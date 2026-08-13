@@ -1,31 +1,1495 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nuvoco HR Competency Review — Admin</title>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1"
+>
+
+<title>
+Nuvoco HR Competency Review — Admin
+</title>
+
+
 <style>
-:root{--navy:#172554;--purple:#6d28d9;--pink:#db2777;--green:#059669;--red:#be123c;--ink:#172033;--muted:#667085;--bg:#f7f8fc;--line:#e7e9f2}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 5% 5%,#ede9fe,transparent 22%),radial-gradient(circle at 95% 5%,#fce7f3,transparent 22%),var(--bg);color:var(--ink)}
-header{background:linear-gradient(120deg,#172554,#4c1d95,#be185d);color:#fff;padding:25px 32px;box-shadow:0 8px 30px #4c1d9530}.eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.8}h1{margin:6px 0;font-size:26px}header p{margin:0;font-size:12px;opacity:.85}
-.wrap{max-width:1450px;margin:20px auto;padding:0 18px}.box{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px #17255410;padding:20px}
-.login{max-width:420px;margin:70px auto}.login h2{margin-top:0;color:var(--navy)}input{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:12px}button{border:1px solid var(--line);background:#fff;padding:9px 13px;border-radius:9px;font-size:11px;font-weight:750;cursor:pointer}button.primary{background:linear-gradient(90deg,#6d28d9,#db2777);border:0;color:#fff}.hidden{display:none}.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin:18px 0}.kpi{border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;overflow:hidden}.kpi:before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#6d28d9,#db2777)}.kpi:nth-child(2):before{background:#2563eb}.kpi:nth-child(3):before{background:#059669}.kpi:nth-child(4):before{background:#db2777}.kpi:nth-child(5):before{background:#f97316}.kpi b{display:block;font-size:26px;color:var(--navy)}.kpi span{font-size:10px;color:var(--muted)}
-.actions{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:13px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters input,.filters select{width:auto;min-width:170px;padding:9px;border:1px solid var(--line);border-radius:9px;font-size:11px}
-table{border-collapse:collapse;width:100%;min-width:900px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:11px;vertical-align:top}th{font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);background:#f8fafc;position:sticky;top:0}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:11px}.agree{color:#047857;background:#dcfce7;padding:4px 7px;border-radius:999px;font-weight:800;font-size:9px}.disagree{color:#be123c;background:#fce7f3;padding:4px 7px;border-radius:999px;font-weight:800;font-size:9px}.muted{color:var(--muted);font-size:11px}
-@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.kpis{grid-template-columns:1fr}.wrap{padding:0 10px}}
-</style></head>
+
+:root{
+
+--navy:#172554;
+--purple:#6d28d9;
+--pink:#db2777;
+--green:#059669;
+--red:#be123c;
+--ink:#172033;
+--muted:#667085;
+--bg:#f7f8fc;
+--line:#e7e9f2;
+
+}
+
+*{
+box-sizing:border-box
+}
+
+body{
+
+margin:0;
+
+font-family:
+Inter,
+Segoe UI,
+Arial,
+sans-serif;
+
+background:
+radial-gradient(
+circle at 5% 5%,
+#ede9fe,
+transparent 22%
+),
+radial-gradient(
+circle at 95% 5%,
+#fce7f3,
+transparent 22%
+),
+var(--bg);
+
+color:var(--ink);
+
+}
+
+header{
+
+background:
+linear-gradient(
+120deg,
+#172554,
+#4c1d95,
+#be185d
+);
+
+color:#fff;
+
+padding:25px 32px;
+
+}
+
+.eyebrow{
+
+font-size:10px;
+letter-spacing:2px;
+text-transform:uppercase;
+opacity:.8
+
+}
+
+h1{
+
+margin:6px 0;
+font-size:26px
+
+}
+
+header p{
+
+margin:0;
+font-size:12px;
+opacity:.85
+
+}
+
+.wrap{
+
+max-width:1500px;
+margin:20px auto;
+padding:0 18px
+
+}
+
+.box{
+
+background:#fff;
+border:1px solid var(--line);
+border-radius:16px;
+box-shadow:0 8px 28px #17255410;
+padding:20px
+
+}
+
+.login{
+
+max-width:420px;
+margin:70px auto
+
+}
+
+.login h2{
+
+margin-top:0;
+color:var(--navy)
+
+}
+
+input,
+select{
+
+padding:10px;
+
+border:1px solid var(--line);
+
+border-radius:9px;
+
+font:inherit;
+font-size:11px;
+
+background:white
+
+}
+
+.login input{
+
+width:100%
+
+}
+
+button{
+
+border:1px solid var(--line);
+background:white;
+
+padding:9px 13px;
+
+border-radius:9px;
+
+font-size:11px;
+font-weight:750;
+
+cursor:pointer
+
+}
+
+button.primary{
+
+background:
+linear-gradient(
+90deg,
+#6d28d9,
+#db2777
+);
+
+border:0;
+color:white
+
+}
+
+.hidden{
+display:none
+}
+
+
+.kpis{
+
+display:grid;
+
+grid-template-columns:
+repeat(6,1fr);
+
+gap:11px;
+
+margin:18px 0
+
+}
+
+.kpi{
+
+border:1px solid var(--line);
+
+border-radius:12px;
+
+padding:14px;
+
+position:relative;
+
+overflow:hidden
+
+}
+
+.kpi:before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:4px;
+
+background:#059669
+
+}
+
+.kpi:nth-child(2):before{
+background:#2563eb
+}
+
+.kpi:nth-child(3):before{
+background:#059669
+}
+
+.kpi:nth-child(4):before{
+background:#db2777
+}
+
+.kpi:nth-child(5):before{
+background:#f97316
+}
+
+.kpi:nth-child(6):before{
+background:#6d28d9
+}
+
+.kpi b{
+
+display:block;
+
+font-size:25px;
+
+color:var(--navy)
+
+}
+
+.kpi span{
+
+font-size:10px;
+color:var(--muted)
+
+}
+
+
+.actions{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:10px;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+margin-bottom:13px
+
+}
+
+.filters{
+
+display:flex;
+gap:8px;
+flex-wrap:wrap
+
+}
+
+.filters input,
+.filters select{
+
+min-width:190px
+
+}
+
+
+.tablewrap{
+
+overflow:auto;
+
+border:1px solid var(--line);
+
+border-radius:11px
+
+}
+
+table{
+
+border-collapse:collapse;
+
+width:100%;
+
+min-width:1250px
+
+}
+
+th,
+td{
+
+padding:11px;
+
+border-bottom:
+1px solid var(--line);
+
+text-align:left;
+
+font-size:11px;
+
+vertical-align:top
+
+}
+
+th{
+
+font-size:9px;
+
+text-transform:uppercase;
+
+letter-spacing:.7px;
+
+color:var(--muted);
+
+background:#f8fafc;
+
+position:sticky;
+
+top:0
+
+}
+
+
+.badge{
+
+display:inline-block;
+
+padding:4px 8px;
+
+border-radius:999px;
+
+font-size:9px;
+
+font-weight:800
+
+}
+
+.agree{
+
+color:#047857;
+background:#dcfce7
+
+}
+
+.disagree{
+
+color:#be123c;
+background:#fce7f3
+
+}
+
+
+.competency-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:4px;
+
+min-width:420px
+
+}
+
+.comp-row{
+
+display:grid;
+
+grid-template-columns:
+minmax(190px,1fr)
+42px
+55px
+100px;
+
+gap:7px;
+
+align-items:center;
+
+padding:6px 0;
+
+border-bottom:
+1px solid #f0f1f5
+
+}
+
+.comp-name{
+
+font-weight:650;
+
+font-size:10px
+
+}
+
+.small{
+
+font-size:9px;
+
+color:var(--muted)
+
+}
+
+.level{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+width:28px;
+height:28px;
+
+border-radius:7px;
+
+background:#172554;
+
+color:white;
+
+font-weight:800
+
+}
+
+.suggested{
+
+background:#059669
+
+}
+
+.change-up{
+
+color:#047857;
+font-weight:800
+
+}
+
+.change-down{
+
+color:#be123c;
+font-weight:800
+
+}
+
+.no-change{
+
+color:#667085
+
+}
+
+.comments{
+
+max-width:260px;
+
+line-height:1.45
+
+}
+
+.muted{
+
+color:var(--muted);
+font-size:11px
+
+}
+
+
+@media(max-width:1100px){
+
+.kpis{
+
+grid-template-columns:
+repeat(3,1fr)
+
+}
+
+}
+
+@media(max-width:600px){
+
+.kpis{
+
+grid-template-columns:
+repeat(2,1fr)
+
+}
+
+.wrap{
+
+padding:0 10px
+
+}
+
+}
+
+</style>
+
+</head>
+
+
 <body>
-<header><div class="eyebrow">NUVOCO HR • ADMIN</div><h1>Competency Review Dashboard</h1><p>Central view of Head-level validation and change requests.</p></header>
+
+
+<header>
+
+<div class="eyebrow">
+NUVOCO HR • ADMIN
+</div>
+
+<h1>
+Competency Review Dashboard
+</h1>
+
+<p>
+Central view of role mapping validation and proficiency recommendations.
+</p>
+
+</header>
+
+
 <div class="wrap">
-<div id="login" class="box login"><h2>Admin access</h2><p class="muted">Enter the admin password to view consolidated feedback.</p><input id="password" type="password" placeholder="Admin password" onkeydown="if(event.key==='Enter')login()"><div style="margin-top:10px"><button class="primary" onclick="login()">Sign in</button></div><div id="loginerr" style="margin-top:8px;color:#be123c;font-size:10px"></div></div>
-<div id="dashboard" class="box hidden">
-<div class="actions"><div><h2 style="margin:0;color:#172554">Review Summary</h2><div class="muted">All submitted role reviews</div></div><div><button onclick="location.href='/'">Open Portal</button> <button class="primary" onclick="exportCSV()">Download CSV</button></div></div>
-<div class="kpis"><div class="kpi"><b id="total">0</b><span>Total submissions</span></div><div class="kpi"><b id="roles">0</b><span>Unique roles reviewed</span></div><div class="kpi"><b id="agree">0</b><span>I Agree</span></div><div class="kpi"><b id="disagree">0</b><span>I Don't Agree</span></div><div class="kpi"><b id="reviewers">0</b><span>Reviewers</span></div></div>
-<div class="actions"><div class="filters"><input id="q" placeholder="Search role / reviewer…" oninput="render()"><select id="decision" onchange="render()"><option value="">All decisions</option><option>I agree</option><option>I don't agree</option></select></div><div class="muted" id="shown"></div></div>
-<div class="tablewrap"><table><thead><tr><th>Reviewer</th><th>Vertical</th><th>Role</th><th>Decision</th><th>Comments / Change Requests</th><th>Submitted</th></tr></thead><tbody id="rows"></tbody></table></div>
-</div></div>
+
+
+<!-- LOGIN -->
+
+<div
+id="login"
+class="box login"
+>
+
+<h2>
+Admin access
+</h2>
+
+<p class="muted">
+Enter the admin password to view consolidated feedback.
+</p>
+
+<input
+id="password"
+type="password"
+placeholder="Admin password"
+onkeydown="
+if(event.key==='Enter')login()
+"
+/>
+
+<div style="margin-top:10px">
+
+<button
+class="primary"
+onclick="login()"
+>
+Sign in
+</button>
+
+</div>
+
+<div
+id="loginerr"
+style="
+margin-top:8px;
+color:#be123c;
+font-size:10px
+"
+></div>
+
+</div>
+
+
+
+<!-- DASHBOARD -->
+
+<div
+id="dashboard"
+class="box hidden"
+>
+
+<div class="actions">
+
+<div>
+
+<h2
+style="margin:0;color:#172554"
+>
+Review Summary
+</h2>
+
+<div class="muted">
+Head-level validation of role competency mapping
+</div>
+
+</div>
+
+
+<div>
+
+<button
+onclick="location.href='/'"
+>
+Open Portal
+</button>
+
+<button
+class="primary"
+onclick="exportCSV()"
+>
+Download CSV
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- KPIs -->
+
+<div class="kpis">
+
+<div class="kpi">
+<b id="total">0</b>
+<span>Total submissions</span>
+</div>
+
+<div class="kpi">
+<b id="roles">0</b>
+<span>Unique roles reviewed</span>
+</div>
+
+<div class="kpi">
+<b id="agree">0</b>
+<span>I Agree</span>
+</div>
+
+<div class="kpi">
+<b id="disagree">0</b>
+<span>I Don't Agree</span>
+</div>
+
+<div class="kpi">
+<b id="reviewers">0</b>
+<span>Reviewers</span>
+</div>
+
+<div class="kpi">
+<b id="changes">0</b>
+<span>Roles with level changes</span>
+</div>
+
+</div>
+
+
+
+<!-- FILTERS -->
+
+<div class="actions">
+
+<div class="filters">
+
+<input
+id="q"
+placeholder="Search role / reviewer / competency…"
+oninput="render()"
+/>
+
+<select
+id="decision"
+onchange="render()"
+>
+
+<option value="">
+All decisions
+</option>
+
+<option>
+I agree
+</option>
+
+<option>
+I don't agree
+</option>
+
+</select>
+
+</div>
+
+
+<div
+class="muted"
+id="shown"
+></div>
+
+</div>
+
+
+
+<!-- TABLE -->
+
+<div class="tablewrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Reviewer
+</th>
+
+<th>
+Organisation Vertical
+</th>
+
+<th>
+Role
+</th>
+
+<th>
+Decision
+</th>
+
+<th>
+Mapped vs Suggested Level
+</th>
+
+<th>
+Comments / Change Requests
+</th>
+
+<th>
+Submitted
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="rows">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
 <script>
-let token="",data=[];
-async function login(){let p=document.getElementById("password").value;let r=await fetch("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:p})});if(!r.ok){document.getElementById("loginerr").textContent="Incorrect password.";return}let x=await r.json();token=x.token;document.getElementById("login").classList.add("hidden");document.getElementById("dashboard").classList.remove("hidden");await load()}
-async function load(){let r=await fetch("/api/admin/feedback",{headers:{"x-admin-token":token}});if(!r.ok)return alert("Session expired.");data=await r.json();render()}
-function render(){let q=document.getElementById("q").value.toLowerCase(),d=document.getElementById("decision").value;let f=data.filter(x=>(!q||[x.reviewer,x.vertical,x.role,x.comments].join(" ").toLowerCase().includes(q))&&(!d||x.decision===d));document.getElementById("total").textContent=data.length;document.getElementById("roles").textContent=new Set(data.map(x=>x.role)).size;document.getElementById("agree").textContent=data.filter(x=>x.decision==="I agree").length;document.getElementById("disagree").textContent=data.filter(x=>x.decision==="I don't agree").length;document.getElementById("reviewers").textContent=new Set(data.map(x=>x.reviewer)).size;document.getElementById("shown").textContent=`Showing ${f.length} of ${data.length}`;document.getElementById("rows").innerHTML=f.map(x=>`<tr><td><b>${esc(x.reviewer)}</b></td><td>${esc(x.vertical)}</td><td><b>${esc(x.role)}</b></td><td><span class="${x.decision==="I agree"?"agree":"disagree"}">${esc(x.decision)}</span></td><td>${esc(x.comments||"—")}</td><td>${new Date(x.timestamp).toLocaleString()}</td></tr>`).join("")||`<tr><td colspan="6" class="muted">No feedback found.</td></tr>`}
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
-async function exportCSV(){let r=await fetch("/api/admin/export.csv",{headers:{"x-admin-token":token}});if(!r.ok)return alert("Unable to export.");let b=await r.blob(),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="Nuvoco_HR_Competency_Feedback.csv";a.click();URL.revokeObjectURL(a.href)}
-</script></body></html>
+
+let token="";
+
+let data=[];
+
+let architecture=null;
+
+
+
+/* LOGIN */
+
+async function login(){
+
+let password=
+document
+.getElementById("password")
+.value;
+
+
+let response=
+await fetch(
+"/api/admin/login",
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+password
+})
+
+}
+);
+
+
+if(!response.ok){
+
+document
+.getElementById(
+"loginerr"
+)
+.textContent=
+"Incorrect password.";
+
+return;
+
+}
+
+
+let result=
+await response.json();
+
+token=
+result.token;
+
+
+document
+.getElementById("login")
+.classList.add("hidden");
+
+
+document
+.getElementById("dashboard")
+.classList.remove("hidden");
+
+
+await load();
+
+}
+
+
+
+/* LOAD */
+
+async function load(){
+
+let a=
+await fetch(
+"/api/architecture"
+);
+
+if(a.ok){
+
+architecture=
+await a.json();
+
+}
+
+
+let response=
+await fetch(
+"/api/admin/feedback",
+{
+headers:{
+"x-admin-token":
+token
+}
+}
+);
+
+
+if(!response.ok){
+
+alert(
+"Session expired."
+);
+
+return;
+
+}
+
+
+data=
+await response.json();
+
+render();
+
+}
+
+
+
+/* FIND MAPPED LEVEL */
+
+function getMappedLevel(
+vertical,
+role,
+code
+){
+
+if(!architecture)
+return "";
+
+
+let section=
+architecture.sections?.find(
+s=>s.name===vertical
+);
+
+
+if(!section)
+return "";
+
+
+let roleData=
+section.roles?.find(
+r=>r.name===role
+);
+
+
+if(!roleData)
+return "";
+
+
+return(
+roleData.scores?.[code]
+?? ""
+);
+
+}
+
+
+
+/* COMPETENCY NAME */
+
+function getCompetencyName(code){
+
+return(
+architecture
+?.competencies
+?.[code]
+?.name
+||
+code
+);
+
+}
+
+
+
+/* LEVEL CHANGE */
+
+function hasLevelChange(item){
+
+let levels=
+item.suggestedLevels ||
+{};
+
+
+return Object
+.entries(levels)
+.some(
+([code,suggested])=>{
+
+let mapped=
+getMappedLevel(
+item.vertical,
+item.role,
+code
+);
+
+
+return(
+mapped!=="" &&
+Number(mapped)!==
+Number(suggested)
+);
+
+});
+
+}
+
+
+
+/* COMPETENCY DISPLAY */
+
+function competencyHTML(item){
+
+let levels=
+item.suggestedLevels ||
+{};
+
+
+let entries=
+Object.entries(levels);
+
+
+if(!entries.length){
+
+return `
+<div class="small">
+No suggested levels submitted.
+</div>
+`;
+
+}
+
+
+let rows=
+entries
+.map(
+([code,suggested])=>{
+
+let mapped=
+getMappedLevel(
+item.vertical,
+item.role,
+code
+);
+
+
+let change=
+`<span class="no-change">
+—
+</span>`;
+
+
+if(
+mapped!=="" &&
+Number(suggested)>
+Number(mapped)
+){
+
+change=
+`
+<span class="change-up">
+↑ ${mapped} → ${suggested}
+</span>
+`;
+
+}
+
+
+else if(
+mapped!=="" &&
+Number(suggested)<
+Number(mapped)
+){
+
+change=
+`
+<span class="change-down">
+↓ ${mapped} → ${suggested}
+</span>
+`;
+
+}
+
+
+else if(
+mapped!==""
+){
+
+change=
+`
+<span class="no-change">
+No change
+</span>
+`;
+
+}
+
+
+return `
+
+<div class="comp-row">
+
+<div>
+
+<div class="comp-name">
+
+${esc(
+getCompetencyName(code)
+)}
+
+</div>
+
+<div class="small">
+${esc(code)}
+</div>
+
+</div>
+
+
+<div>
+
+<span class="level">
+${esc(mapped || "—")}
+</span>
+
+</div>
+
+
+<div>
+
+<span class="level suggested">
+${esc(suggested)}
+</span>
+
+</div>
+
+
+<div>
+${change}
+</div>
+
+</div>
+
+`;
+
+}
+)
+.join("");
+
+
+return `
+
+<div class="competency-list">
+
+<div
+class="comp-row"
+style="
+font-size:9px;
+font-weight:800;
+color:#667085
+"
+>
+
+<div>
+COMPETENCY
+</div>
+
+<div>
+MAPPED
+</div>
+
+<div>
+SUGGESTED
+</div>
+
+<div>
+CHANGE
+</div>
+
+</div>
+
+${rows}
+
+</div>
+
+`;
+
+}
+
+
+
+/* RENDER */
+
+function render(){
+
+let q=
+document
+.getElementById("q")
+.value
+.toLowerCase();
+
+
+let decision=
+document
+.getElementById("decision")
+.value;
+
+
+let filtered=
+data.filter(
+item=>{
+
+let text=
+[
+item.reviewer,
+item.vertical,
+item.role,
+item.comments,
+JSON.stringify(
+item.suggestedLevels ||
+{}
+)
+]
+.join(" ")
+.toLowerCase();
+
+
+return(
+
+(!q ||
+text.includes(q))
+
+&&
+
+(!decision ||
+item.decision===decision)
+
+);
+
+}
+);
+
+
+/* KPIs */
+
+document
+.getElementById("total")
+.textContent=
+data.length;
+
+
+document
+.getElementById("roles")
+.textContent=
+new Set(
+data.map(
+x=>x.role
+)
+).size;
+
+
+document
+.getElementById("agree")
+.textContent=
+data.filter(
+x=>x.decision==="I agree"
+).length;
+
+
+document
+.getElementById("disagree")
+.textContent=
+data.filter(
+x=>x.decision==="I don't agree"
+).length;
+
+
+document
+.getElementById("reviewers")
+.textContent=
+new Set(
+data.map(
+x=>x.reviewer
+)
+).size;
+
+
+document
+.getElementById("changes")
+.textContent=
+data.filter(
+x=>hasLevelChange(x)
+).length;
+
+
+document
+.getElementById("shown")
+.textContent=
+`Showing ${filtered.length} of ${data.length}`;
+
+
+
+/* TABLE */
+
+document
+.getElementById("rows")
+.innerHTML=
+
+filtered
+.map(
+item=>`
+
+<tr>
+
+<td>
+
+<b>
+${esc(item.reviewer)}
+</b>
+
+</td>
+
+
+<td>
+${esc(item.vertical)}
+</td>
+
+
+<td>
+
+<b>
+${esc(item.role)}
+</b>
+
+</td>
+
+
+<td>
+
+<span
+class="badge ${
+item.decision==="I agree"
+?"agree"
+:"disagree"
+}"
+>
+
+${esc(item.decision)}
+
+</span>
+
+</td>
+
+
+<td>
+
+${competencyHTML(item)}
+
+</td>
+
+
+<td>
+
+<div class="comments">
+
+${esc(
+item.comments ||
+"—"
+)}
+
+</div>
+
+</td>
+
+
+<td>
+
+${
+item.timestamp
+?
+new Date(
+item.timestamp
+).toLocaleString()
+:
+"—"
+}
+
+</td>
+
+</tr>
+
+`
+)
+.join("")
+
+||
+
+`
+
+<tr>
+
+<td
+colspan="7"
+class="muted"
+>
+
+No feedback found.
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+
+
+/* CSV */
+
+async function exportCSV(){
+
+let response=
+await fetch(
+"/api/admin/export.csv",
+{
+headers:{
+"x-admin-token":
+token
+}
+}
+);
+
+
+if(!response.ok){
+
+alert(
+"Unable to export."
+);
+
+return;
+
+}
+
+
+let blob=
+await response.blob();
+
+
+let url=
+URL.createObjectURL(
+blob
+);
+
+
+let a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"Nuvoco_HR_Competency_Feedback.csv";
+
+a.click();
+
+URL.revokeObjectURL(
+url
+);
+
+}
+
+
+
+/* ESCAPE */
+
+function esc(value){
+
+return String(
+value ?? ""
+)
+.replace(
+/[&<>"']/g,
+m=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[m])
+);
+
+}
+
+</script>
+
+</body>
+</html>
