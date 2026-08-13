@@ -36,8 +36,6 @@ const FEEDBACK =
   );
 
 
-/* READ FEEDBACK */
-
 function readFeedback(){
 
   try{
@@ -58,8 +56,6 @@ function readFeedback(){
 }
 
 
-/* WRITE FEEDBACK */
-
 function writeFeedback(rows){
 
   fs.writeFileSync(
@@ -75,8 +71,6 @@ function writeFeedback(rows){
 }
 
 
-/* ARCHITECTURE API */
-
 app.get(
   "/api/architecture",
   (req,res)=>{
@@ -89,8 +83,6 @@ app.get(
 );
 
 
-/* FEEDBACK API */
-
 app.get(
   "/api/feedback",
   (req,res)=>{
@@ -102,8 +94,6 @@ app.get(
   }
 );
 
-
-/* SAVE REVIEW */
 
 app.post(
   "/api/feedback",
@@ -149,6 +139,9 @@ app.post(
 
       suggestedLevels:
         b.suggestedLevels,
+
+      reviewed:
+        b.reviewed || [],
 
       comments:
         b.comments || "",
@@ -205,8 +198,6 @@ app.post(
 );
 
 
-/* ADMIN LOGIN */
-
 const adminTokens =
   new Set();
 
@@ -262,8 +253,6 @@ app.post(
 );
 
 
-/* ADMIN AUTH */
-
 function requireAdmin(
   req,
   res,
@@ -300,8 +289,6 @@ function requireAdmin(
 }
 
 
-/* ADMIN FEEDBACK */
-
 app.get(
   "/api/admin/feedback",
   requireAdmin,
@@ -315,8 +302,6 @@ app.get(
 );
 
 
-/* ADMIN CSV EXPORT */
-
 app.get(
   "/api/admin/export.csv",
   requireAdmin,
@@ -324,29 +309,6 @@ app.get(
 
     const rows =
       readFeedback();
-
-
-    const headers=[
-
-      "Reviewer",
-
-      "Organisation Vertical",
-
-      "Role",
-
-      "Competency",
-
-      "Mapped Level",
-
-      "Suggested Level",
-
-      "Change",
-
-      "Comments",
-
-      "Timestamp"
-
-    ];
 
 
     const arch=
@@ -358,7 +320,7 @@ app.get(
       );
 
 
-    function getMapped(
+    function mapped(
       vertical,
       role,
       code
@@ -391,7 +353,7 @@ app.get(
     }
 
 
-    function getName(code){
+    function name(code){
 
       return(
         arch
@@ -405,7 +367,7 @@ app.get(
     }
 
 
-    function escapeCSV(v){
+    function esc(v){
 
       return `"${String(
         v??""
@@ -415,6 +377,31 @@ app.get(
       )}"`;
 
     }
+
+
+    const headers=[
+
+      "Reviewer",
+
+      "Organisation Vertical",
+
+      "Role",
+
+      "Competency",
+
+      "Mapped Level",
+
+      "Recommended Level",
+
+      "Change",
+
+      "Reviewed",
+
+      "Comments",
+
+      "Timestamp"
+
+    ];
 
 
     const output=[
@@ -432,8 +419,8 @@ app.get(
         .forEach(
           ([code,suggested])=>{
 
-            const mapped=
-              getMapped(
+            const m=
+              mapped(
                 row.vertical,
                 row.role,
                 code
@@ -445,25 +432,24 @@ app.get(
 
 
             if(
-              mapped!=="" &&
+              m!=="" &&
               Number(suggested)>
-              Number(mapped)
+              Number(m)
             ){
 
               change=
-                `Up: ${mapped} to ${suggested}`;
+                `Up: ${m} to ${suggested}`;
 
             }
 
-
             else if(
-              mapped!=="" &&
+              m!=="" &&
               Number(suggested)<
-              Number(mapped)
+              Number(m)
             ){
 
               change=
-                `Down: ${mapped} to ${suggested}`;
+                `Down: ${m} to ${suggested}`;
 
             }
 
@@ -478,13 +464,20 @@ app.get(
 
                 row.role,
 
-                `${code} - ${getName(code)}`,
+                `${code} - ${name(code)}`,
 
-                mapped,
+                m,
 
                 suggested,
 
                 change,
+
+                (row.reviewed||[])
+                  .includes(code)
+                  ?
+                  "Yes"
+                  :
+                  "No",
 
                 row.comments,
 
@@ -492,7 +485,7 @@ app.get(
 
               ]
               .map(
-                escapeCSV
+                esc
               )
               .join(",")
 
@@ -513,7 +506,7 @@ app.get(
 
     res.setHeader(
       "Content-Disposition",
-      'attachment; filename="Nuvoco_HR_Competency_Feedback.csv"'
+      'attachment; filename="Nuvoco_HR_Competency_Feedback_Detailed.csv"'
     );
 
 
@@ -524,8 +517,6 @@ app.get(
   }
 );
 
-
-/* ADMIN PAGE */
 
 app.get(
   "/admin",
@@ -542,16 +533,12 @@ app.get(
 );
 
 
-/* STATIC FILES */
-
 app.use(
   express.static(
     ROOT
   )
 );
 
-
-/* MAIN WEBSITE */
 
 app.get(
   "*",
@@ -567,8 +554,6 @@ app.get(
   }
 );
 
-
-/* START */
 
 app.listen(
   PORT,
