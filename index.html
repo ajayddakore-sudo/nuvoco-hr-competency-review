@@ -1,39 +1,1729 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Nuvoco HR Competency Review</title>
+
 <style>
-:root{--navy:#172554;--purple:#6d28d9;--pink:#db2777;--blue:#2563eb;--green:#059669;--orange:#f97316;--ink:#172033;--muted:#667085;--bg:#f7f8fc;--line:#e7e9f2}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 5% 5%,#ede9fe,transparent 22%),radial-gradient(circle at 95% 5%,#fce7f3,transparent 22%),var(--bg);color:var(--ink)}
-header{background:linear-gradient(120deg,#172554,#4c1d95,#be185d);color:#fff;padding:28px 34px;box-shadow:0 8px 30px #4c1d9530}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.8}h1{margin:6px 0;font-size:28px}header p{margin:0;opacity:.85;font-size:13px}
-.layout{display:grid;grid-template-columns:305px 1fr;gap:18px;max-width:1500px;margin:18px auto;padding:0 18px}.box{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px #17255410}.side{height:calc(100vh - 140px);position:sticky;top:120px;overflow:auto;padding:15px}.main{padding:24px;min-height:720px}
-input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:12px;background:#fff}input:focus,select:focus,textarea:focus{outline:none;border-color:#8b5cf6;box-shadow:0 0 0 3px #8b5cf61c}
-.label{font-size:10px;color:var(--muted);font-weight:750;text-transform:uppercase;letter-spacing:1.3px;margin:16px 3px 7px}.org{border-radius:10px;overflow:hidden;margin:4px 0}.orghead{padding:10px;cursor:pointer;font-size:12px;font-weight:700;display:flex;justify-content:space-between}.org.open .orghead{background:#f5f2ff;color:#5b21b6}.roles{display:none;padding:3px 6px 7px}.org.open .roles{display:block}.role{padding:8px 9px;border-radius:8px;font-size:11px;cursor:pointer;color:#475467}.role.active{background:linear-gradient(90deg,#ede9fe,#fce7f3);color:#5b21b6;font-weight:750;border-left:3px solid #db2777}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:20px 0}.kpi{border:1px solid var(--line);border-radius:13px;padding:15px;position:relative;overflow:hidden}.kpi:before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#6d28d9,#db2777)}.kpi:nth-child(2):before{background:linear-gradient(90deg,#2563eb,#06b6a4)}.kpi:nth-child(3):before{background:linear-gradient(90deg,#f97316,#f59e0b)}.kpi:nth-child(4):before{background:linear-gradient(90deg,#059669,#22c55e)}.kpi b{display:block;font-size:27px;color:#172554}.kpi span{font-size:10px;color:var(--muted)}
-.comp-overview{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.mini{border:1px solid var(--line);border-radius:10px;padding:11px}.mini b{font-size:10px;color:#db2777}.mini span{display:block;font-size:11px;font-weight:700;margin-top:3px}
-.role-head{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:15px}.role-head h2{margin:2px 0;font-size:23px;color:#172554}.vertical{font-size:10px;color:#6d28d9;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.card{border:1px solid var(--line);border-radius:13px;padding:15px;cursor:pointer;position:relative;overflow:hidden}.card:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(180deg,#6d28d9,#db2777)}.card:hover{border-color:#c4b5fd;box-shadow:0 8px 20px #6d28d91a;transform:translateY(-2px)}.cardtop{display:flex;justify-content:space-between}.code{font-size:10px;font-weight:850;color:#db2777}.card h3{font-size:13px;margin:4px 0}.score{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6d28d9,#db2777);color:#fff;font-size:18px;font-weight:850;display:flex;align-items:center;justify-content:center}.meta{display:flex;gap:6px;margin-top:8px;align-items:center}.pill{font-size:9px;font-weight:850;padding:4px 8px;border-radius:999px;text-transform:uppercase}.core{background:#dcfce7;color:#047857}.working{background:#dbeafe;color:#1d4ed8}.interface{background:#f3e8ff;color:#7e22ce}.muted{font-size:10px;color:var(--muted)}
-.drawer{display:none;margin-top:16px;padding:17px;border-radius:14px;background:linear-gradient(135deg,#faf9ff,#fff);box-shadow:inset 0 0 0 1px #ddd6fe}.drawer.open{display:block}.drawerhead{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:11px}.drawer h3{margin:0;font-size:17px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:11px 0}.tab{border:0;background:#f3f4f6}.tab.active{background:linear-gradient(90deg,#6d28d9,#db2777);color:#fff}.tabbody{font-size:11px;line-height:1.6;color:#43515a}.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.pl{padding:11px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}.pl b{font-size:11px;color:#172554}.pl p{font-size:10px;color:#5b6971;line-height:1.4}
-.feedback{margin-top:18px;padding:16px;border-radius:14px;background:linear-gradient(135deg,#fff1f2,#fff7ed);box-shadow:inset 0 0 0 1px #fecdd3}.feedback h3{margin:0 0 5px;font-size:14px;color:#881337}.feedback p{font-size:11px;color:var(--muted)}button{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:9px;font-size:11px;font-weight:750;cursor:pointer}button.primary{background:linear-gradient(90deg,#6d28d9,#db2777);border:0;color:#fff}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.saved{display:none;color:#047857;font-size:10px;margin-left:7px}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:relative;top:auto;height:auto}.kpis,.cards,.comp-overview{grid-template-columns:1fr}.ladder{grid-template-columns:1fr 1fr}}@media(max-width:560px){.kpis,.ladder,.row{grid-template-columns:1fr}}
-</style></head>
+
+:root{
+--navy:#172554;
+--purple:#6d28d9;
+--pink:#db2777;
+--blue:#2563eb;
+--green:#059669;
+--green-light:#dcfce7;
+--yellow:#fef3c7;
+--yellow-text:#a16207;
+--orange:#f97316;
+--ink:#172033;
+--muted:#667085;
+--bg:#f7f8fc;
+--line:#e7e9f2
+}
+
+*{
+box-sizing:border-box
+}
+
+body{
+margin:0;
+font-family:Inter,Segoe UI,Arial,sans-serif;
+background:
+radial-gradient(circle at 5% 5%,#ede9fe,transparent 22%),
+radial-gradient(circle at 95% 5%,#fce7f3,transparent 22%),
+var(--bg);
+color:var(--ink)
+}
+
+header{
+background:linear-gradient(120deg,#172554,#4c1d95,#be185d);
+color:#fff;
+padding:28px 34px;
+box-shadow:0 8px 30px #4c1d9530
+}
+
+.eyebrow{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+opacity:.8
+}
+
+h1{
+margin:6px 0;
+font-size:28px
+}
+
+header p{
+margin:0;
+opacity:.85;
+font-size:13px
+}
+
+.layout{
+display:grid;
+grid-template-columns:305px 1fr;
+gap:18px;
+max-width:1500px;
+margin:18px auto;
+padding:0 18px
+}
+
+.box{
+background:#fff;
+border:1px solid var(--line);
+border-radius:18px;
+box-shadow:0 8px 28px #17255410
+}
+
+.side{
+height:calc(100vh - 140px);
+position:sticky;
+top:120px;
+overflow:auto;
+padding:15px
+}
+
+.main{
+padding:24px;
+min-height:720px
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:10px;
+border:1px solid var(--line);
+border-radius:9px;
+font:inherit;
+font-size:12px;
+background:#fff
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+outline:none;
+border-color:#8b5cf6;
+box-shadow:0 0 0 3px #8b5cf61c
+}
+
+.label{
+font-size:10px;
+color:var(--muted);
+font-weight:750;
+text-transform:uppercase;
+letter-spacing:1.3px;
+margin:16px 3px 7px
+}
+
+.org{
+border-radius:10px;
+overflow:hidden;
+margin:4px 0
+}
+
+.orghead{
+padding:10px;
+cursor:pointer;
+font-size:12px;
+font-weight:700;
+display:flex;
+justify-content:space-between
+}
+
+.org.open .orghead{
+background:#f5f2ff;
+color:#5b21b6
+}
+
+.roles{
+display:none;
+padding:3px 6px 7px
+}
+
+.org.open .roles{
+display:block
+}
+
+.role{
+padding:8px 9px;
+border-radius:8px;
+font-size:11px;
+cursor:pointer;
+color:#475467
+}
+
+.role.active{
+background:linear-gradient(90deg,#ede9fe,#fce7f3);
+color:#5b21b6;
+font-weight:750;
+border-left:3px solid #db2777
+}
+
+.kpis{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:11px;
+margin:20px 0
+}
+
+.kpi{
+border:1px solid var(--line);
+border-radius:13px;
+padding:15px;
+position:relative;
+overflow:hidden
+}
+
+.kpi:before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:4px;
+background:linear-gradient(90deg,#6d28d9,#db2777)
+}
+
+.kpi:nth-child(2):before{
+background:linear-gradient(90deg,#2563eb,#06b6a4)
+}
+
+.kpi:nth-child(3):before{
+background:linear-gradient(90deg,#f97316,#f59e0b)
+}
+
+.kpi:nth-child(4):before{
+background:linear-gradient(90deg,#059669,#22c55e)
+}
+
+.kpi b{
+display:block;
+font-size:27px;
+color:#172554
+}
+
+.kpi span{
+font-size:10px;
+color:var(--muted)
+}
+
+.comp-overview{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px
+}
+
+.mini{
+border:1px solid var(--line);
+border-radius:10px;
+padding:11px
+}
+
+.mini b{
+font-size:10px;
+color:#db2777
+}
+
+.mini span{
+display:block;
+font-size:11px;
+font-weight:700;
+margin-top:3px
+}
+
+.role-head{
+display:flex;
+justify-content:space-between;
+gap:15px;
+border-bottom:1px solid var(--line);
+padding-bottom:15px;
+margin-bottom:15px
+}
+
+.role-head h2{
+margin:2px 0;
+font-size:23px;
+color:#172554
+}
+
+.vertical{
+font-size:10px;
+color:#6d28d9;
+font-weight:800;
+letter-spacing:1.3px;
+text-transform:uppercase
+}
+
+.review-note{
+margin:16px 0 12px;
+padding:10px 12px;
+border-radius:10px;
+background:#f0fdf4;
+border:1px solid #bbf7d0;
+color:#166534;
+font-size:10px
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:11px
+}
+
+.card{
+border:1px solid var(--line);
+border-radius:13px;
+padding:15px;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+transition:.15s
+}
+
+/* GREEN EDGE FOR ALL COMPETENCIES */
+
+.card:before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:4px;
+height:100%;
+background:#059669
+}
+
+.card:hover{
+border-color:#86efac;
+box-shadow:0 8px 20px #0596691a;
+transform:translateY(-2px)
+}
+
+.cardtop{
+display:flex;
+justify-content:space-between
+}
+
+.code{
+font-size:10px;
+font-weight:850;
+color:#047857
+}
+
+.card h3{
+font-size:13px;
+margin:4px 0
+}
+
+.score{
+width:36px;
+height:36px;
+border-radius:10px;
+background:#059669;
+color:#fff;
+font-size:18px;
+font-weight:850;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.meta{
+display:flex;
+gap:6px;
+margin-top:8px;
+align-items:center
+}
+
+.pill{
+font-size:9px;
+font-weight:850;
+padding:4px 8px;
+border-radius:999px;
+text-transform:uppercase
+}
+
+/* CORE = GREEN */
+
+.core{
+background:#dcfce7;
+color:#047857
+}
+
+/* WORKING = YELLOW */
+
+.working{
+background:#fef3c7;
+color:#a16207
+}
+
+.muted{
+font-size:10px;
+color:var(--muted)
+}
+
+.levelselect{
+margin-top:10px;
+display:flex;
+align-items:center;
+gap:7px
+}
+
+.levelselect label{
+font-size:9px;
+color:var(--muted);
+font-weight:700;
+margin:0;
+white-space:nowrap
+}
+
+.levelselect select{
+width:75px;
+padding:7px 8px;
+font-size:11px;
+border-color:#cbd5e1
+}
+
+.levelselect select:focus{
+border-color:#059669;
+box-shadow:0 0 0 3px #05966918
+}
+
+.review-submit{
+margin-top:15px;
+padding:13px 15px;
+border-radius:13px;
+background:#f8fafc;
+border:1px solid var(--line);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px
+}
+
+.review-submit button{
+background:linear-gradient(90deg,#059669,#047857);
+color:#fff;
+border:0
+}
+
+.drawer{
+display:none;
+margin-top:16px;
+padding:17px;
+border-radius:14px;
+background:linear-gradient(135deg,#faf9ff,#fff);
+box-shadow:inset 0 0 0 1px #ddd6fe
+}
+
+.drawer.open{
+display:block
+}
+
+.drawerhead{
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
+padding-bottom:11px
+}
+
+.drawer h3{
+margin:0;
+font-size:17px
+}
+
+.tabs{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+margin:11px 0
+}
+
+.tab{
+border:0;
+background:#f3f4f6
+}
+
+.tab.active{
+background:linear-gradient(90deg,#6d28d9,#db2777);
+color:#fff
+}
+
+.tabbody{
+font-size:11px;
+line-height:1.6;
+color:#43515a
+}
+
+.ladder{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px
+}
+
+.pl{
+padding:11px;
+border-radius:10px;
+background:#fff;
+box-shadow:inset 0 0 0 1px var(--line);
+min-height:155px
+}
+
+.pl-number{
+font-size:22px;
+font-weight:850;
+color:#059669
+}
+
+.pl-title{
+font-size:11px;
+font-weight:800;
+color:#172554
+}
+
+.pl .definition{
+font-size:10px;
+color:#43515a;
+line-height:1.45;
+margin:5px 0 7px
+}
+
+.pl .expect{
+font-size:9px;
+color:#5b6971;
+line-height:1.45
+}
+
+.pl .expect ul{
+padding-left:14px;
+margin:3px 0
+}
+
+.feedback{
+margin-top:18px;
+padding:16px;
+border-radius:14px;
+background:linear-gradient(135deg,#fff1f2,#fff7ed);
+box-shadow:inset 0 0 0 1px #fecdd3
+}
+
+.feedback h3{
+margin:0 0 5px;
+font-size:14px;
+color:#881337
+}
+
+.feedback p{
+font-size:11px;
+color:var(--muted)
+}
+
+button{
+border:1px solid var(--line);
+background:#fff;
+padding:9px 12px;
+border-radius:9px;
+font-size:11px;
+font-weight:750;
+cursor:pointer
+}
+
+button.primary{
+background:linear-gradient(90deg,#6d28d9,#db2777);
+border:0;
+color:#fff
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.saved{
+display:none;
+color:#047857;
+font-size:10px;
+margin-left:7px
+}
+
+@media(max-width:900px){
+
+.layout{
+grid-template-columns:1fr
+}
+
+.side{
+position:relative;
+top:auto;
+height:auto
+}
+
+.kpis,
+.cards,
+.comp-overview{
+grid-template-columns:1fr
+}
+
+.ladder{
+grid-template-columns:1fr 1fr
+}
+
+}
+
+@media(max-width:560px){
+
+.kpis,
+.ladder,
+.row{
+grid-template-columns:1fr
+}
+
+}
+
+</style>
+</head>
+
+
 <body>
-<header><div class="eyebrow">NUVOCO HR • Functional Competency Architecture</div><h1>HR Competency Review Portal</h1><p>Explore role-wise competency mapping and capture Head-level validation in one central system.</p></header>
-<div class="layout">
-<aside class="box side"><input id="search" placeholder="Search role…" oninput="filterRoles()"><div class="label">Organisation structure</div><div id="nav"></div></aside>
-<main class="box main" id="main"></main>
+
+<header>
+
+<div class="eyebrow">
+NUVOCO HR • Functional Competency Architecture
 </div>
+
+<h1>
+HR Competency Review Portal
+</h1>
+
+<p>
+Explore role-wise competency mapping and capture Head-level validation in one central system.
+</p>
+
+</header>
+
+
+<div class="layout">
+
+<aside class="box side">
+
+<input
+id="search"
+placeholder="Search role…"
+oninput="filterRoles()"
+/>
+
+<div class="label">
+Organisation structure
+</div>
+
+<div id="nav"></div>
+
+</aside>
+
+
+<main
+class="box main"
+id="main"
+></main>
+
+</div>
+
+
 <script>
-let DATA=null,current={sec:null,role:null,code:null};
-const $=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-async function boot(){DATA=await fetch("/api/architecture").then(r=>r.json());buildNav();overview()}
-function buildNav(){let n=$("nav");n.innerHTML="";DATA.sections.forEach((s,si)=>{let o=document.createElement("div");o.className="org";let h=document.createElement("div");h.className="orghead";h.innerHTML=`<span>${esc(s.name)}</span><span>${s.roles.length} ▾</span>`;let rs=document.createElement("div");rs.className="roles";s.roles.forEach((r,ri)=>{let x=document.createElement("div");x.className="role";x.textContent=r.name;x.dataset.q=(s.name+" "+r.name).toLowerCase();x.onclick=()=>showRole(si,ri,x);rs.appendChild(x)});h.onclick=()=>o.classList.toggle("open");o.append(h,rs);n.appendChild(o)})}
-function filterRoles(){let q=$("search").value.toLowerCase();document.querySelectorAll(".org").forEach(o=>{let any=false;o.querySelectorAll(".role").forEach(r=>{let show=!q||r.dataset.q.includes(q);r.style.display=show?"block":"none";if(show)any=true});o.style.display=any?"block":"none";if(q&&any)o.classList.add("open")})}
-function overview(){let comps=Object.entries(DATA.competencies);let roles=DATA.sections.reduce((a,s)=>a+s.roles.length,0);$("main").innerHTML=`<h2 style="margin:0;color:#172554">Competency Review Overview</h2><p class="muted" style="line-height:1.6">Select an organisation vertical and role from the left. The role view shows only its mapped competencies. Heads can review details and submit their decision directly to the central system.</p><div class="kpis"><div class="kpi"><b>${comps.length}</b><span>Total functional competencies</span></div><div class="kpi"><b>${roles}</b><span>Roles mapped</span></div><div class="kpi"><b>${DATA.sections.length}</b><span>Organisation verticals</span></div><div class="kpi"><b>4</b><span>Proficiency levels</span></div></div><div class="label">Competency architecture at a glance</div><div class="comp-overview">${comps.map(([c,x])=>`<div class="mini"><b>${c}</b><span>${esc(x.name)}</span></div>`).join("")}</div><div style="margin-top:20px;padding:14px;border-radius:13px;background:#f8fafc;border:1px solid #e7e9f2"><b style="font-size:11px">Reviewer</b><p class="muted">Enter your name once. It will be used for all role submissions in this session.</p><div class="row"><input id="reviewer" placeholder="Reviewer name"><button class="primary" onclick="saveReviewer()">Save reviewer</button></div><div id="rsaved" class="saved">Reviewer saved.</div></div>`;let n=sessionStorage.getItem("reviewer")||"";if(n)$("reviewer").value=n}
-function saveReviewer(){let n=$("reviewer").value.trim();if(!n)return alert("Please enter your name.");sessionStorage.setItem("reviewer",n);$("rsaved").style.display="inline"}
-function showRole(si,ri,el){current={sec:si,role:ri,code:null};document.querySelectorAll(".role").forEach(x=>x.classList.remove("active"));el.classList.add("active");let s=DATA.sections[si],r=s.roles[ri];let mapped=Object.entries(r.scores).filter(([c,v])=>v!=="NA"&&v!==null&&v!==undefined&&v!=="");$("main").innerHTML=`<div class="role-head"><div><div class="vertical">${esc(s.name)}</div><h2>${esc(r.name)}</h2><div class="muted">${mapped.length} competencies mapped</div></div><button onclick="overview()">← Overview</button></div><div class="cards">${mapped.map(([code,v])=>{let c=DATA.competencies[code],rel=(r.relationship||{})[code]||"—";return `<div class="card" onclick="openComp('${code}')"><div class="cardtop"><div><div class="code">${code}</div><h3>${esc(c.name)}</h3></div><div class="score">${v}</div></div><div class="meta"><span class="pill ${rel.toLowerCase()}">${esc(rel)}</span><span class="muted">${["","Foundational","Independent","Advanced","Enterprise"][v]||""}</span></div></div>`}).join("")}</div><div id="drawer" class="drawer"></div><div class="feedback"><h3>Head / Reviewer Feedback</h3><p>Review the mapped competencies and proficiency levels, then submit one decision for this role.</p><label>Decision</label><select id="decision"><option value="">Select decision</option><option>I agree</option><option>I don't agree</option></select><label style="margin-top:9px">Comments / changes suggested</label><textarea id="comments" placeholder="Mention competency or proficiency changes, additions or removals…"></textarea><div style="margin-top:9px"><button class="primary" onclick="submitFeedback()">Submit review</button><span id="saved" class="saved">Review submitted.</span></div></div>`}
-function openComp(code){current.code=code;let c=DATA.competencies[code],d=$("drawer");d.classList.add("open");d.innerHTML=`<div class="drawerhead"><div><h3>${code} — ${esc(c.name)}</h3><div class="muted">${esc(c.scope||"")}</div></div><button onclick="d.classList.remove('open')">Close</button></div><div class="tabs"><button class="tab active" onclick="tab(this,'definition')">Definition</button><button class="tab" onclick="tab(this,'ksa')">Knowledge • Skill • Attitude</button><button class="tab" onclick="tab(this,'activities')">Activities</button><button class="tab" onclick="tab(this,'ladder')">Proficiency Ladder</button></div><div id="tabbody" class="tabbody"></div>`;tab(document.querySelector(".tab"),"definition")}
-function tab(btn,type){document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");let c=DATA.competencies[current.code],b=$("tabbody");if(type==="definition")b.innerHTML=`<b>Competency definition</b><p>${esc(c.scope||"")}</p>`;if(type==="ksa")b.innerHTML=`<div class="cards" style="grid-template-columns:repeat(3,1fr)"><div class="card" style="cursor:default"><b>KNOWLEDGE</b><p>${esc(c.Knowledge||"")}</p></div><div class="card" style="cursor:default"><b>SKILL</b><p>${esc(c.Skill||"")}</p></div><div class="card" style="cursor:default"><b>ATTITUDE</b><p>${esc(c.Attitude||"")}</p></div></div>`;if(type==="activities")b.innerHTML=`<b>On-the-job activities</b><ul>${String(c["On-the-Job Activities"]||c["On-the-job activities"]||"").split("\\n").filter(Boolean).map(x=>"<li>"+esc(x.replace(/^•\\s*/,""))+"</li>").join("")}</ul>`;if(type==="ladder")b.innerHTML=`<div class="ladder">${["PL1","PL2","PL3","PL4"].map(x=>`<div class="pl"><b>${x}</b><p>${esc(c[x]||"")}</p></div>`).join("")}</div>`}
-async function submitFeedback(){let reviewer=sessionStorage.getItem("reviewer");if(!reviewer)return alert("Please save your reviewer name from the Overview page first.");let decision=$("decision").value;if(!decision)return alert("Please select a decision.");let s=DATA.sections[current.sec],r=s.roles[current.role];let payload={reviewer,vertical:s.name,role:r.name,decision,comments:$("comments").value};let res=await fetch("/api/feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!res.ok)return alert("Unable to save. Please try again.");$("saved").style.display="inline"}
+
+let DATA=null;
+
+let current={
+sec:null,
+role:null,
+code:null
+};
+
+const $=
+id=>document.getElementById(id);
+
+const esc=
+s=>String(s??"")
+.replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"\"":"&quot;",
+"'":"&#39;"
+}[m])
+);
+
+
+/* LOAD DATA */
+
+async function boot(){
+
+DATA=
+await fetch("/api/architecture")
+.then(r=>r.json());
+
+buildNav();
+
+overview();
+
+}
+
+
+
+/* LEFT NAVIGATION */
+
+function buildNav(){
+
+let n=$("nav");
+
+n.innerHTML="";
+
+DATA.sections.forEach(
+(s,si)=>{
+
+let o=
+document.createElement("div");
+
+o.className="org";
+
+
+let h=
+document.createElement("div");
+
+h.className="orghead";
+
+h.innerHTML=`
+<span>${esc(s.name)}</span>
+<span>${s.roles.length} ▾</span>
+`;
+
+
+let rs=
+document.createElement("div");
+
+rs.className="roles";
+
+
+s.roles.forEach(
+(r,ri)=>{
+
+let x=
+document.createElement("div");
+
+x.className="role";
+
+x.textContent=r.name;
+
+x.dataset.q=
+(s.name+" "+r.name)
+.toLowerCase();
+
+x.onclick=
+()=>showRole(si,ri,x);
+
+rs.appendChild(x);
+
+});
+
+
+h.onclick=
+()=>o.classList.toggle("open");
+
+o.append(h,rs);
+
+n.appendChild(o);
+
+});
+
+}
+
+
+
+/* SEARCH */
+
+function filterRoles(){
+
+let q=
+$("search")
+.value
+.toLowerCase();
+
+document
+.querySelectorAll(".org")
+.forEach(o=>{
+
+let any=false;
+
+o.querySelectorAll(".role")
+.forEach(r=>{
+
+let show=
+!q ||
+r.dataset.q.includes(q);
+
+r.style.display=
+show?"block":"none";
+
+if(show) any=true;
+
+});
+
+o.style.display=
+any?"block":"none";
+
+if(q&&any)
+o.classList.add("open");
+
+});
+
+}
+
+
+
+/* OVERVIEW */
+
+function overview(){
+
+let comps=
+Object.entries(
+DATA.competencies
+);
+
+let roles=
+DATA.sections.reduce(
+(a,s)=>a+s.roles.length,
+0
+);
+
+
+$("main").innerHTML=`
+
+<h2
+style="margin:0;color:#172554"
+>
+Competency Review Overview
+</h2>
+
+<p
+class="muted"
+style="line-height:1.6"
+>
+Select an organisation vertical and role from the left.
+The role view shows only its mapped competencies.
+Heads can review details and submit their decision directly
+to the central system.
+</p>
+
+
+<div class="kpis">
+
+<div class="kpi">
+<b>${comps.length}</b>
+<span>Total functional competencies</span>
+</div>
+
+<div class="kpi">
+<b>${roles}</b>
+<span>Roles mapped</span>
+</div>
+
+<div class="kpi">
+<b>${DATA.sections.length}</b>
+<span>Organisation verticals</span>
+</div>
+
+<div class="kpi">
+<b>4</b>
+<span>Proficiency levels</span>
+</div>
+
+</div>
+
+
+<div class="label">
+Competency architecture at a glance
+</div>
+
+
+<div class="comp-overview">
+
+${comps.map(
+([c,x])=>
+`
+<div class="mini">
+
+<b>${c}</b>
+
+<span>
+${esc(x.name)}
+</span>
+
+</div>
+`
+).join("")}
+
+</div>
+
+
+<div
+style="
+margin-top:20px;
+padding:14px;
+border-radius:13px;
+background:#f8fafc;
+border:1px solid #e7e9f2
+"
+>
+
+<b style="font-size:11px">
+Reviewer
+</b>
+
+<p class="muted">
+Enter your name once. It will be used for all role submissions in this session.
+</p>
+
+<div class="row">
+
+<input
+id="reviewer"
+placeholder="Reviewer name"
+/>
+
+<button
+class="primary"
+onclick="saveReviewer()"
+>
+Save reviewer
+</button>
+
+</div>
+
+<div
+id="rsaved"
+class="saved"
+>
+Reviewer saved.
+</div>
+
+</div>
+
+`;
+
+
+let n=
+sessionStorage.getItem("reviewer")||"";
+
+if(n)
+$("reviewer").value=n;
+
+}
+
+
+
+/* SAVE REVIEWER */
+
+function saveReviewer(){
+
+let n=
+$("reviewer")
+.value
+.trim();
+
+if(!n)
+return alert(
+"Please enter your name."
+);
+
+sessionStorage.setItem(
+"reviewer",
+n
+);
+
+$("rsaved").style.display=
+"inline";
+
+}
+
+
+
+/* SHOW ROLE */
+
+function showRole(si,ri,el){
+
+current={
+sec:si,
+role:ri,
+code:null
+};
+
+
+document
+.querySelectorAll(".role")
+.forEach(
+x=>x.classList.remove("active")
+);
+
+el.classList.add("active");
+
+
+let s=
+DATA.sections[si];
+
+let r=
+s.roles[ri];
+
+
+let mapped=
+Object
+.entries(r.scores)
+.filter(
+([c,v])=>
+v!=="NA" &&
+v!==null &&
+v!==undefined &&
+v!==""
+);
+
+
+$("main").innerHTML=`
+
+<div class="role-head">
+
+<div>
+
+<div class="vertical">
+${esc(s.name)}
+</div>
+
+<h2>
+${esc(r.name)}
+</h2>
+
+<div class="muted">
+${mapped.length} competencies mapped
+</div>
+
+</div>
+
+<button
+onclick="overview()"
+>
+← Overview
+</button>
+
+</div>
+
+
+<div class="review-note">
+
+Review each mapped competency and enter the proficiency level you believe is most appropriate for this role.
+
+Click a competency to view its full definition and proficiency ladder.
+
+</div>
+
+
+<div class="cards">
+
+${mapped.map(
+([code,v])=>{
+
+let c=
+DATA.competencies[code];
+
+let rel=
+(r.relationship||{})[code]||"—";
+
+
+return `
+
+<div class="card">
+
+
+<div
+class="cardtop"
+onclick="openComp('${code}')"
+>
+
+<div>
+
+<div class="code">
+${code}
+</div>
+
+<h3>
+${esc(c.name)}
+</h3>
+
+</div>
+
+
+<div>
+
+<div
+class="muted"
+style="
+text-align:right;
+font-size:8px;
+margin-bottom:3px
+"
+>
+Mapped
+</div>
+
+<div class="score">
+${v}
+</div>
+
+</div>
+
+</div>
+
+
+<div class="meta">
+
+<span
+class="pill ${String(rel).toLowerCase()}"
+>
+${esc(rel)}
+</span>
+
+</div>
+
+
+<div class="levelselect">
+
+<label>
+Your suggested level
+</label>
+
+<select
+id="level-${code}"
+onclick="event.stopPropagation()"
+>
+
+<option
+value="1"
+${String(v)==="1"?"selected":""}
+>
+1
+</option>
+
+<option
+value="2"
+${String(v)==="2"?"selected":""}
+>
+2
+</option>
+
+<option
+value="3"
+${String(v)==="3"?"selected":""}
+>
+3
+</option>
+
+<option
+value="4"
+${String(v)==="4"?"selected":""}
+>
+4
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+`;
+
+}).join("")}
+
+</div>
+
+
+<div class="review-submit">
+
+<span class="muted">
+
+Suggested levels will be included with your role review.
+
+</span>
+
+<button
+onclick="submitRoleReview()"
+>
+Next: Submit Review →
+</button>
+
+</div>
+
+
+<div
+id="drawer"
+class="drawer"
+></div>
+
+
+<div class="feedback">
+
+<h3>
+Head / Reviewer Feedback
+</h3>
+
+<p>
+Review the mapped competencies and proficiency levels,
+then submit one decision for this role.
+</p>
+
+
+<label>
+Decision
+</label>
+
+<select id="decision">
+
+<option value="">
+Select decision
+</option>
+
+<option>
+I agree
+</option>
+
+<option>
+I don't agree
+</option>
+
+</select>
+
+
+<label
+style="margin-top:9px"
+>
+Comments / changes suggested
+</label>
+
+<textarea
+id="comments"
+placeholder="Mention competency or proficiency changes, additions or removals…"
+></textarea>
+
+
+<div style="margin-top:9px">
+
+<button
+class="primary"
+onclick="submitFeedback()"
+>
+Submit review
+</button>
+
+<span
+id="saved"
+class="saved"
+>
+Review submitted.
+</span>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+
+/* OPEN COMPETENCY */
+
+function openComp(code){
+
+current.code=code;
+
+let c=
+DATA.competencies[code];
+
+let d=
+$("drawer");
+
+d.classList.add("open");
+
+
+d.innerHTML=`
+
+<div class="drawerhead">
+
+<div>
+
+<h3>
+${code} — ${esc(c.name)}
+</h3>
+
+<div class="muted">
+${esc(c.scope||"")}
+</div>
+
+</div>
+
+<button
+onclick="d.classList.remove('open')"
+>
+Close
+</button>
+
+</div>
+
+
+<div class="tabs">
+
+<button
+class="tab active"
+onclick="tab(this,'definition')"
+>
+Definition
+</button>
+
+<button
+class="tab"
+onclick="tab(this,'ksa')"
+>
+Knowledge • Skill • Attitude
+</button>
+
+<button
+class="tab"
+onclick="tab(this,'activities')"
+>
+Activities
+</button>
+
+<button
+class="tab"
+onclick="tab(this,'ladder')"
+>
+Proficiency Ladder
+</button>
+
+</div>
+
+
+<div
+id="tabbody"
+class="tabbody"
+></div>
+
+`;
+
+
+tab(
+document.querySelector(".tab"),
+"definition"
+);
+
+}
+
+
+
+/* COMPETENCY DETAILS */
+
+function tab(btn,type){
+
+document
+.querySelectorAll(".tab")
+.forEach(
+x=>x.classList.remove("active")
+);
+
+btn.classList.add("active");
+
+
+let c=
+DATA.competencies[current.code];
+
+let b=
+$("tabbody");
+
+
+/* DEFINITION */
+
+if(type==="definition"){
+
+b.innerHTML=`
+
+<b>
+Competency definition
+</b>
+
+<p>
+${esc(c.scope||"")}
+</p>
+
+`;
+
+}
+
+
+/* KSA */
+
+if(type==="ksa"){
+
+b.innerHTML=`
+
+<div
+class="cards"
+style="grid-template-columns:repeat(3,1fr)"
+>
+
+<div
+class="card"
+style="cursor:default"
+>
+
+<b>
+KNOWLEDGE
+</b>
+
+<p>
+${esc(c.Knowledge||"")}
+</p>
+
+</div>
+
+
+<div
+class="card"
+style="cursor:default"
+>
+
+<b>
+SKILL
+</b>
+
+<p>
+${esc(c.Skill||"")}
+</p>
+
+</div>
+
+
+<div
+class="card"
+style="cursor:default"
+>
+
+<b>
+ATTITUDE
+</b>
+
+<p>
+${esc(c.Attitude||"")}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* ACTIVITIES */
+
+if(type==="activities"){
+
+let activities=
+String(
+c["On-the-Job Activities"] ||
+c["On-the-job activities"] ||
+""
+)
+.split("\n")
+.filter(Boolean);
+
+
+b.innerHTML=`
+
+<b>
+On-the-job activities
+</b>
+
+<ul>
+
+${activities.map(
+x=>
+"<li>"+
+esc(
+x.replace(/^•\s*/,"")
+)+
+"</li>"
+).join("")}
+
+</ul>
+
+`;
+
+}
+
+
+/* PROFICIENCY LADDER */
+
+if(type==="ladder"){
+
+b.innerHTML=`
+
+<div
+style="margin-bottom:10px"
+>
+
+<b>
+Proficiency Ladder (1–4)
+</b>
+
+<div
+class="muted"
+style="margin-top:3px"
+>
+Increasing complexity, impact and autonomy
+</div>
+
+</div>
+
+
+<div class="ladder">
+
+${["PL4","PL3","PL2","PL1"]
+.map(x=>{
+
+let lines=
+String(c[x]||"")
+.split("\n")
+.map(
+v=>v.replace(/^•\s*/,"").trim()
+)
+.filter(Boolean);
+
+
+/*
+FIRST LINE = DEFINITION
+REMAINING LINES = EXPECTATIONS
+*/
+
+let definition=
+lines.shift() ||
+"Definition not available";
+
+
+return `
+
+<div class="pl">
+
+<div class="pl-number">
+${x.replace("PL","")}
+</div>
+
+<div class="pl-title">
+${esc(x)}
+</div>
+
+
+<div class="definition">
+
+${esc(definition)}
+
+</div>
+
+
+<div class="expect">
+
+<b>
+At this level:
+</b>
+
+<ul>
+
+${lines.map(
+v=>
+`<li>${esc(v)}</li>`
+).join("")}
+
+</ul>
+
+</div>
+
+</div>
+
+`;
+
+}).join("")}
+
+</div>
+
+`;
+
+}
+
+}
+
+
+
+/* GO TO SUBMIT */
+
+function submitRoleReview(){
+
+document
+.querySelector(".feedback")
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+document
+.getElementById("decision")
+.focus();
+
+}
+
+
+
+/* SUBMIT REVIEW */
+
+async function submitFeedback(){
+
+let reviewer=
+sessionStorage.getItem("reviewer");
+
+
+if(!reviewer){
+
+return alert(
+"Please save your reviewer name from the Overview page first."
+);
+
+}
+
+
+let decision=
+$("decision").value;
+
+
+if(!decision){
+
+return alert(
+"Please select a decision."
+);
+
+}
+
+
+let s=
+DATA.sections[current.sec];
+
+let r=
+s.roles[current.role];
+
+
+/*
+CAPTURE SUGGESTED LEVEL
+FOR EVERY MAPPED COMPETENCY
+*/
+
+let suggestedLevels={};
+
+
+Object
+.entries(r.scores)
+.filter(
+([code,v])=>
+v!=="NA" &&
+v!==null &&
+v!==undefined &&
+v!==""
+)
+.forEach(
+([code])=>{
+
+let select=
+document.getElementById(
+`level-${code}`
+);
+
+if(select){
+
+suggestedLevels[code]=
+Number(select.value);
+
+}
+
+});
+
+
+let payload={
+
+reviewer,
+
+vertical:s.name,
+
+role:r.name,
+
+decision,
+
+comments:$("comments").value,
+
+suggestedLevels
+
+};
+
+
+let res=
+await fetch(
+"/api/feedback",
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify(payload)
+
+});
+
+
+if(!res.ok){
+
+return alert(
+"Unable to save. Please try again."
+);
+
+}
+
+
+$("saved").style.display=
+"inline";
+
+}
+
+
 boot();
-</script></body></html>
+
+</script>
+
+</body>
+</html>
