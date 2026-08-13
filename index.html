@@ -2,24 +2,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>
-Nuvoco HR Competency Review
-</title>
-
+<title>Nuvoco HR Competency Review</title>
 
 <style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 *{
     box-sizing:border-box;
@@ -27,22 +15,13 @@ Nuvoco HR Competency Review
 
 body{
     margin:0;
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f5f7fb;
     color:#172033;
 }
 
 header{
-    background:
-        linear-gradient(
-            120deg,
-            #172554,
-            #5b21b6,
-            #be185d
-        );
+    background:linear-gradient(120deg,#172554,#5b21b6,#be185d);
     color:white;
     padding:24px 35px;
 }
@@ -65,11 +44,6 @@ header p{
     opacity:.85;
 }
 
-
-/* =========================================================
-   PAGE
-========================================================= */
-
 .page{
     width:100%;
     padding:20px;
@@ -85,10 +59,7 @@ header p{
     margin:auto;
 }
 
-
-/* =========================================================
-   WORKFLOW
-========================================================= */
+/* WORKFLOW */
 
 .workflow{
     background:white;
@@ -139,12 +110,7 @@ header p{
 }
 
 .active .circle{
-    background:
-        linear-gradient(
-            135deg,
-            #6d28d9,
-            #db2777
-        );
+    background:linear-gradient(135deg,#6d28d9,#db2777);
     color:white;
 }
 
@@ -153,10 +119,7 @@ header p{
     color:white;
 }
 
-
-/* =========================================================
-   COMMON
-========================================================= */
+/* COMMON */
 
 .container{
     background:white;
@@ -179,17 +142,8 @@ button:hover{
     background:#f8fafc;
 }
 
-button:focus{
-    outline:none;
-}
-
 .primary{
-    background:
-        linear-gradient(
-            90deg,
-            #6d28d9,
-            #db2777
-        );
+    background:linear-gradient(90deg,#6d28d9,#db2777);
     color:white;
     border:0;
 }
@@ -216,14 +170,11 @@ select:focus,
 textarea:focus{
     outline:none;
     border-color:#7c3aed;
-    box-shadow:
-        0 0 0 3px
-        rgba(124,58,237,.08);
+    box-shadow:0 0 0 3px rgba(124,58,237,.08);
 }
 
 textarea{
     min-height:90px;
-    resize:vertical;
 }
 
 .title-label{
@@ -234,15 +185,17 @@ textarea{
     letter-spacing:1px;
 }
 
+h2{
+    margin:4px 0;
+    color:#172554;
+}
+
 .description{
     font-size:10px;
     color:#667085;
 }
 
-
-/* =========================================================
-   REVIEWER
-========================================================= */
+/* REVIEWER */
 
 .reviewer{
     display:flex;
@@ -268,10 +221,7 @@ textarea{
     margin-top:2px;
 }
 
-
-/* =========================================================
-   WELCOME
-========================================================= */
+/* WELCOME */
 
 .welcome{
     min-height:600px;
@@ -288,9 +238,7 @@ textarea{
     border-radius:20px;
     padding:45px;
     text-align:center;
-    box-shadow:
-        0 15px 40px
-        rgba(23,37,84,.08);
+    box-shadow:0 15px 40px rgba(23,37,84,.08);
 }
 
 .logo{
@@ -301,12 +249,7 @@ textarea{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:
-        linear-gradient(
-            135deg,
-            #6d28d9,
-            #db2777
-        );
+    background:linear-gradient(135deg,#6d28d9,#db2777);
     color:white;
     font-weight:bold;
     font-size:22px;
@@ -323,20 +266,11 @@ textarea{
     line-height:1.6;
 }
 
-
-/* =========================================================
-   OVERVIEW
-========================================================= */
-
-h2{
-    margin:4px 0;
-    color:#172554;
-}
+/* OVERVIEW */
 
 .metrics{
     display:grid;
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:10px;
     margin:18px 0;
 }
@@ -356,8 +290,7 @@ h2{
     right:0;
     height:3px;
     background:#6d28d9;
-    border-radius:
-        11px 11px 0 0;
+    border-radius:11px 11px 0 0;
 }
 
 .metric:nth-child(2)::before{
@@ -385,8 +318,7 @@ h2{
 
 .competencies{
     display:grid;
-    grid-template-columns:
-        repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:8px;
 }
 
@@ -419,267 +351,115 @@ h2{
     align-items:center;
 }
 
-
-/* =========================================================
-   ORGANISATION INTRO
-========================================================= */
+/* ORIGINAL ORGANISATION STRUCTURE */
 
 .org-intro{
-    background:
-        linear-gradient(
-            120deg,
-            #faf9ff,
-            #fff7fb
-        );
+    background:linear-gradient(120deg,#faf9ff,#fff7fb);
     border:1px solid #e4ddff;
     border-radius:12px;
-    padding:18px;
-    margin-bottom:20px;
+    padding:16px;
+    margin-bottom:15px;
 }
 
 .org-intro h2{
-    margin:4px 0;
+    margin:3px 0;
 }
 
 .org-intro p{
-    margin:5px 0 0;
+    margin:4px 0 0;
     color:#667085;
     font-size:10px;
-    line-height:1.5;
 }
 
-
-/* =========================================================
-   ORGANISATION TREE
-========================================================= */
-
-.org-tree{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:100%;
+.org-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.org-root{
-    min-width:240px;
-    padding:14px 25px;
-    background:
-        linear-gradient(
-            135deg,
-            #172554,
-            #4c1d95
-        );
-    color:white;
-    border-radius:12px;
-    text-align:center;
-    box-shadow:
-        0 8px 20px
-        rgba(23,37,84,.15);
-}
-
-.org-root-title{
-    font-size:15px;
-    font-weight:bold;
-}
-
-.org-root-sub{
-    font-size:8px;
-    opacity:.75;
-    margin-top:4px;
-}
-
-.tree-down{
-    height:28px;
-    width:2px;
-    background:#c4b5fd;
-    position:relative;
-}
-
-.tree-down::after{
-    content:"";
-    position:absolute;
-    bottom:-1px;
-    left:-4px;
-    border-left:5px solid transparent;
-    border-right:5px solid transparent;
-    border-top:7px solid #8b5cf6;
-}
-
-.vertical-row{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    position:relative;
-    padding-top:2px;
-}
-
-.vertical-row::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:8%;
-    right:8%;
-    height:2px;
-    background:#ddd6fe;
-}
-
-.vertical-node{
-    flex:1;
-    max-width:280px;
-    min-width:210px;
-    position:relative;
-}
-
-.vertical-node::before{
-    content:"";
-    position:absolute;
-    top:-13px;
-    left:50%;
-    width:2px;
-    height:14px;
-    background:#c4b5fd;
-}
-
-.vertical-card{
-    background:white;
-    border:1px solid #ddd6fe;
+.org{
+    border:1px solid #e5e7eb;
     border-radius:12px;
     overflow:hidden;
-    box-shadow:
-        0 5px 15px
-        rgba(109,40,217,.06);
+    background:white;
 }
 
-.vertical-card-head{
-    padding:13px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.org-header{
+    padding:15px;
     cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.org-header:hover{
     background:#faf9ff;
 }
 
-.vertical-card-head:hover{
+.org.open{
+    border-color:#a78bfa;
+}
+
+.org.open .org-header{
     background:#f5f3ff;
 }
 
-.vertical-name{
-    font-size:11px;
+.org-name{
+    font-size:13px;
     font-weight:bold;
     color:#172554;
 }
 
-.vertical-count{
-    font-size:7px;
+.role-count{
     background:#ede9fe;
     color:#6d28d9;
-    padding:5px 7px;
     border-radius:20px;
+    padding:5px 8px;
+    font-size:8px;
     font-weight:bold;
 }
 
-.expand-symbol{
-    font-size:14px;
-    color:#6d28d9;
-    margin-right:6px;
-}
-
-.vertical-roles{
+.roles{
     display:none;
-    padding:4px 10px 12px;
+    padding:0 12px 12px;
     border-top:1px solid #ede9fe;
 }
 
-.vertical-card.open
-.vertical-roles{
+.org.open .roles{
     display:block;
 }
 
-.role-node{
-    position:relative;
-    margin-top:9px;
-}
-
-.role-node::before{
-    content:"";
-    position:absolute;
-    left:13px;
-    top:-9px;
-    width:2px;
-    height:10px;
-    background:#c4b5fd;
-}
-
-.role-card{
-    padding:10px 11px;
-    background:white;
+.role{
     border:1px solid #e5e7eb;
     border-radius:8px;
+    padding:11px;
+    margin-top:6px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
     cursor:pointer;
-    transition:.15s;
 }
 
-.role-card:hover{
-    border-color:#a78bfa;
+.role:hover{
     background:#faf9ff;
-    transform:translateX(2px);
+    border-color:#a78bfa;
 }
 
-.role-card-name{
-    font-size:9px;
+.role-name{
+    font-size:10px;
     font-weight:bold;
-    color:#344054;
 }
 
-.role-card-sub{
-    font-size:7px;
+.role-sub{
+    font-size:8px;
     color:#98a2b3;
     margin-top:3px;
 }
 
-.role-arrow{
+.arrow{
     color:#6d28d9;
-    font-size:14px;
-    font-weight:bold;
 }
 
-.role-review-line{
-    height:20px;
-    width:2px;
-    background:#c4b5fd;
-    margin:auto;
-    position:relative;
-}
-
-.role-review-line::after{
-    content:"";
-    position:absolute;
-    bottom:-1px;
-    left:-4px;
-    border-left:5px solid transparent;
-    border-right:5px solid transparent;
-    border-top:7px solid #8b5cf6;
-}
-
-.structure-help{
-    margin-top:20px;
-    padding:11px;
-    border-radius:9px;
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    text-align:center;
-    color:#667085;
-    font-size:8px;
-}
-
-
-/* =========================================================
-   REVIEW LAYOUT
-========================================================= */
+/* REVIEW LAYOUT */
 
 .review-layout{
     display:grid;
@@ -737,10 +517,7 @@ h2{
     background:#f5f3ff;
 }
 
-
-/* =========================================================
-   ROLE HEADER
-========================================================= */
+/* ROLE */
 
 .role-header{
     display:flex;
@@ -778,10 +555,7 @@ h2{
     color:#a16207;
 }
 
-
-/* =========================================================
-   PROGRESS
-========================================================= */
+/* PROGRESS */
 
 .progress{
     border:1px solid #e5e7eb;
@@ -808,19 +582,10 @@ h2{
 .progress-fill{
     height:100%;
     width:0;
-    background:
-        linear-gradient(
-            90deg,
-            #059669,
-            #2563eb
-        );
-    transition:.2s;
+    background:linear-gradient(90deg,#059669,#2563eb);
 }
 
-
-/* =========================================================
-   REVIEW TIP
-========================================================= */
+/* REVIEW TIP */
 
 .review-tip{
     background:#f8fafc;
@@ -832,10 +597,7 @@ h2{
     margin-bottom:10px;
 }
 
-
-/* =========================================================
-   COMPETENCY CARD
-========================================================= */
+/* COMPETENCY */
 
 .competency-card{
     border:1px solid #e5e7eb;
@@ -845,7 +607,6 @@ h2{
     position:relative;
     cursor:pointer;
     background:white;
-    transition:.15s;
 }
 
 .competency-card::before{
@@ -856,8 +617,7 @@ h2{
     bottom:0;
     width:4px;
     background:#059669;
-    border-radius:
-        11px 0 0 11px;
+    border-radius:11px 0 0 11px;
 }
 
 .competency-card.working::before{
@@ -870,9 +630,7 @@ h2{
 
 .competency-card.selected{
     border-color:#86efac;
-    box-shadow:
-        0 5px 15px
-        rgba(5,150,105,.08);
+    box-shadow:0 5px 15px rgba(5,150,105,.08);
 }
 
 .comp-top{
@@ -976,12 +734,11 @@ h2{
     background:#dcfce7;
     color:#047857;
     border-color:#bbf7d0;
+    opacity:1;
+    visibility:visible;
 }
 
-
-/* =========================================================
-   EXPANDED COMPETENCY
-========================================================= */
+/* EXPANDED DETAIL */
 
 .detail{
     display:none;
@@ -1009,20 +766,20 @@ h2{
 .detail-header h3{
     margin:3px 0;
     color:#172554;
-    font-size:15px;
 }
 
 .close-detail{
     flex-shrink:0;
-    background:white;
+    position:relative;
+    z-index:20;
+    background:#ffffff;
     color:#475467;
     border:1px solid #d0d5dd;
-    position:relative;
-    z-index:10;
+    cursor:pointer;
 }
 
 .close-detail:hover{
-    background:#fee2e2;
+    background:#fef2f2;
     color:#991b1b;
     border-color:#fecaca;
 }
@@ -1073,10 +830,7 @@ h2{
     color:#047857;
 }
 
-
-/* =========================================================
-   TABS
-========================================================= */
+/* TABS */
 
 .tabs{
     display:flex;
@@ -1091,12 +845,7 @@ h2{
 }
 
 .tab.active{
-    background:
-        linear-gradient(
-            90deg,
-            #6d28d9,
-            #db2777
-        );
+    background:linear-gradient(90deg,#6d28d9,#db2777);
     color:white;
 }
 
@@ -1106,10 +855,7 @@ h2{
     color:#475467;
 }
 
-
-/* =========================================================
-   LADDER
-========================================================= */
+/* LADDER */
 
 .ladder{
     display:grid;
@@ -1146,10 +892,7 @@ h2{
     line-height:1.4;
 }
 
-
-/* =========================================================
-   FEEDBACK
-========================================================= */
+/* FEEDBACK */
 
 .feedback{
     margin-top:15px;
@@ -1170,28 +913,16 @@ h2{
     font-size:9px;
 }
 
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1000px){
-
-    .vertical-row{
-        flex-wrap:wrap;
-    }
-
-    .vertical-node{
-        max-width:45%;
-    }
-
-}
+/* RESPONSIVE */
 
 @media(max-width:900px){
 
     .metrics{
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .org-grid{
+        grid-template-columns:1fr;
     }
 
     .review-layout{
@@ -1205,7 +936,7 @@ h2{
 
 }
 
-@media(max-width:650px){
+@media(max-width:600px){
 
     .page{
         padding:10px;
@@ -1233,25 +964,7 @@ h2{
     }
 
     .step{
-        min-width:125px;
-    }
-
-    .vertical-node{
-        max-width:100%;
-        width:100%;
-    }
-
-    .vertical-row{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .vertical-row::before{
-        display:none;
-    }
-
-    .vertical-node{
-        min-width:0;
+        min-width:130px;
     }
 
     .ladder{
@@ -1265,12 +978,10 @@ h2{
 }
 
 </style>
-
 </head>
 
 
 <body>
-
 
 <header>
 
@@ -1289,32 +1000,26 @@ Validate the role mapping and recommend the right proficiency level.
 </header>
 
 
-<div
-id="app"
-class="page full"
->
-</div>
+<div id="app" class="page full"></div>
 
 
 <script>
 
-
-/* =========================================================
+/* =====================================================
    GLOBAL
-========================================================= */
+===================================================== */
 
 let DATA = null;
 
 let currentSection = null;
-
 let currentRole = null;
 
 let reviewed = {};
 
 
-/* =========================================================
+/* =====================================================
    PROFICIENCY DEFINITIONS
-========================================================= */
+===================================================== */
 
 const LEVEL_INFO = {
 
@@ -1345,27 +1050,24 @@ const LEVEL_INFO = {
 };
 
 
-/* =========================================================
+/* =====================================================
    HELPERS
-========================================================= */
+===================================================== */
 
 function esc(value){
 
     return String(value ?? "")
-    .replace(
-        /[&<>"']/g,
-        function(m){
+    .replace(/[&<>"']/g,function(m){
 
-            return {
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#39;"
-            }[m];
+        return {
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#39;"
+        }[m];
 
-        }
-    );
+    });
 
 }
 
@@ -1384,9 +1086,9 @@ function reviewer(){
 }
 
 
-/* =========================================================
+/* =====================================================
    LOAD DATA
-========================================================= */
+===================================================== */
 
 async function loadData(){
 
@@ -1398,14 +1100,13 @@ async function loadData(){
         if(!response.ok){
 
             throw new Error(
-                "Architecture unavailable"
+                "Architecture could not be loaded"
             );
 
         }
 
         DATA =
         await response.json();
-
 
         if(reviewer()){
 
@@ -1428,8 +1129,8 @@ async function loadData(){
             </h2>
 
             <p class="description">
-                Please check that your server is running
-                and /api/architecture is available.
+                Please check that your server is running and
+                /api/architecture is available.
             </p>
 
         </div>
@@ -1441,14 +1142,13 @@ async function loadData(){
 }
 
 
-/* =========================================================
+/* =====================================================
    WORKFLOW
-========================================================= */
+===================================================== */
 
 function workflow(active){
 
-    let html =
-    `<div class="workflow">`;
+    let html = `<div class="workflow">`;
 
     const names = [
         "Reviewer",
@@ -1457,50 +1157,39 @@ function workflow(active){
         "Review"
     ];
 
+    names.forEach(function(name,index){
 
-    names.forEach(
-        function(name,index){
+        const number = index + 1;
 
-            const number =
-            index + 1;
+        let cls = "";
 
-            let cls = "";
+        if(number < active){
 
+            cls = "done";
 
-            if(number < active){
+        }else if(number === active){
 
-                cls = "done";
-
-            }else if(number === active){
-
-                cls = "active";
-
-            }
-
-
-            html += `
-
-            <div class="step ${cls}">
-
-                <div class="circle">
-                    ${
-                        number < active
-                        ? "✓"
-                        : number
-                    }
-                </div>
-
-                <span>
-                    ${name}
-                </span>
-
-            </div>
-
-            `;
+            cls = "active";
 
         }
-    );
 
+        html += `
+
+        <div class="step ${cls}">
+
+            <div class="circle">
+                ${number < active ? "✓" : number}
+            </div>
+
+            <span>
+                ${name}
+            </span>
+
+        </div>
+
+        `;
+
+    });
 
     html += `</div>`;
 
@@ -1509,15 +1198,13 @@ function workflow(active){
 }
 
 
-/* =========================================================
+/* =====================================================
    WELCOME
-========================================================= */
+===================================================== */
 
 function showWelcome(){
 
-    app().className =
-    "page full";
-
+    app().className = "page full";
 
     app().innerHTML = `
 
@@ -1553,11 +1240,7 @@ function showWelcome(){
 
             <button
                 class="primary"
-                style="
-                    width:100%;
-                    margin-top:10px;
-                    padding:12px
-                "
+                style="width:100%;margin-top:10px;padding:12px"
                 onclick="startReview()"
             >
                 Start Review →
@@ -1579,24 +1262,16 @@ function showWelcome(){
 
     `;
 
+    setTimeout(function(){
 
-    setTimeout(
-        function(){
+        const input =
+        document.getElementById("reviewerInput");
 
-            const input =
-            document.getElementById(
-                "reviewerInput"
-            );
+        if(input){
+            input.focus();
+        }
 
-            if(input){
-
-                input.focus();
-
-            }
-
-        },
-        100
-    );
+    },100);
 
 }
 
@@ -1604,14 +1279,10 @@ function showWelcome(){
 function startReview(){
 
     const input =
-    document.getElementById(
-        "reviewerInput"
-    );
-
+    document.getElementById("reviewerInput");
 
     const name =
     input.value.trim();
-
 
     if(!name){
 
@@ -1623,21 +1294,19 @@ function startReview(){
 
     }
 
-
     sessionStorage.setItem(
         "reviewer",
         name
     );
-
 
     showOverview();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    REVIEWER BAR
-========================================================= */
+===================================================== */
 
 function reviewerBar(){
 
@@ -1672,54 +1341,39 @@ function reviewerBar(){
 
 function changeReviewer(){
 
-    if(
-        !confirm(
-            "Change the reviewer?"
-        )
-    ){
+    if(!confirm(
+        "Change the reviewer?"
+    )){
 
         return;
 
     }
 
-
-    sessionStorage.removeItem(
-        "reviewer"
-    );
-
+    sessionStorage.removeItem("reviewer");
 
     reviewed = {};
-
 
     showWelcome();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    OVERVIEW
-========================================================= */
+===================================================== */
 
 function showOverview(){
 
-    app().className =
-    "page full";
+    app().className = "page full";
 
+    let competencies =
+    Object.entries(DATA.competencies);
 
-    const competencies =
-    Object.entries(
-        DATA.competencies
-    );
-
-
-    const roles =
+    let roles =
     DATA.sections.reduce(
         function(total,section){
 
-            return (
-                total +
-                section.roles.length
-            );
+            return total + section.roles.length;
 
         },
         0
@@ -1743,63 +1397,47 @@ function showOverview(){
         </h2>
 
         <div class="description">
-            Review the competency architecture before
-            selecting the organisation and role you want
-            to validate.
+            Review the competency architecture before selecting
+            the organisation and role you want to validate.
         </div>
 
 
         <div class="metrics">
 
             <div class="metric">
-
                 <strong>
                     ${competencies.length}
                 </strong>
-
                 <span>
                     Functional competencies
                 </span>
-
             </div>
 
-
             <div class="metric">
-
                 <strong>
                     ${roles}
                 </strong>
-
                 <span>
                     Roles mapped
                 </span>
-
             </div>
 
-
             <div class="metric">
-
                 <strong>
                     ${DATA.sections.length}
                 </strong>
-
                 <span>
                     Organisation verticals
                 </span>
-
             </div>
 
-
             <div class="metric">
-
                 <strong>
                     4
                 </strong>
-
                 <span>
                     Proficiency levels
                 </span>
-
             </div>
 
         </div>
@@ -1839,13 +1477,12 @@ function showOverview(){
 
                 <br>
 
-                3. Open each competency and review
-                its details.
+                3. Review the competencies mapped to the role.
 
                 <br>
 
-                4. Check the definition, KSA, activities
-                and proficiency ladder.
+                4. Check the definition, KSA, activities and
+                proficiency ladder.
 
                 <br>
 
@@ -1860,10 +1497,7 @@ function showOverview(){
         </div>
 
 
-        <div
-            class="title-label"
-            style="margin-top:18px"
-        >
+        <div class="title-label" style="margin-top:18px">
             Competency Architecture
         </div>
 
@@ -1874,12 +1508,8 @@ function showOverview(){
                 competencies.map(
                     function(item){
 
-                        const code =
-                        item[0];
-
-                        const competency =
-                        item[1];
-
+                        const code = item[0];
+                        const competency = item[1];
 
                         return `
 
@@ -1890,9 +1520,7 @@ function showOverview(){
                             </b>
 
                             <span>
-                                ${esc(
-                                    competency.name
-                                )}
+                                ${esc(competency.name)}
                             </span>
 
                         </div>
@@ -1923,12 +1551,11 @@ function showOverview(){
                     class="description"
                     style="margin-top:3px"
                 >
-                    Select the organisation vertical and
-                    role you want to review.
+                    Select the organisation vertical and role
+                    you want to review.
                 </div>
 
             </div>
-
 
             <button
                 class="primary"
@@ -1946,15 +1573,13 @@ function showOverview(){
 }
 
 
-/* =========================================================
-   ORGANISATION STRUCTURE
-========================================================= */
+/* =====================================================
+   ORIGINAL ORGANISATION STRUCTURE
+===================================================== */
 
 function showOrganisation(){
 
-    app().className =
-    "page full";
-
+    app().className = "page full";
 
     app().innerHTML = `
 
@@ -1963,7 +1588,6 @@ function showOrganisation(){
     <div class="container">
 
         ${reviewerBar()}
-
 
         <button
             onclick="showOverview()"
@@ -1980,211 +1604,113 @@ function showOrganisation(){
             </div>
 
             <h2>
-                Organisation Structure
+                Select Organisation & Role
             </h2>
 
             <p>
-                Follow the structure below. Expand an
-                organisation vertical to see the roles
-                mapped to it, then select a role to begin
-                the competency review.
+                Expand an organisation vertical below.
+                Then select the role you want to validate.
             </p>
 
         </div>
 
 
-        <div class="org-tree">
+        <div class="org-grid">
 
+            ${
+                DATA.sections.map(
+                    function(section,index){
 
-            <!-- ROOT -->
+                        return `
 
-            <div class="org-root">
-
-                <div class="org-root-title">
-                    NUVOCO HR
-                </div>
-
-                <div class="org-root-sub">
-                    Competency Architecture
-                </div>
-
-            </div>
-
-
-            <div class="tree-down"></div>
-
-
-            <!-- VERTICALS -->
-
-            <div class="vertical-row">
-
-                ${
-                    DATA.sections.map(
-                        function(section,index){
-
-                            return `
+                        <div
+                            class="org"
+                            id="org-${index}"
+                        >
 
                             <div
-                                class="vertical-node"
+                                class="org-header"
+                                onclick="
+                                    toggleOrganisation(${index})
+                                "
                             >
 
-                                <div
-                                    class="vertical-card"
-                                    id="vertical-${index}"
-                                >
+                                <div>
 
-                                    <div
-                                        class="vertical-card-head"
-                                        onclick="
-                                            toggleVertical(
-                                                ${index}
-                                            )
-                                        "
-                                    >
-
-                                        <div>
-
-                                            <div
-                                                class="vertical-name"
-                                            >
-                                                ${esc(
-                                                    section.name
-                                                )}
-                                            </div>
-
-                                            <div
-                                                style="
-                                                    font-size:7px;
-                                                    color:#98a2b3;
-                                                    margin-top:3px
-                                                "
-                                            >
-                                                Click to expand
-                                            </div>
-
-                                        </div>
-
-
-                                        <div
-                                            style="
-                                                display:flex;
-                                                align-items:center
-                                            "
-                                        >
-
-                                            <span
-                                                class="vertical-count"
-                                            >
-                                                ${
-                                                    section.roles.length
-                                                }
-                                                Roles
-                                            </span>
-
-                                            <span
-                                                id="expand-${index}"
-                                                class="expand-symbol"
-                                            >
-                                                +
-                                            </span>
-
-                                        </div>
-
+                                    <div class="org-name">
+                                        ${esc(section.name)}
                                     </div>
 
-
-                                    <div class="vertical-roles">
-
-                                        ${
-                                            section.roles.map(
-                                                function(
-                                                    role,
-                                                    roleIndex
-                                                ){
-
-                                                    return `
-
-                                                    <div
-                                                        class="role-node"
-                                                    >
-
-                                                        <div
-                                                            class="role-card"
-                                                            onclick="
-                                                                openRole(
-                                                                    ${index},
-                                                                    ${roleIndex}
-                                                                )
-                                                            "
-                                                        >
-
-                                                            <div>
-
-                                                                <div
-                                                                    class="role-card-name"
-                                                                >
-                                                                    ${esc(
-                                                                        role.name
-                                                                    )}
-                                                                </div>
-
-                                                                <div
-                                                                    class="role-card-sub"
-                                                                >
-                                                                    Click to review competencies
-                                                                </div>
-
-                                                            </div>
-
-
-                                                            <div
-                                                                class="role-arrow"
-                                                            >
-                                                                →
-                                                            </div>
-
-                                                        </div>
-
-
-                                                        <div
-                                                            class="role-review-line"
-                                                        ></div>
-
-                                                    </div>
-
-                                                    `;
-
-                                                }
-                                            ).join("")
-                                        }
-
+                                    <div
+                                        style="
+                                            font-size:8px;
+                                            color:#98a2b3;
+                                            margin-top:3px
+                                        "
+                                    >
+                                        Click to view roles
                                     </div>
 
                                 </div>
 
+                                <div class="role-count">
+                                    ${section.roles.length} Roles
+                                </div>
+
                             </div>
 
-                            `;
 
-                        }
-                    ).join("")
-                }
+                            <div class="roles">
 
-            </div>
+                                ${
+                                    section.roles.map(
+                                        function(role,roleIndex){
 
+                                            return `
 
-            <div class="structure-help">
+                                            <div
+                                                class="role"
+                                                onclick="
+                                                    openRole(
+                                                        ${index},
+                                                        ${roleIndex}
+                                                    )
+                                                "
+                                            >
 
-                <b>
-                    How it works:
-                </b>
+                                                <div>
 
-                Click a vertical →
-                expand the roles →
-                select a role →
-                review the mapped competencies.
+                                                    <div class="role-name">
+                                                        ${esc(role.name)}
+                                                    </div>
 
-            </div>
+                                                    <div class="role-sub">
+                                                        Review competency mapping
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="arrow">
+                                                    →
+                                                </div>
+
+                                            </div>
+
+                                            `;
+
+                                        }
+                                    ).join("")
+                                }
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+            }
 
         </div>
 
@@ -2195,158 +1721,100 @@ function showOrganisation(){
 }
 
 
-function toggleVertical(index){
+function toggleOrganisation(index){
 
-    const card =
+    const selected =
     document.getElementById(
-        "vertical-"+index
+        "org-"+index
     );
-
-
-    const symbol =
-    document.getElementById(
-        "expand-"+index
-    );
-
 
     document
-    .querySelectorAll(
-        ".vertical-card"
-    )
-    .forEach(
-        function(item,i){
+    .querySelectorAll(".org")
+    .forEach(function(item){
 
-            if(item !== card){
+        if(item !== selected){
 
-                item.classList.remove(
-                    "open"
-                );
-
-                const other =
-                document.getElementById(
-                    "expand-"+i
-                );
-
-                if(other){
-
-                    other.textContent =
-                    "+";
-
-                }
-
-            }
+            item.classList.remove("open");
 
         }
-    );
 
+    });
 
-    const isOpen =
-    card.classList.toggle("open");
-
-
-    symbol.textContent =
-    isOpen
-    ? "−"
-    : "+";
+    selected.classList.toggle("open");
 
 }
 
 
-/* =========================================================
-   ROLE REVIEW
-========================================================= */
+/* =====================================================
+   ROLE
+===================================================== */
 
-function openRole(
-    sectionIndex,
-    roleIndex
-){
+function openRole(sectionIndex,roleIndex){
 
-    currentSection =
-    sectionIndex;
-
-    currentRole =
-    roleIndex;
-
+    currentSection = sectionIndex;
+    currentRole = roleIndex;
 
     reviewed = {};
-
 
     showRoleReview();
 
 }
 
 
-/* =========================================================
-   ROLE REVIEW SCREEN
-========================================================= */
+/* =====================================================
+   ROLE REVIEW
+===================================================== */
 
 function showRoleReview(){
 
-    app().className =
-    "page review";
+    app().className = "page review";
 
 
     const section =
-    DATA.sections[
-        currentSection
-    ];
-
+    DATA.sections[currentSection];
 
     const role =
-    section.roles[
-        currentRole
-    ];
+    section.roles[currentRole];
 
 
     const mapped =
-    Object.entries(
-        role.scores
-    )
-    .filter(
-        function(item){
+    Object.entries(role.scores)
+    .filter(function(item){
 
-            const value =
-            item[1];
+        const value = item[1];
 
-            return (
-                value !== "NA" &&
-                value !== null &&
-                value !== undefined &&
-                value !== ""
-            );
+        return (
+            value !== "NA" &&
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+        );
 
-        }
-    );
+    });
 
 
     const core =
-    mapped.filter(
-        function(item){
+    mapped.filter(function(item){
 
-            const code =
-            item[0];
+        const code = item[0];
 
-            return String(
-                (role.relationship || {})[code] || ""
-            ).toLowerCase() === "core";
+        return String(
+            (role.relationship || {})[code] || ""
+        ).toLowerCase() === "core";
 
-        }
-    ).length;
+    }).length;
 
 
     const working =
-    mapped.filter(
-        function(item){
+    mapped.filter(function(item){
 
-            const code =
-            item[0];
+        const code = item[0];
 
-            return String(
-                (role.relationship || {})[code] || ""
-            ).toLowerCase() === "working";
+        return String(
+            (role.relationship || {})[code] || ""
+        ).toLowerCase() === "working";
 
-        }
-    ).length;
+    }).length;
 
 
     app().innerHTML = `
@@ -2357,8 +1825,6 @@ function showRoleReview(){
     <div class="review-layout">
 
 
-        <!-- SIDEBAR -->
-
         <div class="review-sidebar">
 
             <input
@@ -2367,7 +1833,6 @@ function showRoleReview(){
                 placeholder="Search role..."
                 oninput="searchRoles()"
             >
-
 
             <div
                 style="
@@ -2381,31 +1846,25 @@ function showRoleReview(){
                 Organisation
             </div>
 
-
             <div id="sideOrganisation">
 
                 ${
                     DATA.sections.map(
-                        function(
-                            section,
-                            sIndex
-                        ){
+                        function(section,sIndex){
 
                             return `
 
-                            <div class="side-org">
+                            <div
+                                class="side-org"
+                            >
 
                                 <div
                                     class="side-org-title"
                                     onclick="
-                                        toggleSideOrg(
-                                            ${sIndex}
-                                        )
+                                        toggleSideOrg(${sIndex})
                                     "
                                 >
-                                    ${esc(
-                                        section.name
-                                    )}
+                                    ${esc(section.name)}
                                 </div>
 
 
@@ -2413,19 +1872,13 @@ function showRoleReview(){
 
                                     ${
                                         section.roles.map(
-                                            function(
-                                                r,
-                                                rIndex
-                                            ){
+                                            function(r,rIndex){
 
                                                 return `
 
                                                 <div
                                                     class="side-role"
-                                                    data-role="${esc(
-                                                        r.name
-                                                        .toLowerCase()
-                                                    )}"
+                                                    data-role="${esc(r.name.toLowerCase())}"
                                                     onclick="
                                                         openRole(
                                                             ${sIndex},
@@ -2433,9 +1886,7 @@ function showRoleReview(){
                                                         )
                                                     "
                                                 >
-                                                    ${esc(
-                                                        r.name
-                                                    )}
+                                                    ${esc(r.name)}
                                                 </div>
 
                                                 `;
@@ -2459,8 +1910,6 @@ function showRoleReview(){
         </div>
 
 
-        <!-- MAIN REVIEW -->
-
         <div class="container">
 
             ${reviewerBar()}
@@ -2479,8 +1928,7 @@ function showRoleReview(){
                     </h2>
 
                     <div class="role-info">
-                        ${mapped.length}
-                        competencies mapped for this role
+                        ${mapped.length} competencies mapped for this role
                     </div>
 
                 </div>
@@ -2521,8 +1969,7 @@ function showRoleReview(){
                 <div class="progress-text">
 
                     <span id="progressText">
-                        0 of ${mapped.length}
-                        competencies reviewed
+                        0 of ${mapped.length} competencies reviewed
                     </span>
 
                     <span id="progressPercent">
@@ -2530,7 +1977,6 @@ function showRoleReview(){
                     </span>
 
                 </div>
-
 
                 <div class="progress-bar">
 
@@ -2546,15 +1992,12 @@ function showRoleReview(){
 
             <div class="review-tip">
 
-                <b>
-                    Review tip:
-                </b>
-
-                Open every competency and review its
-                definition, KSA, activities and proficiency
-                ladder. Opening a competency marks it as
-                <b>Reviewed</b>. The score does not need
-                to change if you agree with the mapping.
+                <b>Review tip:</b>
+                Open each competency to review its definition,
+                KSA, activities and proficiency ladder.
+                <b>Opening a competency marks it as Reviewed.</b>
+                The score does not need to change if you agree
+                with the existing mapping.
 
             </div>
 
@@ -2585,16 +2028,14 @@ function showRoleReview(){
                 </h3>
 
                 <p>
-                    Add any rationale, mapping change or
-                    observation you want to share for this role.
+                    Add any rationale, mapping change or observation
+                    you want to share for this role.
                 </p>
-
 
                 <textarea
                     id="comments"
                     placeholder="Enter comments..."
                 ></textarea>
-
 
                 <div style="margin-top:9px">
 
@@ -2604,7 +2045,6 @@ function showRoleReview(){
                     >
                         Submit Role Review
                     </button>
-
 
                     <span
                         id="savedMessage"
@@ -2634,9 +2074,9 @@ function showRoleReview(){
 }
 
 
-/* =========================================================
+/* =====================================================
    COMPETENCY CARD
-========================================================= */
+===================================================== */
 
 function competencyCard(
     code,
@@ -2645,9 +2085,7 @@ function competencyCard(
 ){
 
     const competency =
-    DATA.competencies[
-        code
-    ];
+    DATA.competencies[code];
 
 
     const relationship =
@@ -2655,9 +2093,7 @@ function competencyCard(
 
 
     const type =
-    String(
-        relationship
-    ).toLowerCase();
+    String(relationship).toLowerCase();
 
 
     return `
@@ -2670,7 +2106,6 @@ function competencyCard(
         "
     >
 
-
         <div class="comp-top">
 
             <div>
@@ -2680,9 +2115,7 @@ function competencyCard(
                 </div>
 
                 <div class="comp-name">
-                    ${esc(
-                        competency.name
-                    )}
+                    ${esc(competency.name)}
                 </div>
 
             </div>
@@ -2706,11 +2139,8 @@ function competencyCard(
         <div class="meta">
 
             <span class="type ${type}">
-                ${esc(
-                    relationship || "—"
-                )}
+                ${esc(relationship || "—")}
             </span>
-
 
             <span
                 id="status-${code}"
@@ -2724,68 +2154,44 @@ function competencyCard(
 
         <div
             class="recommendation"
-            onclick="
-                event.stopPropagation()
-            "
+            onclick="event.stopPropagation()"
         >
 
             <label>
                 Your recommendation
             </label>
 
-
             <select
                 id="recommend-${code}"
                 onchange="
-                    recommendationChanged(
-                        '${code}'
-                    )
+                    recommendationChanged('${code}')
                 "
             >
 
                 <option
                     value="1"
-                    ${
-                        String(mappedLevel)==="1"
-                        ?"selected"
-                        :""
-                    }
+                    ${String(mappedLevel)==="1"?"selected":""}
                 >
                     1
                 </option>
 
-
                 <option
                     value="2"
-                    ${
-                        String(mappedLevel)==="2"
-                        ?"selected"
-                        :""
-                    }
+                    ${String(mappedLevel)==="2"?"selected":""}
                 >
                     2
                 </option>
 
-
                 <option
                     value="3"
-                    ${
-                        String(mappedLevel)==="3"
-                        ?"selected"
-                        :""
-                    }
+                    ${String(mappedLevel)==="3"?"selected":""}
                 >
                     3
                 </option>
 
-
                 <option
                     value="4"
-                    ${
-                        String(mappedLevel)==="4"
-                        ?"selected"
-                        :""
-                    }
+                    ${String(mappedLevel)==="4"?"selected":""}
                 >
                     4
                 </option>
@@ -2810,9 +2216,7 @@ function competencyCard(
         <div
             id="detail-${code}"
             class="detail"
-            onclick="
-                event.stopPropagation()
-            "
+            onclick="event.stopPropagation()"
         ></div>
 
     </div>
@@ -2822,11 +2226,10 @@ function competencyCard(
 }
 
 
-/* =========================================================
+/* =====================================================
    EXPAND COMPETENCY
-   IMPORTANT:
-   Opening = Reviewed
-========================================================= */
+   OPENING = REVIEWED
+===================================================== */
 
 function expandCompetency(code){
 
@@ -2835,50 +2238,36 @@ function expandCompetency(code){
         "detail-"+code
     );
 
-
     const wasOpen =
-    detail.classList.contains(
-        "open"
-    );
+    detail.classList.contains("open");
 
 
     /*
-       Close all other competency details.
+       Close all other competency details
     */
 
     document
     .querySelectorAll(".detail")
-    .forEach(
-        function(item){
+    .forEach(function(item){
 
-            item.classList.remove(
-                "open"
-            );
+        item.classList.remove("open");
+        item.innerHTML = "";
 
-            item.innerHTML = "";
-
-        }
-    );
+    });
 
 
     document
-    .querySelectorAll(
-        ".competency-card"
-    )
-    .forEach(
-        function(item){
+    .querySelectorAll(".competency-card")
+    .forEach(function(item){
 
-            item.classList.remove(
-                "selected"
-            );
+        item.classList.remove("selected");
 
-        }
-    );
+    });
 
 
     /*
-       If clicking the currently open
-       competency, simply close it.
+       Clicking an already-open competency
+       closes it.
     */
 
     if(wasOpen){
@@ -2890,54 +2279,40 @@ function expandCompetency(code){
 
     /*
        IMPORTANT:
-       Opening the competency automatically
-       marks it as reviewed.
+       Opening the competency itself marks
+       it as reviewed.
     */
 
     reviewed[code] = true;
 
-
     markReviewedUI(code);
-
-
-    /*
-       Update progress immediately.
-    */
 
     updateProgress();
 
 
-    /*
-       Highlight selected card.
-    */
-
-    document
-    .getElementById(
+    const card =
+    document.getElementById(
         "card-"+code
-    )
-    .classList.add(
-        "selected"
     );
+
+    if(card){
+
+        card.classList.add("selected");
+
+    }
 
 
     const competency =
-    DATA.competencies[
-        code
-    ];
+    DATA.competencies[code];
 
 
     const role =
-    DATA.sections[
-        currentSection
-    ].roles[
-        currentRole
-    ];
+    DATA.sections[currentSection]
+    .roles[currentRole];
 
 
     const mapped =
-    role.scores[
-        code
-    ];
+    role.scores[code];
 
 
     const recommendation =
@@ -2957,22 +2332,19 @@ function expandCompetency(code){
             </div>
 
             <h3>
-                ${esc(
-                    competency.name
-                )}
+                ${esc(competency.name)}
             </h3>
 
         </div>
 
 
-        <!-- FIXED CLOSE BUTTON -->
-
         <button
-            class="close-detail"
             type="button"
+            class="close-detail"
             onclick="
+                event.preventDefault();
                 event.stopPropagation();
-                closeCompetency('${code}')
+                closeCompetency('${code}');
             "
         >
             × Close
@@ -2983,9 +2355,9 @@ function expandCompetency(code){
 
     <div class="reviewed-banner">
 
-        ✓ Reviewed — this competency has been opened
-        and reviewed. The recommendation may remain the
-        same if you agree with the existing mapping.
+        ✓ Reviewed — you have opened this competency.
+        The recommendation can remain unchanged if you
+        agree with the existing mapping.
 
     </div>
 
@@ -3024,10 +2396,9 @@ function expandCompetency(code){
 
     <div class="tabs">
 
-
         <button
-            class="tab active"
             type="button"
+            class="tab active"
             onclick="
                 event.stopPropagation();
 
@@ -3043,8 +2414,8 @@ function expandCompetency(code){
 
 
         <button
-            class="tab"
             type="button"
+            class="tab"
             onclick="
                 event.stopPropagation();
 
@@ -3060,8 +2431,8 @@ function expandCompetency(code){
 
 
         <button
-            class="tab"
             type="button"
+            class="tab"
             onclick="
                 event.stopPropagation();
 
@@ -3077,8 +2448,8 @@ function expandCompetency(code){
 
 
         <button
-            class="tab"
             type="button"
+            class="tab"
             onclick="
                 event.stopPropagation();
 
@@ -3092,7 +2463,6 @@ function expandCompetency(code){
             Proficiency Ladder
         </button>
 
-
     </div>
 
 
@@ -3104,15 +2474,11 @@ function expandCompetency(code){
     `;
 
 
-    detail.classList.add(
-        "open"
-    );
+    detail.classList.add("open");
 
 
     const firstTab =
-    detail.querySelector(
-        ".tab"
-    );
+    detail.querySelector(".tab");
 
 
     competencyTab(
@@ -3124,9 +2490,9 @@ function expandCompetency(code){
 }
 
 
-/* =========================================================
+/* =====================================================
    CLOSE COMPETENCY
-========================================================= */
+===================================================== */
 
 function closeCompetency(code){
 
@@ -3134,7 +2500,6 @@ function closeCompetency(code){
     document.getElementById(
         "detail-"+code
     );
-
 
     const card =
     document.getElementById(
@@ -3144,9 +2509,7 @@ function closeCompetency(code){
 
     if(detail){
 
-        detail.classList.remove(
-            "open"
-        );
+        detail.classList.remove("open");
 
         detail.innerHTML = "";
 
@@ -3155,18 +2518,16 @@ function closeCompetency(code){
 
     if(card){
 
-        card.classList.remove(
-            "selected"
-        );
+        card.classList.remove("selected");
 
     }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    COMPETENCY TABS
-========================================================= */
+===================================================== */
 
 function competencyTab(
     button,
@@ -3181,29 +2542,19 @@ function competencyTab(
 
 
     detail
-    .querySelectorAll(
-        ".tab"
-    )
-    .forEach(
-        function(tab){
+    .querySelectorAll(".tab")
+    .forEach(function(tab){
 
-            tab.classList.remove(
-                "active"
-            );
+        tab.classList.remove("active");
 
-        }
-    );
+    });
 
 
-    button.classList.add(
-        "active"
-    );
+    button.classList.add("active");
 
 
     const competency =
-    DATA.competencies[
-        code
-    ];
+    DATA.competencies[code];
 
 
     const content =
@@ -3212,7 +2563,7 @@ function competencyTab(
     );
 
 
-    if(type === "definition"){
+    if(type==="definition"){
 
         content.innerHTML = `
 
@@ -3233,7 +2584,7 @@ function competencyTab(
     }
 
 
-    if(type === "ksa"){
+    if(type==="ksa"){
 
         content.innerHTML = `
 
@@ -3259,8 +2610,7 @@ function competencyTab(
 
                 <p>
                     ${esc(
-                        competency.Knowledge ||
-                        "—"
+                        competency.Knowledge || "—"
                     )}
                 </p>
 
@@ -3282,8 +2632,7 @@ function competencyTab(
 
                 <p>
                     ${esc(
-                        competency.Skill ||
-                        "—"
+                        competency.Skill || "—"
                     )}
                 </p>
 
@@ -3305,8 +2654,7 @@ function competencyTab(
 
                 <p>
                     ${esc(
-                        competency.Attitude ||
-                        "—"
+                        competency.Attitude || "—"
                     )}
                 </p>
 
@@ -3319,13 +2667,11 @@ function competencyTab(
     }
 
 
-    if(type === "activities"){
+    if(type==="activities"){
 
         const activities =
         String(
-            competency[
-                "On-the-Job Activities"
-            ] || ""
+            competency["On-the-Job Activities"] || ""
         )
         .split("\n")
         .filter(Boolean);
@@ -3344,7 +2690,6 @@ function competencyTab(
                     function(item){
 
                         return `
-
                         <li>
                             ${esc(
                                 item.replace(
@@ -3353,7 +2698,6 @@ function competencyTab(
                                 )
                             )}
                         </li>
-
                         `;
 
                     }
@@ -3367,14 +2711,12 @@ function competencyTab(
     }
 
 
-    if(type === "ladder"){
+    if(type==="ladder"){
 
         content.innerHTML = `
 
         <div
-            style="
-                margin-bottom:8px
-            "
+            style="margin-bottom:8px"
         >
 
             <b>
@@ -3382,8 +2724,7 @@ function competencyTab(
             </b>
 
             <div class="description">
-                Use these levels to validate the
-                recommended mapping.
+                Use these levels to validate the recommended mapping.
             </div>
 
         </div>
@@ -3396,32 +2737,26 @@ function competencyTab(
                     function(level){
 
                         const info =
-                        LEVEL_INFO[
-                            level
-                        ];
+                        LEVEL_INFO[level];
 
 
                         const raw =
-                        competency[
-                            "PL"+level
-                        ] || "";
+                        competency["PL"+level] || "";
 
 
                         const items =
                         String(raw)
                         .split("\n")
-                        .map(
-                            function(item){
+                        .map(function(item){
 
-                                return item
-                                .replace(
-                                    /^•\s*/,
-                                    ""
-                                )
-                                .trim();
+                            return item
+                            .replace(
+                                /^•\s*/,
+                                ""
+                            )
+                            .trim();
 
-                            }
-                        )
+                        })
                         .filter(Boolean);
 
 
@@ -3433,22 +2768,18 @@ function competencyTab(
                                 ${level}
                             </div>
 
-
                             <div class="pl-label">
                                 ${info.label}
                             </div>
-
 
                             <div class="pl-definition">
                                 ${info.definition}
                             </div>
 
-
                             ${
                                 items.length
                                 ?
                                 `
-
                                 <div
                                     style="
                                         font-size:8px;
@@ -3467,11 +2798,9 @@ function competencyTab(
                                                 function(item){
 
                                                     return `
-
                                                     <li>
                                                         ${esc(item)}
                                                     </li>
-
                                                     `;
 
                                                 }
@@ -3481,7 +2810,6 @@ function competencyTab(
                                     </ul>
 
                                 </div>
-
                                 `
                                 :
                                 ""
@@ -3504,23 +2832,20 @@ function competencyTab(
 }
 
 
-/* =========================================================
-   RECOMMENDATION CHANGED
-========================================================= */
+/* =====================================================
+   RECOMMENDATION
+===================================================== */
 
 function recommendationChanged(code){
 
     /*
-       Changing score ALSO means reviewed.
-       But score change is NOT required for reviewed.
+       Changing the score also counts as review,
+       but changing it is NOT required.
     */
 
     reviewed[code] = true;
 
-
-    markReviewedUI(
-        code
-    );
+    markReviewedUI(code);
 
 
     const select =
@@ -3548,24 +2873,15 @@ function recommendationChanged(code){
 }
 
 
-/* =========================================================
-   MARK REVIEWED
-========================================================= */
+/* =====================================================
+   MANUAL REVIEW BUTTON
+===================================================== */
 
 function markReviewed(code){
 
-    /*
-       Keep this button as a manual backup.
-       Opening the competency already marks it reviewed.
-    */
-
     reviewed[code] = true;
 
-
-    markReviewedUI(
-        code
-    );
-
+    markReviewedUI(code);
 
     updateProgress();
 
@@ -3598,47 +2914,33 @@ function markReviewedUI(code){
         button.textContent =
         "✓ Reviewed";
 
-
-        button.classList.add(
-            "done"
-        );
-
+        button.classList.add("done");
 
         status.textContent =
         "Reviewed";
 
-
-        status.classList.add(
-            "reviewed"
-        );
+        status.classList.add("reviewed");
 
     }else{
 
         button.textContent =
         "Mark reviewed";
 
-
-        button.classList.remove(
-            "done"
-        );
-
+        button.classList.remove("done");
 
         status.textContent =
         "Not reviewed";
 
-
-        status.classList.remove(
-            "reviewed"
-        );
+        status.classList.remove("reviewed");
 
     }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    PROGRESS
-========================================================= */
+===================================================== */
 
 function updateProgress(){
 
@@ -3653,38 +2955,28 @@ function updateProgress(){
 
 
     const role =
-    DATA.sections[
-        currentSection
-    ].roles[
-        currentRole
-    ];
+    DATA.sections[currentSection]
+    .roles[currentRole];
 
 
     const total =
-    Object.entries(
-        role.scores
-    )
-    .filter(
-        function(item){
+    Object.entries(role.scores)
+    .filter(function(item){
 
-            const value =
-            item[1];
+        const value = item[1];
 
-            return (
-                value !== "NA" &&
-                value !== null &&
-                value !== undefined &&
-                value !== ""
-            );
+        return (
+            value !== "NA" &&
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+        );
 
-        }
-    ).length;
+    }).length;
 
 
     const completed =
-    Object.values(
-        reviewed
-    )
+    Object.values(reviewed)
     .filter(Boolean)
     .length;
 
@@ -3693,9 +2985,7 @@ function updateProgress(){
     total
     ?
     Math.round(
-        completed /
-        total *
-        100
+        completed / total * 100
     )
     :
     0;
@@ -3706,12 +2996,10 @@ function updateProgress(){
         "progressText"
     );
 
-
     const percent =
     document.getElementById(
         "progressPercent"
     );
-
 
     const fill =
     document.getElementById(
@@ -3745,9 +3033,9 @@ function updateProgress(){
 }
 
 
-/* =========================================================
+/* =====================================================
    SIDE NAVIGATION
-========================================================= */
+===================================================== */
 
 function toggleSideOrg(index){
 
@@ -3757,19 +3045,17 @@ function toggleSideOrg(index){
     );
 
 
-    all.forEach(
-        function(item,i){
+    all.forEach(function(item,i){
 
-            if(i !== index){
+        if(i !== index){
 
-                item.classList.remove(
-                    "open"
-                );
-
-            }
+            item.classList.remove(
+                "open"
+            );
 
         }
-    );
+
+    });
 
 
     all[index]
@@ -3793,95 +3079,75 @@ function searchRoles(){
 
 
     document
-    .querySelectorAll(
-        ".side-role"
-    )
-    .forEach(
-        function(role){
+    .querySelectorAll(".side-role")
+    .forEach(function(role){
 
-            const text =
-            role.dataset.role || "";
+        const text =
+        role.dataset.role || "";
 
 
-            role.style.display =
-            text.includes(query)
-            ?
-            "block"
-            :
-            "none";
+        role.style.display =
+        text.includes(query)
+        ?
+        "block"
+        :
+        "none";
 
-        }
-    );
+    });
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SUBMIT
-========================================================= */
+===================================================== */
 
 async function submitReview(){
 
     const section =
-    DATA.sections[
-        currentSection
-    ];
-
+    DATA.sections[currentSection];
 
     const role =
-    section.roles[
-        currentRole
-    ];
+    section.roles[currentRole];
 
 
     const mapped =
-    Object.entries(
-        role.scores
-    )
-    .filter(
-        function(item){
+    Object.entries(role.scores)
+    .filter(function(item){
 
-            const value =
-            item[1];
+        const value = item[1];
 
-            return (
-                value !== "NA" &&
-                value !== null &&
-                value !== undefined &&
-                value !== ""
-            );
+        return (
+            value !== "NA" &&
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+        );
 
-        }
-    );
+    });
 
 
     const suggestedLevels = {};
 
 
-    mapped.forEach(
-        function(item){
+    mapped.forEach(function(item){
 
-            const code =
-            item[0];
+        const code = item[0];
 
-
-            const select =
-            document.getElementById(
-                "recommend-"+code
-            );
+        const select =
+        document.getElementById(
+            "recommend-"+code
+        );
 
 
-            if(select){
+        if(select){
 
-                suggestedLevels[code] =
-                Number(
-                    select.value
-                );
-
-            }
+            suggestedLevels[code] =
+            Number(select.value);
 
         }
-    );
+
+    });
 
 
     const comments =
@@ -3905,15 +3171,12 @@ async function submitReview(){
         suggestedLevels,
 
         reviewed:
-        Object.keys(
-            reviewed
-        ).filter(
-            function(code){
+        Object.keys(reviewed)
+        .filter(function(code){
 
-                return reviewed[code];
+            return reviewed[code];
 
-            }
-        ),
+        }),
 
         comments:
         comments
@@ -3935,9 +3198,7 @@ async function submitReview(){
                 },
 
                 body:
-                JSON.stringify(
-                    payload
-                )
+                JSON.stringify(payload)
 
             }
         );
@@ -3975,14 +3236,13 @@ async function submitReview(){
 }
 
 
-/* =========================================================
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
 loadData();
 
 </script>
 
 </body>
-
 </html>
