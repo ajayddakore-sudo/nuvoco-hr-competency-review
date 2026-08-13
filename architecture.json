@@ -1,0 +1,1212 @@
+{
+  "competencies": {
+    "HC1": {
+      "name": "Business Acumen & Strategic HR Partnering",
+      "scope": "Scope: Business understanding, strategic HR business partnering, workforce planning and organisation design advisory",
+      "Knowledge": "Interprets Nuvoco's business model, plant economics, product line priorities and manpower cost drivers across cement, RMX and MBM, and explains how people performance links to business performance.",
+      "Skill": "Analyses business and people data to diagnose workforce implications, advises leaders on organisation design, workforce planning, budgets and people priorities, and translates the AOP into HR actions with measurable people outcomes.",
+      "Attitude": "Approaches people decisions with a business first mindset, stays curious about how the business works and grounds advice in evidence rather than opinion.",
+      "On-the-Job Activities": "•  Business and industry insight\n•  Manpower planning and budgeting\n•  Organisation structure and design advisory\n•  Commercial framing of people decisions\n•  Trusted advisor partnering with leaders\n•  Business review and AOP participation",
+      "PL1": "• Describes Nuvoco's businesses, products and cost drivers across cement, RMX and MBM.\n• Compiles manpower numbers and cost data into approved AOP templates as part of day to day work.\n• Prepares headcount and attrition trackers for the assigned unit.\n• Collects benchmark and talent market data from approved sources.\n• Records organisation structure changes accurately for review.",
+      "PL2": "• Builds the manpower plan for an assigned unit, explains variances to the HRBP and closes monthly and quarterly plan updates independently.\n• Interprets unit cost, output and productivity data when planning HR support.\n• Prepares cost and benefit inputs for hiring, training and engagement proposals.\n• Partners assigned line managers on routine people matters and builds working trust.\n• Presents people data and insights in monthly and quarterly unit review meetings.",
+      "PL3": "• Leads annual workforce planning for the vertical and defends the manpower budget with business heads through the AOP cycle.\n• Reviews structures, spans and layers prepared by the team and challenges misfit designs.\n• Frames HR recommendations to leaders in commercial and return terms.\n• Advises the vertical leadership team as a trusted partner on people decisions.\n• Tracks the vertical people budget against the AOP and corrects overruns through the team.",
+      "PL4": "• Holds complete accountability for enterprise workforce planning and headcount governance, setting the plan with the CHRO.\n• Sets the long term workforce vision and organisation design direction for Nuvoco across product lines.\n• Owns the HR voice in AOP and strategy forums, reporting to the Managing Director and NLT.\n• Governs manpower cost norms and reviews plans prepared by vertical heads, delivering through HRBP Heads.\n• Sets the standard for evidence based, commercially framed people advice across HR."
+    },
+    "HC2": {
+      "name": "Talent Acquisition",
+      "scope": "Scope: Recruitment and selection, sourcing strategies, campus hiring, competency based interviewing, employer branding, candidate pre-boarding and onboarding, manpower plan alignment for hiring",
+      "Knowledge": "Explains workforce requirements, job architecture, sourcing channels, assessment methods, offer structures, campus hiring and onboarding practices, and how the hiring plan connects to the manpower plan.",
+      "Skill": "Sources and screens candidates, conducts competency based interviews, negotiates offers and manages hiring stakeholders to deliver diverse, quality hiring within TAT and cost targets while protecting candidate experience from attraction through induction.",
+      "Attitude": "Balances speed with quality of hire and treats candidates and hiring managers with fairness and respect throughout the process.",
+      "On-the-Job Activities": "•  Sourcing strategy and channel mix\n•  Screening and competency based interviews\n•  Campus hiring and GET or DET intake\n•  Offer negotiation and salary fitment\n•  Employer branding, IJP and referrals\n•  Pre-boarding, onboarding and induction",
+      "PL1": "• Coordinates interview scheduling, candidate documentation and onboarding logistics in SuccessFactors as day to day work.\n• Compiles candidate trackers and TA MIS accurately and on time.\n• Collects campus data and documents from selected students per criteria.\n• Responds to candidate queries promptly using approved information.\n• Supports induction sessions and joining formalities for new joiners.",
+      "PL2": "• Runs end to end hiring for assigned roles within TAT using approved sourcing channels and closes monthly and quarterly hiring targets independently.\n• Conducts competency based screening using the funnel probing approach.\n• Coordinates campus drives, panels and assessments on the ground and holds student engagement.\n• Negotiates offers within approved ranges, policy and internal parity.\n• Tracks pre-boarding touchpoints and flags dropout risk early with a backup ready.",
+      "PL3": "• Leads the annual hiring plan for the vertical, aligning it with the manpower plan and budget agreed in the AOP, and reviews closures, quality and cost of hire with the team.\n• Reviews interview quality and coaches hiring managers on competency based interviewing.\n• Owns the campus strategy for assigned institutes and the GET and DET pipeline.\n• Directs vendor and agency performance for the vertical against agreed terms.\n• Reviews onboarding experience using 30, 60 and 90 day feedback and closes gaps.",
+      "PL4": "• Holds complete accountability for enterprise hiring, setting the TA framework, sourcing mix and hiring governance for Nuvoco.\n• Sets enterprise hiring capacity from the manpower plan, aligning long term workforce numbers, budgets and sourcing strategy with the CHRO.\n• Owns hiring TAT, quality and diversity outcomes, reporting to the CHRO.\n• Directs employer brand and campus positioning across product lines with a multi year view.\n• Governs agency empanelment, IJP and referral standards, delivering through TA Leads and recruiters."
+    },
+    "HC3": {
+      "name": "Talent, Learning & Performance",
+      "scope": "Scope: Learning solution consultancy, training needs and learning delivery, functional academies, competency architecture drafting, in-house content curation and e-learning development, blended learning journeys, talent review, succession planning, assessment centres, IDPs and Hi-Po development",
+      "Knowledge": "Applies knowledge of adult learning, capability frameworks and academy design.",
+      "Skill": "Facilitates talent and competency assessments, succession and leadership pipeline, performance management and IDP; designs, builds and delivers organisation and capability development initiatives, talent and leadership development; and evaluates effectiveness and learning transfer for business impact to build a future-ready talent.",
+      "Attitude": "Owns the learner and talent experience, invites feedback on programme quality and keeps improving design based on what works.",
+      "On-the-Job Activities": "•  Learning Solution consultancy, Training needs identification and learning calendar delivery\n•  Functional academies\n•  Talent review, and succession planning\n•  Assessment and development centres\n•  IDP, Hi-Po and leadership development programs\n•  Competency architecture and competency dictionary drafting\n•  Blended learning journey design using adult learning principles\n•  In-house content curation, courseware and e-learning development\n•  Facilitation, internal faculty development and learning partner curation\n•  Learning transfer, effectiveness and business impact evaluation",
+      "PL1": "• Coordinates training logistics, attendance, feedback capture and LMS records as day to day work.\n• Compiles and maintains data for training needs, feedback scores, vendor data and payouts.\n• Maintains talent review data, succession charts and Hi-Po tracking sheets.\n• Coordinates assessment centre logistics.\n• Records IDP submissions and follows up for closure.",
+      "PL2": "• Executes the learning calendar for an assigned function and closes monthly and quarterly learning hour targets independently.\n• Identifies training needs with department heads and maps learning plans for individuals and teams.\n• Develops in-house content, e-learning modules and facilitator material for assigned programs.\n• Prepares talent assessment data and talent review packs for leadership discussions.\n• Facilitates IDP exercises and supports assessment centre administration.",
+      "PL3": "• Leads the annual capability plan for the vertical per the AOP, building functional academies and drafting competency architecture from skill gap analysis.\n• Designs blended learning journeys and consults department heads on capability solutions.\n• Runs assessment centres, facilitates Talent Day and curates Hi-Po development programs.\n• Builds succession benches for key and critical positions with the leadership team through the annual talent review.\n• Reviews learning quality, application and impact for the vertical and corrects design.",
+      "PL4": "• Holds complete accountability for learning and talent outcomes, setting the enterprise learning strategy, academy structure and capability agenda across functions.\n• Sets the long term talent vision, the enterprise development and IDP philosophy with the CHRO and business heads.\n• Owns the talent management framework, the Hi-Po definition and succession governance for Nuvoco.\n• Directs design standards for academies, assessments and development centres across functions.\n• Reports learning and talent outcomes to the CHRO and NLT, delivering through L&D and TM Leads."
+    },
+    "HC4": {
+      "name": "Total Rewards",
+      "scope": "Scope: Compensation and benefits, annual salary review and variable pay, job evaluation and grade structures, rewards policy and SOPs, recognition programs",
+      "Knowledge": "Explains compensation frameworks, market benchmarks, job evaluation methods, grade structures, benefits and the statutory requirements tied to pay.",
+      "Skill": "Analyses pay and manpower cost data, administers salary and variable pay cycles, evaluates jobs, drafts policies and designs recognition interventions that hold internal equity, external competitiveness, pay for performance and reward budgets across product lines.",
+      "Attitude": "Handles pay data with discretion, applies policy consistently and raises equity concerns early so decisions stay fair and defensible.",
+      "On-the-Job Activities": "•  Annual salary review and variable pay cycle\n•  Benefits administration and market benchmarks\n•  Job evaluation and grade structures\n•  C&B policy and SOP drafting\n•  Recognition programs and campaigns\n•  Manpower cost and budget inputs",
+      "PL1": "• Compiles salary review data and inputs accurately for the assigned group as day to day work.\n• Maintains benefits records and resolves routine entitlement queries.\n• Records job evaluation inputs and keeps job descriptions filed in order.\n• Prepares policy communication drafts to approved formats.\n• Tracks recognition program nominations and awards.",
+      "PL2": "• Administers the annual salary review and variable pay cycle for an assigned group within budget, closing monthly and quarterly reward deliverables independently.\n• Applies pay ranges and grade structures for correct fitment on hires and transfers.\n• Participates in job grading with precise and detailed job descriptions.\n• Drafts C&B SOPs in simple language and keeps parity across product lines.\n• Checks compliance with regulations tied to compensation and benefits programs.",
+      "PL3": "• Leads the enterprise salary review as an annual AOP deliverable, coaching managers and resolving disagreements.\n• Reviews benchmark studies and pay range design prepared by the team.\n• Owns job evaluation quality and consistency against internal and external standards.\n• Reviews reward policy exceptions and protects budget discipline through the year.\n• Directs recognition program design and measures its effect on engagement.",
+      "PL4": "• Holds complete accountability for rewards, setting the enterprise compensation philosophy and pay architecture for Nuvoco.\n• Sets the long term reward strategy and benefits direction across product lines.\n• Owns reward budgets and outcomes, reporting to the CHRO and the Nomination and Remuneration forums.\n• Governs job evaluation committees and grade integrity for key positions.\n• Delivers through the TR team, reviewing cycles and policies prepared by them."
+    },
+    "HC5": {
+      "name": "Employee Relations & Workplace Services",
+      "scope": "Scope: Labour law and statutory compliance, union and committee engagement, grievance and domestic enquiry, contract labour management, payroll and time office operations, employee lifecycle transactions, plant and office administration, security, occupational health and employee welfare",
+      "Knowledge": "Interprets labour laws, statutory compliance, industrial relations, contract labour, payroll, time office, employee lifecycle, facilities, security, occupational health and welfare standards.",
+      "Skill": "Negotiates with unions and authorities, resolves grievances and disciplinary matters, administers payroll, time office and lifecycle transactions and manages workplace services to hold industrial harmony, accurate and timely employee services, safe and dignified workplaces, cost discipline and audit readiness.",
+      "Attitude": "Stays fair and composed in sensitive employee matters, applies rules consistently and treats every workforce group with dignity.",
+      "On-the-Job Activities": "•  Statutory compliance, licences and returns\n•  Union, committee and grievance redressal forums\n•  Contract labour management and WFM tracking\n•  Payroll, time office and lifecycle transactions\n•  Township, guest house, canteen, travel and transport services\n•  Security, occupational health and welfare operations",
+      "PL1": "• Maintains statutory registers, licence trackers and compliance records accurately as day to day work.\n• Compiles payroll inputs, attendance data and settlement documentation on time.\n• Records committee minutes, grievance cases and IR documentation.\n• Monitors facility, guest house, canteen and township tasks against checklists.\n• Supports security posts, OHC records and welfare activity documentation.",
+      "PL2": "• Processes monthly payroll runs, time office data and lifecycle transactions without error and closes quarterly statutory returns independently.\n• Applies labour law and statutory requirements to assigned compliance tasks.\n• Administers grievance and disciplinary procedures for assigned cases under guidance.\n• Manages facility, travel and transport services within policy and approvals.\n• Monitors contractor manpower, welfare measures and security routines to SOP.",
+      "PL3": "• Leads union engagement and committee forums for the site, holding harmonious relations through the annual IR calendar.\n• Conducts and chairs domestic enquiries and closes complex cases defensibly.\n• Owns the payroll cycle or site operations for the year, holding pay and record integrity against AOP service and cost targets.\n• Governs contract labour compliance, cost and deployment across the site.\n• Directs admin, security and occupational health standards and audit readiness for the site.",
+      "PL4": "• Holds complete accountability for IR and workplace services, setting the enterprise IR strategy and the long term settlement and engagement approach.\n• Governs statutory compliance across the four Labour Codes and allied Acts for Nuvoco.\n• Governs the enterprise payroll operation, controls and pay integrity framework.\n• Sets admin, facility, security and welfare standards across plants and offices with a multi year view.\n• Owns budgets and service levels, reporting to the CHRO and auditors."
+    },
+    "HC6": {
+      "name": "Organisation Development, Culture & Change",
+      "scope": "Scope: Organisation development interventions, diagnosis and redesign of structures, policies and processes, engagement and Great Place to Work, culture and values cascade, change management, internal communication and employee experience",
+      "Knowledge": "Explains organisation diagnostics, engagement science, culture models and change management approaches and how OD interventions are designed.",
+      "Skill": "Assesses culture, diagnoses organisational issues, designs OD interventions, facilitates change and communicates with stakeholders; and evaluates adoption, engagement and experience outcomes to strengthen organisational effectiveness, culture and agility.",
+      "Attitude": "Listens before designing, respects how change lands on people and adjusts the approach based on adoption evidence.",
+      "On-the-Job Activities": "•  Engagement surveys and action planning\n•  Culture, values and leadership behaviour cascade\n•  Change management and transformation support\n•  OD diagnostics and redesign of structures, policies and processes\n•  Internal communication and campaigns\n•  Employee experience and moments that matter",
+      "PL1": "• Supports engagement activities and culture initiatives for an assigned group as day to day work.\n• Compiles survey administration data and participation trackers.\n• Prepares internal communication drafts to approved formats.\n• Records change rollout actions and follow ups for review.\n• Supports employees through routine lifecycle moments with care and accuracy.",
+      "PL2": "• Administers engagement and Great Place to Work surveys for an assigned unit and runs the monthly and quarterly engagement calendar and R&R forums independently.\n• Cascades values, vision and leadership behaviours to an assigned group.\n• Executes change rollouts for an assigned unit and manages routine resistance.\n• Tracks the effect of engagement actions and reports movement each quarter.\n• Conducts sensitive conversations such as feedback and exit under guidance.",
+      "PL3": "• Diagnoses engagement and culture gaps for the vertical and leads the annual improvement plan per the AOP.\n• Designs OD interventions and reviews adoption prepared by the team.\n• Leads change programs for the vertical and steadies teams through transition.\n• Directs internal communication for the vertical with clear, consistent messaging.\n• Designs employee lifecycle experiences for the vertical around moments that matter.",
+      "PL4": "• Holds complete accountability for culture and engagement, architecting the enterprise culture, engagement and employee value proposition agenda.\n• Sets the long term change and transformation approach aligned to the Managing Director's agenda.\n• Owns enterprise engagement outcomes, reporting movement to the CHRO and NLT.\n• Governs internal communication standards for the HR function.\n• Delivers through HRBP Heads and the Transformation Office, reviewing plans prepared by them."
+    },
+    "HC7": {
+      "name": "HR Digital Transformation & AI",
+      "scope": "Scope: NEST, SuccessFactors and HRMS administration, HR process digitisation and automation, AI tool selection and adoption, workflow redesign, external benchmarking of digital HR practices, the impact of AI on HR roles and skills, data security and responsible AI use",
+      "Knowledge": "Explains HRMS platforms, workflow design, automation methods, AI tools, data security and responsible AI principles.",
+      "Skill": "Maps and redesigns processes, pilots and scales digital and AI solutions, tests systems and supports user adoption; and evaluates technology impact on service experience, productivity, roles and skills to scale secure, ethical digital HR solutions.",
+      "Attitude": "Stays open to new tools and ways of working, tests before scaling and uses AI and people data responsibly.",
+      "On-the-Job Activities": "•  NEST, SuccessFactors and HRMS administration\n•  HR process digitisation and automation\n•  AI tool selection, piloting and adoption\n•  Workflow redesign for a better employee experience\n•  External benchmarking of digital and AI practices\n•  Reading the impact of AI on HR roles and skills\n•  Data security and responsible AI use",
+      "PL1": "• Enters and updates employee data in NEST accurately and on time as day to day work.\n• Uses approved digital and AI assisted tools for routine HR tasks.\n• Logs system issues and follows them up to closure.\n• Guides employees on self service options in the HRMS.\n• Follows data security and responsible AI rules in daily work.",
+      "PL2": "• Operates HRMS modules for an assigned group, holding data quality through monthly and quarterly cycles independently.\n• Applies AI assisted tools to improve accuracy and speed of assigned work.\n• Maps process steps and flags candidates for automation.\n• Tests system changes before release and reports gaps.\n• Supports users through system and process transitions.",
+      "PL3": "• Leads the annual digitisation plan for the vertical per the AOP, running pilots and automating repetitive HR processes.\n• Redesigns HR workflows with measurable time and experience gains.\n• Benchmarks HR digital and AI practices against peer companies and recommends what the vertical should adopt.\n• Governs HRMS configuration, access and data integrity for the vertical.\n• Assesses how AI changes roles in the vertical, proposes structure and skill shifts and coaches the team on effective and responsible AI use.",
+      "PL4": "• Holds complete accountability for HR technology, setting the HR technology and AI roadmap for Nuvoco with a multi year view.\n• Sets the long term vision for AI adoption and workflow redesign across the HR function, benchmarking against the best external practices.\n• Owns the redesign of HR structures and capabilities as AI changes roles, reporting to the CHRO and NLT.\n• Governs data security and responsible AI standards for people data.\n• Delivers through system owners, analysts and technology partners."
+    },
+    "HC8": {
+      "name": "People Analytics & Insights",
+      "scope": "Scope: HR MIS, reports and dashboards, headcount, attrition and cost analytics, people analytics and insight generation, analytics tools such as Excel, Power BI and AI, data storytelling and data confidentiality",
+      "Knowledge": "Explains people metrics, data standards, reporting methods and analytical techniques, and applies tools such as Excel, Power BI, Tableau, SQL and AI.",
+      "Skill": "Validates data, builds dashboards, analyses workforce trends and communicates evidence through data stories; and converts people data into decisions while governing data quality, confidentiality, access and single source of truth standards.",
+      "Attitude": "Lets evidence lead the conversation, protects data confidentiality and presents findings honestly even when they are inconvenient.",
+      "On-the-Job Activities": "•  HR MIS, reports and dashboards\n•  Headcount, attrition and manpower cost analytics\n•  Insight notes and data stories for reviews\n•  Analytics tool adoption across the team\n•  Evidence based inputs to HR and business decisions\n•  Data confidentiality and access discipline",
+      "PL1": "• Compiles HR MIS into standard report and dashboard templates accurately and on time as day to day work.\n• Maintains data files in a structured form for quick retrieval.\n• Provides accurate data inputs to support HR decisions.\n• Shares reports only with the intended audience.\n• Flags data gaps and errors to the owner for correction.",
+      "PL2": "• Builds monthly and quarterly headcount, attrition and cost dashboards independently and interprets trends.\n• Prepares insight notes from HR data for stakeholder reviews.\n• Applies analytics tools to assigned work with clean, consistent data.\n• Answers stakeholder questions with evidence, not opinion.\n• Holds data quality standards for the assigned scope.",
+      "PL3": "• Designs the annual analytics pack for the vertical per the AOP and turns data into workforce insight.\n• Builds evidence based cases that influence workforce decisions.\n• Reviews reporting prepared by the team and corrects systemic gaps.\n• Leads analytics tool adoption and reporting standards for the vertical.\n• Presents insight stories that move leadership decisions.",
+      "PL4": "• Holds complete accountability for people analytics, setting the enterprise people data and analytics strategy for Nuvoco.\n• Sets the long term vision for how data and AI inform people decisions across the function.\n• Owns the HR analytics agenda, reporting insight to the CHRO and NLT.\n• Governs metric definitions, a single source of truth, confidentiality and access standards for people data.\n• Delivers through analysts and MIS owners, reviewing their dashboards."
+    },
+    "HC9": {
+      "name": "Stakeholder Engagement & Influencing",
+      "scope": "Scope: Internal stakeholders such as line managers, employees, senior leaders and HRBP and COE counterparts; external stakeholders such as government and labour authorities, unions, community leaders, campuses and partners; negotiation, communication and influence without authority",
+      "Knowledge": "Maps internal and external stakeholders and interprets the business, regulatory, labour, community and partner contexts in which they operate.",
+      "Skill": "Builds trusted relationships inside and outside Nuvoco, communicates clearly, negotiates, resolves conflict and influences without authority; and mobilises leaders, employees, unions, authorities, communities and partners to achieve sustainable HR and business outcomes.",
+      "Attitude": "Builds trust through consistent follow through, listens to differing views and stays composed in contested conversations.",
+      "On-the-Job Activities": "•  Internal engagement with line managers and employees\n•  Alignment with senior leaders, HRBP and COE counterparts\n•  Government and labour authority liaison\n•  Union, community and village relations\n•  Negotiation and conflict resolution\n•  Clear, consistent communication to every audience",
+      "PL1": "• Responds to line manager and employee requests with accurate, timely support as day to day work.\n• Records liaison visits, submissions and follow up actions accurately.\n• Drafts clear routine communication using approved formats.\n• Shares information promptly with COE and HRBP counterparts.\n• Escalates sensitive matters to the right owner without delay.",
+      "PL2": "• Builds working rapport with assigned managers, teams and officials, sustaining monthly and quarterly engagement rhythms independently.\n• Supports negotiations and conflict resolution for assigned cases under guidance.\n• Communicates HR messages clearly to assigned audiences in the local context.\n• Coordinates joint outcomes with COE, HRBP and business counterparts.\n• Maintains steady relations with assigned external contacts.",
+      "PL3": "• Leads negotiations with line, unions, authorities or partners for the vertical and resolves contested issues within the annual IR and liaison plan.\n• Influences senior leaders on difficult people decisions with a clear case.\n• Builds external relationships that pre-empt conflict for the site or vertical.\n• Communicates complex and sensitive HR positions persuasively to senior audiences.\n• Reviews stakeholder plans prepared by the team.",
+      "PL4": "• Holds complete accountability for the enterprise stakeholder and liaison posture on high stakes matters.\n• Sets the long term relationship strategy with unions, authorities, communities and partners for Nuvoco.\n• Represents HR at the highest internal and external forums for Nuvoco.\n• Aligns the NLT and business heads on the people agenda and directs the negotiation approach for enterprise IR and partner matters.\n• Governs communication standards for the HR function."
+    },
+    "HC10": {
+      "name": "Strategic Vendor & Partner Management",
+      "scope": "Scope: Vendor sourcing, selection and empanelment, commercial negotiation, contracts and SLAs, performance review and governance, billing and statutory checks, and vendor relationships across admin, plant, L&D, TA, TR, TO, payroll and talent services",
+      "Knowledge": "Explains sourcing, contracting, SLAs, statutory requirements, commercial terms, vendor risk and ethics standards relevant to HR services.",
+      "Skill": "Evaluates and selects vendors, negotiates contracts, monitors performance, validates bills and compliance and drives corrective action to optimise cost, quality, continuity, compliance and relationship value across HR services.",
+      "Attitude": "Deals with vendors transparently and ethically, balances cost pressure with service quality and acts on persistent non performance in time.",
+      "On-the-Job Activities": "•  Vendor sourcing, selection and empanelment\n•  Commercial negotiation, contracts and SLAs\n•  Vendor performance review and course correction\n•  Billing, documentation and statutory checks\n•  Vendor risk, ethics and relationship management\n•  Cost optimisation across vendor spend",
+      "PL1": "• Tracks vendor deliverables against agreed terms and timelines as day to day work.\n• Compiles vendor bills, documents and statutory records accurately.\n• Coordinates vendor logistics and access for assigned work.\n• Records service issues and follows them up to closure.\n• Keeps vendor files complete and audit ready.",
+      "PL2": "• Manages assigned vendors to agreed service levels and quality, closing monthly bill verification and quarterly performance inputs independently.\n• Verifies vendor bills, compliance documents and licences before clearance.\n• Prepares vendor performance inputs for review meetings.\n• Resolves routine vendor issues within policy.\n• Compares quotes and prepares selection inputs for approval.",
+      "PL3": "• Leads annual vendor selection, empanelment and contract renewals for the vertical within the AOP budget.\n• Negotiates commercial terms and SLAs within budget.\n• Reviews vendor performance for the vertical and replaces weak vendors.\n• Governs vendor compliance, documentation and ethics for the vertical.\n• Finds and delivers cost savings across vendor spend through the year.",
+      "PL4": "• Holds complete accountability for vendor outcomes, setting vendor governance standards and the empanelment policy for the HR function.\n• Sets the long term partner strategy and cost direction for HR services across Nuvoco.\n• Directs major enterprise negotiations and contract decisions.\n• Governs vendor risk, ethics and audit standards for Nuvoco, reporting budgets and outcomes to the CHRO.\n• Delivers through Admin, COE and site owners, reviewing their vendor plans."
+    }
+  },
+  "sections": [
+    {
+      "name": "Function Leadership",
+      "roles": [
+        {
+          "name": "Chief Human Resources Officer",
+          "scores": {
+            "HC1": 4,
+            "HC2": 4,
+            "HC3": 4,
+            "HC4": 4,
+            "HC5": 4,
+            "HC6": 4,
+            "HC7": 4,
+            "HC8": 4,
+            "HC9": 4,
+            "HC10": 4
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Core",
+            "HC3": "Core",
+            "HC4": "Core",
+            "HC5": "Core",
+            "HC6": "Core",
+            "HC7": "Core",
+            "HC8": "Core",
+            "HC9": "Core",
+            "HC10": "Core"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Manufacturing HR - Leadership & Compliance",
+      "roles": [
+        {
+          "name": "Head HRBP Manufacturing",
+          "scores": {
+            "HC1": 4,
+            "HC2": 3,
+            "HC3": 4,
+            "HC4": "NA",
+            "HC5": 4,
+            "HC6": 4,
+            "HC7": "NA",
+            "HC8": 3,
+            "HC9": 4,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Working",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Core",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Core",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Team Member - Manufacturing HR",
+          "scores": {
+            "HC1": "NA",
+            "HC2": 1,
+            "HC3": 1,
+            "HC4": "NA",
+            "HC5": 2,
+            "HC6": 1,
+            "HC7": 1,
+            "HC8": 1,
+            "HC9": "NA",
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Working",
+            "HC3": "Working",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Working",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Interface",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Team Member - Regional Compliance",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 2,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": 1,
+            "HC9": 1,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Plant HR Head",
+          "scores": {
+            "HC1": 3,
+            "HC2": "NA",
+            "HC3": 3,
+            "HC4": "NA",
+            "HC5": 3,
+            "HC6": 3,
+            "HC7": "NA",
+            "HC8": 2,
+            "HC9": 3,
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Interface",
+            "HC3": "Working",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Core",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Core",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Team Member - Plant L&D & TA",
+          "scores": {
+            "HC1": "NA",
+            "HC2": 2,
+            "HC3": 2,
+            "HC4": "NA",
+            "HC5": 1,
+            "HC6": 1,
+            "HC7": "NA",
+            "HC8": 1,
+            "HC9": 1,
+            "HC10": 1
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Core",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Working",
+            "HC6": "Working",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "IR Manager",
+          "scores": {
+            "HC1": 2,
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 3,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 3,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Core",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Team Member - Contract Labour Management",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 2,
+            "HC6": "NA",
+            "HC7": 1,
+            "HC8": 1,
+            "HC9": 1,
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Executive - Time Office",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 2,
+            "HC6": "NA",
+            "HC7": 2,
+            "HC8": 1,
+            "HC9": 1,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Interface"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Manufacturing HR - Admin, Security & Medical",
+      "roles": [
+        {
+          "name": "Plant Admin Head",
+          "scores": {
+            "HC1": 2,
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 3,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 3,
+            "HC10": 3
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Core",
+            "HC10": "Core"
+          }
+        },
+        {
+          "name": "Team Member - Guest House & Canteen",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 1,
+            "HC6": "NA",
+            "HC7": 1,
+            "HC8": "NA",
+            "HC9": 1,
+            "HC10": 1
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Interface",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Team Member - Township Maintenance",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 1,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 1,
+            "HC10": 1
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Security Head",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 3,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 2,
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Security Team Members",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 1,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 1,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Working",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "CMO (Chief Medical Officer)",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 3,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 2,
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Medical Officer",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 2,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 1,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Working",
+            "HC10": "Interface"
+          }
+        }
+      ]
+    },
+    {
+      "name": "HRBP - Sales",
+      "roles": [
+        {
+          "name": "HRBP - Sales / MBM / RMX",
+          "scores": {
+            "HC1": 4,
+            "HC2": 3,
+            "HC3": 4,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 4,
+            "HC7": "NA",
+            "HC8": 3,
+            "HC9": 4,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Working",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Core",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Core",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Lead HRBP (Cement, RMX)",
+          "scores": {
+            "HC1": 3,
+            "HC2": 2,
+            "HC3": 3,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 2,
+            "HC7": "NA",
+            "HC8": 2,
+            "HC9": 3,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Working",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Working",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Core",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Regional HRBP (Cement, MBM, RMX)",
+          "scores": {
+            "HC1": 2,
+            "HC2": 2,
+            "HC3": 2,
+            "HC4": "NA",
+            "HC5": 1,
+            "HC6": 2,
+            "HC7": "NA",
+            "HC8": 1,
+            "HC9": 2,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Core",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Working",
+            "HC6": "Working",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Core",
+            "HC10": "Interface"
+          }
+        }
+      ]
+    },
+    {
+      "name": "HRBP - Support Functions",
+      "roles": [
+        {
+          "name": "HRBP - Support Functions",
+          "scores": {
+            "HC1": 4,
+            "HC2": 3,
+            "HC3": 4,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 4,
+            "HC7": "NA",
+            "HC8": 3,
+            "HC9": 4,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Working",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Core",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Core",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Team Member - Support Function HR",
+          "scores": {
+            "HC1": 1,
+            "HC2": 2,
+            "HC3": 2,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 1,
+            "HC7": "NA",
+            "HC8": 1,
+            "HC9": 2,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Core",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Working",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Interface"
+          }
+        }
+      ]
+    },
+    {
+      "name": "COE - L&D & TM",
+      "roles": [
+        {
+          "name": "Head - L&D & TM",
+          "scores": {
+            "HC1": 4,
+            "HC2": "NA",
+            "HC3": 4,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 4,
+            "HC7": 3,
+            "HC8": 3,
+            "HC9": 3,
+            "HC10": 3
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Interface",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Core",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Lead L&D",
+          "scores": {
+            "HC1": 2,
+            "HC2": "NA",
+            "HC3": 3,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 2,
+            "HC7": 2,
+            "HC8": 2,
+            "HC9": 2,
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Working",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Lead TM",
+          "scores": {
+            "HC1": 2,
+            "HC2": "NA",
+            "HC3": 3,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 3,
+            "HC7": 2,
+            "HC8": 2,
+            "HC9": 2,
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Core",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Team Member - L&D",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": 1,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 1,
+            "HC7": 1,
+            "HC8": 1,
+            "HC9": 1,
+            "HC10": 1
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Core",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Working",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        }
+      ]
+    },
+    {
+      "name": "COE - TA",
+      "roles": [
+        {
+          "name": "Head - TA",
+          "scores": {
+            "HC1": 3,
+            "HC2": 4,
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 3,
+            "HC7": 3,
+            "HC8": 3,
+            "HC9": 3,
+            "HC10": 3
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Core",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Working",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Team Member - TA",
+          "scores": {
+            "HC1": "NA",
+            "HC2": 2,
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 1,
+            "HC6": "NA",
+            "HC7": 1,
+            "HC8": 1,
+            "HC9": 1,
+            "HC10": 1
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Core",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Working",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        }
+      ]
+    },
+    {
+      "name": "COE - TR",
+      "roles": [
+        {
+          "name": "Head - TR",
+          "scores": {
+            "HC1": 3,
+            "HC2": "NA",
+            "HC3": 3,
+            "HC4": 4,
+            "HC5": 3,
+            "HC6": "NA",
+            "HC7": 3,
+            "HC8": 3,
+            "HC9": "NA",
+            "HC10": 3
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Working",
+            "HC4": "Core",
+            "HC5": "Working",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Interface",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Lead TR",
+          "scores": {
+            "HC1": 2,
+            "HC2": "NA",
+            "HC3": 2,
+            "HC4": 3,
+            "HC5": 2,
+            "HC6": "NA",
+            "HC7": 2,
+            "HC8": 2,
+            "HC9": "NA",
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Working",
+            "HC4": "Core",
+            "HC5": "Working",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Interface",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Team Member - TR",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": 1,
+            "HC4": 2,
+            "HC5": 2,
+            "HC6": "NA",
+            "HC7": 1,
+            "HC8": 2,
+            "HC9": "NA",
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Working",
+            "HC4": "Core",
+            "HC5": "Working",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Interface",
+            "HC10": "Interface"
+          }
+        },
+        {
+          "name": "Team Member - TR (NEST)",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": 1,
+            "HC5": 1,
+            "HC6": "NA",
+            "HC7": 2,
+            "HC8": 2,
+            "HC9": "NA",
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Working",
+            "HC5": "Working",
+            "HC6": "Interface",
+            "HC7": "Core",
+            "HC8": "Working",
+            "HC9": "Interface",
+            "HC10": "Interface"
+          }
+        }
+      ]
+    },
+    {
+      "name": "COE - TO",
+      "roles": [
+        {
+          "name": "Head - TO",
+          "scores": {
+            "HC1": 3,
+            "HC2": "NA",
+            "HC3": 3,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 4,
+            "HC7": 4,
+            "HC8": 4,
+            "HC9": 3,
+            "HC10": 3
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Working",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Core",
+            "HC7": "Core",
+            "HC8": "Core",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Lead TO",
+          "scores": {
+            "HC1": 2,
+            "HC2": "NA",
+            "HC3": 2,
+            "HC4": "NA",
+            "HC5": "NA",
+            "HC6": 3,
+            "HC7": 3,
+            "HC8": 3,
+            "HC9": 2,
+            "HC10": 2
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Working",
+            "HC4": "Interface",
+            "HC5": "Interface",
+            "HC6": "Core",
+            "HC7": "Core",
+            "HC8": "Core",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payroll",
+      "roles": [
+        {
+          "name": "Head - Payroll",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": 3,
+            "HC5": 4,
+            "HC6": "NA",
+            "HC7": 3,
+            "HC8": 3,
+            "HC9": "NA",
+            "HC10": 3
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Working",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Interface",
+            "HC10": "Working"
+          }
+        },
+        {
+          "name": "Team Member - Payroll",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": 1,
+            "HC5": 2,
+            "HC6": "NA",
+            "HC7": 2,
+            "HC8": 2,
+            "HC9": "NA",
+            "HC10": 1
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Working",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Working",
+            "HC8": "Working",
+            "HC9": "Interface",
+            "HC10": "Working"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Office Admin",
+      "roles": [
+        {
+          "name": "Head - Office Admin",
+          "scores": {
+            "HC1": 3,
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 4,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": "NA",
+            "HC9": 3,
+            "HC10": 4
+          },
+          "relationship": {
+            "HC1": "Working",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Interface",
+            "HC9": "Working",
+            "HC10": "Core"
+          }
+        },
+        {
+          "name": "Team Member - Office Admin",
+          "scores": {
+            "HC1": "NA",
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 1,
+            "HC6": "NA",
+            "HC7": "NA",
+            "HC8": 1,
+            "HC9": 1,
+            "HC10": 1
+          },
+          "relationship": {
+            "HC1": "Interface",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Core",
+            "HC6": "Interface",
+            "HC7": "Interface",
+            "HC8": "Working",
+            "HC9": "Working",
+            "HC10": "Working"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Business Excellence",
+      "roles": [
+        {
+          "name": "Business Excellence Lead - HR",
+          "scores": {
+            "HC1": 3,
+            "HC2": "NA",
+            "HC3": "NA",
+            "HC4": "NA",
+            "HC5": 2,
+            "HC6": 2,
+            "HC7": 3,
+            "HC8": 3,
+            "HC9": 2,
+            "HC10": "NA"
+          },
+          "relationship": {
+            "HC1": "Core",
+            "HC2": "Interface",
+            "HC3": "Interface",
+            "HC4": "Interface",
+            "HC5": "Working",
+            "HC6": "Working",
+            "HC7": "Core",
+            "HC8": "Core",
+            "HC9": "Working",
+            "HC10": "Interface"
+          }
+        }
+      ]
+    }
+  ]
+}
