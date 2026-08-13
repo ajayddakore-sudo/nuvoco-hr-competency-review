@@ -1,45 +1,45 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 
 app.use(express.json({ limit: "1mb" }));
 
-// All files are in the ROOT folder of your GitHub repository
 const ROOT = __dirname;
 const ARCHITECTURE = path.join(ROOT, "architecture.json");
 const FEEDBACK = path.join(ROOT, "feedback.json");
 
-// Serve the website from the root folder
-app.use(express.static(ROOT));
+function readFeedback() {
+  try {
+    return JSON.parse(fs.readFileSync(FEEDBACK, "utf8"));
+  } catch (e) {
+    return [];
+  }
+}
 
-// Load competency architecture
+function writeFeedback(rows) {
+  fs.writeFileSync(
+    FEEDBACK,
+    JSON.stringify(rows, null, 2),
+    "utf8"
+  );
+}
+
+/* ---------------- PUBLIC PORTAL ---------------- */
+
 app.get("/api/architecture", (req, res) => {
-  try {
-    res.sendFile(ARCHITECTURE);
-  } catch (e) {
-    res.status(500).json({
-      error: "Could not load architecture."
-    });
-  }
+  res.sendFile(ARCHITECTURE);
 });
 
-// View submitted feedback
 app.get("/api/feedback", (req, res) => {
-  try {
-    const rows = JSON.parse(
-      fs.readFileSync(FEEDBACK, "utf8")
-    );
-    res.json(rows);
-  } catch (e) {
-    res.json([]);
-  }
+  res.json(readFeedback());
 });
 
-// Save feedback
 app.post("/api/feedback", (req, res) => {
+
   const b = req.body || {};
 
   if (!b.reviewer || !b.vertical || !b.role || !b.decision) {
@@ -48,15 +48,7 @@ app.post("/api/feedback", (req, res) => {
     });
   }
 
-  let rows = [];
-
-  try {
-    rows = JSON.parse(
-      fs.readFileSync(FEEDBACK, "utf8")
-    );
-  } catch (e) {
-    rows = [];
-  }
+  const rows = readFeedback();
 
   const record = {
     ...b,
@@ -76,11 +68,7 @@ app.post("/api/feedback", (req, res) => {
     rows.push(record);
   }
 
-  fs.writeFileSync(
-    FEEDBACK,
-    JSON.stringify(rows, null, 2),
-    "utf8"
-  );
+  writeFeedback(rows);
 
   res.json({
     ok: true,
@@ -88,69 +76,151 @@ app.post("/api/feedback", (req, res) => {
   });
 });
 
-// Export feedback as CSV
-app.get("/api/export.csv", (req, res) => {
-  let rows = [];
 
-  try {
-    rows = JSON.parse(
-      fs.readFileSync(FEEDBACK, "utf8")
-    );
-  } catch (e) {
-    rows = [];
+/* ---------------- ADMIN LOGIN ---------------- */
+
+const ADMIN_PASSWORD =
+  process.env.ADMIN_PASSWORD || "change-this-password";
+
+const adminTokens = new Set();
+
+app.post("/api/admin/login", (req, res) => {
+
+  const password = String(
+    req.body?.password || ""
+  );
+
+  if (password !== ADMIN_PASSWORD) {
+    return res.status(401).json({
+      error: "Invalid password"
+    });
   }
 
-  const headers = [
-    "Reviewer",
-    "Organisation Vertical",
-    "Role",
-    "Decision",
-    "Comments",
-    "Timestamp"
-  ];
+  const token = crypto
+    .randomBytes(24)
+    .toString("hex");
 
-  const escapeCSV = value =>
-    `"${String(value ?? "").replaceAll('"', '""')}"`;
+  adminTokens.add(token);
 
-  const csv = [
-    headers.join(","),
-    ...rows.map(row =>
-      [
-        row.reviewer,
-        row.vertical,
-        row.role,
-        row.decision,
-        row.comments,
-        row.timestamp
-      ]
-        .map(escapeCSV)
-        .join(",")
-    )
-  ].join("\n");
-
-  res.setHeader(
-    "Content-Type",
-    "text/csv; charset=utf-8"
-  );
-
-  res.setHeader(
-    "Content-Disposition",
-    'attachment; filename="Nuvoco_HR_Competency_Feedback.csv"'
-  );
-
-  res.send(csv);
+  res.json({
+    ok: true,
+    token
+  });
 });
 
-// Open the website
+
+function requireAdmin(req, res, next) {
+
+  const token =
+    req.headers["x-admin-token"];
+
+  if (!token || !adminTokens.has(token)) {
+    return res.status(401).json({
+      error: "Admin authentication required"
+    });
+  }
+
+  next();
+}
+
+
+/* ---------------- ADMIN DATA ---------------- */
+
+app.get(
+  "/api/admin/feedback",
+  requireAdmin,
+  (req, res) => {
+
+    res.json(readFeedback());
+
+  }
+);
+
+
+/* ---------------- ADMIN EXPORT ---------------- */
+
+app.get(
+  "/api/admin/export.csv",
+  requireAdmin,
+  (req, res) => {
+
+    const rows = readFeedback();
+
+    const headers = [
+      "Reviewer",
+      "Organisation Vertical",
+      "Role",
+      "Decision",
+      "Comments",
+      "Timestamp"
+    ];
+
+    const escapeCSV = value =>
+      `"${String(value ?? "")
+        .replaceAll('"', '""')}"`;
+
+    const csv = [
+      headers.join(","),
+      ...rows.map(row =>
+        [
+          row.reviewer,
+          row.vertical,
+          row.role,
+          row.decision,
+          row.comments,
+          row.timestamp
+        ]
+          .map(escapeCSV)
+          .join(",")
+      )
+    ].join("\n");
+
+    res.setHeader(
+      "Content-Type",
+      "text/csv; charset=utf-8"
+    );
+
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="Nuvoco_HR_Competency_Feedback.csv"'
+    );
+
+    res.send(csv);
+  }
+);
+
+
+/* ---------------- ADMIN PAGE ---------------- */
+
+app.get("/admin", (req, res) => {
+
+  res.sendFile(
+    path.join(ROOT, "admin.html")
+  );
+
+});
+
+
+/* ---------------- WEBSITE ---------------- */
+
+app.use(express.static(ROOT));
+
+
 app.get("*", (req, res) => {
+
   res.sendFile(
     path.join(ROOT, "index.html")
   );
+
 });
 
-// Start server
+
+/* ---------------- START ---------------- */
+
 app.listen(PORT, () => {
+
   console.log(
     `Nuvoco HR Competency Review running on port ${PORT}`
   );
+
 });
