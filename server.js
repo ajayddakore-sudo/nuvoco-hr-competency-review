@@ -12,14 +12,16 @@ const ADMIN_PASSWORD =
   process.env.ADMIN_PASSWORD ||
   "change-this-password";
 
+
 app.use(
   express.json({
-    limit: "1mb"
+    limit:"1mb"
   })
 );
 
 
-const ROOT = __dirname;
+const ROOT =
+  __dirname;
 
 const ARCHITECTURE =
   path.join(
@@ -34,13 +36,11 @@ const FEEDBACK =
   );
 
 
-/* -----------------------------
-   FILE HELPERS
------------------------------ */
+/* READ FEEDBACK */
 
-function readFeedback() {
+function readFeedback(){
 
-  try {
+  try{
 
     return JSON.parse(
       fs.readFileSync(
@@ -49,7 +49,7 @@ function readFeedback() {
       )
     );
 
-  } catch (e) {
+  }catch(e){
 
     return [];
 
@@ -58,7 +58,9 @@ function readFeedback() {
 }
 
 
-function writeFeedback(rows) {
+/* WRITE FEEDBACK */
+
+function writeFeedback(rows){
 
   fs.writeFileSync(
     FEEDBACK,
@@ -73,13 +75,11 @@ function writeFeedback(rows) {
 }
 
 
-/* -----------------------------
-   ARCHITECTURE
------------------------------ */
+/* ARCHITECTURE API */
 
 app.get(
   "/api/architecture",
-  (req,res) => {
+  (req,res)=>{
 
     res.sendFile(
       ARCHITECTURE
@@ -89,13 +89,11 @@ app.get(
 );
 
 
-/* -----------------------------
-   PUBLIC FEEDBACK
------------------------------ */
+/* FEEDBACK API */
 
 app.get(
   "/api/feedback",
-  (req,res) => {
+  (req,res)=>{
 
     res.json(
       readFeedback()
@@ -105,9 +103,11 @@ app.get(
 );
 
 
+/* SAVE REVIEW */
+
 app.post(
   "/api/feedback",
-  (req,res) => {
+  (req,res)=>{
 
     const b =
       req.body || {};
@@ -117,14 +117,16 @@ app.post(
       !b.reviewer ||
       !b.vertical ||
       !b.role ||
-      !b.decision
+      !b.suggestedLevels
     ){
 
       return res
         .status(400)
         .json({
+
           error:
-          "Reviewer, vertical, role and decision are required."
+          "Reviewer, vertical, role and suggested levels are required."
+
         });
 
     }
@@ -134,9 +136,22 @@ app.post(
       readFeedback();
 
 
-    const record = {
+    const record={
 
-      ...b,
+      reviewer:
+        b.reviewer,
+
+      vertical:
+        b.vertical,
+
+      role:
+        b.role,
+
+      suggestedLevels:
+        b.suggestedLevels,
+
+      comments:
+        b.comments || "",
 
       timestamp:
         new Date()
@@ -147,21 +162,21 @@ app.post(
 
     const index =
       rows.findIndex(
-        x =>
-          x.vertical ===
+        x=>
+          x.vertical===
             b.vertical &&
 
-          x.role ===
+          x.role===
             b.role &&
 
-          x.reviewer ===
+          x.reviewer===
             b.reviewer
       );
 
 
-    if(index >= 0){
+    if(index>=0){
 
-      rows[index] =
+      rows[index]=
         record;
 
     }else{
@@ -179,17 +194,18 @@ app.post(
 
 
     res.json({
+
       ok:true,
+
       record
+
     });
 
   }
 );
 
 
-/* -----------------------------
-   ADMIN LOGIN
------------------------------ */
+/* ADMIN LOGIN */
 
 const adminTokens =
   new Set();
@@ -197,7 +213,7 @@ const adminTokens =
 
 app.post(
   "/api/admin/login",
-  (req,res) => {
+  (req,res)=>{
 
     const password =
       String(
@@ -207,16 +223,17 @@ app.post(
 
 
     if(
-      !password ||
       password !==
-        ADMIN_PASSWORD
+      ADMIN_PASSWORD
     ){
 
       return res
         .status(401)
         .json({
+
           error:
           "Invalid password"
+
         });
 
     }
@@ -224,8 +241,8 @@ app.post(
 
     const token =
       crypto
-        .randomBytes(24)
-        .toString("hex");
+      .randomBytes(24)
+      .toString("hex");
 
 
     adminTokens.add(
@@ -234,13 +251,18 @@ app.post(
 
 
     res.json({
+
       ok:true,
+
       token
+
     });
 
   }
 );
 
+
+/* ADMIN AUTH */
 
 function requireAdmin(
   req,
@@ -264,8 +286,10 @@ function requireAdmin(
     return res
       .status(401)
       .json({
+
         error:
         "Admin authentication required"
+
       });
 
   }
@@ -276,14 +300,12 @@ function requireAdmin(
 }
 
 
-/* -----------------------------
-   ADMIN DATA
------------------------------ */
+/* ADMIN FEEDBACK */
 
 app.get(
   "/api/admin/feedback",
   requireAdmin,
-  (req,res) => {
+  (req,res)=>{
 
     res.json(
       readFeedback()
@@ -293,20 +315,18 @@ app.get(
 );
 
 
-/* -----------------------------
-   ADMIN CSV EXPORT
------------------------------ */
+/* ADMIN CSV EXPORT */
 
 app.get(
   "/api/admin/export.csv",
   requireAdmin,
-  (req,res) => {
+  (req,res)=>{
 
     const rows =
       readFeedback();
 
 
-    const headers = [
+    const headers=[
 
       "Reviewer",
 
@@ -314,9 +334,13 @@ app.get(
 
       "Role",
 
-      "Decision",
+      "Competency",
 
-      "Suggested Levels",
+      "Mapped Level",
+
+      "Suggested Level",
+
+      "Change",
 
       "Comments",
 
@@ -325,61 +349,160 @@ app.get(
     ];
 
 
-    const escapeCSV =
-      value =>
-        `"${String(
-          value ?? ""
-        ).replaceAll(
-          '"',
-          '""'
-        )}"`;
+    const arch=
+      JSON.parse(
+        fs.readFileSync(
+          ARCHITECTURE,
+          "utf8"
+        )
+      );
 
 
-    const csv = [
+    function getMapped(
+      vertical,
+      role,
+      code
+    ){
 
-      headers.join(","),
-
-      ...rows.map(
-        row => {
-
-          const levels =
-            Object.entries(
-              row.suggestedLevels ||
-              {}
-            )
-            .map(
-              ([code,level]) =>
-                `${code}: Level ${level}`
-            )
-            .join(" | ");
+      const s=
+        arch.sections
+        ?.find(
+          x=>
+            x.name===
+            vertical
+        );
 
 
-          return [
+      const r=
+        s?.roles
+        ?.find(
+          x=>
+            x.name===
+            role
+        );
 
-            row.reviewer,
 
-            row.vertical,
+      return(
+        r?.scores?.[code]
+        ??
+        ""
+      );
 
-            row.role,
+    }
 
-            row.decision,
 
-            levels,
+    function getName(code){
 
-            row.comments,
+      return(
+        arch
+        .competencies
+        ?.[code]
+        ?.name
+        ||
+        code
+      );
 
-            row.timestamp
+    }
 
-          ]
-          .map(
-            escapeCSV
-          )
-          .join(",");
 
-        }
-      )
+    function escapeCSV(v){
 
-    ].join("\n");
+      return `"${String(
+        v??""
+      ).replaceAll(
+        '"',
+        '""'
+      )}"`;
+
+    }
+
+
+    const output=[
+      headers.join(",")
+    ];
+
+
+    rows.forEach(
+      row=>{
+
+        Object
+        .entries(
+          row.suggestedLevels||{}
+        )
+        .forEach(
+          ([code,suggested])=>{
+
+            const mapped=
+              getMapped(
+                row.vertical,
+                row.role,
+                code
+              );
+
+
+            let change=
+              "No change";
+
+
+            if(
+              mapped!=="" &&
+              Number(suggested)>
+              Number(mapped)
+            ){
+
+              change=
+                `Up: ${mapped} to ${suggested}`;
+
+            }
+
+
+            else if(
+              mapped!=="" &&
+              Number(suggested)<
+              Number(mapped)
+            ){
+
+              change=
+                `Down: ${mapped} to ${suggested}`;
+
+            }
+
+
+            output.push(
+
+              [
+
+                row.reviewer,
+
+                row.vertical,
+
+                row.role,
+
+                `${code} - ${getName(code)}`,
+
+                mapped,
+
+                suggested,
+
+                change,
+
+                row.comments,
+
+                row.timestamp
+
+              ]
+              .map(
+                escapeCSV
+              )
+              .join(",")
+
+            );
+
+          }
+        );
+
+      }
+    );
 
 
     res.setHeader(
@@ -394,19 +517,19 @@ app.get(
     );
 
 
-    res.send(csv);
+    res.send(
+      output.join("\n")
+    );
 
   }
 );
 
 
-/* -----------------------------
-   ADMIN PAGE
------------------------------ */
+/* ADMIN PAGE */
 
 app.get(
   "/admin",
-  (req,res) => {
+  (req,res)=>{
 
     res.sendFile(
       path.join(
@@ -419,9 +542,7 @@ app.get(
 );
 
 
-/* -----------------------------
-   STATIC WEBSITE
------------------------------ */
+/* STATIC FILES */
 
 app.use(
   express.static(
@@ -430,9 +551,11 @@ app.use(
 );
 
 
+/* MAIN WEBSITE */
+
 app.get(
   "*",
-  (req,res) => {
+  (req,res)=>{
 
     res.sendFile(
       path.join(
@@ -445,13 +568,11 @@ app.get(
 );
 
 
-/* -----------------------------
-   START
------------------------------ */
+/* START */
 
 app.listen(
   PORT,
-  () => {
+  ()=>{
 
     console.log(
       `Nuvoco HR Competency Review running on port ${PORT}`
