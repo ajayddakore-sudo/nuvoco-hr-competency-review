@@ -4,105 +4,673 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nuvoco HR Competency Review</title>
+
 <style>
 :root{
---navy:#172554;--purple:#6d28d9;--pink:#db2777;--green:#059669;
---greenbg:#ecfdf5;--yellow:#fef3c7;--yellowtext:#a16207;
---ink:#172033;--muted:#667085;--bg:#f6f7fb;--line:#e5e7eb;
---blue:#2563eb
+--navy:#172554;
+--purple:#6d28d9;
+--pink:#db2777;
+--green:#059669;
+--yellow:#fef3c7;
+--ink:#172033;
+--muted:#667085;
+--bg:#f6f7fb;
+--line:#e5e7eb
 }
+
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:linear-gradient(115deg,#172554,#4c1d95,#be185d);color:#fff;padding:24px 32px}
-.eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.8}
-h1{margin:5px 0;font-size:26px}
-header p{margin:0;font-size:12px;opacity:.86}
-.layout{display:grid;grid-template-columns:285px minmax(0,1fr);gap:16px;max-width:1500px;margin:16px auto;padding:0 16px}
-.box{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 20px #1725540a}
-.side{height:calc(100vh - 120px);position:sticky;top:100px;overflow:auto;padding:14px}
-.main{padding:20px;min-height:720px}
-input,select,textarea{width:100%;padding:9px 10px;border:1px solid #d9dee8;border-radius:8px;background:#fff;font:inherit;font-size:11px}
-textarea{min-height:90px;resize:vertical}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#8b5cf6;box-shadow:0 0 0 3px #8b5cf61a}
-button{border:1px solid #d9dee8;background:#fff;padding:8px 11px;border-radius:8px;font-size:10px;font-weight:750;cursor:pointer}
-button:hover{background:#f8fafc}
-.primary{background:linear-gradient(90deg,#6d28d9,#db2777)!important;color:#fff!important;border:0!important}
-.greenbtn{background:#059669!important;color:#fff!important;border:0!important}
-.label{font-size:9px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:15px 3px 7px}
-.org{margin:3px 0;border-radius:9px;overflow:hidden}
-.orghead{padding:9px;font-size:11px;font-weight:750;cursor:pointer;display:flex;justify-content:space-between}
-.org.open .orghead{background:#f4f1ff;color:#5b21b6}
-.roles{display:none;padding:2px 5px 6px}
-.org.open .roles{display:block}
-.role{padding:7px 8px;border-radius:7px;font-size:10px;cursor:pointer;color:#475467}
-.role:hover{background:#f8fafc}
-.role.active{background:linear-gradient(90deg,#ede9fe,#fce7f3);color:#5b21b6;font-weight:800;border-left:3px solid #db2777}
-.overview-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.role-head h2{margin:2px 0;font-size:22px;color:var(--navy)}
-.vertical{font-size:9px;color:#6d28d9;font-weight:850;letter-spacing:1.1px;text-transform:uppercase}
-.muted{font-size:10px;color:var(--muted)}
-.role-summary{display:flex;gap:7px;flex-wrap:wrap;margin:11px 0}
-.summary-chip{padding:6px 9px;border-radius:999px;background:#f8fafc;border:1px solid var(--line);font-size:9px;font-weight:750;color:#475467}
-.summary-chip.core{background:#dcfce7;color:#047857;border-color:#bbf7d0}
-.summary-chip.working{background:#fef3c7;color:#a16207;border-color:#fde68a}
-.progress-wrap{margin:12px 0 15px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fafbfc}
-.progress-row{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:6px}
-.progress{height:6px;border-radius:99px;background:#e5e7eb;overflow:hidden}
-.progress>span{display:block;height:100%;background:linear-gradient(90deg,#059669,#2563eb);border-radius:99px;transition:.2s}
-.review-grid{display:grid;grid-template-columns:minmax(350px,.88fr) minmax(450px,1.12fr);gap:14px;align-items:start}
-.cards{display:grid;gap:8px}
-.card{border:1px solid var(--line);border-radius:12px;padding:12px;position:relative;background:#fff;cursor:pointer;transition:.15s}
-.card:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:#059669}
-.card:hover,.card.selected{border-color:#86efac;box-shadow:0 5px 16px #05966915}
-.card-top{display:flex;justify-content:space-between;gap:10px}
-.code{font-size:9px;color:#047857;font-weight:850}
-.card h3{font-size:12px;margin:3px 0 7px;line-height:1.35}
-.meta{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-.pill{font-size:8px;font-weight:850;padding:4px 7px;border-radius:999px;text-transform:uppercase}
-.core{background:#dcfce7;color:#047857}
-.working{background:#fef3c7;color:#a16207}
-.mapped-box{display:flex;align-items:center;gap:5px}
-.mapped-label{font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:800}
-.score{width:31px;height:31px;border-radius:8px;background:#172554;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:850}
-.level-row{display:flex;align-items:center;gap:7px;margin-top:9px}
-.level-row label{font-size:9px;font-weight:750;color:#475467;white-space:nowrap}
-.level-row select{width:62px;padding:6px 7px}
-.reviewed-btn{margin-left:auto;font-size:8px;padding:6px 8px}
-.reviewed-btn.done{background:#dcfce7;color:#047857;border-color:#bbf7d0}
-.detail{position:sticky;top:100px;border:1px solid var(--line);border-radius:13px;background:#fff;min-height:560px;overflow:hidden}
-.detail.empty{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);padding:30px}
-.detail-inner{padding:16px}
-.detail-head{display:flex;justify-content:space-between;gap:10px;padding-bottom:11px;border-bottom:1px solid var(--line)}
-.detail-head h3{margin:0;color:var(--navy);font-size:16px}
-.level-compare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:11px 0}
-.level-box{padding:9px;border-radius:9px;border:1px solid var(--line);background:#fafbfc}
-.level-box .small{font-size:8px;text-transform:uppercase;color:var(--muted);font-weight:850}
-.level-box strong{display:block;font-size:18px;color:var(--navy);margin-top:2px}
-.level-box.suggested{background:#ecfdf5;border-color:#bbf7d0}
-.level-box.suggested strong{color:#047857}
-.tabs{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}
-.tab{border:0;background:#f3f4f6}
-.tab.active{background:linear-gradient(90deg,#6d28d9,#db2777);color:#fff}
-.tabbody{font-size:10px;line-height:1.55;color:#43515a}
-.ladder{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.pl{padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff}
-.plnum{font-size:18px;font-weight:850;color:#059669}
-.pllabel{font-size:10px;font-weight:850;color:var(--navy)}
-.definition{font-size:9px;line-height:1.4;padding:7px 8px;background:#ecfdf5;border-left:3px solid #059669;border-radius:5px;margin:6px 0}
-.expect{font-size:8.5px;color:#5b6971}
-.expect ul{padding-left:14px;margin:4px 0}.expect li{margin-bottom:3px}
-.feedback{margin-top:14px;padding:13px;border:1px solid #fed7aa;border-radius:12px;background:#fffaf5}
-.feedback h3{margin:0;color:#9a3412;font-size:13px}
-.feedback p{font-size:9px;color:var(--muted);margin:4px 0 8px}
-.saved{display:none;color:#047857;font-size:9px;margin-left:6px}
-.overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
-.kpi{padding:13px;border:1px solid var(--line);border-radius:11px;position:relative}
-.kpi:before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:#6d28d9}.kpi:nth-child(2):before{background:#2563eb}.kpi:nth-child(3):before{background:#f97316}.kpi:nth-child(4):before{background:#059669}
-.kpi b{display:block;font-size:23px;color:var(--navy)}.kpi span{font-size:9px;color:var(--muted)}
-.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.mini{border:1px solid var(--line);border-radius:9px;padding:9px}.mini b{font-size:9px;color:#db2777}.mini span{display:block;font-size:10px;font-weight:700;margin-top:2px}
-@media(max-width:1050px){.review-grid{grid-template-columns:1fr}.detail{position:relative;top:auto}.overview-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:850px){.layout{grid-template-columns:1fr}.side{height:auto;position:relative;top:auto}}
-@media(max-width:600px){.overview-grid{grid-template-columns:1fr}.ladder{grid-template-columns:1fr}.level-compare{grid-template-columns:1fr}}
+
+body{
+margin:0;
+font-family:Inter,Segoe UI,Arial,sans-serif;
+background:var(--bg);
+color:var(--ink)
+}
+
+header{
+background:linear-gradient(115deg,#172554,#4c1d95,#be185d);
+color:#fff;
+padding:24px 32px
+}
+
+.eyebrow{
+font-size:10px;
+letter-spacing:2px;
+text-transform:uppercase;
+opacity:.8
+}
+
+h1{
+margin:5px 0;
+font-size:26px
+}
+
+header p{
+margin:0;
+font-size:12px;
+opacity:.86
+}
+
+.layout{
+display:grid;
+grid-template-columns:285px minmax(0,1fr);
+gap:16px;
+max-width:1500px;
+margin:16px auto;
+padding:0 16px
+}
+
+.box{
+background:#fff;
+border:1px solid var(--line);
+border-radius:16px;
+box-shadow:0 5px 20px #1725540a
+}
+
+.side{
+height:calc(100vh - 120px);
+position:sticky;
+top:100px;
+overflow:auto;
+padding:14px
+}
+
+.main{
+padding:20px;
+min-height:720px
+}
+
+input,select,textarea{
+width:100%;
+padding:9px 10px;
+border:1px solid #d9dee8;
+border-radius:8px;
+background:#fff;
+font:inherit;
+font-size:11px
+}
+
+textarea{
+min-height:90px;
+resize:vertical
+}
+
+input:focus,select:focus,textarea:focus{
+outline:none;
+border-color:#8b5cf6;
+box-shadow:0 0 0 3px #8b5cf61a
+}
+
+button{
+border:1px solid #d9dee8;
+background:#fff;
+padding:8px 11px;
+border-radius:8px;
+font-size:10px;
+font-weight:750;
+cursor:pointer
+}
+
+button:hover{
+background:#f8fafc
+}
+
+.primary{
+background:linear-gradient(90deg,#6d28d9,#db2777)!important;
+color:#fff!important;
+border:0!important
+}
+
+.greenbtn{
+background:#059669!important;
+color:#fff!important;
+border:0!important
+}
+
+.label{
+font-size:9px;
+color:var(--muted);
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:1.2px;
+margin:15px 3px 7px
+}
+
+.org{
+margin:3px 0;
+border-radius:9px;
+overflow:hidden
+}
+
+.orghead{
+padding:9px;
+font-size:11px;
+font-weight:750;
+cursor:pointer;
+display:flex;
+justify-content:space-between
+}
+
+.org.open .orghead{
+background:#f4f1ff;
+color:#5b21b6
+}
+
+.roles{
+display:none;
+padding:2px 5px 6px
+}
+
+.org.open .roles{
+display:block
+}
+
+.role{
+padding:7px 8px;
+border-radius:7px;
+font-size:10px;
+cursor:pointer;
+color:#475467
+}
+
+.role:hover{
+background:#f8fafc
+}
+
+.role.active{
+background:linear-gradient(90deg,#ede9fe,#fce7f3);
+color:#5b21b6;
+font-weight:800;
+border-left:3px solid #db2777
+}
+
+.overview-top{
+display:flex;
+justify-content:space-between;
+gap:12px;
+align-items:flex-start
+}
+
+.vertical{
+font-size:9px;
+color:#6d28d9;
+font-weight:850;
+letter-spacing:1.1px;
+text-transform:uppercase
+}
+
+.muted{
+font-size:10px;
+color:var(--muted)
+}
+
+.role-summary{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+margin:11px 0
+}
+
+.summary-chip{
+padding:6px 9px;
+border-radius:999px;
+background:#f8fafc;
+border:1px solid var(--line);
+font-size:9px;
+font-weight:750;
+color:#475467
+}
+
+.summary-chip.core{
+background:#dcfce7;
+color:#047857;
+border-color:#bbf7d0
+}
+
+.summary-chip.working{
+background:#fef3c7;
+color:#a16207;
+border-color:#fde68a
+}
+
+.progress-wrap{
+margin:12px 0 15px;
+padding:10px 12px;
+border:1px solid var(--line);
+border-radius:10px;
+background:#fafbfc
+}
+
+.progress-row{
+display:flex;
+justify-content:space-between;
+font-size:9px;
+color:var(--muted);
+margin-bottom:6px
+}
+
+.progress{
+height:6px;
+border-radius:99px;
+background:#e5e7eb;
+overflow:hidden
+}
+
+.progress>span{
+display:block;
+height:100%;
+background:linear-gradient(90deg,#059669,#2563eb);
+border-radius:99px;
+transition:.2s
+}
+
+.review-note{
+font-size:8px;
+line-height:1.4;
+color:#667085;
+background:#f8fafc;
+border:1px solid #e5e7eb;
+padding:7px 9px;
+border-radius:8px;
+margin-bottom:10px
+}
+
+.cards{
+display:grid;
+gap:8px
+}
+
+.card{
+border:1px solid var(--line);
+border-radius:12px;
+padding:12px;
+position:relative;
+background:#fff;
+cursor:pointer;
+transition:.15s
+}
+
+.card:before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:4px;
+height:100%;
+background:#059669
+}
+
+.card:hover,.card.selected{
+border-color:#86efac;
+box-shadow:0 5px 16px #05966915
+}
+
+.card-top{
+display:flex;
+justify-content:space-between;
+gap:10px
+}
+
+.code{
+font-size:9px;
+color:#047857;
+font-weight:850
+}
+
+.card h3{
+font-size:12px;
+margin:3px 0 7px;
+line-height:1.35
+}
+
+.meta{
+display:flex;
+gap:5px;
+align-items:center;
+flex-wrap:wrap
+}
+
+.pill{
+font-size:8px;
+font-weight:850;
+padding:4px 7px;
+border-radius:999px;
+text-transform:uppercase
+}
+
+.core{
+background:#dcfce7;
+color:#047857
+}
+
+.working{
+background:#fef3c7;
+color:#a16207
+}
+
+.mapped-box{
+display:flex;
+align-items:center;
+gap:5px
+}
+
+.mapped-label{
+font-size:8px;
+color:var(--muted);
+text-transform:uppercase;
+font-weight:800
+}
+
+.score{
+width:31px;
+height:31px;
+border-radius:8px;
+background:#172554;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:15px;
+font-weight:850
+}
+
+.level-row{
+display:flex;
+align-items:center;
+gap:7px;
+margin-top:9px
+}
+
+.level-row label{
+font-size:9px;
+font-weight:750;
+color:#475467;
+white-space:nowrap
+}
+
+.level-row select{
+width:62px;
+padding:6px 7px
+}
+
+.reviewed-btn{
+margin-left:auto;
+font-size:8px;
+padding:6px 8px
+}
+
+.reviewed-btn.done{
+background:#dcfce7;
+color:#047857;
+border-color:#bbf7d0
+}
+
+/* Expanded competency detail */
+.detail{
+margin-top:10px;
+border:1px solid #ddd6fe;
+border-radius:11px;
+background:#faf9ff;
+overflow:hidden;
+display:none
+}
+
+.detail.open{
+display:block
+}
+
+.detail-inner{
+padding:13px
+}
+
+.detail-head{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding-bottom:11px;
+border-bottom:1px solid var(--line)
+}
+
+.detail-head h3{
+margin:0;
+color:var(--navy);
+font-size:16px
+}
+
+.level-compare{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin:11px 0
+}
+
+.level-box{
+padding:9px;
+border-radius:9px;
+border:1px solid var(--line);
+background:#fff
+}
+
+.level-box .small{
+font-size:8px;
+text-transform:uppercase;
+color:var(--muted);
+font-weight:850
+}
+
+.level-box strong{
+display:block;
+font-size:18px;
+color:var(--navy);
+margin-top:2px
+}
+
+.level-box.suggested{
+background:#ecfdf5;
+border-color:#bbf7d0
+}
+
+.level-box.suggested strong{
+color:#047857
+}
+
+.tabs{
+display:flex;
+gap:5px;
+flex-wrap:wrap;
+margin:10px 0
+}
+
+.tab{
+border:0;
+background:#f3f4f6
+}
+
+.tab.active{
+background:linear-gradient(90deg,#6d28d9,#db2777);
+color:#fff
+}
+
+.tabbody{
+font-size:10px;
+line-height:1.55;
+color:#43515a
+}
+
+.ladder{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+}
+
+.pl{
+padding:10px;
+border:1px solid var(--line);
+border-radius:9px;
+background:#fff
+}
+
+.plnum{
+font-size:18px;
+font-weight:850;
+color:#059669
+}
+
+.pllabel{
+font-size:10px;
+font-weight:850;
+color:var(--navy)
+}
+
+.definition{
+font-size:9px;
+line-height:1.4;
+padding:7px 8px;
+background:#ecfdf5;
+border-left:3px solid #059669;
+border-radius:5px;
+margin:6px 0
+}
+
+.expect{
+font-size:8.5px;
+color:#5b6971
+}
+
+.expect ul{
+padding-left:14px;
+margin:4px 0
+}
+
+.expect li{
+margin-bottom:3px
+}
+
+.feedback{
+margin-top:14px;
+padding:13px;
+border:1px solid #fed7aa;
+border-radius:12px;
+background:#fffaf5
+}
+
+.feedback h3{
+margin:0;
+color:#9a3412;
+font-size:13px
+}
+
+.feedback p{
+font-size:9px;
+color:var(--muted);
+margin:4px 0 8px
+}
+
+.saved{
+display:none;
+color:#047857;
+font-size:9px;
+margin-left:6px
+}
+
+.overview-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin:16px 0
+}
+
+.kpi{
+padding:13px;
+border:1px solid var(--line);
+border-radius:11px;
+position:relative
+}
+
+.kpi:before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:3px;
+background:#6d28d9
+}
+
+.kpi:nth-child(2):before{
+background:#2563eb
+}
+
+.kpi:nth-child(3):before{
+background:#f97316
+}
+
+.kpi:nth-child(4):before{
+background:#059669
+}
+
+.kpi b{
+display:block;
+font-size:23px;
+color:var(--navy)
+}
+
+.kpi span{
+font-size:9px;
+color:var(--muted)
+}
+
+.mini-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:7px
+}
+
+.mini{
+border:1px solid var(--line);
+border-radius:9px;
+padding:9px
+}
+
+.mini b{
+font-size:9px;
+color:#db2777
+}
+
+.mini span{
+display:block;
+font-size:10px;
+font-weight:700;
+margin-top:2px
+}
+
+@media(max-width:850px){
+.layout{
+grid-template-columns:1fr
+}
+
+.side{
+height:auto;
+position:relative;
+top:auto
+}
+}
+
+@media(max-width:600px){
+
+.overview-grid{
+grid-template-columns:1fr
+}
+
+.ladder{
+grid-template-columns:1fr
+}
+
+.level-compare{
+grid-template-columns:1fr
+}
+
+}
 </style>
 </head>
 
@@ -117,54 +685,93 @@ button:hover{background:#f8fafc}
 <div class="layout">
 
 <aside class="box side">
-<input id="search" placeholder="Search role…" oninput="filterRoles()">
-<div class="label">Organisation structure</div>
+
+<input
+id="search"
+placeholder="Search role…"
+oninput="filterRoles()"
+>
+
+<div class="label">
+Organisation structure
+</div>
+
 <div id="nav"></div>
+
 </aside>
 
-<main class="box main" id="main"></main>
+
+<main
+class="box main"
+id="main"
+></main>
 
 </div>
+
 
 <script>
 
 let DATA=null;
-let current={sec:null,role:null,code:null};
+
+let current={
+sec:null,
+role:null,
+code:null
+};
+
 let reviewed={};
 
+
 const LEVEL_INFO={
+
 PL1:{
 label:"Foundational",
 definition:"Delivers day to day tasks with guidance"
 },
+
 PL2:{
 label:"Independent",
 definition:"Owns monthly and quarterly deliverables independently"
 },
+
 PL3:{
 label:"Advanced",
 definition:"Leads annual deliverables and the AOP cycle for the vertical"
 },
+
 PL4:{
 label:"Enterprise",
 definition:"Holds complete accountability, vision and long term strategy for the function"
 }
+
 };
 
-const $=id=>document.getElementById(id);
 
-const esc=s=>String(s??"")
-.replace(/[&<>"']/g,m=>({
+const $=id=>
+document.getElementById(id);
+
+
+const esc=s=>
+String(s??"")
+.replace(
+/[&<>"']/g,
+m=>({
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 "\"":"&quot;",
 "'":"&#39;"
-}[m]));
+}[m])
+);
+
 
 async function boot(){
 
-DATA=await fetch("/api/architecture").then(r=>r.json());
+DATA=
+await fetch(
+"/api/architecture"
+)
+.then(r=>r.json());
 
 buildNav();
 
@@ -172,19 +779,27 @@ overview();
 
 }
 
+
 function buildNav(){
 
 let n=$("nav");
 
 n.innerHTML="";
 
-DATA.sections.forEach((s,si)=>{
+DATA.sections.forEach(
+(s,si)=>{
 
-let o=document.createElement("div");
+let o=
+document.createElement(
+"div"
+);
 
 o.className="org";
 
-let h=document.createElement("div");
+let h=
+document.createElement(
+"div"
+);
 
 h.className="orghead";
 
@@ -193,68 +808,130 @@ h.innerHTML=`
 <span>${s.roles.length}</span>
 `;
 
-let rs=document.createElement("div");
+let rs=
+document.createElement(
+"div"
+);
 
 rs.className="roles";
 
-s.roles.forEach((r,ri)=>{
 
-let x=document.createElement("div");
+s.roles.forEach(
+(r,ri)=>{
+
+let x=
+document.createElement(
+"div"
+);
 
 x.className="role";
 
 x.textContent=r.name;
 
 x.dataset.q=
-(s.name+" "+r.name).toLowerCase();
+(
+s.name+
+" "+
+r.name
+)
+.toLowerCase();
 
-x.onclick=()=>showRole(si,ri,x);
+x.onclick=()=>
+showRole(
+si,
+ri,
+x
+);
 
 rs.appendChild(x);
 
-});
+}
+);
 
-h.onclick=()=>o.classList.toggle("open");
+
+h.onclick=()=>
+o.classList.toggle(
+"open"
+);
 
 o.append(h,rs);
 
 n.appendChild(o);
 
-});
+}
+);
 
 }
+
 
 function filterRoles(){
 
-let q=$("search").value.toLowerCase();
+let q=
+$("search")
+.value
+.toLowerCase();
 
-document.querySelectorAll(".org").forEach(o=>{
+document
+.querySelectorAll(
+".org"
+)
+.forEach(
+o=>{
 
 let any=false;
 
-o.querySelectorAll(".role").forEach(r=>{
+o.querySelectorAll(
+".role"
+)
+.forEach(
+r=>{
 
-let show=!q||r.dataset.q.includes(q);
+let show=
+!q ||
+r.dataset.q
+.includes(q);
 
-r.style.display=show?"block":"none";
+r.style.display=
+show?
+"block":
+"none";
 
-if(show)any=true;
+if(show)
+any=true;
 
-});
+}
+);
 
-o.style.display=any?"block":"none";
+o.style.display=
+any?
+"block":
+"none";
 
-if(q&&any)o.classList.add("open");
+if(q&&any)
+o.classList.add(
+"open"
+);
 
-});
+}
+);
 
 }
 
+
 function overview(){
 
-let comps=Object.entries(DATA.competencies);
+let comps=
+Object.entries(
+DATA.competencies
+);
 
-let roles=DATA.sections.reduce((a,s)=>a+s.roles.length,0);
+let roles=
+DATA.sections.reduce(
+(a,s)=>
+a+s.roles.length,
+0
+);
+
 
 $("main").innerHTML=`
 
@@ -262,9 +939,16 @@ $("main").innerHTML=`
 
 <div>
 
-<div class="vertical">Start here</div>
+<div class="vertical">
+Start here
+</div>
 
-<h2 style="margin:3px 0;color:#172554">
+<h2
+style="
+margin:3px 0;
+color:#172554
+"
+>
 Competency Review Overview
 </h2>
 
@@ -332,7 +1016,8 @@ Competency architecture
 
 <div class="mini-grid">
 
-${comps.map(([c,x])=>`
+${comps.map(
+([c,x])=>`
 
 <div class="mini">
 
@@ -344,7 +1029,8 @@ ${esc(x.name)}
 
 </div>
 
-`).join("")}
+`
+).join("")}
 
 </div>
 
@@ -397,27 +1083,46 @@ Reviewer saved.
 
 `;
 
-let n=sessionStorage.getItem("reviewer")||"";
+let n=
+sessionStorage.getItem(
+"reviewer"
+)||
+"";
 
 if(n)
 $("reviewer").value=n;
 
 }
 
+
 function saveReviewer(){
 
-let n=$("reviewer").value.trim();
+let n=
+$("reviewer")
+.value
+.trim();
 
 if(!n)
-return alert("Please enter your name.");
+return alert(
+"Please enter your name."
+);
 
-sessionStorage.setItem("reviewer",n);
+sessionStorage.setItem(
+"reviewer",
+n
+);
 
-$("rsaved").style.display="inline";
+$("rsaved").style.display=
+"inline";
 
 }
 
-function showRole(si,ri,el){
+
+function showRole(
+si,
+ri,
+el
+){
 
 current={
 sec:si,
@@ -427,39 +1132,65 @@ code:null
 
 reviewed={};
 
-document.querySelectorAll(".role")
+document
+.querySelectorAll(
+".role"
+)
 .forEach(
-x=>x.classList.remove("active")
+x=>
+x.classList.remove(
+"active"
+)
 );
 
-el.classList.add("active");
+el.classList.add(
+"active"
+);
 
-let s=DATA.sections[si];
 
-let r=s.roles[ri];
+let s=
+DATA.sections[si];
 
-let mapped=Object.entries(r.scores)
+let r=
+s.roles[ri];
+
+
+let mapped=
+Object.entries(
+r.scores
+)
 .filter(
 ([c,v])=>
-v!=="NA"&&
-v!==null&&
-v!==undefined&&
+v!=="NA" &&
+v!==null &&
+v!==undefined &&
 v!==""
 );
 
-let core=mapped.filter(
-([c])=>
-String(
-(r.relationship||{})[c]
-).toLowerCase()==="core"
-).length;
 
-let working=mapped.filter(
+let core=
+mapped.filter(
 ([c])=>
 String(
 (r.relationship||{})[c]
-).toLowerCase()==="working"
-).length;
+)
+.toLowerCase()
+==="core"
+)
+.length;
+
+
+let working=
+mapped.filter(
+([c])=>
+String(
+(r.relationship||{})[c]
+)
+.toLowerCase()
+==="working"
+)
+.length;
+
 
 $("main").innerHTML=`
 
@@ -530,10 +1261,12 @@ PL1–PL4 available
 </div>
 
 <div class="progress">
+
 <span
 id="progressBar"
 style="width:0%"
 ></span>
+
 </div>
 
 </div>
@@ -549,17 +1282,18 @@ Use <b>Your recommendation</b> only if you believe the level should change.
 </div>
 
 
-<div class="review-grid">
-
-<div>
-
 <div class="cards">
 
-${mapped.map(([code,v])=>{
+${mapped.map(
+([code,v])=>{
 
-let c=DATA.competencies[code];
+let c=
+DATA.competencies[code];
 
-let rel=(r.relationship||{})[code]||"—";
+let rel=
+(r.relationship||{})[code]||
+"—";
+
 
 return `
 
@@ -630,6 +1364,7 @@ onclick="event.stopPropagation()"
 Your recommendation
 </label>
 
+
 <select
 id="level-${code}"
 onchange="levelChanged('${code}')"
@@ -639,28 +1374,28 @@ onchange="levelChanged('${code}')"
 value="1"
 ${String(v)==="1"?"selected":""}
 >
-PL1
+1
 </option>
 
 <option
 value="2"
 ${String(v)==="2"?"selected":""}
 >
-PL2
+2
 </option>
 
 <option
 value="3"
 ${String(v)==="3"?"selected":""}
 >
-PL3
+3
 </option>
 
 <option
 value="4"
 ${String(v)==="4"?"selected":""}
 >
-PL4
+4
 </option>
 
 </select>
@@ -676,25 +1411,20 @@ Mark reviewed
 
 </div>
 
+
+<div
+id="detail-${code}"
+class="detail"
+onclick="event.stopPropagation()"
+></div>
+
+
 </div>
 
 `;
 
-}).join("")}
-
-</div>
-
-</div>
-
-
-<div
-id="detail"
-class="detail empty"
->
-
-Select a competency to view its details.
-
-</div>
+}
+).join("")}
 
 </div>
 
@@ -711,7 +1441,7 @@ Use this for any mapping change, rationale or observation you want to capture fo
 
 <textarea
 id="comments"
-placeholder="Example: HC2 should be PL3 instead of PL4 because the role owns the annual cycle but not enterprise strategy."
+placeholder="Example: HC2 should be 3 instead of 4 because the role owns the annual cycle but not enterprise strategy."
 ></textarea>
 
 <div style="margin-top:9px">
@@ -740,6 +1470,7 @@ updateProgress();
 
 }
 
+
 function levelChanged(code){
 
 reviewed[code]=true;
@@ -748,22 +1479,24 @@ setReviewedUI(code);
 
 updateProgress();
 
-if(current.code===code){
+const x=
+$(`detailSuggested-${code}`);
 
-let v=$("level-"+code).value;
+if(x){
 
-let x=$("detailSuggested");
+x.textContent=
+$("level-"+code)
+.value;
 
-if(x)
-x.textContent="PL"+v;
+}
 
 }
 
-}
 
 function markReviewed(code){
 
-reviewed[code]=!reviewed[code];
+reviewed[code]=
+!reviewed[code];
 
 setReviewedUI(code);
 
@@ -771,31 +1504,44 @@ updateProgress();
 
 }
 
+
 function setReviewedUI(code){
 
-let btn=$("reviewed-"+code);
+let btn=
+$("reviewed-"+code);
 
-let status=$("status-"+code);
+let status=
+$("status-"+code);
 
 if(reviewed[code]){
 
-btn.textContent="✓ Reviewed";
+btn.textContent=
+"✓ Reviewed";
 
-btn.classList.add("done");
+btn.classList.add(
+"done"
+);
 
-status.textContent="Reviewed";
+status.textContent=
+"Reviewed";
 
-status.style.color="#047857";
+status.style.color=
+"#047857";
 
-status.style.fontWeight="800";
+status.style.fontWeight=
+"800";
 
 }else{
 
-btn.textContent="Mark reviewed";
+btn.textContent=
+"Mark reviewed";
 
-btn.classList.remove("done");
+btn.classList.remove(
+"done"
+);
 
-status.textContent="Not reviewed";
+status.textContent=
+"Not reviewed";
 
 status.style.color="";
 
@@ -805,67 +1551,139 @@ status.style.fontWeight="";
 
 }
 
+
 function updateProgress(){
 
-let s=DATA.sections[current.sec];
+let s=
+DATA.sections[current.sec];
 
-let r=s.roles[current.role];
+let r=
+s.roles[current.role];
 
-let total=Object.entries(r.scores)
+let total=
+Object.entries(
+r.scores
+)
 .filter(
 ([c,v])=>
-v!=="NA"&&
-v!==null&&
-v!==undefined&&
+v!=="NA" &&
+v!==null &&
+v!==undefined &&
 v!==""
-).length;
+)
+.length;
 
-let done=Object.values(reviewed)
-.filter(Boolean).length;
 
-let pct=total?
-Math.round(done/total*100):
+let done=
+Object.values(
+reviewed
+)
+.filter(Boolean)
+.length;
+
+
+let pct=
+total?
+Math.round(
+done/total*100
+):
 0;
 
+
 if($("progressText"))
-$("progressText").textContent=
+$("progressText")
+.textContent=
 `${done} of ${total} competencies reviewed`;
 
+
 if($("progressPct"))
-$("progressPct").textContent=
+$("progressPct")
+.textContent=
 `${pct}%`;
 
+
 if($("progressBar"))
-$("progressBar").style.width=
+$("progressBar")
+.style.width=
 pct+"%";
 
 }
+
 
 function openComp(code){
 
 current.code=code;
 
-document.querySelectorAll(".card")
+
+document
+.querySelectorAll(
+".card"
+)
 .forEach(
-x=>x.classList.remove("selected")
+x=>
+x.classList.remove(
+"selected"
+)
 );
 
-$("card-"+code)?.classList.add("selected");
+$("card-"+code)
+.classList.add(
+"selected"
+);
 
-let c=DATA.competencies[code];
 
-let r=DATA.sections[current.sec]
+let detail=
+$("detail-"+code);
+
+let wasOpen=
+detail.classList.contains(
+"open"
+);
+
+
+document
+.querySelectorAll(
+".detail"
+)
+.forEach(
+d=>{
+d.classList.remove(
+"open"
+);
+d.innerHTML="";
+}
+);
+
+
+if(wasOpen){
+
+$("card-"+code)
+.classList.remove(
+"selected"
+);
+
+return;
+
+}
+
+
+let c=
+DATA.competencies[code];
+
+let r=
+DATA.sections[current.sec]
 .roles[current.role];
 
-let mapped=r.scores[code];
+let mapped=
+r.scores[code];
 
 let suggested=
-$("level-"+code)?.value||
+$("level-"+code)
+?.value ||
 mapped;
 
-$("detail").className="detail";
 
-$("detail").innerHTML=`
+detail.innerHTML=`
 
 <div class="detail-inner">
 
@@ -881,14 +1699,13 @@ ${code}
 ${esc(c.name)}
 </h3>
 
-<div class="muted">
-${esc(c.scope||"")}
-</div>
-
 </div>
 
 <button
-onclick="closeComp()"
+onclick="
+event.stopPropagation();
+openComp('${code}')
+"
 >
 Close
 </button>
@@ -905,7 +1722,7 @@ Current mapped level
 </div>
 
 <strong>
-PL${mapped}
+${mapped}
 </strong>
 
 </div>
@@ -918,9 +1735,9 @@ Your recommendation
 </div>
 
 <strong
-id="detailSuggested"
+id="detailSuggested-${code}"
 >
-PL${suggested}
+${suggested}
 </strong>
 
 </div>
@@ -932,28 +1749,40 @@ PL${suggested}
 
 <button
 class="tab active"
-onclick="tab(this,'definition')"
+onclick="
+event.stopPropagation();
+tab(this,'${code}','definition')
+"
 >
 Definition
 </button>
 
 <button
 class="tab"
-onclick="tab(this,'ksa')"
+onclick="
+event.stopPropagation();
+tab(this,'${code}','ksa')
+"
 >
 Knowledge • Skill • Attitude
 </button>
 
 <button
 class="tab"
-onclick="tab(this,'activities')"
+onclick="
+event.stopPropagation();
+tab(this,'${code}','activities')
+"
 >
 Activities
 </button>
 
 <button
 class="tab"
-onclick="tab(this,'ladder')"
+onclick="
+event.stopPropagation();
+tab(this,'${code}','ladder')
+"
 >
 Proficiency Ladder
 </button>
@@ -962,7 +1791,7 @@ Proficiency Ladder
 
 
 <div
-id="tabbody"
+id="tabbody-${code}"
 class="tabbody"
 >
 </div>
@@ -971,45 +1800,53 @@ class="tabbody"
 
 `;
 
+
+detail.classList.add(
+"open"
+);
+
+
 tab(
-document.querySelector(
-"#detail .tab"
+detail.querySelector(
+".tab"
 ),
+code,
 "definition"
 );
 
 }
 
-function closeComp(){
 
-current.code=null;
+function tab(
+btn,
+code,
+type
+){
 
-document.querySelectorAll(".card")
+let detail=
+$("detail-"+code);
+
+detail
+.querySelectorAll(
+".tab"
+)
 .forEach(
-x=>x.classList.remove("selected")
+x=>
+x.classList.remove(
+"active"
+)
 );
 
-$("detail").className=
-"detail empty";
-
-$("detail").innerHTML=
-"Select a competency to view its details.";
-
-}
-
-function tab(btn,type){
-
-document.querySelectorAll("#detail .tab")
-.forEach(
-x=>x.classList.remove("active")
+btn.classList.add(
+"active"
 );
 
-btn.classList.add("active");
 
 let c=
-DATA.competencies[current.code];
+DATA.competencies[code];
 
-let b=$("tabbody");
+let b=
+$("tabbody-"+code);
 
 
 if(type==="definition"){
@@ -1017,7 +1854,7 @@ if(type==="definition"){
 b.innerHTML=`
 
 <b>
-What this competency means
+Definition
 </b>
 
 <p>
@@ -1098,10 +1935,12 @@ if(type==="activities"){
 
 let items=
 String(
-c["On-the-Job Activities"]||""
+c["On-the-Job Activities"]||
+""
 )
 .split("\n")
 .filter(Boolean);
+
 
 b.innerHTML=`
 
@@ -1132,7 +1971,11 @@ if(type==="ladder"){
 
 b.innerHTML=`
 
-<div style="margin-bottom:8px">
+<div
+style="
+margin-bottom:8px
+"
+>
 
 <b>
 Proficiency Ladder
@@ -1148,11 +1991,13 @@ Use these definitions to validate the recommended level.
 <div class="ladder">
 
 ${["PL1","PL2","PL3","PL4"]
-.map(x=>{
+.map(
+x=>{
 
 let items=
 String(
-c[x]||""
+c[x]||
+""
 )
 .split("\n")
 .map(
@@ -1160,12 +2005,15 @@ v=>
 v.replace(
 /^•\s*/,
 ""
-).trim()
+)
+.trim()
 )
 .filter(Boolean);
 
+
 let info=
 LEVEL_INFO[x];
+
 
 return `
 
@@ -1204,7 +2052,8 @@ v=>
 
 `;
 
-}).join("")}
+}
+).join("")}
 
 </div>
 
@@ -1214,15 +2063,20 @@ v=>
 
 }
 
+
 function submitFeedback(){
 
 let reviewer=
-sessionStorage.getItem("reviewer");
+sessionStorage.getItem(
+"reviewer"
+);
+
 
 if(!reviewer)
 return alert(
 "Please save your reviewer name from the Overview page first."
 );
+
 
 let s=
 DATA.sections[current.sec];
@@ -1230,21 +2084,26 @@ DATA.sections[current.sec];
 let r=
 s.roles[current.role];
 
+
 let mapped=
-Object.entries(r.scores)
+Object.entries(
+r.scores
+)
 .filter(
 ([c,v])=>
-v!=="NA"&&
-v!==null&&
-v!==undefined&&
+v!=="NA" &&
+v!==null &&
+v!==undefined &&
 v!==""
 );
+
 
 let notReviewed=
 mapped.filter(
 ([code])=>
 !reviewed[code]
 );
+
 
 if(notReviewed.length){
 
@@ -1255,29 +2114,36 @@ return;
 
 }
 
+
 let suggestedLevels={};
+
 
 mapped.forEach(
 ([code])=>{
 
-let el=$("level-"+code);
+let el=
+$("level-"+code);
 
 if(el)
 suggestedLevels[code]=
 Number(el.value);
 
-});
+}
+);
 
 
 fetch(
 "/api/feedback",
 {
 method:"POST",
+
 headers:{
 "Content-Type":
 "application/json"
 },
-body:JSON.stringify({
+
+body:
+JSON.stringify({
 
 reviewer,
 
@@ -1287,14 +2153,17 @@ role:r.name,
 
 suggestedLevels,
 
-reviewed:Object.keys(
+reviewed:
+Object.keys(
 reviewed
-).filter(
+)
+.filter(
 k=>reviewed[k]
 ),
 
 comments:
-$("comments").value
+$("comments")
+.value
 
 })
 }
@@ -1305,10 +2174,12 @@ async res=>{
 if(!res.ok)
 throw new Error();
 
-$("saved").style.display=
+$("saved")
+.style.display=
 "inline";
 
-$("saved").textContent=
+$("saved")
+.textContent=
 "✓ Review submitted";
 
 }
@@ -1320,6 +2191,7 @@ $("saved").textContent=
 );
 
 }
+
 
 boot();
 
