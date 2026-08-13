@@ -82,7 +82,7 @@ min-height:720px
 
 input,select,textarea{
 width:100%;
-padding:9px 10px;
+padding:10px 11px;
 border:1px solid #d9dee8;
 border-radius:8px;
 background:#fff;
@@ -106,7 +106,7 @@ box-shadow:0 0 0 3px #8b5cf61a
 button{
 border:1px solid #d9dee8;
 background:#fff;
-padding:8px 11px;
+padding:9px 12px;
 border-radius:8px;
 font-size:10px;
 font-weight:750;
@@ -137,6 +137,70 @@ text-transform:uppercase;
 letter-spacing:1.2px;
 margin:15px 3px 7px
 }
+
+.muted{
+font-size:10px;
+color:var(--muted)
+}
+
+/* Welcome */
+
+.welcome{
+min-height:650px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center
+}
+
+.welcome-card{
+width:min(540px,100%);
+padding:45px 40px;
+border:1px solid var(--line);
+border-radius:20px;
+background:#fff;
+box-shadow:0 15px 45px #17255412
+}
+
+.welcome-icon{
+width:68px;
+height:68px;
+margin:0 auto 18px;
+border-radius:18px;
+background:linear-gradient(135deg,#6d28d9,#db2777);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:900
+}
+
+.welcome-card h2{
+margin:0;
+font-size:25px;
+color:var(--navy)
+}
+
+.welcome-card p{
+font-size:11px;
+color:var(--muted);
+line-height:1.6;
+margin:8px 0 22px
+}
+
+.welcome-card input{
+font-size:13px;
+padding:13px
+}
+
+.start-btn{
+margin-top:10px;
+width:100%;
+padding:12px
+}
+
+/* Organisation */
 
 .org{
 margin:3px 0;
@@ -186,6 +250,32 @@ font-weight:800;
 border-left:3px solid #db2777
 }
 
+/* Reviewer bar */
+
+.reviewer-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:9px 12px;
+margin-bottom:15px;
+background:#f8fafc;
+border:1px solid var(--line);
+border-radius:10px
+}
+
+.reviewer-name{
+font-weight:800;
+color:var(--navy);
+font-size:11px
+}
+
+.change-reviewer{
+font-size:8px
+}
+
+/* Overview */
+
 .overview-top{
 display:flex;
 justify-content:space-between;
@@ -201,10 +291,90 @@ letter-spacing:1.1px;
 text-transform:uppercase
 }
 
-.muted{
-font-size:10px;
+.overview-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin:16px 0
+}
+
+.kpi{
+padding:13px;
+border:1px solid var(--line);
+border-radius:11px;
+position:relative
+}
+
+.kpi:before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:3px;
+background:#6d28d9
+}
+
+.kpi:nth-child(2):before{
+background:#2563eb
+}
+
+.kpi:nth-child(3):before{
+background:#f97316
+}
+
+.kpi:nth-child(4):before{
+background:#059669
+}
+
+.kpi b{
+display:block;
+font-size:23px;
+color:var(--navy)
+}
+
+.kpi span{
+font-size:9px;
 color:var(--muted)
 }
+
+.mini-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:7px
+}
+
+.mini{
+border:1px solid var(--line);
+border-radius:9px;
+padding:9px
+}
+
+.mini b{
+font-size:9px;
+color:#db2777
+}
+
+.mini span{
+display:block;
+font-size:10px;
+font-weight:700;
+margin-top:2px
+}
+
+.next-box{
+margin-top:18px;
+padding:14px;
+border:1px solid #ddd6fe;
+background:#faf9ff;
+border-radius:11px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px
+}
+
+/* Role review */
 
 .role-summary{
 display:flex;
@@ -266,7 +436,6 @@ border-radius:99px;
 transition:.2s
 }
 
-/* Small review tip */
 .review-note{
 font-size:8px;
 line-height:1.4;
@@ -409,7 +578,8 @@ color:#047857;
 border-color:#bbf7d0
 }
 
-/* Expanded competency details */
+/* Competency expansion */
+
 .detail{
 margin-top:10px;
 border:1px solid #ddd6fe;
@@ -577,77 +747,6 @@ font-size:9px;
 margin-left:6px
 }
 
-.overview-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin:16px 0
-}
-
-.kpi{
-padding:13px;
-border:1px solid var(--line);
-border-radius:11px;
-position:relative
-}
-
-.kpi:before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:3px;
-background:#6d28d9
-}
-
-.kpi:nth-child(2):before{
-background:#2563eb
-}
-
-.kpi:nth-child(3):before{
-background:#f97316
-}
-
-.kpi:nth-child(4):before{
-background:#059669
-}
-
-.kpi b{
-display:block;
-font-size:23px;
-color:var(--navy)
-}
-
-.kpi span{
-font-size:9px;
-color:var(--muted)
-}
-
-.mini-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:7px
-}
-
-.mini{
-border:1px solid var(--line);
-border-radius:9px;
-padding:9px
-}
-
-.mini b{
-font-size:9px;
-color:#db2777
-}
-
-.mini span{
-display:block;
-font-size:10px;
-font-weight:700;
-margin-top:2px
-}
-
 @media(max-width:850px){
 
 .layout{
@@ -676,6 +775,11 @@ grid-template-columns:1fr
 grid-template-columns:1fr
 }
 
+.next-box{
+flex-direction:column;
+align-items:stretch
+}
+
 }
 </style>
 </head>
@@ -694,7 +798,7 @@ HR Competency Review Portal
 </h1>
 
 <p>
-Validate the role mapping, compare the proficiency level and record your recommendation.
+Validate the role mapping and recommend the right proficiency level.
 </p>
 
 </header>
@@ -702,7 +806,14 @@ Validate the role mapping, compare the proficiency level and record your recomme
 
 <div class="layout">
 
-<aside class="box side">
+
+<!-- LEFT ORGANISATION STRUCTURE -->
+
+<aside
+class="box side"
+id="sidebar"
+style="display:none"
+>
 
 <input
 id="search"
@@ -719,10 +830,15 @@ Organisation structure
 </aside>
 
 
+<!-- MAIN -->
+
 <main
 class="box main"
 id="main"
-></main>
+>
+
+</main>
+
 
 </div>
 
@@ -739,6 +855,10 @@ code:null
 
 let reviewed={};
 
+
+/* -----------------------------
+   PROFICIENCY DEFINITIONS
+------------------------------ */
 
 const LEVEL_INFO={
 
@@ -787,6 +907,10 @@ m=>({
 );
 
 
+/* -----------------------------
+   START
+------------------------------ */
+
 async function boot(){
 
 DATA=
@@ -795,135 +919,157 @@ await fetch(
 )
 .then(r=>r.json());
 
-buildNav();
 
-overview();
+// If reviewer name already exists
+// in this browser session, skip
+// welcome screen.
+
+let reviewer=
+sessionStorage.getItem(
+"reviewer"
+);
+
+
+if(reviewer){
+
+showOverview();
+
+}else{
+
+showWelcome();
+
+}
 
 }
 
 
-function buildNav(){
+/* -----------------------------
+   WELCOME SCREEN
+------------------------------ */
 
-let n=$("nav");
+function showWelcome(){
 
-n.innerHTML="";
+$("sidebar").style.display="none";
 
-DATA.sections.forEach(
-(s,si)=>{
 
-let o=
-document.createElement("div");
+$("main").innerHTML=`
 
-o.className="org";
+<div class="welcome">
 
-let h=
-document.createElement("div");
+<div class="welcome-card">
 
-h.className="orghead";
+<div class="welcome-icon">
+HR
+</div>
 
-h.innerHTML=`
-<span>${esc(s.name)}</span>
-<span>${s.roles.length}</span>
+<div
+class="vertical"
+style="margin-bottom:6px"
+>
+NUVOCO HR
+</div>
+
+<h2>
+HR Competency Review
+</h2>
+
+<p>
+Welcome to the HR Competency Mapping Review.
+Please enter your name to begin.
+</p>
+
+<input
+id="reviewerName"
+placeholder="Enter your name"
+autocomplete="name"
+onkeydown="
+if(event.key==='Enter')
+startReview()
+"
+/>
+
+<button
+class="primary start-btn"
+onclick="startReview()"
+>
+Start Review →
+</button>
+
+<div
+style="
+font-size:8px;
+color:#98a2b3;
+margin-top:12px
+"
+>
+Your name will be used across all role reviews in this session.
+</div>
+
+</div>
+
+</div>
+
 `;
 
-let rs=
-document.createElement("div");
-
-rs.className="roles";
-
-
-s.roles.forEach(
-(r,ri)=>{
-
-let x=
-document.createElement("div");
-
-x.className="role";
-
-x.textContent=r.name;
-
-x.dataset.q=
-(
-s.name+
-" "+
-r.name
-)
-.toLowerCase();
-
-x.onclick=()=>
-showRole(
-si,
-ri,
-x
-);
-
-rs.appendChild(x);
-
-}
-);
-
-
-h.onclick=()=>
-o.classList.toggle("open");
-
-o.append(h,rs);
-
-n.appendChild(o);
-
-}
+setTimeout(
+()=>
+$("reviewerName")?.focus(),
+100
 );
 
 }
 
 
-function filterRoles(){
+/* -----------------------------
+   START REVIEW
+------------------------------ */
 
-let q=
-$("search")
+function startReview(){
+
+let name=
+$("reviewerName")
 .value
-.toLowerCase();
+.trim();
 
-document
-.querySelectorAll(".org")
-.forEach(
-o=>{
 
-let any=false;
+if(!name){
 
-o.querySelectorAll(".role")
-.forEach(
-r=>{
-
-let show=
-!q ||
-r.dataset.q.includes(q);
-
-r.style.display=
-show?
-"block":
-"none";
-
-if(show)
-any=true;
-
-}
+alert(
+"Please enter your name to continue."
 );
 
-o.style.display=
-any?
-"block":
-"none";
-
-if(q&&any)
-o.classList.add("open");
+return;
 
 }
+
+
+sessionStorage.setItem(
+"reviewer",
+name
 );
 
+
+showOverview();
+
 }
 
 
-function overview(){
+/* -----------------------------
+   OVERVIEW
+------------------------------ */
+
+function showOverview(){
+
+$("sidebar").style.display="block";
+
+buildNav();
+
+
+let reviewer=
+sessionStorage.getItem(
+"reviewer"
+);
+
 
 let comps=
 Object.entries(
@@ -940,12 +1086,38 @@ a+s.roles.length,
 
 $("main").innerHTML=`
 
+<div class="reviewer-bar">
+
+<div>
+
+<span
+class="muted"
+>
+Reviewer
+</span>
+
+<div class="reviewer-name">
+${esc(reviewer)}
+</div>
+
+</div>
+
+<button
+class="change-reviewer"
+onclick="changeReviewer()"
+>
+Change Reviewer
+</button>
+
+</div>
+
+
 <div class="overview-top">
 
 <div>
 
 <div class="vertical">
-Start here
+Review Overview
 </div>
 
 <h2
@@ -954,11 +1126,11 @@ margin:3px 0;
 color:#172554
 "
 >
-Competency Review Overview
+Welcome, ${esc(reviewer)}
 </h2>
 
 <div class="muted">
-Choose a vertical and role from the left to begin.
+Before selecting a role, please familiarise yourself with the competency architecture.
 </div>
 
 </div>
@@ -993,7 +1165,7 @@ Choose a vertical and role from the left to begin.
 
 <div
 style="
-padding:13px;
+padding:14px;
 border:1px solid #ddd6fe;
 background:#faf9ff;
 border-radius:11px
@@ -1006,9 +1178,34 @@ How to review
 
 <div
 class="muted"
-style="line-height:1.7;margin-top:4px"
+style="
+line-height:1.8;
+margin-top:5px
+"
 >
-1. Select your role → 2. Review each mapped competency → 3. Check the PL ladder → 4. Enter the level you recommend → 5. Add comments and submit.
+
+1. Select your organisation / function from the left.
+
+<br>
+
+2. Select the role you want to review.
+
+<br>
+
+3. Review every mapped competency.
+
+<br>
+
+4. Keep the existing level if you agree with it, or recommend another level.
+
+<br>
+
+5. Open the competency to review Definition, KSA, Activities and Proficiency Ladder.
+
+<br>
+
+6. Mark the competency as reviewed and submit the role review.
+
 </div>
 
 </div>
@@ -1026,7 +1223,7 @@ ${comps.map(
 
 <div class="mini">
 
-<b>${c}</b>
+<b>${esc(c)}</b>
 
 <span>
 ${esc(x.name)}
@@ -1040,86 +1237,255 @@ ${esc(x.name)}
 </div>
 
 
-<div
+<div class="next-box">
+
+<div>
+
+<b
 style="
-margin-top:18px;
-padding:13px;
-background:#f8fafc;
-border:1px solid var(--line);
-border-radius:11px
+font-size:11px;
+color:#172554
 "
 >
-
-<b style="font-size:11px">
-Reviewer
+Ready to begin?
 </b>
 
 <div
 class="muted"
-style="margin:3px 0 8px"
+style="margin-top:3px"
 >
-Enter your name once. It will be used for all your submissions in this browser session.
+Select a role from the Organisation Structure on the left.
 </div>
 
-<div style="display:flex;gap:8px">
-
-<input
-id="reviewer"
-placeholder="Reviewer name"
->
+</div>
 
 <button
 class="primary"
-onclick="saveReviewer()"
+onclick="focusOrg()"
 >
-Save reviewer
+View Organisation Structure →
 </button>
-
-</div>
-
-<div
-id="rsaved"
-class="saved"
->
-Reviewer saved.
-</div>
 
 </div>
 
 `;
 
-let n=
-sessionStorage.getItem("reviewer")||
-"";
+}
 
-if(n)
-$("reviewer").value=n;
+
+function focusOrg(){
+
+let first=
+document.querySelector(
+".orghead"
+);
+
+if(first){
+
+first.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
 
 }
 
 
-function saveReviewer(){
+/* -----------------------------
+   CHANGE REVIEWER
+------------------------------ */
 
-let n=
-$("reviewer")
+function changeReviewer(){
+
+if(
+!confirm(
+"Change the reviewer?\n\nYour current browser session will be switched to a new reviewer."
+)
+)
+return;
+
+
+sessionStorage.removeItem(
+"reviewer"
+);
+
+
+reviewed={};
+
+showWelcome();
+
+}
+
+
+/* -----------------------------
+   NAVIGATION
+------------------------------ */
+
+function buildNav(){
+
+let n=$("nav");
+
+n.innerHTML="";
+
+
+DATA.sections.forEach(
+(s,si)=>{
+
+let o=
+document.createElement(
+"div"
+);
+
+o.className="org";
+
+
+let h=
+document.createElement(
+"div"
+);
+
+h.className="orghead";
+
+h.innerHTML=`
+
+<span>
+${esc(s.name)}
+</span>
+
+<span>
+${s.roles.length}
+</span>
+
+`;
+
+
+let rs=
+document.createElement(
+"div"
+);
+
+rs.className="roles";
+
+
+s.roles.forEach(
+(r,ri)=>{
+
+let x=
+document.createElement(
+"div"
+);
+
+x.className="role";
+
+x.textContent=
+r.name;
+
+x.dataset.q=
+(
+s.name+
+" "+
+r.name
+)
+.toLowerCase();
+
+
+x.onclick=()=>
+showRole(
+si,
+ri,
+x
+);
+
+
+rs.appendChild(x);
+
+}
+);
+
+
+h.onclick=()=>
+o.classList.toggle(
+"open"
+);
+
+
+o.append(
+h,
+rs
+);
+
+
+n.appendChild(o);
+
+}
+);
+
+}
+
+
+function filterRoles(){
+
+let q=
+$("search")
 .value
-.trim();
+.toLowerCase();
 
-if(!n)
-return alert(
-"Please enter your name."
+
+document
+.querySelectorAll(
+".org"
+)
+.forEach(
+o=>{
+
+let any=false;
+
+
+o.querySelectorAll(
+".role"
+)
+.forEach(
+r=>{
+
+let show=
+!q ||
+r.dataset.q.includes(q);
+
+
+r.style.display=
+show?
+"block":
+"none";
+
+
+if(show)
+any=true;
+
+}
 );
 
-sessionStorage.setItem(
-"reviewer",
-n
+
+o.style.display=
+any?
+"block":
+"none";
+
+
+if(q&&any)
+o.classList.add(
+"open"
 );
 
-$("rsaved")
-.style.display="inline";
+}
+);
 
 }
 
+
+/* -----------------------------
+   ROLE REVIEW
+------------------------------ */
 
 function showRole(
 si,
@@ -1135,14 +1501,22 @@ code:null
 
 reviewed={};
 
+
 document
-.querySelectorAll(".role")
+.querySelectorAll(
+".role"
+)
 .forEach(
 x=>
-x.classList.remove("active")
+x.classList.remove(
+"active"
+)
 );
 
-el.classList.add("active");
+
+el.classList.add(
+"active"
+);
 
 
 let s=
@@ -1189,6 +1563,32 @@ String(
 
 $("main").innerHTML=`
 
+<div class="reviewer-bar">
+
+<div>
+
+<span class="muted">
+Reviewer
+</span>
+
+<div class="reviewer-name">
+${esc(
+sessionStorage.getItem("reviewer")
+)}
+</div>
+
+</div>
+
+<button
+class="change-reviewer"
+onclick="changeReviewer()"
+>
+Change Reviewer
+</button>
+
+</div>
+
+
 <div class="overview-top">
 
 <div>
@@ -1213,7 +1613,10 @@ ${mapped.length} competencies mapped for this role
 
 </div>
 
-<button onclick="overview()">
+
+<button
+onclick="showOverview()"
+>
 ← Overview
 </button>
 
@@ -1303,7 +1706,7 @@ onclick="openComp('${code}')"
 <div>
 
 <div class="code">
-${code}
+${esc(code)}
 </div>
 
 <h3>
@@ -1436,7 +1839,7 @@ Use this for any mapping change, rationale or observation you want to capture fo
 
 <textarea
 id="comments"
-placeholder="Example: HC2 should be 3 instead of 4 because the role owns the annual cycle but not enterprise strategy."
+placeholder="Add any comments or suggested changes..."
 ></textarea>
 
 <div style="margin-top:9px">
@@ -1466,20 +1869,11 @@ updateProgress();
 }
 
 
+/* -----------------------------
+   REVIEW STATUS
+------------------------------ */
+
 function levelChanged(code){
-
-/*
-IMPORTANT:
-Changing the dropdown is a review action even when
-the selected value is exactly the same as the mapped score.
-
-Example:
-Mapped = 3
-Recommendation = 3
-
-This means the reviewer agrees with the mapping.
-It must therefore count as reviewed.
-*/
 
 reviewed[code]=true;
 
@@ -1502,13 +1896,6 @@ $("level-"+code).value;
 
 
 function markReviewed(code){
-
-/*
-The reviewer can explicitly mark the competency
-as reviewed without changing the recommendation.
-This is also valid when the recommendation equals
-the mapped score.
-*/
 
 reviewed[code]=
 !reviewed[code];
@@ -1534,7 +1921,9 @@ if(reviewed[code]){
 btn.textContent=
 "✓ Reviewed";
 
-btn.classList.add("done");
+btn.classList.add(
+"done"
+);
 
 status.textContent=
 "Reviewed";
@@ -1550,7 +1939,9 @@ status.style.fontWeight=
 btn.textContent=
 "Mark reviewed";
 
-btn.classList.remove("done");
+btn.classList.remove(
+"done"
+);
 
 status.textContent=
 "Not reviewed";
@@ -1565,6 +1956,13 @@ status.style.fontWeight="";
 
 
 function updateProgress(){
+
+if(
+current.sec===null ||
+current.role===null
+)
+return;
+
 
 let s=
 DATA.sections[current.sec];
@@ -1623,36 +2021,55 @@ pct+"%";
 }
 
 
+/* -----------------------------
+   COMPETENCY EXPANSION
+------------------------------ */
+
 function openComp(code){
 
 current.code=code;
 
 
 document
-.querySelectorAll(".card")
+.querySelectorAll(
+".card"
+)
 .forEach(
 x=>
-x.classList.remove("selected")
+x.classList.remove(
+"selected"
+)
 );
 
 
 $("card-"+code)
-.classList.add("selected");
+.classList.add(
+"selected"
+);
 
 
 let detail=
 $("detail-"+code);
 
 let wasOpen=
-detail.classList.contains("open");
+detail.classList.contains(
+"open"
+);
 
 
 document
-.querySelectorAll(".detail")
+.querySelectorAll(
+".detail"
+)
 .forEach(
 d=>{
-d.classList.remove("open");
+
+d.classList.remove(
+"open"
+);
+
 d.innerHTML="";
+
 }
 );
 
@@ -1660,7 +2077,9 @@ d.innerHTML="";
 if(wasOpen){
 
 $("card-"+code)
-.classList.remove("selected");
+.classList.remove(
+"selected"
+);
 
 return;
 
@@ -1803,17 +2222,25 @@ class="tabbody"
 `;
 
 
-detail.classList.add("open");
+detail.classList.add(
+"open"
+);
 
 
 tab(
-detail.querySelector(".tab"),
+detail.querySelector(
+".tab"
+),
 code,
 "definition"
 );
 
 }
 
+
+/* -----------------------------
+   TABS
+------------------------------ */
 
 function tab(
 btn,
@@ -1826,13 +2253,20 @@ $("detail-"+code);
 
 
 detail
-.querySelectorAll(".tab")
+.querySelectorAll(
+".tab"
+)
 .forEach(
 x=>
-x.classList.remove("active")
+x.classList.remove(
+"active"
+)
 );
 
-btn.classList.add("active");
+
+btn.classList.add(
+"active"
+);
 
 
 let c=
@@ -1965,9 +2399,7 @@ if(type==="ladder"){
 b.innerHTML=`
 
 <div
-style="
-margin-bottom:8px
-"
+style="margin-bottom:8px"
 >
 
 <b>
@@ -2057,6 +2489,10 @@ v=>
 }
 
 
+/* -----------------------------
+   SUBMIT
+------------------------------ */
+
 function submitFeedback(){
 
 let reviewer=
@@ -2068,7 +2504,7 @@ sessionStorage.getItem(
 if(!reviewer){
 
 return alert(
-"Please save your reviewer name from the Overview page first."
+"Please enter your name first."
 );
 
 }
@@ -2094,19 +2530,6 @@ v!==""
 );
 
 
-/*
-A competency is considered reviewed if:
-1. The reviewer changed the score, OR
-2. The reviewer clicked "Mark reviewed".
-
-Therefore:
-Mapped = 3
-Recommendation = 3
-+ Mark reviewed
-= VALID REVIEW.
-*/
-
-
 let notReviewed=
 mapped.filter(
 ([code])=>
@@ -2116,13 +2539,12 @@ mapped.filter(
 
 if(notReviewed.length){
 
-if(!confirm(
+if(
+!confirm(
 `You have not marked ${notReviewed.length} competency(ies) as reviewed. Submit anyway?`
-)){
-
+)
+)
 return;
-
-}
 
 }
 
@@ -2210,6 +2632,10 @@ alert(
 
 }
 
+
+/* -----------------------------
+   RUN
+------------------------------ */
 
 boot();
 
