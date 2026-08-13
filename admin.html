@@ -14,21 +14,16 @@ content="width=device-width,initial-scale=1"
 Nuvoco HR Competency Review — Admin
 </title>
 
-
 <style>
 
 :root{
-
 --navy:#172554;
---purple:#6d28d9;
---pink:#db2777;
 --green:#059669;
 --red:#be123c;
 --ink:#172033;
 --muted:#667085;
 --bg:#f7f8fc;
---line:#e7e9f2;
-
+--line:#e7e9f2
 }
 
 *{
@@ -36,202 +31,118 @@ box-sizing:border-box
 }
 
 body{
-
 margin:0;
-
-font-family:
-Inter,
-Segoe UI,
-Arial,
-sans-serif;
-
+font-family:Inter,Segoe UI,Arial,sans-serif;
 background:
-radial-gradient(
-circle at 5% 5%,
-#ede9fe,
-transparent 22%
-),
-radial-gradient(
-circle at 95% 5%,
-#fce7f3,
-transparent 22%
-),
+radial-gradient(circle at 5% 5%,#ede9fe,transparent 22%),
+radial-gradient(circle at 95% 5%,#fce7f3,transparent 22%),
 var(--bg);
-
-color:var(--ink);
-
+color:var(--ink)
 }
 
 header{
-
-background:
-linear-gradient(
-120deg,
-#172554,
-#4c1d95,
-#be185d
-);
-
+background:linear-gradient(120deg,#172554,#4c1d95,#be185d);
 color:#fff;
-
-padding:25px 32px;
-
+padding:25px 32px
 }
 
 .eyebrow{
-
 font-size:10px;
 letter-spacing:2px;
 text-transform:uppercase;
 opacity:.8
-
 }
 
 h1{
-
 margin:6px 0;
 font-size:26px
-
 }
 
 header p{
-
 margin:0;
 font-size:12px;
 opacity:.85
-
 }
 
 .wrap{
-
 max-width:1500px;
 margin:20px auto;
 padding:0 18px
-
 }
 
 .box{
-
 background:#fff;
 border:1px solid var(--line);
 border-radius:16px;
 box-shadow:0 8px 28px #17255410;
 padding:20px
-
 }
 
 .login{
-
 max-width:420px;
 margin:70px auto
-
 }
 
 .login h2{
-
-margin-top:0;
 color:var(--navy)
-
 }
 
 input,
 select{
-
 padding:10px;
-
 border:1px solid var(--line);
-
 border-radius:9px;
-
 font:inherit;
 font-size:11px;
-
-background:white
-
+background:#fff
 }
 
 .login input{
-
 width:100%
-
 }
 
 button{
-
 border:1px solid var(--line);
-background:white;
-
+background:#fff;
 padding:9px 13px;
-
 border-radius:9px;
-
 font-size:11px;
 font-weight:750;
-
 cursor:pointer
-
 }
 
 button.primary{
-
-background:
-linear-gradient(
-90deg,
-#6d28d9,
-#db2777
-);
-
+background:linear-gradient(90deg,#6d28d9,#db2777);
 border:0;
-color:white
-
+color:#fff
 }
 
 .hidden{
 display:none
 }
 
-
 .kpis{
-
 display:grid;
-
-grid-template-columns:
-repeat(6,1fr);
-
+grid-template-columns:repeat(5,1fr);
 gap:11px;
-
 margin:18px 0
-
 }
 
 .kpi{
-
 border:1px solid var(--line);
-
 border-radius:12px;
-
 padding:14px;
-
-position:relative;
-
-overflow:hidden
-
+position:relative
 }
 
 .kpi:before{
-
 content:"";
-
 position:absolute;
-
 top:0;
 left:0;
-
 width:100%;
 height:4px;
-
 background:#059669
-
 }
 
 .kpi:nth-child(2):before{
@@ -239,7 +150,7 @@ background:#2563eb
 }
 
 .kpi:nth-child(3):before{
-background:#059669
+background:#f97316
 }
 
 .kpi:nth-child(4):before{
@@ -247,266 +158,137 @@ background:#db2777
 }
 
 .kpi:nth-child(5):before{
-background:#f97316
-}
-
-.kpi:nth-child(6):before{
 background:#6d28d9
 }
 
 .kpi b{
-
 display:block;
-
 font-size:25px;
-
 color:var(--navy)
-
 }
 
 .kpi span{
-
 font-size:10px;
 color:var(--muted)
-
 }
 
-
 .actions{
-
 display:flex;
-
 justify-content:space-between;
-
 gap:10px;
-
 align-items:center;
-
 flex-wrap:wrap;
-
 margin-bottom:13px
-
 }
 
 .filters{
-
 display:flex;
 gap:8px;
 flex-wrap:wrap
-
 }
 
-.filters input,
-.filters select{
-
-min-width:190px
-
+.filters input{
+min-width:260px
 }
-
 
 .tablewrap{
-
 overflow:auto;
-
 border:1px solid var(--line);
-
 border-radius:11px
-
 }
 
 table{
-
 border-collapse:collapse;
-
 width:100%;
-
-min-width:1250px
-
+min-width:1200px
 }
 
 th,
 td{
-
 padding:11px;
-
-border-bottom:
-1px solid var(--line);
-
+border-bottom:1px solid var(--line);
 text-align:left;
-
 font-size:11px;
-
 vertical-align:top
-
 }
 
 th{
-
 font-size:9px;
-
 text-transform:uppercase;
-
 letter-spacing:.7px;
-
 color:var(--muted);
-
 background:#f8fafc;
-
 position:sticky;
-
 top:0
-
-}
-
-
-.badge{
-
-display:inline-block;
-
-padding:4px 8px;
-
-border-radius:999px;
-
-font-size:9px;
-
-font-weight:800
-
-}
-
-.agree{
-
-color:#047857;
-background:#dcfce7
-
-}
-
-.disagree{
-
-color:#be123c;
-background:#fce7f3
-
-}
-
-
-.competency-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:4px;
-
-min-width:420px
-
-}
-
-.comp-row{
-
-display:grid;
-
-grid-template-columns:
-minmax(190px,1fr)
-42px
-55px
-100px;
-
-gap:7px;
-
-align-items:center;
-
-padding:6px 0;
-
-border-bottom:
-1px solid #f0f1f5
-
-}
-
-.comp-name{
-
-font-weight:650;
-
-font-size:10px
-
-}
-
-.small{
-
-font-size:9px;
-
-color:var(--muted)
-
 }
 
 .level{
-
 display:inline-flex;
-
 align-items:center;
-
 justify-content:center;
-
-width:28px;
-height:28px;
-
+width:27px;
+height:27px;
 border-radius:7px;
-
 background:#172554;
-
 color:white;
-
 font-weight:800
-
 }
 
 .suggested{
-
 background:#059669
-
 }
 
 .change-up{
-
 color:#047857;
 font-weight:800
-
 }
 
 .change-down{
-
 color:#be123c;
 font-weight:800
-
 }
 
 .no-change{
-
 color:#667085
-
 }
 
 .comments{
-
-max-width:260px;
-
+max-width:300px;
 line-height:1.45
-
 }
 
 .muted{
-
 color:var(--muted);
 font-size:11px
-
 }
 
+.comp-list{
+min-width:430px
+}
 
-@media(max-width:1100px){
+.comp-row{
+display:grid;
+grid-template-columns:minmax(190px,1fr) 42px 55px 95px;
+gap:7px;
+align-items:center;
+padding:6px 0;
+border-bottom:1px solid #f0f1f5
+}
+
+.comp-name{
+font-size:10px;
+font-weight:650
+}
+
+.small{
+font-size:9px;
+color:var(--muted)
+}
+
+@media(max-width:900px){
 
 .kpis{
-
-grid-template-columns:
-repeat(3,1fr)
-
+grid-template-columns:repeat(2,1fr)
 }
 
 }
@@ -514,16 +296,11 @@ repeat(3,1fr)
 @media(max-width:600px){
 
 .kpis{
-
-grid-template-columns:
-repeat(2,1fr)
-
+grid-template-columns:1fr
 }
 
 .wrap{
-
 padding:0 10px
-
 }
 
 }
@@ -532,9 +309,7 @@ padding:0 10px
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -547,7 +322,7 @@ Competency Review Dashboard
 </h1>
 
 <p>
-Central view of role mapping validation and proficiency recommendations.
+Consolidated view of reviewer-suggested proficiency levels and comments.
 </p>
 
 </header>
@@ -555,8 +330,6 @@ Central view of role mapping validation and proficiency recommendations.
 
 <div class="wrap">
 
-
-<!-- LOGIN -->
 
 <div
 id="login"
@@ -575,9 +348,7 @@ Enter the admin password to view consolidated feedback.
 id="password"
 type="password"
 placeholder="Admin password"
-onkeydown="
-if(event.key==='Enter')login()
-"
+onkeydown="if(event.key==='Enter')login()"
 />
 
 <div style="margin-top:10px">
@@ -603,9 +374,6 @@ font-size:10px
 </div>
 
 
-
-<!-- DASHBOARD -->
-
 <div
 id="dashboard"
 class="box hidden"
@@ -622,7 +390,7 @@ Review Summary
 </h2>
 
 <div class="muted">
-Head-level validation of role competency mapping
+Head-level proficiency validation
 </div>
 
 </div>
@@ -648,9 +416,6 @@ Download CSV
 </div>
 
 
-
-<!-- KPIs -->
-
 <div class="kpis">
 
 <div class="kpi">
@@ -664,16 +429,6 @@ Download CSV
 </div>
 
 <div class="kpi">
-<b id="agree">0</b>
-<span>I Agree</span>
-</div>
-
-<div class="kpi">
-<b id="disagree">0</b>
-<span>I Don't Agree</span>
-</div>
-
-<div class="kpi">
 <b id="reviewers">0</b>
 <span>Reviewers</span>
 </div>
@@ -683,11 +438,13 @@ Download CSV
 <span>Roles with level changes</span>
 </div>
 
+<div class="kpi">
+<b id="commentsCount">0</b>
+<span>Reviews with comments</span>
 </div>
 
+</div>
 
-
-<!-- FILTERS -->
 
 <div class="actions">
 
@@ -699,27 +456,7 @@ placeholder="Search role / reviewer / competency…"
 oninput="render()"
 />
 
-<select
-id="decision"
-onchange="render()"
->
-
-<option value="">
-All decisions
-</option>
-
-<option>
-I agree
-</option>
-
-<option>
-I don't agree
-</option>
-
-</select>
-
 </div>
-
 
 <div
 class="muted"
@@ -728,9 +465,6 @@ id="shown"
 
 </div>
 
-
-
-<!-- TABLE -->
 
 <div class="tablewrap">
 
@@ -745,7 +479,7 @@ Reviewer
 </th>
 
 <th>
-Organisation Vertical
+Vertical
 </th>
 
 <th>
@@ -753,15 +487,11 @@ Role
 </th>
 
 <th>
-Decision
+Suggested Proficiency
 </th>
 
 <th>
-Mapped vs Suggested Level
-</th>
-
-<th>
-Comments / Change Requests
+Comments / Suggested Changes
 </th>
 
 <th>
@@ -771,7 +501,6 @@ Submitted
 </tr>
 
 </thead>
-
 
 <tbody id="rows">
 </tbody>
@@ -788,49 +517,41 @@ Submitted
 <script>
 
 let token="";
-
 let data=[];
-
 let architecture=null;
-
 
 
 /* LOGIN */
 
 async function login(){
 
-let password=
+let p=
 document
 .getElementById("password")
 .value;
 
 
-let response=
+let r=
 await fetch(
 "/api/admin/login",
 {
 method:"POST",
-
 headers:{
 "Content-Type":
 "application/json"
 },
-
 body:
 JSON.stringify({
-password
+password:p
 })
-
 }
 );
 
 
-if(!response.ok){
+if(!r.ok){
 
 document
-.getElementById(
-"loginerr"
-)
+.getElementById("loginerr")
 .textContent=
 "Incorrect password.";
 
@@ -839,11 +560,10 @@ return;
 }
 
 
-let result=
-await response.json();
-
 token=
-result.token;
+(
+await r.json()
+).token;
 
 
 document
@@ -861,7 +581,6 @@ await load();
 }
 
 
-
 /* LOAD */
 
 async function load(){
@@ -871,15 +590,13 @@ await fetch(
 "/api/architecture"
 );
 
-if(a.ok){
 
+if(a.ok)
 architecture=
 await a.json();
 
-}
 
-
-let response=
+let r=
 await fetch(
 "/api/admin/feedback",
 {
@@ -891,70 +608,57 @@ token
 );
 
 
-if(!response.ok){
-
-alert(
+if(!r.ok)
+return alert(
 "Session expired."
 );
 
-return;
-
-}
-
 
 data=
-await response.json();
+await r.json();
 
 render();
 
 }
 
 
+/* MAPPED LEVEL */
 
-/* FIND MAPPED LEVEL */
-
-function getMappedLevel(
+function mapped(
 vertical,
 role,
 code
 ){
 
-if(!architecture)
-return "";
-
-
-let section=
-architecture.sections?.find(
-s=>s.name===vertical
+let s=
+architecture
+?.sections
+?.find(
+x=>x.name===vertical
 );
 
 
-if(!section)
-return "";
-
-
-let roleData=
-section.roles?.find(
-r=>r.name===role
+let r=
+s
+?.roles
+?.find(
+x=>x.name===role
 );
-
-
-if(!roleData)
-return "";
 
 
 return(
-roleData.scores?.[code]
-?? ""
+r
+?.scores
+?.[code]
+??""
 );
 
 }
 
 
-
 /* COMPETENCY NAME */
 
-function getCompetencyName(code){
+function name(code){
 
 return(
 architecture
@@ -968,33 +672,28 @@ code
 }
 
 
+/* HAS CHANGE */
 
-/* LEVEL CHANGE */
-
-function hasLevelChange(item){
-
-let levels=
-item.suggestedLevels ||
-{};
-
+function changed(item){
 
 return Object
-.entries(levels)
+.entries(
+item.suggestedLevels||{}
+)
 .some(
-([code,suggested])=>{
+([c,v])=>{
 
-let mapped=
-getMappedLevel(
+let m=
+mapped(
 item.vertical,
 item.role,
-code
+c
 );
 
-
 return(
-mapped!=="" &&
-Number(mapped)!==
-Number(suggested)
+m!=="" &&
+Number(m)!==
+Number(v)
 );
 
 });
@@ -1002,18 +701,14 @@ Number(suggested)
 }
 
 
-
 /* COMPETENCY DISPLAY */
 
-function competencyHTML(item){
-
-let levels=
-item.suggestedLevels ||
-{};
-
+function comps(item){
 
 let entries=
-Object.entries(levels);
+Object.entries(
+item.suggestedLevels||{}
+);
 
 
 if(!entries.length){
@@ -1027,126 +722,9 @@ No suggested levels submitted.
 }
 
 
-let rows=
-entries
-.map(
-([code,suggested])=>{
-
-let mapped=
-getMappedLevel(
-item.vertical,
-item.role,
-code
-);
-
-
-let change=
-`<span class="no-change">
-—
-</span>`;
-
-
-if(
-mapped!=="" &&
-Number(suggested)>
-Number(mapped)
-){
-
-change=
-`
-<span class="change-up">
-↑ ${mapped} → ${suggested}
-</span>
-`;
-
-}
-
-
-else if(
-mapped!=="" &&
-Number(suggested)<
-Number(mapped)
-){
-
-change=
-`
-<span class="change-down">
-↓ ${mapped} → ${suggested}
-</span>
-`;
-
-}
-
-
-else if(
-mapped!==""
-){
-
-change=
-`
-<span class="no-change">
-No change
-</span>
-`;
-
-}
-
-
 return `
 
-<div class="comp-row">
-
-<div>
-
-<div class="comp-name">
-
-${esc(
-getCompetencyName(code)
-)}
-
-</div>
-
-<div class="small">
-${esc(code)}
-</div>
-
-</div>
-
-
-<div>
-
-<span class="level">
-${esc(mapped || "—")}
-</span>
-
-</div>
-
-
-<div>
-
-<span class="level suggested">
-${esc(suggested)}
-</span>
-
-</div>
-
-
-<div>
-${change}
-</div>
-
-</div>
-
-`;
-
-}
-)
-.join("");
-
-
-return `
-
-<div class="competency-list">
+<div class="comp-list">
 
 <div
 class="comp-row"
@@ -1175,14 +753,119 @@ CHANGE
 
 </div>
 
-${rows}
+
+${
+entries
+.map(
+([c,s])=>{
+
+let m=
+mapped(
+item.vertical,
+item.role,
+c
+);
+
+
+let ch=
+'<span class="no-change">—</span>';
+
+
+if(
+m!=="" &&
+Number(s)>Number(m)
+){
+
+ch=
+`
+<span class="change-up">
+↑ ${m} → ${s}
+</span>
+`;
+
+}
+
+else if(
+m!=="" &&
+Number(s)<Number(m)
+){
+
+ch=
+`
+<span class="change-down">
+↓ ${m} → ${s}
+</span>
+`;
+
+}
+
+else if(
+m!==""
+){
+
+ch=
+`
+<span class="no-change">
+No change
+</span>
+`;
+
+}
+
+
+return `
+
+<div class="comp-row">
+
+<div>
+
+<div class="comp-name">
+${esc(name(c))}
+</div>
+
+<div class="small">
+${esc(c)}
+</div>
+
+</div>
+
+
+<div>
+
+<span class="level">
+${esc(m||"—")}
+</span>
+
+</div>
+
+
+<div>
+
+<span class="level suggested">
+${esc(s)}
+</span>
+
+</div>
+
+
+<div>
+${ch}
+</div>
 
 </div>
 
 `;
 
 }
+)
+.join("")
+}
 
+</div>
+
+`;
+
+}
 
 
 /* RENDER */
@@ -1196,48 +879,24 @@ document
 .toLowerCase();
 
 
-let decision=
-document
-.getElementById("decision")
-.value;
-
-
-let filtered=
+let f=
 data.filter(
-item=>{
-
-let text=
+x=>
+!q ||
 [
-item.reviewer,
-item.vertical,
-item.role,
-item.comments,
+x.reviewer,
+x.vertical,
+x.role,
+x.comments,
 JSON.stringify(
-item.suggestedLevels ||
-{}
+x.suggestedLevels||{}
 )
 ]
 .join(" ")
-.toLowerCase();
-
-
-return(
-
-(!q ||
-text.includes(q))
-
-&&
-
-(!decision ||
-item.decision===decision)
-
+.toLowerCase()
+.includes(q)
 );
 
-}
-);
-
-
-/* KPIs */
 
 document
 .getElementById("total")
@@ -1256,22 +915,6 @@ x=>x.role
 
 
 document
-.getElementById("agree")
-.textContent=
-data.filter(
-x=>x.decision==="I agree"
-).length;
-
-
-document
-.getElementById("disagree")
-.textContent=
-data.filter(
-x=>x.decision==="I don't agree"
-).length;
-
-
-document
 .getElementById("reviewers")
 .textContent=
 new Set(
@@ -1285,97 +928,75 @@ document
 .getElementById("changes")
 .textContent=
 data.filter(
-x=>hasLevelChange(x)
+changed
+).length;
+
+
+document
+.getElementById("commentsCount")
+.textContent=
+data.filter(
+x=>
+String(
+x.comments||""
+).trim()
 ).length;
 
 
 document
 .getElementById("shown")
 .textContent=
-`Showing ${filtered.length} of ${data.length}`;
+`Showing ${f.length} of ${data.length}`;
 
-
-
-/* TABLE */
 
 document
 .getElementById("rows")
 .innerHTML=
 
-filtered
-.map(
-item=>`
+f.map(
+x=>`
 
 <tr>
 
 <td>
-
 <b>
-${esc(item.reviewer)}
+${esc(x.reviewer)}
 </b>
-
 </td>
 
-
 <td>
-${esc(item.vertical)}
+${esc(x.vertical)}
 </td>
 
-
 <td>
-
 <b>
-${esc(item.role)}
+${esc(x.role)}
 </b>
-
 </td>
-
 
 <td>
-
-<span
-class="badge ${
-item.decision==="I agree"
-?"agree"
-:"disagree"
-}"
->
-
-${esc(item.decision)}
-
-</span>
-
+${comps(x)}
 </td>
-
-
-<td>
-
-${competencyHTML(item)}
-
-</td>
-
 
 <td>
 
 <div class="comments">
 
 ${esc(
-item.comments ||
-"—"
+x.comments||"—"
 )}
 
 </div>
 
 </td>
 
-
 <td>
 
 ${
-item.timestamp
+x.timestamp
 ?
 new Date(
-item.timestamp
+x.timestamp
 ).toLocaleString()
 :
 "—"
@@ -1392,31 +1013,26 @@ item.timestamp
 ||
 
 `
-
 <tr>
 
 <td
-colspan="7"
+colspan="6"
 class="muted"
 >
-
 No feedback found.
-
 </td>
 
 </tr>
-
 `;
 
 }
 
 
-
-/* CSV */
+/* CSV EXPORT */
 
 async function exportCSV(){
 
-let response=
+let r=
 await fetch(
 "/api/admin/export.csv",
 {
@@ -1428,31 +1044,29 @@ token
 );
 
 
-if(!response.ok){
+if(!r.ok){
 
-alert(
+return alert(
 "Unable to export."
 );
-
-return;
 
 }
 
 
-let blob=
-await response.blob();
+let b=
+await r.blob();
 
 
-let url=
+let u=
 URL.createObjectURL(
-blob
+b
 );
 
 
 let a=
 document.createElement("a");
 
-a.href=url;
+a.href=u;
 
 a.download=
 "Nuvoco_HR_Competency_Feedback.csv";
@@ -1460,19 +1074,18 @@ a.download=
 a.click();
 
 URL.revokeObjectURL(
-url
+u
 );
 
 }
 
 
-
 /* ESCAPE */
 
-function esc(value){
+function esc(v){
 
 return String(
-value ?? ""
+v??""
 )
 .replace(
 /[&<>"']/g,
@@ -1481,7 +1094,7 @@ m=>({
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
-'"':"&quot;",
+"\"":"&quot;",
 "'":"&#39;"
 
 }[m])
