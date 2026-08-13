@@ -95,7 +95,9 @@ min-height:90px;
 resize:vertical
 }
 
-input:focus,select:focus,textarea:focus{
+input:focus,
+select:focus,
+textarea:focus{
 outline:none;
 border-color:#8b5cf6;
 box-shadow:0 0 0 3px #8b5cf61a
@@ -264,6 +266,7 @@ border-radius:99px;
 transition:.2s
 }
 
+/* Small review tip */
 .review-note{
 font-size:8px;
 line-height:1.4;
@@ -300,7 +303,8 @@ height:100%;
 background:#059669
 }
 
-.card:hover,.card.selected{
+.card:hover,
+.card.selected{
 border-color:#86efac;
 box-shadow:0 5px 16px #05966915
 }
@@ -405,7 +409,7 @@ color:#047857;
 border-color:#bbf7d0
 }
 
-/* Expanded competency detail */
+/* Expanded competency details */
 .detail{
 margin-top:10px;
 border:1px solid #ddd6fe;
@@ -645,6 +649,7 @@ margin-top:2px
 }
 
 @media(max-width:850px){
+
 .layout{
 grid-template-columns:1fr
 }
@@ -654,6 +659,7 @@ height:auto;
 position:relative;
 top:auto
 }
+
 }
 
 @media(max-width:600px){
@@ -674,13 +680,25 @@ grid-template-columns:1fr
 </style>
 </head>
 
+
 <body>
 
 <header>
-<div class="eyebrow">NUVOCO HR • Functional Competency Architecture</div>
-<h1>HR Competency Review Portal</h1>
-<p>Validate the role mapping, compare the proficiency level and record your recommendation.</p>
+
+<div class="eyebrow">
+NUVOCO HR • Functional Competency Architecture
+</div>
+
+<h1>
+HR Competency Review Portal
+</h1>
+
+<p>
+Validate the role mapping, compare the proficiency level and record your recommendation.
+</p>
+
 </header>
+
 
 <div class="layout">
 
@@ -726,22 +744,26 @@ const LEVEL_INFO={
 
 PL1:{
 label:"Foundational",
-definition:"Delivers day to day tasks with guidance"
+definition:
+"Delivers day to day tasks with guidance"
 },
 
 PL2:{
 label:"Independent",
-definition:"Owns monthly and quarterly deliverables independently"
+definition:
+"Owns monthly and quarterly deliverables independently"
 },
 
 PL3:{
 label:"Advanced",
-definition:"Leads annual deliverables and the AOP cycle for the vertical"
+definition:
+"Leads annual deliverables and the AOP cycle for the vertical"
 },
 
 PL4:{
 label:"Enterprise",
-definition:"Holds complete accountability, vision and long term strategy for the function"
+definition:
+"Holds complete accountability, vision and long term strategy for the function"
 }
 
 };
@@ -790,16 +812,12 @@ DATA.sections.forEach(
 (s,si)=>{
 
 let o=
-document.createElement(
-"div"
-);
+document.createElement("div");
 
 o.className="org";
 
 let h=
-document.createElement(
-"div"
-);
+document.createElement("div");
 
 h.className="orghead";
 
@@ -809,9 +827,7 @@ h.innerHTML=`
 `;
 
 let rs=
-document.createElement(
-"div"
-);
+document.createElement("div");
 
 rs.className="roles";
 
@@ -820,9 +836,7 @@ s.roles.forEach(
 (r,ri)=>{
 
 let x=
-document.createElement(
-"div"
-);
+document.createElement("div");
 
 x.className="role";
 
@@ -850,9 +864,7 @@ rs.appendChild(x);
 
 
 h.onclick=()=>
-o.classList.toggle(
-"open"
-);
+o.classList.toggle("open");
 
 o.append(h,rs);
 
@@ -872,24 +884,19 @@ $("search")
 .toLowerCase();
 
 document
-.querySelectorAll(
-".org"
-)
+.querySelectorAll(".org")
 .forEach(
 o=>{
 
 let any=false;
 
-o.querySelectorAll(
-".role"
-)
+o.querySelectorAll(".role")
 .forEach(
 r=>{
 
 let show=
 !q ||
-r.dataset.q
-.includes(q);
+r.dataset.q.includes(q);
 
 r.style.display=
 show?
@@ -908,9 +915,7 @@ any?
 "none";
 
 if(q&&any)
-o.classList.add(
-"open"
-);
+o.classList.add("open");
 
 }
 );
@@ -1084,9 +1089,7 @@ Reviewer saved.
 `;
 
 let n=
-sessionStorage.getItem(
-"reviewer"
-)||
+sessionStorage.getItem("reviewer")||
 "";
 
 if(n)
@@ -1112,8 +1115,8 @@ sessionStorage.setItem(
 n
 );
 
-$("rsaved").style.display=
-"inline";
+$("rsaved")
+.style.display="inline";
 
 }
 
@@ -1133,19 +1136,13 @@ code:null
 reviewed={};
 
 document
-.querySelectorAll(
-".role"
-)
+.querySelectorAll(".role")
 .forEach(
 x=>
-x.classList.remove(
-"active"
-)
+x.classList.remove("active")
 );
 
-el.classList.add(
-"active"
-);
+el.classList.add("active");
 
 
 let s=
@@ -1174,8 +1171,7 @@ mapped.filter(
 String(
 (r.relationship||{})[c]
 )
-.toLowerCase()
-==="core"
+.toLowerCase()==="core"
 )
 .length;
 
@@ -1186,8 +1182,7 @@ mapped.filter(
 String(
 (r.relationship||{})[c]
 )
-.toLowerCase()
-==="working"
+.toLowerCase()==="working"
 )
 .length;
 
@@ -1277,7 +1272,7 @@ style="width:0%"
 <b>Review tip:</b>
 Click a competency to read its definition and PL1–PL4 expectations.
 The <b>Mapped</b> number is the current architecture.
-Use <b>Your recommendation</b> only if you believe the level should change.
+Your recommendation can remain the same if you agree with the mapping.
 
 </div>
 
@@ -1473,20 +1468,33 @@ updateProgress();
 
 function levelChanged(code){
 
+/*
+IMPORTANT:
+Changing the dropdown is a review action even when
+the selected value is exactly the same as the mapped score.
+
+Example:
+Mapped = 3
+Recommendation = 3
+
+This means the reviewer agrees with the mapping.
+It must therefore count as reviewed.
+*/
+
 reviewed[code]=true;
 
 setReviewedUI(code);
 
 updateProgress();
 
+
 const x=
-$(`detailSuggested-${code}`);
+$("detailSuggested-"+code);
 
 if(x){
 
 x.textContent=
-$("level-"+code)
-.value;
+$("level-"+code).value;
 
 }
 
@@ -1494,6 +1502,13 @@ $("level-"+code)
 
 
 function markReviewed(code){
+
+/*
+The reviewer can explicitly mark the competency
+as reviewed without changing the recommendation.
+This is also valid when the recommendation equals
+the mapped score.
+*/
 
 reviewed[code]=
 !reviewed[code];
@@ -1513,14 +1528,13 @@ $("reviewed-"+code);
 let status=
 $("status-"+code);
 
+
 if(reviewed[code]){
 
 btn.textContent=
 "✓ Reviewed";
 
-btn.classList.add(
-"done"
-);
+btn.classList.add("done");
 
 status.textContent=
 "Reviewed";
@@ -1536,9 +1550,7 @@ status.style.fontWeight=
 btn.textContent=
 "Mark reviewed";
 
-btn.classList.remove(
-"done"
-);
+btn.classList.remove("done");
 
 status.textContent=
 "Not reviewed";
@@ -1559,6 +1571,7 @@ DATA.sections[current.sec];
 
 let r=
 s.roles[current.role];
+
 
 let total=
 Object.entries(
@@ -1616,40 +1629,29 @@ current.code=code;
 
 
 document
-.querySelectorAll(
-".card"
-)
+.querySelectorAll(".card")
 .forEach(
 x=>
-x.classList.remove(
-"selected"
-)
+x.classList.remove("selected")
 );
 
+
 $("card-"+code)
-.classList.add(
-"selected"
-);
+.classList.add("selected");
 
 
 let detail=
 $("detail-"+code);
 
 let wasOpen=
-detail.classList.contains(
-"open"
-);
+detail.classList.contains("open");
 
 
 document
-.querySelectorAll(
-".detail"
-)
+.querySelectorAll(".detail")
 .forEach(
 d=>{
-d.classList.remove(
-"open"
-);
+d.classList.remove("open");
 d.innerHTML="";
 }
 );
@@ -1658,9 +1660,7 @@ d.innerHTML="";
 if(wasOpen){
 
 $("card-"+code)
-.classList.remove(
-"selected"
-);
+.classList.remove("selected");
 
 return;
 
@@ -1678,8 +1678,7 @@ let mapped=
 r.scores[code];
 
 let suggested=
-$("level-"+code)
-?.value ||
+$("level-"+code)?.value||
 mapped;
 
 
@@ -1757,6 +1756,7 @@ tab(this,'${code}','definition')
 Definition
 </button>
 
+
 <button
 class="tab"
 onclick="
@@ -1767,6 +1767,7 @@ tab(this,'${code}','ksa')
 Knowledge • Skill • Attitude
 </button>
 
+
 <button
 class="tab"
 onclick="
@@ -1776,6 +1777,7 @@ tab(this,'${code}','activities')
 >
 Activities
 </button>
+
 
 <button
 class="tab"
@@ -1801,15 +1803,11 @@ class="tabbody"
 `;
 
 
-detail.classList.add(
-"open"
-);
+detail.classList.add("open");
 
 
 tab(
-detail.querySelector(
-".tab"
-),
+detail.querySelector(".tab"),
 code,
 "definition"
 );
@@ -1826,20 +1824,15 @@ type
 let detail=
 $("detail-"+code);
 
+
 detail
-.querySelectorAll(
-".tab"
-)
+.querySelectorAll(".tab")
 .forEach(
 x=>
-x.classList.remove(
-"active"
-)
+x.classList.remove("active")
 );
 
-btn.classList.add(
-"active"
-);
+btn.classList.add("active");
 
 
 let c=
@@ -2072,10 +2065,13 @@ sessionStorage.getItem(
 );
 
 
-if(!reviewer)
+if(!reviewer){
+
 return alert(
 "Please save your reviewer name from the Overview page first."
 );
+
+}
 
 
 let s=
@@ -2098,6 +2094,19 @@ v!==""
 );
 
 
+/*
+A competency is considered reviewed if:
+1. The reviewer changed the score, OR
+2. The reviewer clicked "Mark reviewed".
+
+Therefore:
+Mapped = 3
+Recommendation = 3
++ Mark reviewed
+= VALID REVIEW.
+*/
+
+
 let notReviewed=
 mapped.filter(
 ([code])=>
@@ -2109,8 +2118,11 @@ if(notReviewed.length){
 
 if(!confirm(
 `You have not marked ${notReviewed.length} competency(ies) as reviewed. Submit anyway?`
-))
+)){
+
 return;
+
+}
 
 }
 
@@ -2124,9 +2136,12 @@ mapped.forEach(
 let el=
 $("level-"+code);
 
-if(el)
+if(el){
+
 suggestedLevels[code]=
 Number(el.value);
+
+}
 
 }
 );
@@ -2154,9 +2169,7 @@ role:r.name,
 suggestedLevels,
 
 reviewed:
-Object.keys(
-reviewed
-)
+Object.keys(reviewed)
 .filter(
 k=>reviewed[k]
 ),
@@ -2174,20 +2187,25 @@ async res=>{
 if(!res.ok)
 throw new Error();
 
+
 $("saved")
 .style.display=
 "inline";
 
 $("saved")
 .textContent=
-"✓ Review submitted";
+"✓ Review submitted successfully";
 
 }
 )
 .catch(
-()=>alert(
+()=>{
+
+alert(
 "Unable to save. Please try again."
-)
+);
+
+}
 );
 
 }
