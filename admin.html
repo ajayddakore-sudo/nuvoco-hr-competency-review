@@ -20,10 +20,11 @@ Nuvoco HR Competency Review — Admin
 --navy:#172554;
 --green:#059669;
 --red:#be123c;
+--purple:#6d28d9;
 --ink:#172033;
 --muted:#667085;
---bg:#f7f8fc;
---line:#e7e9f2
+--bg:#f6f7fb;
+--line:#e5e7eb
 }
 
 *{
@@ -33,17 +34,19 @@ box-sizing:border-box
 body{
 margin:0;
 font-family:Inter,Segoe UI,Arial,sans-serif;
-background:
-radial-gradient(circle at 5% 5%,#ede9fe,transparent 22%),
-radial-gradient(circle at 95% 5%,#fce7f3,transparent 22%),
-var(--bg);
+background:var(--bg);
 color:var(--ink)
 }
 
 header{
-background:linear-gradient(120deg,#172554,#4c1d95,#be185d);
+background:linear-gradient(
+115deg,
+#172554,
+#4c1d95,
+#be185d
+);
 color:#fff;
-padding:25px 32px
+padding:24px 32px
 }
 
 .eyebrow{
@@ -54,28 +57,28 @@ opacity:.8
 }
 
 h1{
-margin:6px 0;
+margin:5px 0;
 font-size:26px
 }
 
 header p{
 margin:0;
 font-size:12px;
-opacity:.85
+opacity:.86
 }
 
 .wrap{
 max-width:1500px;
-margin:20px auto;
-padding:0 18px
+margin:16px auto;
+padding:0 16px
 }
 
 .box{
 background:#fff;
 border:1px solid var(--line);
 border-radius:16px;
-box-shadow:0 8px 28px #17255410;
-padding:20px
+box-shadow:0 5px 20px #1725540a;
+padding:18px
 }
 
 .login{
@@ -83,15 +86,11 @@ max-width:420px;
 margin:70px auto
 }
 
-.login h2{
-color:var(--navy)
-}
-
 input,
 select{
-padding:10px;
-border:1px solid var(--line);
-border-radius:9px;
+padding:9px 10px;
+border:1px solid #d9dee8;
+border-radius:8px;
 font:inherit;
 font-size:11px;
 background:#fff
@@ -102,47 +101,56 @@ width:100%
 }
 
 button{
-border:1px solid var(--line);
+border:1px solid #d9dee8;
 background:#fff;
-padding:9px 13px;
-border-radius:9px;
-font-size:11px;
+padding:8px 11px;
+border-radius:8px;
+font-size:10px;
 font-weight:750;
 cursor:pointer
 }
 
-button.primary{
-background:linear-gradient(90deg,#6d28d9,#db2777);
-border:0;
-color:#fff
+.primary{
+background:linear-gradient(
+90deg,
+#6d28d9,
+#db2777
+)!important;
+color:#fff!important;
+border:0!important
 }
 
 .hidden{
 display:none
 }
 
+.muted{
+font-size:10px;
+color:var(--muted)
+}
+
 .kpis{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:11px;
-margin:18px 0
+gap:9px;
+margin:15px 0
 }
 
 .kpi{
+padding:12px;
 border:1px solid var(--line);
-border-radius:12px;
-padding:14px;
+border-radius:10px;
 position:relative
 }
 
 .kpi:before{
 content:"";
 position:absolute;
-top:0;
 left:0;
+top:0;
 width:100%;
-height:4px;
-background:#059669
+height:3px;
+background:#6d28d9
 }
 
 .kpi:nth-child(2):before{
@@ -150,70 +158,111 @@ background:#2563eb
 }
 
 .kpi:nth-child(3):before{
-background:#f97316
+background:#059669
 }
 
 .kpi:nth-child(4):before{
-background:#db2777
+background:#f97316
 }
 
 .kpi:nth-child(5):before{
-background:#6d28d9
+background:#db2777
 }
 
 .kpi b{
 display:block;
-font-size:25px;
+font-size:23px;
 color:var(--navy)
 }
 
 .kpi span{
-font-size:10px;
+font-size:9px;
 color:var(--muted)
 }
 
 .actions{
 display:flex;
 justify-content:space-between;
-gap:10px;
+gap:8px;
 align-items:center;
 flex-wrap:wrap;
-margin-bottom:13px
+margin-bottom:10px
 }
 
 .filters{
 display:flex;
-gap:8px;
+gap:7px;
 flex-wrap:wrap
 }
 
 .filters input{
-min-width:260px
+min-width:240px
+}
+
+.filters select{
+min-width:150px
+}
+
+.section-title{
+font-size:12px;
+font-weight:800;
+color:var(--navy);
+margin:17px 0 8px
+}
+
+.summary-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px
+}
+
+.summary-card{
+border:1px solid var(--line);
+border-radius:10px;
+padding:10px
+}
+
+.summary-card b{
+font-size:11px
+}
+
+.summary-card .bar{
+height:5px;
+background:#eef0f4;
+border-radius:99px;
+margin-top:7px;
+overflow:hidden
+}
+
+.summary-card .bar span{
+display:block;
+height:100%;
+background:#059669
 }
 
 .tablewrap{
 overflow:auto;
 border:1px solid var(--line);
-border-radius:11px
+border-radius:10px
 }
 
 table{
 border-collapse:collapse;
 width:100%;
-min-width:1200px
+min-width:1250px
 }
 
 th,
 td{
-padding:11px;
+padding:10px;
 border-bottom:1px solid var(--line);
 text-align:left;
-font-size:11px;
+font-size:10px;
 vertical-align:top
 }
 
 th{
-font-size:9px;
+font-size:8px;
 text-transform:uppercase;
 letter-spacing:.7px;
 color:var(--muted);
@@ -222,15 +271,42 @@ position:sticky;
 top:0
 }
 
+.comp-list{
+min-width:430px
+}
+
+.comp-row{
+display:grid;
+grid-template-columns:
+minmax(190px,1fr)
+42px
+55px
+90px;
+gap:7px;
+align-items:center;
+padding:5px 0;
+border-bottom:1px solid #f0f1f5
+}
+
+.comp-name{
+font-size:9px;
+font-weight:700
+}
+
+.small{
+font-size:8px;
+color:var(--muted)
+}
+
 .level{
 display:inline-flex;
 align-items:center;
 justify-content:center;
-width:27px;
-height:27px;
+width:26px;
+height:26px;
 border-radius:7px;
 background:#172554;
-color:white;
+color:#fff;
 font-weight:800
 }
 
@@ -253,54 +329,44 @@ color:#667085
 }
 
 .comments{
-max-width:300px;
+max-width:280px;
 line-height:1.45
 }
 
-.muted{
-color:var(--muted);
-font-size:11px
+.badge{
+padding:4px 7px;
+border-radius:999px;
+font-size:8px;
+font-weight:800
 }
 
-.comp-list{
-min-width:430px
+.complete{
+background:#dcfce7;
+color:#047857
 }
 
-.comp-row{
-display:grid;
-grid-template-columns:minmax(190px,1fr) 42px 55px 95px;
-gap:7px;
-align-items:center;
-padding:6px 0;
-border-bottom:1px solid #f0f1f5
+.partial{
+background:#fef3c7;
+color:#a16207
 }
 
-.comp-name{
-font-size:10px;
-font-weight:650
-}
-
-.small{
-font-size:9px;
-color:var(--muted)
-}
-
-@media(max-width:900px){
+@media(max-width:1000px){
 
 .kpis{
-grid-template-columns:repeat(2,1fr)
+grid-template-columns:repeat(3,1fr)
+}
+
+.summary-grid{
+grid-template-columns:1fr 1fr
 }
 
 }
 
-@media(max-width:600px){
+@media(max-width:650px){
 
-.kpis{
+.kpis,
+.summary-grid{
 grid-template-columns:1fr
-}
-
-.wrap{
-padding:0 10px
 }
 
 }
@@ -322,7 +388,7 @@ Competency Review Dashboard
 </h1>
 
 <p>
-Consolidated view of reviewer-suggested proficiency levels and comments.
+Consolidate reviewer recommendations, identify changes and track completion.
 </p>
 
 </header>
@@ -336,7 +402,9 @@ id="login"
 class="box login"
 >
 
-<h2>
+<h2
+style="margin-top:0;color:#172554"
+>
 Admin access
 </h2>
 
@@ -351,7 +419,7 @@ placeholder="Admin password"
 onkeydown="if(event.key==='Enter')login()"
 />
 
-<div style="margin-top:10px">
+<div style="margin-top:9px">
 
 <button
 class="primary"
@@ -365,9 +433,9 @@ Sign in
 <div
 id="loginerr"
 style="
-margin-top:8px;
+margin-top:7px;
 color:#be123c;
-font-size:10px
+font-size:9px
 "
 ></div>
 
@@ -390,7 +458,7 @@ Review Summary
 </h2>
 
 <div class="muted">
-Head-level proficiency validation
+One place to consolidate all Heads' recommendations.
 </div>
 
 </div>
@@ -408,7 +476,7 @@ Open Portal
 class="primary"
 onclick="exportCSV()"
 >
-Download CSV
+Download Detailed CSV
 </button>
 
 </div>
@@ -420,7 +488,7 @@ Download CSV
 
 <div class="kpi">
 <b id="total">0</b>
-<span>Total submissions</span>
+<span>Role submissions</span>
 </div>
 
 <div class="kpi">
@@ -446,6 +514,20 @@ Download CSV
 </div>
 
 
+<div class="section-title">
+Completion by reviewer
+</div>
+
+<div
+id="reviewerSummary"
+class="summary-grid"
+></div>
+
+
+<div class="section-title">
+Filters
+</div>
+
 <div class="actions">
 
 <div class="filters">
@@ -456,11 +538,43 @@ placeholder="Search role / reviewer / competency…"
 oninput="render()"
 />
 
+<select
+id="vertical"
+onchange="render()"
+>
+
+<option value="">
+All verticals
+</option>
+
+</select>
+
+
+<select
+id="changeFilter"
+onchange="render()"
+>
+
+<option value="">
+All reviews
+</option>
+
+<option value="change">
+Only level changes
+</option>
+
+<option value="same">
+No level changes
+</option>
+
+</select>
+
 </div>
 
+
 <div
-class="muted"
 id="shown"
+class="muted"
 ></div>
 
 </div>
@@ -487,7 +601,11 @@ Role
 </th>
 
 <th>
-Suggested Proficiency
+Completion
+</th>
+
+<th>
+Mapped vs Recommended
 </th>
 
 <th>
@@ -521,14 +639,12 @@ let data=[];
 let architecture=null;
 
 
-/* LOGIN */
-
 async function login(){
 
 let p=
-document
-.getElementById("password")
-.value;
+document.getElementById(
+"password"
+).value;
 
 
 let r=
@@ -536,23 +652,26 @@ await fetch(
 "/api/admin/login",
 {
 method:"POST",
+
 headers:{
 "Content-Type":
 "application/json"
 },
+
 body:
 JSON.stringify({
 password:p
 })
+
 }
 );
 
 
 if(!r.ok){
 
-document
-.getElementById("loginerr")
-.textContent=
+document.getElementById(
+"loginerr"
+).textContent=
 "Incorrect password.";
 
 return;
@@ -566,22 +685,24 @@ await r.json()
 ).token;
 
 
-document
-.getElementById("login")
-.classList.add("hidden");
+document.getElementById(
+"login"
+).classList.add(
+"hidden"
+);
 
 
-document
-.getElementById("dashboard")
-.classList.remove("hidden");
+document.getElementById(
+"dashboard"
+).classList.remove(
+"hidden"
+);
 
 
 await load();
 
 }
 
-
-/* LOAD */
 
 async function load(){
 
@@ -617,12 +738,53 @@ return alert(
 data=
 await r.json();
 
+populateVerticals();
+
 render();
 
 }
 
 
-/* MAPPED LEVEL */
+function populateVerticals(){
+
+let s=
+new Set(
+data
+.map(
+x=>x.vertical
+)
+.filter(Boolean)
+);
+
+
+let el=
+document.getElementById(
+"vertical"
+);
+
+
+[
+...s
+]
+.sort()
+.forEach(
+v=>{
+
+let o=
+document.createElement(
+"option"
+);
+
+o.value=v;
+
+o.textContent=v;
+
+el.appendChild(o);
+
+});
+
+}
+
 
 function mapped(
 vertical,
@@ -639,24 +801,19 @@ x=>x.name===vertical
 
 
 let r=
-s
-?.roles
+s?.roles
 ?.find(
 x=>x.name===role
 );
 
 
 return(
-r
-?.scores
-?.[code]
+r?.scores?.[code]
 ??""
 );
 
 }
 
-
-/* COMPETENCY NAME */
 
 function name(code){
 
@@ -671,8 +828,6 @@ code
 
 }
 
-
-/* HAS CHANGE */
 
 function changed(item){
 
@@ -701,7 +856,34 @@ Number(v)
 }
 
 
-/* COMPETENCY DISPLAY */
+function completion(item){
+
+let total=
+Object.keys(
+item.suggestedLevels||{}
+).length;
+
+let done=
+(item.reviewed||[]).length;
+
+if(!total)
+return {
+done:0,
+total:0,
+pct:0
+};
+
+return {
+done,
+total,
+pct:
+Math.round(
+done/total*100
+)
+};
+
+}
+
 
 function comps(item){
 
@@ -711,15 +893,12 @@ item.suggestedLevels||{}
 );
 
 
-if(!entries.length){
-
+if(!entries.length)
 return `
 <div class="small">
-No suggested levels submitted.
+No recommendations submitted.
 </div>
 `;
-
-}
 
 
 return `
@@ -729,7 +908,7 @@ return `
 <div
 class="comp-row"
 style="
-font-size:9px;
+font-size:8px;
 font-weight:800;
 color:#667085
 "
@@ -744,7 +923,7 @@ MAPPED
 </div>
 
 <div>
-SUGGESTED
+REC.
 </div>
 
 <div>
@@ -766,14 +945,14 @@ item.role,
 c
 );
 
-
 let ch=
-'<span class="no-change">—</span>';
+`<span class="no-change">—</span>`;
 
 
 if(
 m!=="" &&
-Number(s)>Number(m)
+Number(s)>
+Number(m)
 ){
 
 ch=
@@ -787,7 +966,8 @@ ch=
 
 else if(
 m!=="" &&
-Number(s)<Number(m)
+Number(s)<
+Number(m)
 ){
 
 ch=
@@ -868,22 +1048,115 @@ ${ch}
 }
 
 
-/* RENDER */
+function renderReviewerSummary(){
+
+let by={};
+
+
+data.forEach(
+x=>{
+
+if(!by[x.reviewer])
+by[x.reviewer]={
+total:0,
+complete:0
+};
+
+by[x.reviewer].total++;
+
+let c=
+completion(x);
+
+if(
+c.total &&
+c.done===c.total
+)
+by[x.reviewer].complete++;
+
+});
+
+
+document.getElementById(
+"reviewerSummary"
+).innerHTML=
+
+Object
+.entries(by)
+.map(
+([name,x])=>{
+
+let pct=
+Math.round(
+x.complete/
+x.total*100
+);
+
+return `
+
+<div class="summary-card">
+
+<b>
+${esc(name)}
+</b>
+
+<div
+class="muted"
+style="margin-top:3px"
+>
+${x.complete}
+of
+${x.total}
+role reviews complete
+</div>
+
+<div class="bar">
+
+<span
+style="width:${pct}%"
+></span>
+
+</div>
+
+</div>
+
+`;
+
+}
+)
+.join("")
+||
+`
+<div class="muted">
+No submissions yet.
+</div>
+`;
+
+}
+
 
 function render(){
 
 let q=
-document
-.getElementById("q")
-.value
-.toLowerCase();
+document.getElementById(
+"q"
+).value.toLowerCase();
+
+let vertical=
+document.getElementById(
+"vertical"
+).value;
+
+let cf=
+document.getElementById(
+"changeFilter"
+).value;
 
 
 let f=
 data.filter(
-x=>
-!q ||
-[
+x=>{
+
+let text=[
 x.reviewer,
 x.vertical,
 x.role,
@@ -893,20 +1166,51 @@ x.suggestedLevels||{}
 )
 ]
 .join(" ")
-.toLowerCase()
-.includes(q)
-);
+.toLowerCase();
 
 
-document
-.getElementById("total")
-.textContent=
+if(
+q &&
+!text.includes(q)
+)
+return false;
+
+
+if(
+vertical &&
+x.vertical!==vertical
+)
+return false;
+
+
+if(
+cf==="change" &&
+!changed(x)
+)
+return false;
+
+
+if(
+cf==="same" &&
+changed(x)
+)
+return false;
+
+
+return true;
+
+});
+
+
+document.getElementById(
+"total"
+).textContent=
 data.length;
 
 
-document
-.getElementById("roles")
-.textContent=
+document.getElementById(
+"roles"
+).textContent=
 new Set(
 data.map(
 x=>x.role
@@ -914,9 +1218,9 @@ x=>x.role
 ).size;
 
 
-document
-.getElementById("reviewers")
-.textContent=
+document.getElementById(
+"reviewers"
+).textContent=
 new Set(
 data.map(
 x=>x.reviewer
@@ -924,17 +1228,17 @@ x=>x.reviewer
 ).size;
 
 
-document
-.getElementById("changes")
-.textContent=
+document.getElementById(
+"changes"
+).textContent=
 data.filter(
 changed
 ).length;
 
 
-document
-.getElementById("commentsCount")
-.textContent=
+document.getElementById(
+"commentsCount"
+).textContent=
 data.filter(
 x=>
 String(
@@ -943,18 +1247,26 @@ x.comments||""
 ).length;
 
 
-document
-.getElementById("shown")
-.textContent=
+document.getElementById(
+"shown"
+).textContent=
 `Showing ${f.length} of ${data.length}`;
 
 
-document
-.getElementById("rows")
-.innerHTML=
+renderReviewerSummary();
+
+
+document.getElementById(
+"rows"
+).innerHTML=
 
 f.map(
-x=>`
+x=>{
+
+let c=
+completion(x);
+
+return `
 
 <tr>
 
@@ -972,6 +1284,24 @@ ${esc(x.vertical)}
 <b>
 ${esc(x.role)}
 </b>
+</td>
+
+<td>
+
+<span
+class="badge ${
+c.total &&
+c.done===c.total
+?"complete"
+:"partial"
+}"
+>
+
+${c.done}/${c.total||0}
+reviewed
+
+</span>
+
 </td>
 
 <td>
@@ -1006,20 +1336,20 @@ x.timestamp
 
 </tr>
 
-`
+`;
+
+}
 )
 .join("")
-
 ||
-
 `
 <tr>
 
 <td
-colspan="6"
+colspan="7"
 class="muted"
 >
-No feedback found.
+No matching reviews.
 </td>
 
 </tr>
@@ -1027,8 +1357,6 @@ No feedback found.
 
 }
 
-
-/* CSV EXPORT */
 
 async function exportCSV(){
 
@@ -1044,43 +1372,36 @@ token
 );
 
 
-if(!r.ok){
-
+if(!r.ok)
 return alert(
 "Unable to export."
 );
 
-}
-
 
 let b=
 await r.blob();
-
 
 let u=
 URL.createObjectURL(
 b
 );
 
-
 let a=
-document.createElement("a");
+document.createElement(
+"a"
+);
 
 a.href=u;
 
 a.download=
-"Nuvoco_HR_Competency_Feedback.csv";
+"Nuvoco_HR_Competency_Feedback_Detailed.csv";
 
 a.click();
 
-URL.revokeObjectURL(
-u
-);
+URL.revokeObjectURL(u);
 
 }
 
-
-/* ESCAPE */
 
 function esc(v){
 
@@ -1105,4 +1426,5 @@ m=>({
 </script>
 
 </body>
+
 </html>
