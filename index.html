@@ -60,6 +60,15 @@ margin:16px auto;
 padding:0 16px
 }
 
+.layout.full-width{
+grid-template-columns:1fr
+}
+
+.layout.full-width .main{
+width:100%;
+max-width:none
+}
+
 .box{
 background:#fff;
 border:1px solid var(--line);
@@ -77,7 +86,8 @@ padding:14px
 
 .main{
 padding:20px;
-min-height:720px
+min-height:720px;
+width:100%
 }
 
 input,select,textarea{
@@ -143,9 +153,10 @@ font-size:10px;
 color:var(--muted)
 }
 
-/* -----------------------------
+
+/* =================================
    WORKFLOW
------------------------------- */
+================================= */
 
 .workflow{
 display:flex;
@@ -161,8 +172,7 @@ border-radius:12px
 display:flex;
 align-items:center;
 gap:7px;
-flex:1;
-position:relative
+flex:1
 }
 
 .step:not(:last-child):after{
@@ -216,9 +226,10 @@ color:#5b21b6
 color:#047857
 }
 
-/* -----------------------------
+
+/* =================================
    WELCOME
------------------------------- */
+================================= */
 
 .welcome{
 min-height:650px;
@@ -275,43 +286,72 @@ width:100%;
 padding:12px
 }
 
-/* -----------------------------
-   ORGANISATION
------------------------------- */
+
+/* =================================
+   ORGANISATION SCREEN
+================================= */
+
+.org-intro{
+padding:16px;
+background:linear-gradient(
+135deg,
+#faf9ff,
+#fff7fb
+);
+border:1px solid #e4ddff;
+border-radius:13px;
+margin-bottom:15px
+}
+
+.org-intro-title{
+font-size:15px;
+font-weight:850;
+color:var(--navy)
+}
+
+.org-intro-text{
+font-size:10px;
+color:var(--muted);
+margin-top:4px;
+line-height:1.5
+}
 
 .org-workflow{
 display:grid;
-grid-template-columns:1fr;
-gap:10px;
-margin-top:15px
+grid-template-columns:repeat(
+auto-fit,
+minmax(280px,1fr)
+);
+gap:12px
 }
 
 .org-option{
 border:1px solid var(--line);
 border-radius:12px;
 background:#fff;
-overflow:hidden
+overflow:hidden;
+transition:.15s
+}
+
+.org-option:hover{
+border-color:#c4b5fd;
+box-shadow:0 5px 18px #6d28d912
+}
+
+.org-option.open{
+border-color:#a78bfa;
+box-shadow:0 5px 18px #6d28d912
 }
 
 .org-option-head{
-padding:14px;
+padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 cursor:pointer
 }
 
-.org-option-head:hover{
-background:#faf9ff
-}
-
-.org-option.open{
-border-color:#c4b5fd;
-box-shadow:0 5px 18px #6d28d912
-}
-
-.org-option.open
-.org-option-head{
+.org-option.open .org-option-head{
 background:#f5f3ff
 }
 
@@ -363,6 +403,12 @@ font-weight:750;
 color:#344054
 }
 
+.role-description{
+font-size:8px;
+color:#98a2b3;
+margin-top:3px
+}
+
 .role-arrow{
 font-size:12px;
 color:#6d28d9
@@ -372,9 +418,10 @@ color:#6d28d9
 margin-bottom:12px
 }
 
-/* -----------------------------
+
+/* =================================
    REVIEWER BAR
------------------------------- */
+================================= */
 
 .reviewer-bar{
 display:flex;
@@ -398,9 +445,10 @@ font-size:11px
 font-size:8px
 }
 
-/* -----------------------------
+
+/* =================================
    OVERVIEW
------------------------------- */
+================================= */
 
 .overview-top{
 display:flex;
@@ -500,9 +548,10 @@ align-items:center;
 gap:15px
 }
 
-/* -----------------------------
+
+/* =================================
    ROLE REVIEW
------------------------------- */
+================================= */
 
 .role-summary{
 display:flex;
@@ -706,9 +755,10 @@ color:#047857;
 border-color:#bbf7d0
 }
 
-/* -----------------------------
+
+/* =================================
    COMPETENCY EXPANSION
------------------------------- */
+================================= */
 
 .detail{
 margin-top:10px;
@@ -850,6 +900,11 @@ margin:4px 0
 margin-bottom:3px
 }
 
+
+/* =================================
+   FEEDBACK
+================================= */
+
 .feedback{
 margin-top:14px;
 padding:13px;
@@ -877,6 +932,11 @@ font-size:9px;
 margin-left:6px
 }
 
+
+/* =================================
+   RESPONSIVE
+================================= */
+
 @media(max-width:850px){
 
 .layout{
@@ -889,11 +949,19 @@ position:relative;
 top:auto
 }
 
+.overview-grid{
+grid-template-columns:repeat(2,1fr)
+}
+
 }
 
 @media(max-width:600px){
 
 .overview-grid{
+grid-template-columns:1fr
+}
+
+.mini-grid{
 grid-template-columns:1fr
 }
 
@@ -911,7 +979,15 @@ align-items:stretch
 }
 
 .workflow{
-overflow:auto
+overflow-x:auto
+}
+
+.step{
+min-width:130px
+}
+
+.org-workflow{
+grid-template-columns:1fr
 }
 
 }
@@ -938,10 +1014,10 @@ Validate the role mapping and recommend the right proficiency level.
 </header>
 
 
-<div class="layout">
-
-
-<!-- LEFT SIDE -->
+<div
+class="layout full-width"
+id="layout"
+>
 
 <aside
 class="box side"
@@ -963,8 +1039,6 @@ Organisation structure
 
 </aside>
 
-
-<!-- MAIN -->
 
 <main
 class="box main"
@@ -1034,17 +1108,26 @@ m=>({
 );
 
 
-/* =============================
+/* =================================
    BOOT
-============================= */
+================================= */
 
 async function boot(){
+
+try{
 
 DATA=
 await fetch(
 "/api/architecture"
 )
-.then(r=>r.json());
+.then(r=>{
+
+if(!r.ok)
+throw new Error();
+
+return r.json();
+
+});
 
 
 let reviewer=
@@ -1063,12 +1146,37 @@ showWelcome();
 
 }
 
+}catch(e){
+
+$("main").innerHTML=`
+
+<div
+style="
+padding:50px;
+text-align:center
+"
+>
+
+<h2>
+Unable to load competency architecture
+</h2>
+
+<p class="muted">
+Please refresh the page or check that architecture.json is available.
+</p>
+
+</div>
+
+`;
+
+}
+
 }
 
 
-/* =============================
-   WORKFLOW BAR
-============================= */
+/* =================================
+   WORKFLOW
+================================= */
 
 function workflow(step){
 
@@ -1078,7 +1186,7 @@ return `
 
 <div class="
 step
-${step>=1?"done":""}
+${step>1?"done":""}
 ${step===1?"active":""}
 ">
 
@@ -1095,7 +1203,7 @@ Reviewer
 
 <div class="
 step
-${step>=2?"done":""}
+${step>2?"done":""}
 ${step===2?"active":""}
 ">
 
@@ -1112,7 +1220,7 @@ Overview
 
 <div class="
 step
-${step>=3?"done":""}
+${step>3?"done":""}
 ${step===3?"active":""}
 ">
 
@@ -1149,13 +1257,16 @@ Review
 }
 
 
-/* =============================
+/* =================================
    WELCOME
-============================= */
+================================= */
 
 function showWelcome(){
 
 $("sidebar").style.display="none";
+
+$("layout")
+.classList.add("full-width");
 
 
 $("main").innerHTML=`
@@ -1229,9 +1340,9 @@ $("reviewerName")?.focus(),
 }
 
 
-/* =============================
-   START REVIEW
-============================= */
+/* =================================
+   START
+================================= */
 
 function startReview(){
 
@@ -1263,13 +1374,16 @@ showOverview();
 }
 
 
-/* =============================
+/* =================================
    OVERVIEW
-============================= */
+================================= */
 
 function showOverview(){
 
 $("sidebar").style.display="none";
+
+$("layout")
+.classList.add("full-width");
 
 
 let reviewer=
@@ -1380,7 +1494,12 @@ border-radius:11px
 "
 >
 
-<b style="font-size:11px;color:#4c1d95">
+<b
+style="
+font-size:11px;
+color:#4c1d95
+"
+>
 How to review
 </b>
 
@@ -1431,7 +1550,9 @@ ${comps.map(
 
 <div class="mini">
 
-<b>${esc(c)}</b>
+<b>
+${esc(c)}
+</b>
 
 <span>
 ${esc(x.name)}
@@ -1460,7 +1581,9 @@ Ready to select a role?
 
 <div
 class="muted"
-style="margin-top:3px"
+style="
+margin-top:3px
+"
 >
 Next, choose the organisation vertical and role you want to review.
 </div>
@@ -1481,13 +1604,16 @@ View Organisation Structure →
 }
 
 
-/* =============================
+/* =================================
    ORGANISATION SCREEN
-============================= */
+================================= */
 
 function showOrganisation(){
 
 $("sidebar").style.display="none";
+
+$("layout")
+.classList.add("full-width");
 
 
 $("main").innerHTML=`
@@ -1529,21 +1655,20 @@ onclick="showOverview()"
 </button>
 
 
+<div class="org-intro">
+
 <div class="vertical">
 Step 3 of 4
 </div>
 
-<h2
-style="
-margin:3px 0;
-color:#172554
-"
->
+<div class="org-intro-title">
 Select Organisation & Role
-</h2>
+</div>
 
-<div class="muted">
-Expand the organisation vertical and select the role you want to review.
+<div class="org-intro-text">
+Expand an organisation vertical below, then select the role you want to validate. Once you select a role, you will automatically move to the competency review.
+</div>
+
 </div>
 
 
@@ -1570,7 +1695,9 @@ ${esc(s.name)}
 
 <div
 class="muted"
-style="margin-top:3px"
+style="
+margin-top:3px
+"
 >
 Click to view roles
 </div>
@@ -1600,11 +1727,8 @@ onclick="showRole(${si},${ri})"
 ${esc(r.name)}
 </div>
 
-<div
-class="muted"
-style="margin-top:3px"
->
-Review competency mapping
+<div class="role-description">
+Review competency mapping for this role
 </div>
 
 </div>
@@ -1639,12 +1763,16 @@ $("org-"+si);
 
 
 document
-.querySelectorAll(".org-option")
+.querySelectorAll(
+".org-option"
+)
 .forEach(
 x=>{
 
 if(x!==selected)
-x.classList.remove("open");
+x.classList.remove(
+"open"
+);
 
 }
 );
@@ -1657,9 +1785,9 @@ selected.classList.toggle(
 }
 
 
-/* =============================
+/* =================================
    CHANGE REVIEWER
-============================= */
+================================= */
 
 function changeReviewer(){
 
@@ -1678,28 +1806,19 @@ sessionStorage.removeItem(
 
 reviewed={};
 
-
 showWelcome();
 
 }
 
 
-/* =============================
+/* =================================
    ROLE REVIEW
-============================= */
+================================= */
 
 function showRole(
 si,
-ri,
-el
+ri
 ){
-
-/*
-The function supports both:
-showRole(si,ri)
-and the previous:
-showRole(si,ri,element)
-*/
 
 current={
 sec:si,
@@ -1752,7 +1871,12 @@ String(
 .length;
 
 
-$("sidebar").style.display="none";
+$("sidebar").style.display="block";
+
+$("layout")
+.classList.remove(
+"full-width"
+);
 
 
 $("main").innerHTML=`
@@ -2039,7 +2163,9 @@ id="comments"
 placeholder="Add any comments or suggested changes..."
 ></textarea>
 
-<div style="margin-top:9px">
+<div
+style="margin-top:9px"
+>
 
 <button
 class="greenbtn"
@@ -2066,9 +2192,9 @@ updateProgress();
 }
 
 
-/* =============================
+/* =================================
    REVIEW STATUS
-============================= */
+================================= */
 
 function levelChanged(code){
 
@@ -2218,9 +2344,9 @@ pct+"%";
 }
 
 
-/* =============================
-   COMPETENCY
-============================= */
+/* =================================
+   COMPETENCY EXPANSION
+================================= */
 
 function openComp(code){
 
@@ -2405,7 +2531,9 @@ class="tabbody"
 `;
 
 
-detail.classList.add("open");
+detail.classList.add(
+"open"
+);
 
 
 tab(
@@ -2417,9 +2545,9 @@ code,
 }
 
 
-/* =============================
+/* =================================
    TABS
-============================= */
+================================= */
 
 function tab(
 btn,
@@ -2662,9 +2790,9 @@ v=>
 }
 
 
-/* =============================
+/* =================================
    SUBMIT
-============================= */
+================================= */
 
 function submitFeedback(){
 
@@ -2806,9 +2934,70 @@ alert(
 }
 
 
-/* =============================
+/* =================================
+   OPTIONAL SEARCH FOR REVIEW SCREEN
+================================= */
+
+function filterRoles(){
+
+let q=
+$("search")
+.value
+.toLowerCase();
+
+
+document
+.querySelectorAll(
+".org"
+)
+.forEach(
+o=>{
+
+let any=false;
+
+
+o.querySelectorAll(
+".role"
+)
+.forEach(
+r=>{
+
+let show=
+!q ||
+r.dataset.q.includes(q);
+
+
+r.style.display=
+show?
+"block":
+"none";
+
+
+if(show)
+any=true;
+
+}
+);
+
+
+o.style.display=
+any?
+"block":
+"none";
+
+
+if(q&&any)
+o.classList.add(
+"open"
+);
+
+}
+);
+
+
+/* =================================
    RUN
-============================= */
+================================= */
 
 boot();
 
