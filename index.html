@@ -1,32 +1,26 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>Nuvoco HR Competency Review</title>
 
 <style>
-
 :root{
 --navy:#172554;
 --purple:#6d28d9;
 --pink:#db2777;
---blue:#2563eb;
 --green:#059669;
---green-light:#dcfce7;
+--greenbg:#dcfce7;
 --yellow:#fef3c7;
---yellow-text:#a16207;
---orange:#f97316;
+--yellowtext:#a16207;
 --ink:#172033;
 --muted:#667085;
 --bg:#f7f8fc;
 --line:#e7e9f2
 }
 
-*{
-box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -41,12 +35,12 @@ color:var(--ink)
 header{
 background:linear-gradient(120deg,#172554,#4c1d95,#be185d);
 color:#fff;
-padding:28px 34px;
+padding:27px 34px;
 box-shadow:0 8px 30px #4c1d9530
 }
 
 .eyebrow{
-font-size:11px;
+font-size:10px;
 letter-spacing:2px;
 text-transform:uppercase;
 opacity:.8
@@ -54,18 +48,18 @@ opacity:.8
 
 h1{
 margin:6px 0;
-font-size:28px
+font-size:27px
 }
 
 header p{
 margin:0;
-opacity:.85;
-font-size:13px
+font-size:12px;
+opacity:.85
 }
 
 .layout{
 display:grid;
-grid-template-columns:305px 1fr;
+grid-template-columns:300px 1fr;
 gap:18px;
 max-width:1500px;
 margin:18px auto;
@@ -75,26 +69,24 @@ padding:0 18px
 .box{
 background:#fff;
 border:1px solid var(--line);
-border-radius:18px;
+border-radius:17px;
 box-shadow:0 8px 28px #17255410
 }
 
 .side{
-height:calc(100vh - 140px);
+height:calc(100vh - 135px);
 position:sticky;
-top:120px;
+top:110px;
 overflow:auto;
 padding:15px
 }
 
 .main{
-padding:24px;
+padding:23px;
 min-height:720px
 }
 
-input,
-select,
-textarea{
+input,select,textarea{
 width:100%;
 padding:10px;
 border:1px solid var(--line);
@@ -102,6 +94,11 @@ border-radius:9px;
 font:inherit;
 font-size:12px;
 background:#fff
+}
+
+textarea{
+min-height:90px;
+resize:vertical
 }
 
 input:focus,
@@ -117,7 +114,7 @@ font-size:10px;
 color:var(--muted);
 font-weight:750;
 text-transform:uppercase;
-letter-spacing:1.3px;
+letter-spacing:1.2px;
 margin:16px 3px 7px
 }
 
@@ -168,44 +165,43 @@ border-left:3px solid #db2777
 .kpis{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:11px;
-margin:20px 0
+gap:10px;
+margin:18px 0
 }
 
 .kpi{
 border:1px solid var(--line);
-border-radius:13px;
-padding:15px;
-position:relative;
-overflow:hidden
+border-radius:12px;
+padding:14px;
+position:relative
 }
 
 .kpi:before{
 content:"";
 position:absolute;
-top:0;
 left:0;
+top:0;
 width:100%;
 height:4px;
 background:linear-gradient(90deg,#6d28d9,#db2777)
 }
 
 .kpi:nth-child(2):before{
-background:linear-gradient(90deg,#2563eb,#06b6a4)
+background:#2563eb
 }
 
 .kpi:nth-child(3):before{
-background:linear-gradient(90deg,#f97316,#f59e0b)
+background:#f97316
 }
 
 .kpi:nth-child(4):before{
-background:linear-gradient(90deg,#059669,#22c55e)
+background:#059669
 }
 
 .kpi b{
 display:block;
-font-size:27px;
-color:#172554
+font-size:26px;
+color:var(--navy)
 }
 
 .kpi span{
@@ -243,25 +239,30 @@ justify-content:space-between;
 gap:15px;
 border-bottom:1px solid var(--line);
 padding-bottom:15px;
-margin-bottom:15px
+margin-bottom:14px
 }
 
 .role-head h2{
 margin:2px 0;
-font-size:23px;
-color:#172554
+font-size:22px;
+color:var(--navy)
 }
 
 .vertical{
 font-size:10px;
 color:#6d28d9;
 font-weight:800;
-letter-spacing:1.3px;
+letter-spacing:1.2px;
 text-transform:uppercase
 }
 
+.muted{
+font-size:10px;
+color:var(--muted)
+}
+
 .review-note{
-margin:16px 0 12px;
+margin:13px 0;
 padding:10px 12px;
 border-radius:10px;
 background:#f0fdf4;
@@ -270,23 +271,33 @@ color:#166534;
 font-size:10px
 }
 
+/* TWO-PANEL REVIEW */
+
+.review-grid{
+display:grid;
+grid-template-columns:minmax(0,1fr) minmax(430px,0.95fr);
+gap:14px;
+align-items:start
+}
+
 .cards{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:11px
+grid-template-columns:1fr;
+gap:10px
 }
 
 .card{
 border:1px solid var(--line);
 border-radius:13px;
-padding:15px;
+padding:14px;
 cursor:pointer;
 position:relative;
 overflow:hidden;
+background:#fff;
 transition:.15s
 }
 
-/* GREEN EDGE FOR ALL COMPETENCIES */
+/* CORE / COMPETENCY CARD EDGE = GREEN */
 
 .card:before{
 content:"";
@@ -298,15 +309,16 @@ height:100%;
 background:#059669
 }
 
-.card:hover{
+.card:hover,
+.card.selected{
 border-color:#86efac;
-box-shadow:0 8px 20px #0596691a;
-transform:translateY(-2px)
+box-shadow:0 7px 18px #05966918
 }
 
 .cardtop{
 display:flex;
-justify-content:space-between
+justify-content:space-between;
+gap:10px
 }
 
 .code{
@@ -336,8 +348,7 @@ justify-content:center
 .meta{
 display:flex;
 gap:6px;
-margin-top:8px;
-align-items:center
+margin-top:8px
 }
 
 .pill{
@@ -351,90 +362,71 @@ text-transform:uppercase
 /* CORE = GREEN */
 
 .core{
-background:#dcfce7;
+background:var(--greenbg);
 color:#047857
 }
 
 /* WORKING = YELLOW */
 
 .working{
-background:#fef3c7;
-color:#a16207
-}
-
-.muted{
-font-size:10px;
-color:var(--muted)
+background:var(--yellow);
+color:var(--yellowtext)
 }
 
 .levelselect{
-margin-top:10px;
+margin-top:9px;
 display:flex;
 align-items:center;
-gap:7px
+gap:8px
 }
 
 .levelselect label{
 font-size:9px;
 color:var(--muted);
 font-weight:700;
-margin:0;
 white-space:nowrap
 }
 
 .levelselect select{
-width:75px;
+width:72px;
 padding:7px 8px;
-font-size:11px;
-border-color:#cbd5e1
+font-size:11px
 }
 
-.levelselect select:focus{
-border-color:#059669;
-box-shadow:0 0 0 3px #05966918
-}
+/* RIGHT SIDE DETAIL PANEL */
 
-.review-submit{
-margin-top:15px;
-padding:13px 15px;
-border-radius:13px;
-background:#f8fafc;
+.detail{
+position:sticky;
+top:110px;
 border:1px solid var(--line);
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px
-}
-
-.review-submit button{
-background:linear-gradient(90deg,#059669,#047857);
-color:#fff;
-border:0
-}
-
-.drawer{
-display:none;
-margin-top:16px;
-padding:17px;
 border-radius:14px;
 background:linear-gradient(135deg,#faf9ff,#fff);
-box-shadow:inset 0 0 0 1px #ddd6fe
+box-shadow:inset 0 0 0 1px #eee9ff;
+min-height:500px;
+padding:17px
 }
 
-.drawer.open{
-display:block
+.detail.empty{
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:var(--muted);
+font-size:11px
 }
 
 .drawerhead{
 display:flex;
 justify-content:space-between;
+gap:10px;
 border-bottom:1px solid var(--line);
 padding-bottom:11px
 }
 
 .drawer h3{
 margin:0;
-font-size:17px
+font-size:17px;
+color:var(--navy)
 }
 
 .tabs{
@@ -462,7 +454,7 @@ color:#43515a
 
 .ladder{
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:1fr 1fr;
 gap:8px
 }
 
@@ -471,56 +463,82 @@ padding:11px;
 border-radius:10px;
 background:#fff;
 box-shadow:inset 0 0 0 1px var(--line);
-min-height:155px
+min-height:220px
 }
 
-.pl-number{
-font-size:22px;
+.plnum{
+font-size:20px;
 font-weight:850;
 color:#059669
 }
 
-.pl-title{
+.pllabel{
 font-size:11px;
 font-weight:800;
-color:#172554
+color:var(--navy);
+margin-top:1px
 }
 
-.pl .definition{
+/* ACTUAL PL DEFINITION */
+
+.definition{
 font-size:10px;
-color:#43515a;
+color:#172554;
+font-weight:650;
 line-height:1.45;
-margin:5px 0 7px
+padding:7px 9px;
+background:#f0fdf4;
+border-left:3px solid #059669;
+border-radius:5px;
+margin:7px 0 9px
 }
 
-.pl .expect{
+.expect{
 font-size:9px;
 color:#5b6971;
 line-height:1.45
 }
 
-.pl .expect ul{
+.expect ul{
 padding-left:14px;
 margin:3px 0
 }
 
+.expect li{
+margin-bottom:4px
+}
+
 .feedback{
-margin-top:18px;
-padding:16px;
+margin-top:16px;
+padding:15px;
 border-radius:14px;
-background:linear-gradient(135deg,#fff1f2,#fff7ed);
-box-shadow:inset 0 0 0 1px #fecdd3
+background:linear-gradient(135deg,#fff7ed,#fff);
+box-shadow:inset 0 0 0 1px #fed7aa
 }
 
 .feedback h3{
-margin:0 0 5px;
+margin:0 0 4px;
 font-size:14px;
-color:#881337
+color:#9a3412
 }
 
 .feedback p{
-font-size:11px;
-color:var(--muted)
+font-size:10px;
+color:var(--muted);
+margin:4px 0 10px
+}
+
+.saved{
+display:none;
+color:#047857;
+font-size:10px;
+margin-left:7px
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 130px;
+gap:10px
 }
 
 button{
@@ -533,23 +551,27 @@ font-weight:750;
 cursor:pointer
 }
 
-button.primary{
-background:linear-gradient(90deg,#6d28d9,#db2777);
-border:0;
-color:#fff
+.primary{
+background:linear-gradient(90deg,#059669,#047857)!important;
+color:#fff;
+border:0!important
 }
 
-.row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
+@media(max-width:1050px){
+
+.review-grid{
+grid-template-columns:1fr
 }
 
-.saved{
-display:none;
-color:#047857;
-font-size:10px;
-margin-left:7px
+.detail{
+position:relative;
+top:auto
+}
+
+.kpis{
+grid-template-columns:repeat(2,1fr)
+}
+
 }
 
 @media(max-width:900px){
@@ -564,31 +586,29 @@ top:auto;
 height:auto
 }
 
-.kpis,
-.cards,
 .comp-overview{
 grid-template-columns:1fr
 }
 
+}
+
+@media(max-width:600px){
+
 .ladder{
-grid-template-columns:1fr 1fr
+grid-template-columns:1fr
 }
 
-}
-
-@media(max-width:560px){
-
-.kpis,
-.ladder,
 .row{
 grid-template-columns:1fr
 }
 
+.kpis{
+grid-template-columns:1fr
 }
 
+}
 </style>
 </head>
-
 
 <body>
 
@@ -603,7 +623,7 @@ HR Competency Review Portal
 </h1>
 
 <p>
-Explore role-wise competency mapping and capture Head-level validation in one central system.
+Review role-wise competency mapping and record the proficiency level you believe is appropriate.
 </p>
 
 </header>
@@ -646,8 +666,39 @@ role:null,
 code:null
 };
 
+
+const LEVEL_INFO={
+
+PL1:{
+label:"Foundational",
+definition:
+"Delivers day to day tasks with guidance"
+},
+
+PL2:{
+label:"Independent",
+definition:
+"Owns monthly and quarterly deliverables independently"
+},
+
+PL3:{
+label:"Advanced",
+definition:
+"Leads annual deliverables and the AOP cycle for the vertical"
+},
+
+PL4:{
+label:"Enterprise",
+definition:
+"Holds complete accountability, vision and long term strategy for the function"
+}
+
+};
+
+
 const $=
 id=>document.getElementById(id);
+
 
 const esc=
 s=>String(s??"")
@@ -668,8 +719,12 @@ m=>({
 async function boot(){
 
 DATA=
-await fetch("/api/architecture")
-.then(r=>r.json());
+await fetch(
+"/api/architecture"
+)
+.then(
+r=>r.json()
+);
 
 buildNav();
 
@@ -678,8 +733,7 @@ overview();
 }
 
 
-
-/* LEFT NAVIGATION */
+/* NAVIGATION */
 
 function buildNav(){
 
@@ -721,14 +775,22 @@ document.createElement("div");
 
 x.className="role";
 
-x.textContent=r.name;
+x.textContent=
+r.name;
 
 x.dataset.q=
-(s.name+" "+r.name)
-.toLowerCase();
+(
+s.name+" "+r.name
+).toLowerCase();
+
 
 x.onclick=
-()=>showRole(si,ri,x);
+()=>showRole(
+si,
+ri,
+x
+);
+
 
 rs.appendChild(x);
 
@@ -738,14 +800,16 @@ rs.appendChild(x);
 h.onclick=
 ()=>o.classList.toggle("open");
 
-o.append(h,rs);
+o.append(
+h,
+rs
+);
 
 n.appendChild(o);
 
 });
 
 }
-
 
 
 /* SEARCH */
@@ -757,28 +821,39 @@ $("search")
 .value
 .toLowerCase();
 
+
 document
 .querySelectorAll(".org")
-.forEach(o=>{
+.forEach(
+o=>{
 
 let any=false;
 
+
 o.querySelectorAll(".role")
-.forEach(r=>{
+.forEach(
+r=>{
 
 let show=
 !q ||
 r.dataset.q.includes(q);
 
 r.style.display=
-show?"block":"none";
+show
+?"block"
+:"none";
 
-if(show) any=true;
+if(show)
+any=true;
 
 });
 
+
 o.style.display=
-any?"block":"none";
+any
+?"block"
+:"none";
+
 
 if(q&&any)
 o.classList.add("open");
@@ -786,7 +861,6 @@ o.classList.add("open");
 });
 
 }
-
 
 
 /* OVERVIEW */
@@ -800,7 +874,8 @@ DATA.competencies
 
 let roles=
 DATA.sections.reduce(
-(a,s)=>a+s.roles.length,
+(a,s)=>
+a+s.roles.length,
 0
 );
 
@@ -818,9 +893,7 @@ class="muted"
 style="line-height:1.6"
 >
 Select an organisation vertical and role from the left.
-The role view shows only its mapped competencies.
-Heads can review details and submit their decision directly
-to the central system.
+The role view shows only the competencies mapped to that role.
 </p>
 
 
@@ -921,13 +994,15 @@ Reviewer saved.
 
 
 let n=
-sessionStorage.getItem("reviewer")||"";
+sessionStorage.getItem(
+"reviewer"
+)||"";
+
 
 if(n)
 $("reviewer").value=n;
 
 }
-
 
 
 /* SAVE REVIEWER */
@@ -939,15 +1014,18 @@ $("reviewer")
 .value
 .trim();
 
+
 if(!n)
 return alert(
 "Please enter your name."
 );
 
+
 sessionStorage.setItem(
 "reviewer",
 n
 );
+
 
 $("rsaved").style.display=
 "inline";
@@ -955,10 +1033,13 @@ $("rsaved").style.display=
 }
 
 
-
 /* SHOW ROLE */
 
-function showRole(si,ri,el){
+function showRole(
+si,
+ri,
+el
+){
 
 current={
 sec:si,
@@ -970,10 +1051,16 @@ code:null
 document
 .querySelectorAll(".role")
 .forEach(
-x=>x.classList.remove("active")
+x=>
+x.classList.remove(
+"active"
+)
 );
 
-el.classList.add("active");
+
+el.classList.add(
+"active"
+);
 
 
 let s=
@@ -985,7 +1072,9 @@ s.roles[ri];
 
 let mapped=
 Object
-.entries(r.scores)
+.entries(
+r.scores
+)
 .filter(
 ([c,v])=>
 v!=="NA" &&
@@ -1026,12 +1115,19 @@ onclick="overview()"
 
 <div class="review-note">
 
-Review each mapped competency and enter the proficiency level you believe is most appropriate for this role.
+Click a competency to open its definition,
+Knowledge / Skill / Attitude, activities and the
+complete PL1–PL4 ladder beside the competency.
 
-Click a competency to view its full definition and proficiency ladder.
+Enter your suggested level for each competency.
 
 </div>
 
+
+<div class="review-grid">
+
+
+<div>
 
 <div class="cards">
 
@@ -1047,13 +1143,13 @@ let rel=
 
 return `
 
-<div class="card">
-
-
 <div
-class="cardtop"
+class="card"
+id="card-${code}"
 onclick="openComp('${code}')"
 >
+
+<div class="cardtop">
 
 <div>
 
@@ -1071,14 +1167,14 @@ ${esc(c.name)}
 <div>
 
 <div
-class="muted"
 style="
-text-align:right;
 font-size:8px;
-margin-bottom:3px
+text-align:right;
+color:#667085;
+margin-bottom:2px
 "
 >
-Mapped
+MAPPED
 </div>
 
 <div class="score">
@@ -1101,7 +1197,10 @@ ${esc(rel)}
 </div>
 
 
-<div class="levelselect">
+<div
+class="levelselect"
+onclick="event.stopPropagation()"
+>
 
 <label>
 Your suggested level
@@ -1109,7 +1208,6 @@ Your suggested level
 
 <select
 id="level-${code}"
-onclick="event.stopPropagation()"
 >
 
 <option
@@ -1144,7 +1242,6 @@ ${String(v)==="4"?"selected":""}
 
 </div>
 
-
 </div>
 
 `;
@@ -1153,72 +1250,35 @@ ${String(v)==="4"?"selected":""}
 
 </div>
 
-
-<div class="review-submit">
-
-<span class="muted">
-
-Suggested levels will be included with your role review.
-
-</span>
-
-<button
-onclick="submitRoleReview()"
->
-Next: Submit Review →
-</button>
-
 </div>
 
 
 <div
-id="drawer"
-class="drawer"
-></div>
+id="detail"
+class="detail empty"
+>
+
+Select a competency to view its details.
+
+</div>
+
+
+</div>
 
 
 <div class="feedback">
 
 <h3>
-Head / Reviewer Feedback
+Comments / Suggested Changes
 </h3>
 
 <p>
-Review the mapped competencies and proficiency levels,
-then submit one decision for this role.
+Use this box for any changes you want to recommend to the mapping or proficiency level.
 </p>
-
-
-<label>
-Decision
-</label>
-
-<select id="decision">
-
-<option value="">
-Select decision
-</option>
-
-<option>
-I agree
-</option>
-
-<option>
-I don't agree
-</option>
-
-</select>
-
-
-<label
-style="margin-top:9px"
->
-Comments / changes suggested
-</label>
 
 <textarea
 id="comments"
-placeholder="Mention competency or proficiency changes, additions or removals…"
+placeholder="Example: HC2 should be mapped at PL3 instead of PL4."
 ></textarea>
 
 
@@ -1228,7 +1288,7 @@ placeholder="Mention competency or proficiency changes, additions or removals…
 class="primary"
 onclick="submitFeedback()"
 >
-Submit review
+Submit Role Review
 </button>
 
 <span
@@ -1247,20 +1307,39 @@ Review submitted.
 }
 
 
-
 /* OPEN COMPETENCY */
 
 function openComp(code){
 
-current.code=code;
+current.code=
+code;
+
+
+document
+.querySelectorAll(".card")
+.forEach(
+x=>x.classList.remove(
+"selected"
+)
+);
+
+
+$("card-"+code)
+?.classList.add(
+"selected"
+);
+
 
 let c=
 DATA.competencies[code];
 
 let d=
-$("drawer");
+$("detail");
 
-d.classList.add("open");
+
+d.classList.remove(
+"empty"
+);
 
 
 d.innerHTML=`
@@ -1279,8 +1358,9 @@ ${esc(c.scope||"")}
 
 </div>
 
+
 <button
-onclick="d.classList.remove('open')"
+onclick="closeComp()"
 >
 Close
 </button>
@@ -1330,29 +1410,74 @@ class="tabbody"
 
 
 tab(
-document.querySelector(".tab"),
+document.querySelector(
+"#detail .tab"
+),
 "definition"
 );
 
 }
 
 
+/* CLOSE */
 
-/* COMPETENCY DETAILS */
+function closeComp(){
 
-function tab(btn,type){
+current.code=
+null;
+
 
 document
-.querySelectorAll(".tab")
+.querySelectorAll(".card")
 .forEach(
-x=>x.classList.remove("active")
+x=>x.classList.remove(
+"selected"
+)
 );
 
-btn.classList.add("active");
+
+let d=
+$("detail");
+
+
+d.className=
+"detail empty";
+
+
+d.innerHTML=
+"Select a competency to view its details.";
+
+}
+
+
+/* DETAIL TABS */
+
+function tab(
+btn,
+type
+){
+
+document
+.querySelectorAll(
+"#detail .tab"
+)
+.forEach(
+x=>x.classList.remove(
+"active"
+)
+);
+
+
+btn.classList.add(
+"active"
+);
 
 
 let c=
-DATA.competencies[current.code];
+DATA.competencies[
+current.code
+];
+
 
 let b=
 $("tabbody");
@@ -1385,7 +1510,7 @@ b.innerHTML=`
 
 <div
 class="cards"
-style="grid-template-columns:repeat(3,1fr)"
+style="grid-template-columns:1fr"
 >
 
 <div
@@ -1446,16 +1571,6 @@ ${esc(c.Attitude||"")}
 
 if(type==="activities"){
 
-let activities=
-String(
-c["On-the-Job Activities"] ||
-c["On-the-job activities"] ||
-""
-)
-.split("\n")
-.filter(Boolean);
-
-
 b.innerHTML=`
 
 <b>
@@ -1464,14 +1579,23 @@ On-the-job activities
 
 <ul>
 
-${activities.map(
+${
+String(
+c["On-the-Job Activities"]||""
+)
+.split("\n")
+.filter(Boolean)
+.map(
 x=>
-"<li>"+
-esc(
-x.replace(/^•\s*/,"")
-)+
-"</li>"
-).join("")}
+`<li>${esc(
+x.replace(
+/^•\s*/,
+""
+)
+)}</li>`
+)
+.join("")
+}
 
 </ul>
 
@@ -1506,44 +1630,45 @@ Increasing complexity, impact and autonomy
 
 <div class="ladder">
 
-${["PL4","PL3","PL2","PL1"]
-.map(x=>{
+${["PL1","PL2","PL3","PL4"]
+.map(
+x=>{
 
-let lines=
-String(c[x]||"")
+let expectations=
+String(
+c[x]||""
+)
 .split("\n")
 .map(
-v=>v.replace(/^•\s*/,"").trim()
+v=>
+v.replace(
+/^•\s*/,
+""
+).trim()
 )
 .filter(Boolean);
 
 
-/*
-FIRST LINE = DEFINITION
-REMAINING LINES = EXPECTATIONS
-*/
-
-let definition=
-lines.shift() ||
-"Definition not available";
+let info=
+LEVEL_INFO[x];
 
 
 return `
 
 <div class="pl">
 
-<div class="pl-number">
+<div class="plnum">
 ${x.replace("PL","")}
 </div>
 
-<div class="pl-title">
-${esc(x)}
+<div class="pllabel">
+${info.label}
 </div>
 
 
 <div class="definition">
 
-${esc(definition)}
+${info.definition}
 
 </div>
 
@@ -1556,10 +1681,14 @@ At this level:
 
 <ul>
 
-${lines.map(
+${
+expectations
+.map(
 v=>
 `<li>${esc(v)}</li>`
-).join("")}
+)
+.join("")
+}
 
 </ul>
 
@@ -1569,7 +1698,9 @@ v=>
 
 `;
 
-}).join("")}
+}
+)
+.join("")}
 
 </div>
 
@@ -1580,32 +1711,14 @@ v=>
 }
 
 
-
-/* GO TO SUBMIT */
-
-function submitRoleReview(){
-
-document
-.querySelector(".feedback")
-.scrollIntoView({
-behavior:"smooth",
-block:"center"
-});
-
-document
-.getElementById("decision")
-.focus();
-
-}
-
-
-
-/* SUBMIT REVIEW */
+/* SUBMIT */
 
 async function submitFeedback(){
 
 let reviewer=
-sessionStorage.getItem("reviewer");
+sessionStorage.getItem(
+"reviewer"
+);
 
 
 if(!reviewer){
@@ -1617,36 +1730,24 @@ return alert(
 }
 
 
-let decision=
-$("decision").value;
-
-
-if(!decision){
-
-return alert(
-"Please select a decision."
-);
-
-}
-
-
 let s=
-DATA.sections[current.sec];
+DATA.sections[
+current.sec
+];
 
 let r=
-s.roles[current.role];
+s.roles[
+current.role
+];
 
-
-/*
-CAPTURE SUGGESTED LEVEL
-FOR EVERY MAPPED COMPETENCY
-*/
 
 let suggestedLevels={};
 
 
 Object
-.entries(r.scores)
+.entries(
+r.scores
+)
 .filter(
 ([code,v])=>
 v!=="NA" &&
@@ -1657,36 +1758,17 @@ v!==""
 .forEach(
 ([code])=>{
 
-let select=
-document.getElementById(
-`level-${code}`
-);
+let el=
+$("level-"+code);
 
-if(select){
+if(el){
 
 suggestedLevels[code]=
-Number(select.value);
+Number(el.value);
 
 }
 
 });
-
-
-let payload={
-
-reviewer,
-
-vertical:s.name,
-
-role:r.name,
-
-decision,
-
-comments:$("comments").value,
-
-suggestedLevels
-
-};
 
 
 let res=
@@ -1701,9 +1783,25 @@ headers:{
 },
 
 body:
-JSON.stringify(payload)
+JSON.stringify({
 
-});
+reviewer,
+
+vertical:
+s.name,
+
+role:
+r.name,
+
+suggestedLevels,
+
+comments:
+$("comments").value
+
+})
+
+}
+);
 
 
 if(!res.ok){
