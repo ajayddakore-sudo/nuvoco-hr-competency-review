@@ -1,35 +1,25 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1"
->
-
-<title>
-Nuvoco HR Competency Review — Admin
-</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuvoco HR Competency Review — Admin</title>
 
 <style>
-
 :root{
 --navy:#172554;
 --green:#059669;
 --red:#be123c;
 --purple:#6d28d9;
+--pink:#db2777;
 --ink:#172033;
 --muted:#667085;
 --bg:#f6f7fb;
---line:#e5e7eb
+--line:#e5e7eb;
+--orange:#ea580c
 }
 
-*{
-box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -39,12 +29,7 @@ color:var(--ink)
 }
 
 header{
-background:linear-gradient(
-115deg,
-#172554,
-#4c1d95,
-#be185d
-);
+background:linear-gradient(115deg,#172554,#4c1d95,#be185d);
 color:#fff;
 padding:24px 32px
 }
@@ -86,18 +71,21 @@ max-width:420px;
 margin:70px auto
 }
 
-input,
-select{
+.login input{
+width:100%
+}
+
+.hidden{
+display:none!important
+}
+
+input,select{
 padding:9px 10px;
 border:1px solid #d9dee8;
 border-radius:8px;
 font:inherit;
 font-size:11px;
 background:#fff
-}
-
-.login input{
-width:100%
 }
 
 button{
@@ -110,18 +98,26 @@ font-weight:750;
 cursor:pointer
 }
 
+button:hover{
+background:#f8fafc
+}
+
 .primary{
-background:linear-gradient(
-90deg,
-#6d28d9,
-#db2777
-)!important;
+background:linear-gradient(90deg,#6d28d9,#db2777)!important;
 color:#fff!important;
 border:0!important
 }
 
-.hidden{
-display:none
+.danger{
+background:#be123c!important;
+color:#fff!important;
+border:0!important
+}
+
+.warning{
+background:#ea580c!important;
+color:#fff!important;
+border:0!important
 }
 
 .muted{
@@ -153,21 +149,10 @@ height:3px;
 background:#6d28d9
 }
 
-.kpi:nth-child(2):before{
-background:#2563eb
-}
-
-.kpi:nth-child(3):before{
-background:#059669
-}
-
-.kpi:nth-child(4):before{
-background:#f97316
-}
-
-.kpi:nth-child(5):before{
-background:#db2777
-}
+.kpi:nth-child(2):before{background:#2563eb}
+.kpi:nth-child(3):before{background:#059669}
+.kpi:nth-child(4):before{background:#f97316}
+.kpi:nth-child(5):before{background:#db2777}
 
 .kpi b{
 display:block;
@@ -252,8 +237,7 @@ width:100%;
 min-width:1250px
 }
 
-th,
-td{
+th,td{
 padding:10px;
 border-bottom:1px solid var(--line);
 text-align:left;
@@ -277,11 +261,7 @@ min-width:430px
 
 .comp-row{
 display:grid;
-grid-template-columns:
-minmax(190px,1fr)
-42px
-55px
-90px;
+grid-template-columns:minmax(190px,1fr) 42px 55px 90px;
 gap:7px;
 align-items:center;
 padding:5px 0;
@@ -350,6 +330,61 @@ background:#fef3c7;
 color:#a16207
 }
 
+/* Clear responses panel */
+
+.clear-panel{
+margin-top:18px;
+padding:14px;
+border:1px solid #fecaca;
+border-radius:12px;
+background:#fff7f7
+}
+
+.clear-title{
+font-size:12px;
+font-weight:850;
+color:#991b1b;
+margin-bottom:4px
+}
+
+.clear-description{
+font-size:9px;
+color:#667085;
+margin-bottom:10px;
+line-height:1.5
+}
+
+.clear-controls{
+display:grid;
+grid-template-columns:1fr 1fr 1fr auto;
+gap:8px;
+align-items:end
+}
+
+.clear-field label{
+display:block;
+font-size:8px;
+font-weight:800;
+color:#667085;
+text-transform:uppercase;
+margin-bottom:4px
+}
+
+.clear-actions{
+display:flex;
+gap:7px
+}
+
+.danger-outline{
+color:#be123c;
+border-color:#fca5a5;
+background:#fff
+}
+
+.danger-outline:hover{
+background:#fff1f2
+}
+
 @media(max-width:1000px){
 
 .kpis{
@@ -360,20 +395,24 @@ grid-template-columns:repeat(3,1fr)
 grid-template-columns:1fr 1fr
 }
 
+.clear-controls{
+grid-template-columns:1fr 1fr
+}
+
 }
 
 @media(max-width:650px){
 
 .kpis,
-.summary-grid{
+.summary-grid,
+.clear-controls{
 grid-template-columns:1fr
 }
 
 }
-
 </style>
-
 </head>
+
 
 <body>
 
@@ -528,6 +567,7 @@ class="summary-grid"
 Filters
 </div>
 
+
 <div class="actions">
 
 <div class="filters">
@@ -626,6 +666,96 @@ Submitted
 </table>
 
 </div>
+
+
+<!-- CLEAR RESPONSES -->
+
+<div class="clear-panel">
+
+<div class="clear-title">
+Clear Saved Responses
+</div>
+
+<div class="clear-description">
+Use this section only when you want to remove test responses or reset the portal before sharing it with the Heads. Deleted responses cannot be recovered.
+</div>
+
+
+<div class="clear-controls">
+
+<div class="clear-field">
+
+<label>
+Reviewer
+</label>
+
+<select id="clearReviewer">
+
+<option value="">
+All reviewers
+</option>
+
+</select>
+
+</div>
+
+
+<div class="clear-field">
+
+<label>
+Vertical
+</label>
+
+<select id="clearVertical">
+
+<option value="">
+All verticals
+</option>
+
+</select>
+
+</div>
+
+
+<div class="clear-field">
+
+<label>
+Role
+</label>
+
+<select id="clearRole">
+
+<option value="">
+All roles
+</option>
+
+</select>
+
+</div>
+
+
+<div class="clear-actions">
+
+<button
+class="danger-outline"
+onclick="clearSelected()"
+>
+Clear Selected
+</button>
+
+<button
+class="danger"
+onclick="clearAll()"
+>
+Clear All
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -738,36 +868,74 @@ return alert(
 data=
 await r.json();
 
-populateVerticals();
+
+populateFilters();
 
 render();
 
 }
 
 
-function populateVerticals(){
+function populateFilters(){
 
-let s=
+let reviewers=
 new Set(
 data
-.map(
-x=>x.vertical
-)
+.map(x=>x.reviewer)
 .filter(Boolean)
 );
 
 
-let el=
-document.getElementById(
-"vertical"
+let verticals=
+new Set(
+data
+.map(x=>x.vertical)
+.filter(Boolean)
 );
 
 
-[
-...s
-]
-.sort()
-.forEach(
+let roles=
+new Set(
+data
+.map(x=>x.role)
+.filter(Boolean)
+);
+
+
+fillSelect(
+"clearReviewer",
+[...reviewers].sort()
+);
+
+fillSelect(
+"clearVertical",
+[...verticals].sort()
+);
+
+fillSelect(
+"clearRole",
+[...roles].sort()
+);
+
+}
+
+
+function fillSelect(
+id,
+values
+){
+
+let el=
+document.getElementById(id);
+
+
+while(
+el.options.length>1
+)
+el.remove(1);
+
+
+values.forEach(
 v=>{
 
 let o=
@@ -781,7 +949,8 @@ o.textContent=v;
 
 el.appendChild(o);
 
-});
+}
+);
 
 }
 
@@ -867,13 +1036,13 @@ let done=
 (item.reviewed||[]).length;
 
 if(!total)
-return {
+return{
 done:0,
 total:0,
 pct:0
 };
 
-return {
+return{
 done,
 total,
 pct:
@@ -986,7 +1155,7 @@ m!==""
 ch=
 `
 <span class="no-change">
-No change
+Agreed (${m})
 </span>
 `;
 
@@ -1062,10 +1231,13 @@ total:0,
 complete:0
 };
 
+
 by[x.reviewer].total++;
+
 
 let c=
 completion(x);
+
 
 if(
 c.total &&
@@ -1139,12 +1311,15 @@ function render(){
 let q=
 document.getElementById(
 "q"
-).value.toLowerCase();
+).value
+.toLowerCase();
+
 
 let vertical=
 document.getElementById(
 "vertical"
 ).value;
+
 
 let cf=
 document.getElementById(
@@ -1266,6 +1441,7 @@ x=>{
 let c=
 completion(x);
 
+
 return `
 
 <tr>
@@ -1292,8 +1468,10 @@ ${esc(x.role)}
 class="badge ${
 c.total &&
 c.done===c.total
-?"complete"
-:"partial"
+?
+"complete"
+:
+"partial"
 }"
 >
 
@@ -1381,10 +1559,12 @@ return alert(
 let b=
 await r.blob();
 
+
 let u=
 URL.createObjectURL(
 b
 );
+
 
 let a=
 document.createElement(
@@ -1401,6 +1581,225 @@ a.click();
 URL.revokeObjectURL(u);
 
 }
+
+
+/* -----------------------------
+   CLEAR RESPONSE FUNCTIONS
+------------------------------ */
+
+
+async function clearAll(){
+
+const ok=
+confirm(
+"WARNING: This will permanently delete ALL saved reviewer responses.\n\nAre you sure you want to continue?"
+);
+
+
+if(!ok)
+return;
+
+
+const second=
+confirm(
+"Please confirm again.\n\nThis action cannot be undone."
+);
+
+
+if(!second)
+return;
+
+
+let r=
+await fetch(
+"/api/admin/feedback",
+{
+method:"DELETE",
+
+headers:{
+"x-admin-token":
+token,
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+all:true
+})
+}
+);
+
+
+if(!r.ok){
+
+return alert(
+"Unable to clear responses."
+);
+
+}
+
+
+alert(
+"All responses have been cleared."
+);
+
+
+await load();
+
+}
+
+
+async function clearSelected(){
+
+let reviewer=
+document.getElementById(
+"clearReviewer"
+).value;
+
+
+let vertical=
+document.getElementById(
+"clearVertical"
+).value;
+
+
+let role=
+document.getElementById(
+"clearRole"
+).value;
+
+
+if(
+!reviewer &&
+!vertical &&
+!role
+){
+
+return alert(
+"Please select at least one filter.\n\nFor deleting everything, use Clear All."
+);
+
+}
+
+
+let description=[];
+
+
+if(reviewer)
+description.push(
+"Reviewer: "+reviewer
+);
+
+if(vertical)
+description.push(
+"Vertical: "+vertical
+);
+
+if(role)
+description.push(
+"Role: "+role
+);
+
+
+const ok=
+confirm(
+"Delete the following responses?\n\n"+
+description.join("\n")+
+"\n\nThis cannot be undone."
+);
+
+
+if(!ok)
+return;
+
+
+let r=
+await fetch(
+"/api/admin/feedback",
+{
+method:"DELETE",
+
+headers:{
+"x-admin-token":
+token,
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+
+reviewer,
+vertical,
+role
+
+})
+}
+);
+
+
+if(!r.ok){
+
+return alert(
+"Unable to clear selected responses."
+);
+
+}
+
+
+let result=
+await r.json();
+
+
+alert(
+`${result.deleted || 0} response(s) deleted.`
+);
+
+
+await load();
+
+}
+
+
+/* Role dropdown can be filtered by selected vertical */
+
+document.addEventListener(
+"change",
+e=>{
+
+if(
+e.target.id!=="clearVertical"
+)
+return;
+
+
+let vertical=
+e.target.value;
+
+
+let roles=
+new Set(
+data
+.filter(
+x=>
+!vertical ||
+x.vertical===vertical
+)
+.map(
+x=>x.role
+)
+.filter(Boolean)
+);
+
+
+fillSelect(
+"clearRole",
+[...roles].sort()
+);
+
+}
+);
 
 
 function esc(v){
@@ -1426,5 +1825,4 @@ m=>({
 </script>
 
 </body>
-
 </html>
