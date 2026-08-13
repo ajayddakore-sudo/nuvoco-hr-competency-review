@@ -36,6 +36,10 @@ const FEEDBACK =
   );
 
 
+/* -----------------------------
+   FILE HELPERS
+------------------------------ */
+
 function readFeedback(){
 
   try{
@@ -71,6 +75,10 @@ function writeFeedback(rows){
 }
 
 
+/* -----------------------------
+   ARCHITECTURE
+------------------------------ */
+
 app.get(
   "/api/architecture",
   (req,res)=>{
@@ -82,6 +90,10 @@ app.get(
   }
 );
 
+
+/* -----------------------------
+   PUBLIC FEEDBACK
+------------------------------ */
 
 app.get(
   "/api/feedback",
@@ -153,6 +165,13 @@ app.post(
     };
 
 
+    /*
+      If the same reviewer submits
+      the same role again, update the
+      previous submission instead of
+      creating duplicates.
+    */
+
     const index =
       rows.findIndex(
         x=>
@@ -197,6 +216,10 @@ app.post(
   }
 );
 
+
+/* -----------------------------
+   ADMIN AUTHENTICATION
+------------------------------ */
 
 const adminTokens =
   new Set();
@@ -289,6 +312,10 @@ function requireAdmin(
 }
 
 
+/* -----------------------------
+   ADMIN: VIEW FEEDBACK
+------------------------------ */
+
 app.get(
   "/api/admin/feedback",
   requireAdmin,
@@ -301,6 +328,174 @@ app.get(
   }
 );
 
+
+/* -----------------------------
+   ADMIN: CLEAR RESPONSES
+------------------------------ */
+
+app.delete(
+  "/api/admin/feedback",
+  requireAdmin,
+  (req,res)=>{
+
+    const body =
+      req.body || {};
+
+
+    let rows =
+      readFeedback();
+
+
+    /*
+      CLEAR EVERYTHING
+    */
+
+    if(body.all===true){
+
+      const deleted =
+        rows.length;
+
+
+      writeFeedback([]);
+
+
+      return res.json({
+
+        ok:true,
+
+        deleted,
+
+        message:
+        "All responses cleared."
+
+      });
+
+    }
+
+
+    /*
+      CLEAR SELECTED RESPONSES
+    */
+
+    const reviewer =
+      String(
+        body.reviewer ||
+        ""
+      ).trim();
+
+
+    const vertical =
+      String(
+        body.vertical ||
+        ""
+      ).trim();
+
+
+    const role =
+      String(
+        body.role ||
+        ""
+      ).trim();
+
+
+    if(
+      !reviewer &&
+      !vertical &&
+      !role
+    ){
+
+      return res
+        .status(400)
+        .json({
+
+          error:
+          "At least one filter is required."
+
+        });
+
+    }
+
+
+    const originalCount =
+      rows.length;
+
+
+    rows=
+      rows.filter(
+        item=>{
+
+          /*
+            A response matches the
+            selected filters only when
+            every supplied filter matches.
+          */
+
+          if(
+            reviewer &&
+            item.reviewer!==reviewer
+          ){
+            return true;
+          }
+
+
+          if(
+            vertical &&
+            item.vertical!==vertical
+          ){
+            return true;
+          }
+
+
+          if(
+            role &&
+            item.role!==role
+          ){
+            return true;
+          }
+
+
+          /*
+            All supplied filters matched,
+            therefore DELETE this record.
+          */
+
+          return false;
+
+        }
+      );
+
+
+    const deleted =
+      originalCount -
+      rows.length;
+
+
+    writeFeedback(
+      rows
+    );
+
+
+    res.json({
+
+      ok:true,
+
+      deleted,
+
+      remaining:
+      rows.length,
+
+      message:
+      "Selected responses cleared."
+
+    });
+
+  }
+);
+
+
+/* -----------------------------
+   ADMIN: CSV EXPORT
+------------------------------ */
 
 app.get(
   "/api/admin/export.csv",
@@ -518,6 +713,10 @@ app.get(
 );
 
 
+/* -----------------------------
+   ADMIN PAGE
+------------------------------ */
+
 app.get(
   "/admin",
   (req,res)=>{
@@ -533,12 +732,20 @@ app.get(
 );
 
 
+/* -----------------------------
+   STATIC FILES
+------------------------------ */
+
 app.use(
   express.static(
     ROOT
   )
 );
 
+
+/* -----------------------------
+   SPA FALLBACK
+------------------------------ */
 
 app.get(
   "*",
@@ -554,6 +761,10 @@ app.get(
   }
 );
 
+
+/* -----------------------------
+   START SERVER
+------------------------------ */
 
 app.listen(
   PORT,
