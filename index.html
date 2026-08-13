@@ -143,7 +143,82 @@ font-size:10px;
 color:var(--muted)
 }
 
-/* Welcome */
+/* -----------------------------
+   WORKFLOW
+------------------------------ */
+
+.workflow{
+display:flex;
+align-items:center;
+margin:0 0 22px;
+padding:12px 15px;
+background:#faf9ff;
+border:1px solid #e4ddff;
+border-radius:12px
+}
+
+.step{
+display:flex;
+align-items:center;
+gap:7px;
+flex:1;
+position:relative
+}
+
+.step:not(:last-child):after{
+content:"";
+height:2px;
+background:#e5e7eb;
+flex:1;
+margin:0 8px
+}
+
+.step.done:not(:last-child):after{
+background:#a7f3d0
+}
+
+.step-number{
+width:27px;
+height:27px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#e5e7eb;
+color:#667085;
+font-size:9px;
+font-weight:850;
+flex-shrink:0
+}
+
+.step.active .step-number{
+background:linear-gradient(135deg,#6d28d9,#db2777);
+color:#fff
+}
+
+.step.done .step-number{
+background:#059669;
+color:#fff
+}
+
+.step-text{
+font-size:8px;
+font-weight:800;
+color:#667085;
+white-space:nowrap
+}
+
+.step.active .step-text{
+color:#5b21b6
+}
+
+.step.done .step-text{
+color:#047857
+}
+
+/* -----------------------------
+   WELCOME
+------------------------------ */
 
 .welcome{
 min-height:650px;
@@ -200,57 +275,106 @@ width:100%;
 padding:12px
 }
 
-/* Organisation */
+/* -----------------------------
+   ORGANISATION
+------------------------------ */
 
-.org{
-margin:3px 0;
-border-radius:9px;
+.org-workflow{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+margin-top:15px
+}
+
+.org-option{
+border:1px solid var(--line);
+border-radius:12px;
+background:#fff;
 overflow:hidden
 }
 
-.orghead{
-padding:9px;
-font-size:11px;
-font-weight:750;
-cursor:pointer;
+.org-option-head{
+padding:14px;
 display:flex;
-justify-content:space-between
+justify-content:space-between;
+align-items:center;
+cursor:pointer
 }
 
-.org.open .orghead{
-background:#f4f1ff;
-color:#5b21b6
+.org-option-head:hover{
+background:#faf9ff
 }
 
-.roles{
+.org-option.open{
+border-color:#c4b5fd;
+box-shadow:0 5px 18px #6d28d912
+}
+
+.org-option.open
+.org-option-head{
+background:#f5f3ff
+}
+
+.org-title{
+font-size:13px;
+font-weight:850;
+color:var(--navy)
+}
+
+.org-count{
+font-size:8px;
+color:#6d28d9;
+font-weight:800;
+background:#ede9fe;
+padding:5px 8px;
+border-radius:999px
+}
+
+.org-roles{
 display:none;
-padding:2px 5px 6px
+padding:0 12px 12px;
+border-top:1px solid #ede9fe
 }
 
-.org.open .roles{
+.org-option.open .org-roles{
 display:block
 }
 
-.role{
-padding:7px 8px;
-border-radius:7px;
-font-size:10px;
+.role-option{
+margin-top:6px;
+padding:11px 12px;
+border:1px solid #e5e7eb;
+border-radius:9px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 cursor:pointer;
-color:#475467
+background:#fff
 }
 
-.role:hover{
-background:#f8fafc
+.role-option:hover{
+border-color:#a78bfa;
+background:#faf9ff
 }
 
-.role.active{
-background:linear-gradient(90deg,#ede9fe,#fce7f3);
-color:#5b21b6;
-font-weight:800;
-border-left:3px solid #db2777
+.role-name{
+font-size:10px;
+font-weight:750;
+color:#344054
 }
 
-/* Reviewer bar */
+.role-arrow{
+font-size:12px;
+color:#6d28d9
+}
+
+.back-btn{
+margin-bottom:12px
+}
+
+/* -----------------------------
+   REVIEWER BAR
+------------------------------ */
 
 .reviewer-bar{
 display:flex;
@@ -274,7 +398,9 @@ font-size:11px
 font-size:8px
 }
 
-/* Overview */
+/* -----------------------------
+   OVERVIEW
+------------------------------ */
 
 .overview-top{
 display:flex;
@@ -374,7 +500,9 @@ align-items:center;
 gap:15px
 }
 
-/* Role review */
+/* -----------------------------
+   ROLE REVIEW
+------------------------------ */
 
 .role-summary{
 display:flex;
@@ -578,7 +706,9 @@ color:#047857;
 border-color:#bbf7d0
 }
 
-/* Competency expansion */
+/* -----------------------------
+   COMPETENCY EXPANSION
+------------------------------ */
 
 .detail{
 margin-top:10px;
@@ -780,6 +910,10 @@ flex-direction:column;
 align-items:stretch
 }
 
+.workflow{
+overflow:auto
+}
+
 }
 </style>
 </head>
@@ -807,7 +941,7 @@ Validate the role mapping and recommend the right proficiency level.
 <div class="layout">
 
 
-<!-- LEFT ORGANISATION STRUCTURE -->
+<!-- LEFT SIDE -->
 
 <aside
 class="box side"
@@ -835,10 +969,7 @@ Organisation structure
 <main
 class="box main"
 id="main"
->
-
-</main>
-
+></main>
 
 </div>
 
@@ -855,10 +986,6 @@ code:null
 
 let reviewed={};
 
-
-/* -----------------------------
-   PROFICIENCY DEFINITIONS
------------------------------- */
 
 const LEVEL_INFO={
 
@@ -907,9 +1034,9 @@ m=>({
 );
 
 
-/* -----------------------------
-   START
------------------------------- */
+/* =============================
+   BOOT
+============================= */
 
 async function boot(){
 
@@ -919,10 +1046,6 @@ await fetch(
 )
 .then(r=>r.json());
 
-
-// If reviewer name already exists
-// in this browser session, skip
-// welcome screen.
 
 let reviewer=
 sessionStorage.getItem(
@@ -943,9 +1066,92 @@ showWelcome();
 }
 
 
-/* -----------------------------
-   WELCOME SCREEN
------------------------------- */
+/* =============================
+   WORKFLOW BAR
+============================= */
+
+function workflow(step){
+
+return `
+
+<div class="workflow">
+
+<div class="
+step
+${step>=1?"done":""}
+${step===1?"active":""}
+">
+
+<div class="step-number">
+${step>1?"✓":"1"}
+</div>
+
+<div class="step-text">
+Reviewer
+</div>
+
+</div>
+
+
+<div class="
+step
+${step>=2?"done":""}
+${step===2?"active":""}
+">
+
+<div class="step-number">
+${step>2?"✓":"2"}
+</div>
+
+<div class="step-text">
+Overview
+</div>
+
+</div>
+
+
+<div class="
+step
+${step>=3?"done":""}
+${step===3?"active":""}
+">
+
+<div class="step-number">
+${step>3?"✓":"3"}
+</div>
+
+<div class="step-text">
+Select Role
+</div>
+
+</div>
+
+
+<div class="
+step
+${step===4?"active":""}
+">
+
+<div class="step-number">
+4
+</div>
+
+<div class="step-text">
+Review
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =============================
+   WELCOME
+============================= */
 
 function showWelcome(){
 
@@ -953,6 +1159,9 @@ $("sidebar").style.display="none";
 
 
 $("main").innerHTML=`
+
+${workflow(1)}
+
 
 <div class="welcome">
 
@@ -1020,9 +1229,9 @@ $("reviewerName")?.focus(),
 }
 
 
-/* -----------------------------
+/* =============================
    START REVIEW
------------------------------- */
+============================= */
 
 function startReview(){
 
@@ -1054,15 +1263,13 @@ showOverview();
 }
 
 
-/* -----------------------------
+/* =============================
    OVERVIEW
------------------------------- */
+============================= */
 
 function showOverview(){
 
-$("sidebar").style.display="block";
-
-buildNav();
+$("sidebar").style.display="none";
 
 
 let reviewer=
@@ -1086,13 +1293,14 @@ a+s.roles.length,
 
 $("main").innerHTML=`
 
+${workflow(2)}
+
+
 <div class="reviewer-bar">
 
 <div>
 
-<span
-class="muted"
->
+<span class="muted">
 Reviewer
 </span>
 
@@ -1184,27 +1392,27 @@ margin-top:5px
 "
 >
 
-1. Select your organisation / function from the left.
+1. Review the competency architecture.
 
 <br>
 
-2. Select the role you want to review.
+2. Select your organisation / function.
 
 <br>
 
-3. Review every mapped competency.
+3. Select the role you want to validate.
 
 <br>
 
-4. Keep the existing level if you agree with it, or recommend another level.
+4. Review every mapped competency.
 
 <br>
 
-5. Open the competency to review Definition, KSA, Activities and Proficiency Ladder.
+5. Keep the existing level if you agree, or recommend another level.
 
 <br>
 
-6. Mark the competency as reviewed and submit the role review.
+6. Add comments where required and submit the role review.
 
 </div>
 
@@ -1247,21 +1455,21 @@ font-size:11px;
 color:#172554
 "
 >
-Ready to begin?
+Ready to select a role?
 </b>
 
 <div
 class="muted"
 style="margin-top:3px"
 >
-Select a role from the Organisation Structure on the left.
+Next, choose the organisation vertical and role you want to review.
 </div>
 
 </div>
 
 <button
 class="primary"
-onclick="focusOrg()"
+onclick="showOrganisation()"
 >
 View Organisation Structure →
 </button>
@@ -1273,28 +1481,185 @@ View Organisation Structure →
 }
 
 
-function focusOrg(){
+/* =============================
+   ORGANISATION SCREEN
+============================= */
 
-let first=
-document.querySelector(
-".orghead"
+function showOrganisation(){
+
+$("sidebar").style.display="none";
+
+
+$("main").innerHTML=`
+
+${workflow(3)}
+
+
+<div class="reviewer-bar">
+
+<div>
+
+<span class="muted">
+Reviewer
+</span>
+
+<div class="reviewer-name">
+${esc(
+sessionStorage.getItem("reviewer")
+)}
+</div>
+
+</div>
+
+<button
+class="change-reviewer"
+onclick="changeReviewer()"
+>
+Change Reviewer
+</button>
+
+</div>
+
+
+<button
+class="back-btn"
+onclick="showOverview()"
+>
+← Back to Overview
+</button>
+
+
+<div class="vertical">
+Step 3 of 4
+</div>
+
+<h2
+style="
+margin:3px 0;
+color:#172554
+"
+>
+Select Organisation & Role
+</h2>
+
+<div class="muted">
+Expand the organisation vertical and select the role you want to review.
+</div>
+
+
+<div class="org-workflow">
+
+${DATA.sections.map(
+(s,si)=>`
+
+<div
+class="org-option"
+id="org-${si}"
+>
+
+<div
+class="org-option-head"
+onclick="toggleOrg(${si})"
+>
+
+<div>
+
+<div class="org-title">
+${esc(s.name)}
+</div>
+
+<div
+class="muted"
+style="margin-top:3px"
+>
+Click to view roles
+</div>
+
+</div>
+
+<div class="org-count">
+${s.roles.length} Roles
+</div>
+
+</div>
+
+
+<div class="org-roles">
+
+${s.roles.map(
+(r,ri)=>`
+
+<div
+class="role-option"
+onclick="showRole(${si},${ri})"
+>
+
+<div>
+
+<div class="role-name">
+${esc(r.name)}
+</div>
+
+<div
+class="muted"
+style="margin-top:3px"
+>
+Review competency mapping
+</div>
+
+</div>
+
+<div class="role-arrow">
+→
+</div>
+
+</div>
+
+`
+).join("")}
+
+</div>
+
+</div>
+
+`
+).join("")}
+
+</div>
+
+`;
+
+}
+
+
+function toggleOrg(si){
+
+let selected=
+$("org-"+si);
+
+
+document
+.querySelectorAll(".org-option")
+.forEach(
+x=>{
+
+if(x!==selected)
+x.classList.remove("open");
+
+}
 );
 
-if(first){
 
-first.scrollIntoView({
-behavior:"smooth",
-block:"center"
-});
-
-}
+selected.classList.toggle(
+"open"
+);
 
 }
 
 
-/* -----------------------------
+/* =============================
    CHANGE REVIEWER
------------------------------- */
+============================= */
 
 function changeReviewer(){
 
@@ -1313,185 +1678,28 @@ sessionStorage.removeItem(
 
 reviewed={};
 
+
 showWelcome();
 
 }
 
 
-/* -----------------------------
-   NAVIGATION
------------------------------- */
-
-function buildNav(){
-
-let n=$("nav");
-
-n.innerHTML="";
-
-
-DATA.sections.forEach(
-(s,si)=>{
-
-let o=
-document.createElement(
-"div"
-);
-
-o.className="org";
-
-
-let h=
-document.createElement(
-"div"
-);
-
-h.className="orghead";
-
-h.innerHTML=`
-
-<span>
-${esc(s.name)}
-</span>
-
-<span>
-${s.roles.length}
-</span>
-
-`;
-
-
-let rs=
-document.createElement(
-"div"
-);
-
-rs.className="roles";
-
-
-s.roles.forEach(
-(r,ri)=>{
-
-let x=
-document.createElement(
-"div"
-);
-
-x.className="role";
-
-x.textContent=
-r.name;
-
-x.dataset.q=
-(
-s.name+
-" "+
-r.name
-)
-.toLowerCase();
-
-
-x.onclick=()=>
-showRole(
-si,
-ri,
-x
-);
-
-
-rs.appendChild(x);
-
-}
-);
-
-
-h.onclick=()=>
-o.classList.toggle(
-"open"
-);
-
-
-o.append(
-h,
-rs
-);
-
-
-n.appendChild(o);
-
-}
-);
-
-}
-
-
-function filterRoles(){
-
-let q=
-$("search")
-.value
-.toLowerCase();
-
-
-document
-.querySelectorAll(
-".org"
-)
-.forEach(
-o=>{
-
-let any=false;
-
-
-o.querySelectorAll(
-".role"
-)
-.forEach(
-r=>{
-
-let show=
-!q ||
-r.dataset.q.includes(q);
-
-
-r.style.display=
-show?
-"block":
-"none";
-
-
-if(show)
-any=true;
-
-}
-);
-
-
-o.style.display=
-any?
-"block":
-"none";
-
-
-if(q&&any)
-o.classList.add(
-"open"
-);
-
-}
-);
-
-}
-
-
-/* -----------------------------
+/* =============================
    ROLE REVIEW
------------------------------- */
+============================= */
 
 function showRole(
 si,
 ri,
 el
 ){
+
+/*
+The function supports both:
+showRole(si,ri)
+and the previous:
+showRole(si,ri,element)
+*/
 
 current={
 sec:si,
@@ -1500,23 +1708,6 @@ code:null
 };
 
 reviewed={};
-
-
-document
-.querySelectorAll(
-".role"
-)
-.forEach(
-x=>
-x.classList.remove(
-"active"
-)
-);
-
-
-el.classList.add(
-"active"
-);
 
 
 let s=
@@ -1561,7 +1752,13 @@ String(
 .length;
 
 
+$("sidebar").style.display="none";
+
+
 $("main").innerHTML=`
+
+${workflow(4)}
+
 
 <div class="reviewer-bar">
 
@@ -1615,9 +1812,9 @@ ${mapped.length} competencies mapped for this role
 
 
 <button
-onclick="showOverview()"
+onclick="showOrganisation()"
 >
-← Overview
+← Change Role
 </button>
 
 </div>
@@ -1869,9 +2066,9 @@ updateProgress();
 }
 
 
-/* -----------------------------
+/* =============================
    REVIEW STATUS
------------------------------- */
+============================= */
 
 function levelChanged(code){
 
@@ -2021,9 +2218,9 @@ pct+"%";
 }
 
 
-/* -----------------------------
-   COMPETENCY EXPANSION
------------------------------- */
+/* =============================
+   COMPETENCY
+============================= */
 
 function openComp(code){
 
@@ -2031,42 +2228,30 @@ current.code=code;
 
 
 document
-.querySelectorAll(
-".card"
-)
+.querySelectorAll(".card")
 .forEach(
 x=>
-x.classList.remove(
-"selected"
-)
+x.classList.remove("selected")
 );
 
 
 $("card-"+code)
-.classList.add(
-"selected"
-);
+.classList.add("selected");
 
 
 let detail=
 $("detail-"+code);
 
 let wasOpen=
-detail.classList.contains(
-"open"
-);
+detail.classList.contains("open");
 
 
 document
-.querySelectorAll(
-".detail"
-)
+.querySelectorAll(".detail")
 .forEach(
 d=>{
 
-d.classList.remove(
-"open"
-);
+d.classList.remove("open");
 
 d.innerHTML="";
 
@@ -2077,9 +2262,7 @@ d.innerHTML="";
 if(wasOpen){
 
 $("card-"+code)
-.classList.remove(
-"selected"
-);
+.classList.remove("selected");
 
 return;
 
@@ -2222,15 +2405,11 @@ class="tabbody"
 `;
 
 
-detail.classList.add(
-"open"
-);
+detail.classList.add("open");
 
 
 tab(
-detail.querySelector(
-".tab"
-),
+detail.querySelector(".tab"),
 code,
 "definition"
 );
@@ -2238,9 +2417,9 @@ code,
 }
 
 
-/* -----------------------------
+/* =============================
    TABS
------------------------------- */
+============================= */
 
 function tab(
 btn,
@@ -2253,20 +2432,14 @@ $("detail-"+code);
 
 
 detail
-.querySelectorAll(
-".tab"
-)
+.querySelectorAll(".tab")
 .forEach(
 x=>
-x.classList.remove(
-"active"
-)
+x.classList.remove("active")
 );
 
 
-btn.classList.add(
-"active"
-);
+btn.classList.add("active");
 
 
 let c=
@@ -2489,9 +2662,9 @@ v=>
 }
 
 
-/* -----------------------------
+/* =============================
    SUBMIT
------------------------------- */
+============================= */
 
 function submitFeedback(){
 
@@ -2633,9 +2806,9 @@ alert(
 }
 
 
-/* -----------------------------
+/* =============================
    RUN
------------------------------- */
+============================= */
 
 boot();
 
