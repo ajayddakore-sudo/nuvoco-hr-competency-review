@@ -1,996 +1,967 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nuvoco HR Competency Review</title>
 
 <style>
-:root{
---navy:#172554;
---purple:#6d28d9;
---pink:#db2777;
---green:#059669;
---yellow:#fef3c7;
---ink:#172033;
---muted:#667085;
---bg:#f6f7fb;
---line:#e5e7eb
+
+*{
+    box-sizing:border-box;
 }
 
-*{box-sizing:border-box}
-
 body{
-margin:0;
-font-family:Inter,Segoe UI,Arial,sans-serif;
-background:var(--bg);
-color:var(--ink)
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
 }
 
 header{
-background:linear-gradient(115deg,#172554,#4c1d95,#be185d);
-color:#fff;
-padding:24px 32px
+    background:linear-gradient(120deg,#172554,#5b21b6,#be185d);
+    color:white;
+    padding:24px 35px;
 }
 
-.eyebrow{
-font-size:10px;
-letter-spacing:2px;
-text-transform:uppercase;
-opacity:.8
+header .small{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    opacity:.8;
 }
 
-h1{
-margin:5px 0;
-font-size:26px
+header h1{
+    margin:5px 0;
+    font-size:25px;
 }
 
 header p{
-margin:0;
-font-size:12px;
-opacity:.86
+    margin:0;
+    font-size:12px;
+    opacity:.85;
 }
 
-.layout{
-display:grid;
-grid-template-columns:285px minmax(0,1fr);
-gap:16px;
-max-width:1500px;
-margin:16px auto;
-padding:0 16px
+
+/* PAGE */
+
+.page{
+    width:100%;
+    padding:20px;
 }
 
-.layout.full-width{
-grid-template-columns:1fr
+.page.full{
+    max-width:1250px;
+    margin:auto;
 }
 
-.layout.full-width .main{
-width:100%;
-max-width:none
+.page.review{
+    max-width:1500px;
+    margin:auto;
 }
 
-.box{
-background:#fff;
-border:1px solid var(--line);
-border-radius:16px;
-box-shadow:0 5px 20px #1725540a
+
+/* WORKFLOW */
+
+.workflow{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:13px 18px;
+    display:flex;
+    align-items:center;
+    margin-bottom:18px;
 }
 
-.side{
-height:calc(100vh - 120px);
-position:sticky;
-top:100px;
-overflow:auto;
-padding:14px
+.step{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#98a2b3;
+    font-size:9px;
+    font-weight:bold;
 }
 
-.main{
-padding:20px;
-min-height:720px;
-width:100%
+.step:not(:last-child)::after{
+    content:"";
+    height:2px;
+    background:#e5e7eb;
+    flex:1;
+    margin:0 10px;
 }
 
-input,select,textarea{
-width:100%;
-padding:10px 11px;
-border:1px solid #d9dee8;
-border-radius:8px;
-background:#fff;
-font:inherit;
-font-size:11px
+.step.active{
+    color:#5b21b6;
 }
 
+.step.done{
+    color:#047857;
+}
+
+.circle{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    flex-shrink:0;
+}
+
+.active .circle{
+    background:linear-gradient(135deg,#6d28d9,#db2777);
+    color:white;
+}
+
+.done .circle{
+    background:#059669;
+    color:white;
+}
+
+
+/* CARD */
+
+.container{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:22px;
+}
+
+
+/* REVIEWER */
+
+.reviewer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 13px;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    margin-bottom:16px;
+}
+
+.reviewer-label{
+    font-size:8px;
+    color:#667085;
+    text-transform:uppercase;
+}
+
+.reviewer-name{
+    font-size:11px;
+    font-weight:bold;
+    color:#172554;
+    margin-top:2px;
+}
+
+
+/* BUTTONS */
+
+button{
+    border:1px solid #d0d5dd;
+    background:white;
+    border-radius:8px;
+    padding:9px 13px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#f8fafc;
+}
+
+.primary{
+    background:linear-gradient(90deg,#6d28d9,#db2777);
+    color:white;
+    border:0;
+}
+
+.green{
+    background:#059669;
+    color:white;
+    border:0;
+}
+
+
+/* WELCOME */
+
+.welcome{
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.welcome-card{
+    width:500px;
+    max-width:100%;
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    padding:45px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(23,37,84,.08);
+}
+
+.logo{
+    width:65px;
+    height:65px;
+    border-radius:17px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6d28d9,#db2777);
+    color:white;
+    font-weight:bold;
+    font-size:22px;
+}
+
+.welcome-card h2{
+    color:#172554;
+    margin:18px 0 5px;
+}
+
+.welcome-card p{
+    color:#667085;
+    font-size:11px;
+    line-height:1.6;
+}
+
+input,
+select,
 textarea{
-min-height:90px;
-resize:vertical
+    width:100%;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    padding:11px;
+    font-family:inherit;
+    font-size:11px;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
-outline:none;
-border-color:#8b5cf6;
-box-shadow:0 0 0 3px #8b5cf61a
-}
-
-button{
-border:1px solid #d9dee8;
-background:#fff;
-padding:9px 12px;
-border-radius:8px;
-font-size:10px;
-font-weight:750;
-cursor:pointer
-}
-
-button:hover{
-background:#f8fafc
-}
-
-.primary{
-background:linear-gradient(90deg,#6d28d9,#db2777)!important;
-color:#fff!important;
-border:0!important
-}
-
-.greenbtn{
-background:#059669!important;
-color:#fff!important;
-border:0!important
-}
-
-.label{
-font-size:9px;
-color:var(--muted);
-font-weight:800;
-text-transform:uppercase;
-letter-spacing:1.2px;
-margin:15px 3px 7px
-}
-
-.muted{
-font-size:10px;
-color:var(--muted)
+    outline:none;
+    border-color:#7c3aed;
+    box-shadow:0 0 0 3px rgba(124,58,237,.08);
 }
 
 
-/* =================================
-   WORKFLOW
-================================= */
+/* OVERVIEW */
 
-.workflow{
-display:flex;
-align-items:center;
-margin:0 0 22px;
-padding:12px 15px;
-background:#faf9ff;
-border:1px solid #e4ddff;
-border-radius:12px
+.title-label{
+    color:#6d28d9;
+    font-size:9px;
+    text-transform:uppercase;
+    font-weight:bold;
+    letter-spacing:1px;
 }
 
-.step{
-display:flex;
-align-items:center;
-gap:7px;
-flex:1
+h2{
+    margin:4px 0;
+    color:#172554;
 }
 
-.step:not(:last-child):after{
-content:"";
-height:2px;
-background:#e5e7eb;
-flex:1;
-margin:0 8px
+.description{
+    font-size:10px;
+    color:#667085;
 }
 
-.step.done:not(:last-child):after{
-background:#a7f3d0
+.metrics{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:18px 0;
 }
 
-.step-number{
-width:27px;
-height:27px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#e5e7eb;
-color:#667085;
-font-size:9px;
-font-weight:850;
-flex-shrink:0
+.metric{
+    border:1px solid #e5e7eb;
+    border-radius:11px;
+    padding:14px;
+    position:relative;
 }
 
-.step.active .step-number{
-background:linear-gradient(135deg,#6d28d9,#db2777);
-color:#fff
+.metric::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:3px;
+    background:#6d28d9;
+    border-radius:11px 11px 0 0;
 }
 
-.step.done .step-number{
-background:#059669;
-color:#fff
+.metric:nth-child(2)::before{
+    background:#2563eb;
 }
 
-.step-text{
-font-size:8px;
-font-weight:800;
-color:#667085;
-white-space:nowrap
+.metric:nth-child(3)::before{
+    background:#f97316;
 }
 
-.step.active .step-text{
-color:#5b21b6
+.metric:nth-child(4)::before{
+    background:#059669;
 }
 
-.step.done .step-text{
-color:#047857
+.metric strong{
+    display:block;
+    font-size:23px;
+    color:#172554;
+}
+
+.metric span{
+    font-size:9px;
+    color:#667085;
 }
 
 
-/* =================================
-   WELCOME
-================================= */
+/* ARCHITECTURE */
 
-.welcome{
-min-height:650px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center
+.competencies{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
 }
 
-.welcome-card{
-width:min(540px,100%);
-padding:45px 40px;
-border:1px solid var(--line);
-border-radius:20px;
-background:#fff;
-box-shadow:0 15px 45px #17255412
+.competency-mini{
+    border:1px solid #e5e7eb;
+    padding:10px;
+    border-radius:9px;
 }
 
-.welcome-icon{
-width:68px;
-height:68px;
-margin:0 auto 18px;
-border-radius:18px;
-background:linear-gradient(135deg,#6d28d9,#db2777);
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-font-weight:900
+.competency-mini b{
+    color:#db2777;
+    font-size:9px;
 }
 
-.welcome-card h2{
-margin:0;
-font-size:25px;
-color:var(--navy)
-}
-
-.welcome-card p{
-font-size:11px;
-color:var(--muted);
-line-height:1.6;
-margin:8px 0 22px
-}
-
-.welcome-card input{
-font-size:13px;
-padding:13px
-}
-
-.start-btn{
-margin-top:10px;
-width:100%;
-padding:12px
+.competency-mini span{
+    display:block;
+    font-size:10px;
+    font-weight:bold;
+    margin-top:3px;
 }
 
 
-/* =================================
-   ORGANISATION SCREEN
-================================= */
+/* NEXT */
+
+.next{
+    margin-top:18px;
+    background:#faf9ff;
+    border:1px solid #ddd6fe;
+    border-radius:11px;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+
+/* ORGANISATION */
 
 .org-intro{
-padding:16px;
-background:linear-gradient(
-135deg,
-#faf9ff,
-#fff7fb
-);
-border:1px solid #e4ddff;
-border-radius:13px;
-margin-bottom:15px
+    background:linear-gradient(120deg,#faf9ff,#fff7fb);
+    border:1px solid #e4ddff;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:15px;
 }
 
-.org-intro-title{
-font-size:15px;
-font-weight:850;
-color:var(--navy)
+.org-intro h2{
+    margin:3px 0;
 }
 
-.org-intro-text{
-font-size:10px;
-color:var(--muted);
-margin-top:4px;
-line-height:1.5
+.org-intro p{
+    margin:4px 0 0;
+    color:#667085;
+    font-size:10px;
 }
 
-.org-workflow{
-display:grid;
-grid-template-columns:repeat(
-auto-fit,
-minmax(280px,1fr)
-);
-gap:12px
+.org-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.org-option{
-border:1px solid var(--line);
-border-radius:12px;
-background:#fff;
-overflow:hidden;
-transition:.15s
+.org{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    overflow:hidden;
+    background:white;
 }
 
-.org-option:hover{
-border-color:#c4b5fd;
-box-shadow:0 5px 18px #6d28d912
+.org-header{
+    padding:15px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.org-option.open{
-border-color:#a78bfa;
-box-shadow:0 5px 18px #6d28d912
+.org-header:hover{
+    background:#faf9ff;
 }
 
-.org-option-head{
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-cursor:pointer
+.org.open{
+    border-color:#a78bfa;
 }
 
-.org-option.open .org-option-head{
-background:#f5f3ff
+.org.open .org-header{
+    background:#f5f3ff;
 }
 
-.org-title{
-font-size:13px;
-font-weight:850;
-color:var(--navy)
+.org-name{
+    font-size:13px;
+    font-weight:bold;
+    color:#172554;
 }
 
-.org-count{
-font-size:8px;
-color:#6d28d9;
-font-weight:800;
-background:#ede9fe;
-padding:5px 8px;
-border-radius:999px
+.role-count{
+    background:#ede9fe;
+    color:#6d28d9;
+    border-radius:20px;
+    padding:5px 8px;
+    font-size:8px;
+    font-weight:bold;
 }
 
-.org-roles{
-display:none;
-padding:0 12px 12px;
-border-top:1px solid #ede9fe
+.roles{
+    display:none;
+    padding:0 12px 12px;
+    border-top:1px solid #ede9fe;
 }
 
-.org-option.open .org-roles{
-display:block
+.org.open .roles{
+    display:block;
 }
 
-.role-option{
-margin-top:6px;
-padding:11px 12px;
-border:1px solid #e5e7eb;
-border-radius:9px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-cursor:pointer;
-background:#fff
+.role{
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    padding:11px;
+    margin-top:6px;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
 }
 
-.role-option:hover{
-border-color:#a78bfa;
-background:#faf9ff
+.role:hover{
+    background:#faf9ff;
+    border-color:#a78bfa;
 }
 
 .role-name{
-font-size:10px;
-font-weight:750;
-color:#344054
+    font-size:10px;
+    font-weight:bold;
 }
 
-.role-description{
-font-size:8px;
-color:#98a2b3;
-margin-top:3px
+.role-sub{
+    font-size:8px;
+    color:#98a2b3;
+    margin-top:3px;
 }
 
-.role-arrow{
-font-size:12px;
-color:#6d28d9
-}
-
-.back-btn{
-margin-bottom:12px
+.arrow{
+    color:#6d28d9;
 }
 
 
-/* =================================
-   REVIEWER BAR
-================================= */
+/* REVIEW LAYOUT */
 
-.reviewer-bar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-padding:9px 12px;
-margin-bottom:15px;
-background:#f8fafc;
-border:1px solid var(--line);
-border-radius:10px
+.review-layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:15px;
 }
 
-.reviewer-name{
-font-weight:800;
-color:var(--navy);
-font-size:11px
+.review-sidebar{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:13px;
+    height:fit-content;
+    position:sticky;
+    top:15px;
 }
 
-.change-reviewer{
-font-size:8px
+.search{
+    margin-bottom:10px;
 }
 
-
-/* =================================
-   OVERVIEW
-================================= */
-
-.overview-top{
-display:flex;
-justify-content:space-between;
-gap:12px;
-align-items:flex-start
+.side-org{
+    border-radius:8px;
+    margin-bottom:3px;
 }
 
-.vertical{
-font-size:9px;
-color:#6d28d9;
-font-weight:850;
-letter-spacing:1.1px;
-text-transform:uppercase
+.side-org-title{
+    padding:9px;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.overview-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin:16px 0
+.side-org-title:hover{
+    background:#f5f3ff;
 }
 
-.kpi{
-padding:13px;
-border:1px solid var(--line);
-border-radius:11px;
-position:relative
+.side-roles{
+    display:none;
+    padding-left:7px;
 }
 
-.kpi:before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:3px;
-background:#6d28d9
+.side-org.open .side-roles{
+    display:block;
 }
 
-.kpi:nth-child(2):before{
-background:#2563eb
+.side-role{
+    font-size:9px;
+    padding:7px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-.kpi:nth-child(3):before{
-background:#f97316
-}
-
-.kpi:nth-child(4):before{
-background:#059669
-}
-
-.kpi b{
-display:block;
-font-size:23px;
-color:var(--navy)
-}
-
-.kpi span{
-font-size:9px;
-color:var(--muted)
-}
-
-.mini-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:7px
-}
-
-.mini{
-border:1px solid var(--line);
-border-radius:9px;
-padding:9px
-}
-
-.mini b{
-font-size:9px;
-color:#db2777
-}
-
-.mini span{
-display:block;
-font-size:10px;
-font-weight:700;
-margin-top:2px
-}
-
-.next-box{
-margin-top:18px;
-padding:14px;
-border:1px solid #ddd6fe;
-background:#faf9ff;
-border-radius:11px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px
+.side-role:hover{
+    background:#f5f3ff;
 }
 
 
-/* =================================
-   ROLE REVIEW
-================================= */
+/* ROLE */
 
-.role-summary{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-margin:11px 0
+.role-header{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
 }
 
-.summary-chip{
-padding:6px 9px;
-border-radius:999px;
-background:#f8fafc;
-border:1px solid var(--line);
-font-size:9px;
-font-weight:750;
-color:#475467
+.role-info{
+    font-size:9px;
+    color:#667085;
 }
 
-.summary-chip.core{
-background:#dcfce7;
-color:#047857;
-border-color:#bbf7d0
+.chips{
+    display:flex;
+    gap:6px;
+    margin:12px 0;
 }
 
-.summary-chip.working{
-background:#fef3c7;
-color:#a16207;
-border-color:#fde68a
+.chip{
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:8px;
+    font-weight:bold;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
 }
 
-.progress-wrap{
-margin:12px 0 15px;
-padding:10px 12px;
-border:1px solid var(--line);
-border-radius:10px;
-background:#fafbfc
+.chip.core{
+    background:#dcfce7;
+    color:#047857;
 }
 
-.progress-row{
-display:flex;
-justify-content:space-between;
-font-size:9px;
-color:var(--muted);
-margin-bottom:6px
+.chip.working{
+    background:#fef3c7;
+    color:#a16207;
 }
+
+
+/* PROGRESS */
 
 .progress{
-height:6px;
-border-radius:99px;
-background:#e5e7eb;
-overflow:hidden
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:10px;
+    margin-bottom:12px;
 }
 
-.progress>span{
-display:block;
-height:100%;
-background:linear-gradient(90deg,#059669,#2563eb);
-border-radius:99px;
-transition:.2s
+.progress-text{
+    display:flex;
+    justify-content:space-between;
+    font-size:8px;
+    color:#667085;
+    margin-bottom:5px;
 }
 
-.review-note{
-font-size:8px;
-line-height:1.4;
-color:#667085;
-background:#f8fafc;
-border:1px solid #e5e7eb;
-padding:7px 9px;
-border-radius:8px;
-margin-bottom:10px
+.progress-bar{
+    height:6px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
 }
 
-.cards{
-display:grid;
-gap:8px
+.progress-fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#059669,#2563eb);
 }
 
-.card{
-border:1px solid var(--line);
-border-radius:12px;
-padding:12px;
-position:relative;
-background:#fff;
-cursor:pointer;
-transition:.15s
+
+/* REVIEW TIP */
+
+.review-tip{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    padding:8px 10px;
+    font-size:8px;
+    color:#667085;
+    margin-bottom:10px;
 }
 
-.card:before{
-content:"";
-position:absolute;
-left:0;
-top:0;
-width:4px;
-height:100%;
-background:#059669
+
+/* COMPETENCY */
+
+.competency-card{
+    border:1px solid #e5e7eb;
+    border-radius:11px;
+    padding:12px;
+    margin-bottom:8px;
+    position:relative;
+    cursor:pointer;
 }
 
-.card:hover,
-.card.selected{
-border-color:#86efac;
-box-shadow:0 5px 16px #05966915
+.competency-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:#059669;
+    border-radius:11px 0 0 11px;
 }
 
-.card-top{
-display:flex;
-justify-content:space-between;
-gap:10px
+.competency-card.working::before{
+    background:#eab308;
 }
 
-.code{
-font-size:9px;
-color:#047857;
-font-weight:850
+.competency-card:hover{
+    border-color:#86efac;
 }
 
-.card h3{
-font-size:12px;
-margin:3px 0 7px;
-line-height:1.35
+.competency-card.selected{
+    border-color:#86efac;
+    box-shadow:0 5px 15px rgba(5,150,105,.08);
 }
 
-.meta{
-display:flex;
-gap:5px;
-align-items:center;
-flex-wrap:wrap
+.comp-top{
+    display:flex;
+    justify-content:space-between;
 }
 
-.pill{
-font-size:8px;
-font-weight:850;
-padding:4px 7px;
-border-radius:999px;
-text-transform:uppercase
+.comp-code{
+    color:#047857;
+    font-size:9px;
+    font-weight:bold;
 }
 
-.core{
-background:#dcfce7;
-color:#047857
+.comp-name{
+    font-size:12px;
+    font-weight:bold;
+    margin-top:3px;
 }
 
-.working{
-background:#fef3c7;
-color:#a16207
-}
-
-.mapped-box{
-display:flex;
-align-items:center;
-gap:5px
+.mapped{
+    text-align:center;
 }
 
 .mapped-label{
-font-size:8px;
-color:var(--muted);
-text-transform:uppercase;
-font-weight:800
+    font-size:7px;
+    color:#667085;
+    text-transform:uppercase;
 }
 
-.score{
-width:31px;
-height:31px;
-border-radius:8px;
-background:#172554;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:15px;
-font-weight:850
+.mapped-score{
+    background:#172554;
+    color:white;
+    border-radius:7px;
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:bold;
 }
 
-.level-row{
-display:flex;
-align-items:center;
-gap:7px;
-margin-top:9px
+.meta{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-top:8px;
 }
 
-.level-row label{
-font-size:9px;
-font-weight:750;
-color:#475467;
-white-space:nowrap
+.type{
+    font-size:7px;
+    font-weight:bold;
+    padding:4px 7px;
+    border-radius:20px;
 }
 
-.level-row select{
-width:62px;
-padding:6px 7px
+.type.core{
+    background:#dcfce7;
+    color:#047857;
 }
 
-.reviewed-btn{
-margin-left:auto;
-font-size:8px;
-padding:6px 8px
+.type.working{
+    background:#fef3c7;
+    color:#a16207;
 }
 
-.reviewed-btn.done{
-background:#dcfce7;
-color:#047857;
-border-color:#bbf7d0
+.status{
+    font-size:8px;
+    color:#667085;
+}
+
+.recommendation{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:9px;
+}
+
+.recommendation label{
+    font-size:9px;
+    font-weight:bold;
+}
+
+.recommendation select{
+    width:60px;
+    padding:6px;
+}
+
+.review-btn{
+    margin-left:auto;
+    padding:6px 9px;
+    font-size:8px;
+}
+
+.review-btn.done{
+    background:#dcfce7;
+    color:#047857;
 }
 
 
-/* =================================
-   COMPETENCY EXPANSION
-================================= */
+/* EXPANDED DETAIL */
 
 .detail{
-margin-top:10px;
-border:1px solid #ddd6fe;
-border-radius:11px;
-background:#faf9ff;
-overflow:hidden;
-display:none
+    display:none;
+    margin-top:10px;
+    background:#faf9ff;
+    border:1px solid #ddd6fe;
+    border-radius:10px;
+    padding:13px;
 }
 
 .detail.open{
-display:block
+    display:block;
 }
 
-.detail-inner{
-padding:13px
+.detail-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:10px;
+    border-bottom:1px solid #e5e7eb;
 }
 
-.detail-head{
-display:flex;
-justify-content:space-between;
-gap:10px;
-padding-bottom:11px;
-border-bottom:1px solid var(--line)
+.detail-header h3{
+    margin:3px 0;
+    color:#172554;
 }
 
-.detail-head h3{
-margin:0;
-color:var(--navy);
-font-size:16px
-}
-
-.level-compare{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-margin:11px 0
+.levels{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:10px 0;
 }
 
 .level-box{
-padding:9px;
-border-radius:9px;
-border:1px solid var(--line);
-background:#fff
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    padding:9px;
 }
 
-.level-box .small{
-font-size:8px;
-text-transform:uppercase;
-color:var(--muted);
-font-weight:850
+.level-box span{
+    display:block;
+    font-size:7px;
+    text-transform:uppercase;
+    color:#667085;
 }
 
 .level-box strong{
-display:block;
-font-size:18px;
-color:var(--navy);
-margin-top:2px
+    font-size:18px;
+    color:#172554;
 }
 
-.level-box.suggested{
-background:#ecfdf5;
-border-color:#bbf7d0
+.level-box.recommended{
+    background:#ecfdf5;
+    border-color:#bbf7d0;
 }
 
-.level-box.suggested strong{
-color:#047857
+.level-box.recommended strong{
+    color:#047857;
 }
+
+
+/* TABS */
 
 .tabs{
-display:flex;
-gap:5px;
-flex-wrap:wrap;
-margin:10px 0
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+    margin:10px 0;
 }
 
 .tab{
-border:0;
-background:#f3f4f6
+    border:0;
+    background:#f3f4f6;
 }
 
 .tab.active{
-background:linear-gradient(90deg,#6d28d9,#db2777);
-color:#fff
+    background:linear-gradient(90deg,#6d28d9,#db2777);
+    color:white;
 }
 
-.tabbody{
-font-size:10px;
-line-height:1.55;
-color:#43515a
+.tab-content{
+    font-size:10px;
+    line-height:1.55;
+    color:#475467;
 }
+
+
+/* LADDER */
 
 .ladder{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:7px
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
 }
 
 .pl{
-padding:10px;
-border:1px solid var(--line);
-border-radius:9px;
-background:#fff
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    padding:10px;
 }
 
-.plnum{
-font-size:18px;
-font-weight:850;
-color:#059669
+.pl-number{
+    color:#059669;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.pllabel{
-font-size:10px;
-font-weight:850;
-color:var(--navy)
+.pl-label{
+    font-size:10px;
+    font-weight:bold;
+    color:#172554;
 }
 
-.definition{
-font-size:9px;
-line-height:1.4;
-padding:7px 8px;
-background:#ecfdf5;
-border-left:3px solid #059669;
-border-radius:5px;
-margin:6px 0
-}
-
-.expect{
-font-size:8.5px;
-color:#5b6971
-}
-
-.expect ul{
-padding-left:14px;
-margin:4px 0
-}
-
-.expect li{
-margin-bottom:3px
+.pl-definition{
+    background:#ecfdf5;
+    border-left:3px solid #059669;
+    padding:7px;
+    margin:6px 0;
+    border-radius:5px;
+    font-size:8px;
+    line-height:1.4;
 }
 
 
-/* =================================
-   FEEDBACK
-================================= */
+/* FEEDBACK */
 
 .feedback{
-margin-top:14px;
-padding:13px;
-border:1px solid #fed7aa;
-border-radius:12px;
-background:#fffaf5
+    margin-top:15px;
+    background:#fffaf5;
+    border:1px solid #fed7aa;
+    border-radius:11px;
+    padding:13px;
 }
 
 .feedback h3{
-margin:0;
-color:#9a3412;
-font-size:13px
+    color:#9a3412;
+    font-size:13px;
+    margin:0;
 }
 
 .feedback p{
-font-size:9px;
-color:var(--muted);
-margin:4px 0 8px
+    color:#667085;
+    font-size:9px;
 }
 
-.saved{
-display:none;
-color:#047857;
-font-size:9px;
-margin-left:6px
+textarea{
+    min-height:90px;
 }
 
 
-/* =================================
-   RESPONSIVE
-================================= */
+/* RESPONSIVE */
 
-@media(max-width:850px){
+@media(max-width:900px){
 
-.layout{
-grid-template-columns:1fr
-}
+    .metrics{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-.side{
-height:auto;
-position:relative;
-top:auto
-}
+    .org-grid{
+        grid-template-columns:1fr;
+    }
 
-.overview-grid{
-grid-template-columns:repeat(2,1fr)
-}
+    .review-layout{
+        grid-template-columns:1fr;
+    }
+
+    .review-sidebar{
+        position:relative;
+        top:0;
+    }
 
 }
 
 @media(max-width:600px){
 
-.overview-grid{
-grid-template-columns:1fr
+    .page{
+        padding:10px;
+    }
+
+    .container{
+        padding:14px;
+    }
+
+    .metrics{
+        grid-template-columns:1fr;
+    }
+
+    .competencies{
+        grid-template-columns:1fr;
+    }
+
+    .next{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .workflow{
+        overflow:auto;
+    }
+
+    .step{
+        min-width:130px;
+    }
+
+    .ladder{
+        grid-template-columns:1fr;
+    }
+
 }
 
-.mini-grid{
-grid-template-columns:1fr
-}
-
-.ladder{
-grid-template-columns:1fr
-}
-
-.level-compare{
-grid-template-columns:1fr
-}
-
-.next-box{
-flex-direction:column;
-align-items:stretch
-}
-
-.workflow{
-overflow-x:auto
-}
-
-.step{
-min-width:130px
-}
-
-.org-workflow{
-grid-template-columns:1fr
-}
-
-}
 </style>
 </head>
 
@@ -999,8 +970,8 @@ grid-template-columns:1fr
 
 <header>
 
-<div class="eyebrow">
-NUVOCO HR • Functional Competency Architecture
+<div class="small">
+NUVOCO HR • FUNCTIONAL COMPETENCY ARCHITECTURE
 </div>
 
 <h1>
@@ -1015,1991 +986,2155 @@ Validate the role mapping and recommend the right proficiency level.
 
 
 <div
-class="layout full-width"
-id="layout"
+id="app"
+class="page full"
 >
-
-<aside
-class="box side"
-id="sidebar"
-style="display:none"
->
-
-<input
-id="search"
-placeholder="Search role…"
-oninput="filterRoles()"
->
-
-<div class="label">
-Organisation structure
-</div>
-
-<div id="nav"></div>
-
-</aside>
-
-
-<main
-class="box main"
-id="main"
-></main>
-
 </div>
 
 
 <script>
 
-let DATA=null;
+/* =====================================================
+   GLOBAL
+===================================================== */
 
-let current={
-sec:null,
-role:null,
-code:null
+let DATA = null;
+
+let currentSection = null;
+let currentRole = null;
+
+let reviewed = {};
+
+
+/* =====================================================
+   PROFICIENCY DEFINITIONS
+===================================================== */
+
+const LEVEL_INFO = {
+
+    1:{
+        label:"Foundational",
+        definition:
+        "Delivers day to day tasks with guidance"
+    },
+
+    2:{
+        label:"Independent",
+        definition:
+        "Owns monthly and quarterly deliverables independently"
+    },
+
+    3:{
+        label:"Advanced",
+        definition:
+        "Leads annual deliverables and the AOP cycle for the vertical"
+    },
+
+    4:{
+        label:"Enterprise",
+        definition:
+        "Holds complete accountability, vision and long term strategy for the function"
+    }
+
 };
 
-let reviewed={};
 
+/* =====================================================
+   HELPERS
+===================================================== */
 
-const LEVEL_INFO={
+function esc(value){
 
-PL1:{
-label:"Foundational",
-definition:
-"Delivers day to day tasks with guidance"
-},
+    return String(value ?? "")
+    .replace(/[&<>"']/g,function(m){
 
-PL2:{
-label:"Independent",
-definition:
-"Owns monthly and quarterly deliverables independently"
-},
+        return {
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#39;"
 
-PL3:{
-label:"Advanced",
-definition:
-"Leads annual deliverables and the AOP cycle for the vertical"
-},
+        }[m];
 
-PL4:{
-label:"Enterprise",
-definition:
-"Holds complete accountability, vision and long term strategy for the function"
-}
-
-};
-
-
-const $=id=>
-document.getElementById(id);
-
-
-const esc=s=>
-String(s??"")
-.replace(
-/[&<>"']/g,
-m=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-"\"":"&quot;",
-"'":"&#39;"
-}[m])
-);
-
-
-/* =================================
-   BOOT
-================================= */
-
-async function boot(){
-
-try{
-
-DATA=
-await fetch(
-"/api/architecture"
-)
-.then(r=>{
-
-if(!r.ok)
-throw new Error();
-
-return r.json();
-
-});
-
-
-let reviewer=
-sessionStorage.getItem(
-"reviewer"
-);
-
-
-if(reviewer){
-
-showOverview();
-
-}else{
-
-showWelcome();
-
-}
-
-}catch(e){
-
-$("main").innerHTML=`
-
-<div
-style="
-padding:50px;
-text-align:center
-"
->
-
-<h2>
-Unable to load competency architecture
-</h2>
-
-<p class="muted">
-Please refresh the page or check that architecture.json is available.
-</p>
-
-</div>
-
-`;
-
-}
+    });
 
 }
 
 
-/* =================================
+function app(){
+
+    return document.getElementById("app");
+
+}
+
+
+function reviewer(){
+
+    return sessionStorage.getItem("reviewer") || "";
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+async function loadData(){
+
+    try{
+
+        const response =
+        await fetch("/api/architecture");
+
+        if(!response.ok){
+
+            throw new Error(
+                "Architecture could not be loaded"
+            );
+
+        }
+
+        DATA =
+        await response.json();
+
+        if(reviewer()){
+
+            showOverview();
+
+        }else{
+
+            showWelcome();
+
+        }
+
+    }catch(error){
+
+        app().innerHTML = `
+
+        <div class="container">
+
+            <h2>
+                Unable to load application
+            </h2>
+
+            <p class="description">
+                Please check that your server is running and
+                /api/architecture is available.
+            </p>
+
+        </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
    WORKFLOW
-================================= */
+===================================================== */
 
-function workflow(step){
+function workflow(active){
 
-return `
+    let html = `<div class="workflow">`;
 
-<div class="workflow">
+    const names =
+    [
+        "Reviewer",
+        "Overview",
+        "Select Role",
+        "Review"
+    ];
 
-<div class="
-step
-${step>1?"done":""}
-${step===1?"active":""}
-">
+    names.forEach(function(name,index){
 
-<div class="step-number">
-${step>1?"✓":"1"}
-</div>
+        const number = index + 1;
 
-<div class="step-text">
-Reviewer
-</div>
+        let cls = "";
 
-</div>
+        if(number < active){
 
+            cls = "done";
 
-<div class="
-step
-${step>2?"done":""}
-${step===2?"active":""}
-">
+        }else if(number === active){
 
-<div class="step-number">
-${step>2?"✓":"2"}
-</div>
+            cls = "active";
 
-<div class="step-text">
-Overview
-</div>
+        }
 
-</div>
+        html += `
 
+        <div class="step ${cls}">
 
-<div class="
-step
-${step>3?"done":""}
-${step===3?"active":""}
-">
+            <div class="circle">
+                ${number < active ? "✓" : number}
+            </div>
 
-<div class="step-number">
-${step>3?"✓":"3"}
-</div>
+            <span>
+                ${name}
+            </span>
 
-<div class="step-text">
-Select Role
-</div>
+        </div>
 
-</div>
+        `;
 
+    });
 
-<div class="
-step
-${step===4?"active":""}
-">
+    html += `</div>`;
 
-<div class="step-number">
-4
-</div>
-
-<div class="step-text">
-Review
-</div>
-
-</div>
-
-</div>
-
-`;
+    return html;
 
 }
 
 
-/* =================================
-   WELCOME
-================================= */
+/* =====================================================
+   REVIEWER NAME
+===================================================== */
 
 function showWelcome(){
 
-$("sidebar").style.display="none";
+    app().className = "page full";
 
-$("layout")
-.classList.add("full-width");
+    app().innerHTML = `
 
+    ${workflow(1)}
 
-$("main").innerHTML=`
+    <div class="welcome">
 
-${workflow(1)}
+        <div class="welcome-card">
 
+            <div class="logo">
+                HR
+            </div>
 
-<div class="welcome">
+            <h2>
+                HR Competency Review
+            </h2>
 
-<div class="welcome-card">
+            <p>
+                Welcome to the HR Competency Mapping Review.
+                Please enter your name to begin.
+            </p>
 
-<div class="welcome-icon">
-HR
-</div>
+            <input
+                id="reviewerInput"
+                placeholder="Enter your name"
+                autocomplete="name"
+                onkeydown="
+                    if(event.key==='Enter'){
+                        startReview();
+                    }
+                "
+            >
 
-<div
-class="vertical"
-style="margin-bottom:6px"
->
-NUVOCO HR
-</div>
+            <button
+                class="primary"
+                style="width:100%;margin-top:10px;padding:12px"
+                onclick="startReview()"
+            >
+                Start Review →
+            </button>
 
-<h2>
-HR Competency Review
-</h2>
+            <div
+                style="
+                    margin-top:12px;
+                    font-size:8px;
+                    color:#98a2b3
+                "
+            >
+                Your name will be used across all role reviews.
+            </div>
 
-<p>
-Welcome to the HR Competency Mapping Review.
-Please enter your name to begin.
-</p>
+        </div>
 
-<input
-id="reviewerName"
-placeholder="Enter your name"
-autocomplete="name"
-onkeydown="
-if(event.key==='Enter')
-startReview()
-"
-/>
+    </div>
 
-<button
-class="primary start-btn"
-onclick="startReview()"
->
-Start Review →
-</button>
+    `;
 
-<div
-style="
-font-size:8px;
-color:#98a2b3;
-margin-top:12px
-"
->
-Your name will be used across all role reviews in this session.
-</div>
+    setTimeout(function(){
 
-</div>
+        const input =
+        document.getElementById("reviewerInput");
 
-</div>
+        if(input){
+            input.focus();
+        }
 
-`;
-
-setTimeout(
-()=>
-$("reviewerName")?.focus(),
-100
-);
+    },100);
 
 }
 
-
-/* =================================
-   START
-================================= */
 
 function startReview(){
 
-let name=
-$("reviewerName")
-.value
-.trim();
+    const input =
+    document.getElementById("reviewerInput");
 
+    const name =
+    input.value.trim();
 
-if(!name){
+    if(!name){
 
-alert(
-"Please enter your name to continue."
-);
+        alert(
+            "Please enter your name to continue."
+        );
 
-return;
+        return;
 
-}
+    }
 
+    sessionStorage.setItem(
+        "reviewer",
+        name
+    );
 
-sessionStorage.setItem(
-"reviewer",
-name
-);
-
-
-showOverview();
+    showOverview();
 
 }
 
 
-/* =================================
-   OVERVIEW
-================================= */
+/* =====================================================
+   REVIEWER BAR
+===================================================== */
 
-function showOverview(){
+function reviewerBar(){
 
-$("sidebar").style.display="none";
+    return `
 
-$("layout")
-.classList.add("full-width");
+    <div class="reviewer">
 
+        <div>
 
-let reviewer=
-sessionStorage.getItem(
-"reviewer"
-);
+            <div class="reviewer-label">
+                Reviewer
+            </div>
 
+            <div class="reviewer-name">
+                ${esc(reviewer())}
+            </div>
 
-let comps=
-Object.entries(
-DATA.competencies
-);
+        </div>
 
-let roles=
-DATA.sections.reduce(
-(a,s)=>
-a+s.roles.length,
-0
-);
+        <button
+            onclick="changeReviewer()"
+        >
+            Change Reviewer
+        </button>
 
+    </div>
 
-$("main").innerHTML=`
-
-${workflow(2)}
-
-
-<div class="reviewer-bar">
-
-<div>
-
-<span class="muted">
-Reviewer
-</span>
-
-<div class="reviewer-name">
-${esc(reviewer)}
-</div>
-
-</div>
-
-<button
-class="change-reviewer"
-onclick="changeReviewer()"
->
-Change Reviewer
-</button>
-
-</div>
-
-
-<div class="overview-top">
-
-<div>
-
-<div class="vertical">
-Review Overview
-</div>
-
-<h2
-style="
-margin:3px 0;
-color:#172554
-"
->
-Welcome, ${esc(reviewer)}
-</h2>
-
-<div class="muted">
-Before selecting a role, please familiarise yourself with the competency architecture.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="overview-grid">
-
-<div class="kpi">
-<b>${comps.length}</b>
-<span>Functional competencies</span>
-</div>
-
-<div class="kpi">
-<b>${roles}</b>
-<span>Roles mapped</span>
-</div>
-
-<div class="kpi">
-<b>${DATA.sections.length}</b>
-<span>Organisation verticals</span>
-</div>
-
-<div class="kpi">
-<b>4</b>
-<span>Proficiency levels</span>
-</div>
-
-</div>
-
-
-<div
-style="
-padding:14px;
-border:1px solid #ddd6fe;
-background:#faf9ff;
-border-radius:11px
-"
->
-
-<b
-style="
-font-size:11px;
-color:#4c1d95
-"
->
-How to review
-</b>
-
-<div
-class="muted"
-style="
-line-height:1.8;
-margin-top:5px
-"
->
-
-1. Review the competency architecture.
-
-<br>
-
-2. Select your organisation / function.
-
-<br>
-
-3. Select the role you want to validate.
-
-<br>
-
-4. Review every mapped competency.
-
-<br>
-
-5. Keep the existing level if you agree, or recommend another level.
-
-<br>
-
-6. Add comments where required and submit the role review.
-
-</div>
-
-</div>
-
-
-<div class="label">
-Competency architecture
-</div>
-
-
-<div class="mini-grid">
-
-${comps.map(
-([c,x])=>`
-
-<div class="mini">
-
-<b>
-${esc(c)}
-</b>
-
-<span>
-${esc(x.name)}
-</span>
-
-</div>
-
-`
-).join("")}
-
-</div>
-
-
-<div class="next-box">
-
-<div>
-
-<b
-style="
-font-size:11px;
-color:#172554
-"
->
-Ready to select a role?
-</b>
-
-<div
-class="muted"
-style="
-margin-top:3px
-"
->
-Next, choose the organisation vertical and role you want to review.
-</div>
-
-</div>
-
-<button
-class="primary"
-onclick="showOrganisation()"
->
-View Organisation Structure →
-</button>
-
-</div>
-
-`;
+    `;
 
 }
 
-
-/* =================================
-   ORGANISATION SCREEN
-================================= */
-
-function showOrganisation(){
-
-$("sidebar").style.display="none";
-
-$("layout")
-.classList.add("full-width");
-
-
-$("main").innerHTML=`
-
-${workflow(3)}
-
-
-<div class="reviewer-bar">
-
-<div>
-
-<span class="muted">
-Reviewer
-</span>
-
-<div class="reviewer-name">
-${esc(
-sessionStorage.getItem("reviewer")
-)}
-</div>
-
-</div>
-
-<button
-class="change-reviewer"
-onclick="changeReviewer()"
->
-Change Reviewer
-</button>
-
-</div>
-
-
-<button
-class="back-btn"
-onclick="showOverview()"
->
-← Back to Overview
-</button>
-
-
-<div class="org-intro">
-
-<div class="vertical">
-Step 3 of 4
-</div>
-
-<div class="org-intro-title">
-Select Organisation & Role
-</div>
-
-<div class="org-intro-text">
-Expand an organisation vertical below, then select the role you want to validate. Once you select a role, you will automatically move to the competency review.
-</div>
-
-</div>
-
-
-<div class="org-workflow">
-
-${DATA.sections.map(
-(s,si)=>`
-
-<div
-class="org-option"
-id="org-${si}"
->
-
-<div
-class="org-option-head"
-onclick="toggleOrg(${si})"
->
-
-<div>
-
-<div class="org-title">
-${esc(s.name)}
-</div>
-
-<div
-class="muted"
-style="
-margin-top:3px
-"
->
-Click to view roles
-</div>
-
-</div>
-
-<div class="org-count">
-${s.roles.length} Roles
-</div>
-
-</div>
-
-
-<div class="org-roles">
-
-${s.roles.map(
-(r,ri)=>`
-
-<div
-class="role-option"
-onclick="showRole(${si},${ri})"
->
-
-<div>
-
-<div class="role-name">
-${esc(r.name)}
-</div>
-
-<div class="role-description">
-Review competency mapping for this role
-</div>
-
-</div>
-
-<div class="role-arrow">
-→
-</div>
-
-</div>
-
-`
-).join("")}
-
-</div>
-
-</div>
-
-`
-).join("")}
-
-</div>
-
-`;
-
-}
-
-
-function toggleOrg(si){
-
-let selected=
-$("org-"+si);
-
-
-document
-.querySelectorAll(
-".org-option"
-)
-.forEach(
-x=>{
-
-if(x!==selected)
-x.classList.remove(
-"open"
-);
-
-}
-);
-
-
-selected.classList.toggle(
-"open"
-);
-
-}
-
-
-/* =================================
-   CHANGE REVIEWER
-================================= */
 
 function changeReviewer(){
 
-if(
-!confirm(
-"Change the reviewer?\n\nYour current browser session will be switched to a new reviewer."
-)
-)
-return;
+    if(!confirm(
+        "Change the reviewer?"
+    )){
 
+        return;
 
-sessionStorage.removeItem(
-"reviewer"
-);
+    }
 
+    sessionStorage.removeItem("reviewer");
 
-reviewed={};
+    reviewed = {};
 
-showWelcome();
+    showWelcome();
 
 }
 
 
-/* =================================
-   ROLE REVIEW
-================================= */
+/* =====================================================
+   OVERVIEW
+===================================================== */
 
-function showRole(
-si,
-ri
+function showOverview(){
+
+    app().className = "page full";
+
+    let competencies =
+    Object.entries(DATA.competencies);
+
+    let roles =
+    DATA.sections.reduce(
+        function(total,section){
+
+            return total + section.roles.length;
+
+        },
+        0
+    );
+
+
+    app().innerHTML = `
+
+    ${workflow(2)}
+
+    <div class="container">
+
+        ${reviewerBar()}
+
+        <div class="title-label">
+            Review Overview
+        </div>
+
+        <h2>
+            Welcome, ${esc(reviewer())}
+        </h2>
+
+        <div class="description">
+            Review the competency architecture before selecting
+            the organisation and role you want to validate.
+        </div>
+
+
+        <div class="metrics">
+
+            <div class="metric">
+                <strong>
+                    ${competencies.length}
+                </strong>
+                <span>
+                    Functional competencies
+                </span>
+            </div>
+
+            <div class="metric">
+                <strong>
+                    ${roles}
+                </strong>
+                <span>
+                    Roles mapped
+                </span>
+            </div>
+
+            <div class="metric">
+                <strong>
+                    ${DATA.sections.length}
+                </strong>
+                <span>
+                    Organisation verticals
+                </span>
+            </div>
+
+            <div class="metric">
+                <strong>
+                    4
+                </strong>
+                <span>
+                    Proficiency levels
+                </span>
+            </div>
+
+        </div>
+
+
+        <div
+            style="
+                background:#faf9ff;
+                border:1px solid #ddd6fe;
+                padding:14px;
+                border-radius:11px
+            "
+        >
+
+            <b
+                style="
+                    color:#4c1d95;
+                    font-size:11px
+                "
+            >
+                How to review
+            </b>
+
+            <div
+                class="description"
+                style="
+                    line-height:1.8;
+                    margin-top:5px
+                "
+            >
+
+                1. Select an organisation vertical.
+
+                <br>
+
+                2. Select the role you want to review.
+
+                <br>
+
+                3. Review the competencies mapped to the role.
+
+                <br>
+
+                4. Check the definition, KSA, activities and
+                proficiency ladder.
+
+                <br>
+
+                5. Enter your recommended level from 1–4.
+
+                <br>
+
+                6. Add comments where required and submit.
+
+            </div>
+
+        </div>
+
+
+        <div class="title-label" style="margin-top:18px">
+            Competency Architecture
+        </div>
+
+
+        <div class="competencies">
+
+            ${
+                competencies.map(
+                    function(item){
+
+                        const code = item[0];
+                        const competency = item[1];
+
+                        return `
+
+                        <div class="competency-mini">
+
+                            <b>
+                                ${esc(code)}
+                            </b>
+
+                            <span>
+                                ${esc(competency.name)}
+                            </span>
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+            }
+
+        </div>
+
+
+        <div class="next">
+
+            <div>
+
+                <b
+                    style="
+                        color:#172554;
+                        font-size:11px
+                    "
+                >
+                    Ready to begin?
+                </b>
+
+                <div
+                    class="description"
+                    style="margin-top:3px"
+                >
+                    Select the organisation vertical and role
+                    you want to review.
+                </div>
+
+            </div>
+
+            <button
+                class="primary"
+                onclick="showOrganisation()"
+            >
+                View Organisation Structure →
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ORGANISATION
+===================================================== */
+
+function showOrganisation(){
+
+    app().className = "page full";
+
+    app().innerHTML = `
+
+    ${workflow(3)}
+
+    <div class="container">
+
+        ${reviewerBar()}
+
+        <button
+            onclick="showOverview()"
+            style="margin-bottom:12px"
+        >
+            ← Back to Overview
+        </button>
+
+
+        <div class="org-intro">
+
+            <div class="title-label">
+                Step 3 of 4
+            </div>
+
+            <h2>
+                Select Organisation & Role
+            </h2>
+
+            <p>
+                Expand an organisation vertical below.
+                Then select the role you want to validate.
+            </p>
+
+        </div>
+
+
+        <div class="org-grid">
+
+            ${
+                DATA.sections.map(
+                    function(section,index){
+
+                        return `
+
+                        <div
+                            class="org"
+                            id="org-${index}"
+                        >
+
+                            <div
+                                class="org-header"
+                                onclick="
+                                    toggleOrganisation(${index})
+                                "
+                            >
+
+                                <div>
+
+                                    <div class="org-name">
+                                        ${esc(section.name)}
+                                    </div>
+
+                                    <div
+                                        style="
+                                            font-size:8px;
+                                            color:#98a2b3;
+                                            margin-top:3px
+                                        "
+                                    >
+                                        Click to view roles
+                                    </div>
+
+                                </div>
+
+                                <div class="role-count">
+                                    ${section.roles.length} Roles
+                                </div>
+
+                            </div>
+
+
+                            <div class="roles">
+
+                                ${
+                                    section.roles.map(
+                                        function(role,roleIndex){
+
+                                            return `
+
+                                            <div
+                                                class="role"
+                                                onclick="
+                                                    openRole(
+                                                        ${index},
+                                                        ${roleIndex}
+                                                    )
+                                                "
+                                            >
+
+                                                <div>
+
+                                                    <div class="role-name">
+                                                        ${esc(role.name)}
+                                                    </div>
+
+                                                    <div class="role-sub">
+                                                        Review competency mapping
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="arrow">
+                                                    →
+                                                </div>
+
+                                            </div>
+
+                                            `;
+
+                                        }
+                                    ).join("")
+                                }
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+            }
+
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+function toggleOrganisation(index){
+
+    const selected =
+    document.getElementById(
+        "org-"+index
+    );
+
+    document
+    .querySelectorAll(".org")
+    .forEach(function(item){
+
+        if(item !== selected){
+
+            item.classList.remove("open");
+
+        }
+
+    });
+
+    selected.classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   ROLE REVIEW
+===================================================== */
+
+function openRole(sectionIndex,roleIndex){
+
+    currentSection = sectionIndex;
+    currentRole = roleIndex;
+
+    reviewed = {};
+
+    showRoleReview();
+
+}
+
+
+/* =====================================================
+   ROLE REVIEW SCREEN
+===================================================== */
+
+function showRoleReview(){
+
+    app().className = "page review";
+
+
+    const section =
+    DATA.sections[currentSection];
+
+    const role =
+    section.roles[currentRole];
+
+
+    const mapped =
+    Object.entries(role.scores)
+    .filter(function(item){
+
+        const value = item[1];
+
+        return (
+            value !== "NA" &&
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+        );
+
+    });
+
+
+    const core =
+    mapped.filter(function(item){
+
+        const code = item[0];
+
+        return String(
+            (role.relationship || {})[code] || ""
+        ).toLowerCase() === "core";
+
+    }).length;
+
+
+    const working =
+    mapped.filter(function(item){
+
+        const code = item[0];
+
+        return String(
+            (role.relationship || {})[code] || ""
+        ).toLowerCase() === "working";
+
+    }).length;
+
+
+    app().innerHTML = `
+
+    ${workflow(4)}
+
+
+    <div class="review-layout">
+
+
+        <div class="review-sidebar">
+
+            <input
+                id="roleSearch"
+                class="search"
+                placeholder="Search role..."
+                oninput="searchRoles()"
+            >
+
+            <div
+                style="
+                    font-size:9px;
+                    text-transform:uppercase;
+                    color:#667085;
+                    font-weight:bold;
+                    margin-bottom:7px
+                "
+            >
+                Organisation
+            </div>
+
+            <div id="sideOrganisation">
+
+                ${
+                    DATA.sections.map(
+                        function(section,sIndex){
+
+                            return `
+
+                            <div
+                                class="side-org"
+                            >
+
+                                <div
+                                    class="side-org-title"
+                                    onclick="
+                                        toggleSideOrg(${sIndex})
+                                    "
+                                >
+                                    ${esc(section.name)}
+                                </div>
+
+
+                                <div class="side-roles">
+
+                                    ${
+                                        section.roles.map(
+                                            function(r,rIndex){
+
+                                                return `
+
+                                                <div
+                                                    class="side-role"
+                                                    data-role="${esc(r.name.toLowerCase())}"
+                                                    onclick="
+                                                        openRole(
+                                                            ${sIndex},
+                                                            ${rIndex}
+                                                        )
+                                                    "
+                                                >
+                                                    ${esc(r.name)}
+                                                </div>
+
+                                                `;
+
+                                            }
+                                        ).join("")
+                                    }
+
+                                </div>
+
+                            </div>
+
+                            `;
+
+                        }
+                    ).join("")
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="container">
+
+            ${reviewerBar()}
+
+
+            <div class="role-header">
+
+                <div>
+
+                    <div class="title-label">
+                        ${esc(section.name)}
+                    </div>
+
+                    <h2>
+                        ${esc(role.name)}
+                    </h2>
+
+                    <div class="role-info">
+                        ${mapped.length} competencies mapped for this role
+                    </div>
+
+                </div>
+
+
+                <button
+                    onclick="showOrganisation()"
+                >
+                    ← Change Role
+                </button>
+
+            </div>
+
+
+            <div class="chips">
+
+                <div class="chip">
+                    ${mapped.length} Mapped
+                </div>
+
+                <div class="chip core">
+                    ${core} Core
+                </div>
+
+                <div class="chip working">
+                    ${working} Working
+                </div>
+
+                <div class="chip">
+                    PL1–PL4
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div class="progress-text">
+
+                    <span id="progressText">
+                        0 of ${mapped.length} competencies reviewed
+                    </span>
+
+                    <span id="progressPercent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="review-tip">
+
+                <b>Review tip:</b>
+                Click a competency to expand its information.
+                Review the current mapping and enter your recommended
+                level from 1–4. You may keep the same level if you agree.
+
+            </div>
+
+
+            <div id="competencyList">
+
+                ${
+                    mapped.map(
+                        function(item){
+
+                            return competencyCard(
+                                item[0],
+                                item[1],
+                                role
+                            );
+
+                        }
+                    ).join("")
+                }
+
+            </div>
+
+
+            <div class="feedback">
+
+                <h3>
+                    Comments / Suggested Changes
+                </h3>
+
+                <p>
+                    Add any rationale, mapping change or observation
+                    you want to share for this role.
+                </p>
+
+                <textarea
+                    id="comments"
+                    placeholder="Enter comments..."
+                ></textarea>
+
+                <div style="margin-top:9px">
+
+                    <button
+                        class="green"
+                        onclick="submitReview()"
+                    >
+                        Submit Role Review
+                    </button>
+
+                    <span
+                        id="savedMessage"
+                        style="
+                            display:none;
+                            color:#047857;
+                            font-size:9px;
+                            margin-left:8px
+                        "
+                    >
+                        ✓ Review submitted
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+
+    updateProgress();
+
+}
+
+
+/* =====================================================
+   COMPETENCY CARD
+===================================================== */
+
+function competencyCard(
+    code,
+    mappedLevel,
+    role
 ){
 
-current={
-sec:si,
-role:ri,
-code:null
-};
+    const competency =
+    DATA.competencies[code];
 
-reviewed={};
 
+    const relationship =
+    (role.relationship || {})[code] || "";
 
-let s=
-DATA.sections[si];
 
-let r=
-s.roles[ri];
+    const type =
+    String(relationship).toLowerCase();
 
 
-let mapped=
-Object.entries(
-r.scores
-)
-.filter(
-([c,v])=>
-v!=="NA" &&
-v!==null &&
-v!==undefined &&
-v!==""
-);
+    return `
 
+    <div
+        class="competency-card ${type}"
+        id="card-${code}"
+        onclick="
+            expandCompetency('${code}')
+        "
+    >
 
-let core=
-mapped.filter(
-([c])=>
-String(
-(r.relationship||{})[c]
-)
-.toLowerCase()==="core"
-)
-.length;
+        <div class="comp-top">
 
+            <div>
 
-let working=
-mapped.filter(
-([c])=>
-String(
-(r.relationship||{})[c]
-)
-.toLowerCase()==="working"
-)
-.length;
+                <div class="comp-code">
+                    ${esc(code)}
+                </div>
 
+                <div class="comp-name">
+                    ${esc(competency.name)}
+                </div>
 
-$("sidebar").style.display="block";
+            </div>
 
-$("layout")
-.classList.remove(
-"full-width"
-);
 
+            <div class="mapped">
 
-$("main").innerHTML=`
+                <div class="mapped-label">
+                    Mapped
+                </div>
 
-${workflow(4)}
+                <div class="mapped-score">
+                    ${mappedLevel}
+                </div>
 
+            </div>
 
-<div class="reviewer-bar">
+        </div>
 
-<div>
 
-<span class="muted">
-Reviewer
-</span>
+        <div class="meta">
 
-<div class="reviewer-name">
-${esc(
-sessionStorage.getItem("reviewer")
-)}
-</div>
+            <span class="type ${type}">
+                ${esc(relationship || "—")}
+            </span>
 
-</div>
+            <span
+                id="status-${code}"
+                class="status"
+            >
+                Not reviewed
+            </span>
 
-<button
-class="change-reviewer"
-onclick="changeReviewer()"
->
-Change Reviewer
-</button>
+        </div>
 
-</div>
 
+        <div
+            class="recommendation"
+            onclick="event.stopPropagation()"
+        >
 
-<div class="overview-top">
+            <label>
+                Your recommendation
+            </label>
 
-<div>
+            <select
+                id="recommend-${code}"
+                onchange="
+                    recommendationChanged('${code}')
+                "
+            >
 
-<div class="vertical">
-${esc(s.name)}
-</div>
+                <option
+                    value="1"
+                    ${String(mappedLevel)==="1"?"selected":""}
+                >
+                    1
+                </option>
 
-<h2
-style="
-margin:2px 0;
-font-size:22px;
-color:#172554
-"
->
-${esc(r.name)}
-</h2>
+                <option
+                    value="2"
+                    ${String(mappedLevel)==="2"?"selected":""}
+                >
+                    2
+                </option>
 
-<div class="muted">
-${mapped.length} competencies mapped for this role
-</div>
-
-</div>
-
-
-<button
-onclick="showOrganisation()"
->
-← Change Role
-</button>
-
-</div>
-
-
-<div class="role-summary">
-
-<span class="summary-chip">
-${mapped.length} Mapped
-</span>
-
-<span class="summary-chip core">
-${core} Core
-</span>
-
-<span class="summary-chip working">
-${working} Working
-</span>
-
-<span class="summary-chip">
-PL1–PL4 available
-</span>
-
-</div>
-
-
-<div class="progress-wrap">
-
-<div class="progress-row">
-
-<span id="progressText">
-0 of ${mapped.length} competencies reviewed
-</span>
-
-<span id="progressPct">
-0%
-</span>
-
-</div>
-
-<div class="progress">
-
-<span
-id="progressBar"
-style="width:0%"
-></span>
-
-</div>
-
-</div>
-
-
-<div class="review-note">
-
-<b>Review tip:</b>
-Click a competency to read its definition and PL1–PL4 expectations.
-The <b>Mapped</b> number is the current architecture.
-Your recommendation can remain the same if you agree with the mapping.
-
-</div>
-
-
-<div class="cards">
-
-${mapped.map(
-([code,v])=>{
-
-let c=
-DATA.competencies[code];
-
-let rel=
-(r.relationship||{})[code]||
-"—";
-
-
-return `
-
-<div
-class="card"
-id="card-${code}"
-onclick="openComp('${code}')"
->
-
-<div class="card-top">
-
-<div>
-
-<div class="code">
-${esc(code)}
-</div>
-
-<h3>
-${esc(c.name)}
-</h3>
-
-</div>
-
-
-<div class="mapped-box">
-
-<div>
-
-<div class="mapped-label">
-Mapped
-</div>
-
-<div class="score">
-${v}
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="meta">
-
-<span
-class="pill ${String(rel).toLowerCase()}"
->
-${esc(rel)}
-</span>
-
-<span
-id="status-${code}"
-class="muted"
->
-Not reviewed
-</span>
-
-</div>
-
-
-<div
-class="level-row"
-onclick="event.stopPropagation()"
->
-
-<label>
-Your recommendation
-</label>
-
-
-<select
-id="level-${code}"
-onchange="levelChanged('${code}')"
->
-
-<option
-value="1"
-${String(v)==="1"?"selected":""}
->
-1
-</option>
-
-<option
-value="2"
-${String(v)==="2"?"selected":""}
->
-2
-</option>
-
-<option
-value="3"
-${String(v)==="3"?"selected":""}
->
-3
-</option>
-
-<option
-value="4"
-${String(v)==="4"?"selected":""}
->
-4
-</option>
-
-</select>
-
-
-<button
-id="reviewed-${code}"
-class="reviewed-btn"
-onclick="markReviewed('${code}')"
->
-Mark reviewed
-</button>
-
-</div>
-
-
-<div
-id="detail-${code}"
-class="detail"
-onclick="event.stopPropagation()"
-></div>
-
-
-</div>
-
-`;
-
-}
-).join("")}
-
-</div>
-
-
-<div class="feedback">
-
-<h3>
-Comments / Suggested Changes
-</h3>
-
-<p>
-Use this for any mapping change, rationale or observation you want to capture for the role.
-</p>
-
-<textarea
-id="comments"
-placeholder="Add any comments or suggested changes..."
-></textarea>
-
-<div
-style="margin-top:9px"
->
-
-<button
-class="greenbtn"
-onclick="submitFeedback()"
->
-Submit Role Review
-</button>
-
-<span
-id="saved"
-class="saved"
->
-Review submitted.
-</span>
-
-</div>
-
-</div>
-
-`;
-
-updateProgress();
+                <option
+                    value="3"
+                    ${String(mappedLevel)==="3"?"selected":""}
+                >
+                    3
+                </option>
+
+                <option
+                    value="4"
+                    ${String(mappedLevel)==="4"?"selected":""}
+                >
+                    4
+                </option>
+
+            </select>
+
+
+            <button
+                id="review-${code}"
+                class="review-btn"
+                onclick="
+                    markReviewed('${code}')
+                "
+            >
+                Mark reviewed
+            </button>
+
+        </div>
+
+
+        <div
+            id="detail-${code}"
+            class="detail"
+            onclick="event.stopPropagation()"
+        ></div>
+
+    </div>
+
+    `;
 
 }
 
 
-/* =================================
-   REVIEW STATUS
-================================= */
+/* =====================================================
+   EXPAND COMPETENCY
+===================================================== */
 
-function levelChanged(code){
+function expandCompetency(code){
 
-reviewed[code]=true;
+    const detail =
+    document.getElementById(
+        "detail-"+code
+    );
 
-setReviewedUI(code);
+    const wasOpen =
+    detail.classList.contains("open");
 
-updateProgress();
+
+    document
+    .querySelectorAll(".detail")
+    .forEach(function(item){
+
+        item.classList.remove("open");
+        item.innerHTML="";
+
+    });
 
 
-const x=
-$("detailSuggested-"+code);
+    document
+    .querySelectorAll(".competency-card")
+    .forEach(function(item){
 
-if(x){
+        item.classList.remove("selected");
 
-x.textContent=
-$("level-"+code).value;
+    });
+
+
+    if(wasOpen){
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("card-"+code)
+    .classList.add("selected");
+
+
+    const competency =
+    DATA.competencies[code];
+
+
+    const role =
+    DATA.sections[currentSection]
+    .roles[currentRole];
+
+
+    const mapped =
+    role.scores[code];
+
+
+    const recommendation =
+    document.getElementById(
+        "recommend-"+code
+    ).value;
+
+
+    detail.innerHTML = `
+
+    <div class="detail-header">
+
+        <div>
+
+            <div class="comp-code">
+                ${esc(code)}
+            </div>
+
+            <h3>
+                ${esc(competency.name)}
+            </h3>
+
+        </div>
+
+        <button
+            onclick="
+                event.stopPropagation();
+                expandCompetency('${code}')
+            "
+        >
+            Close
+        </button>
+
+    </div>
+
+
+    <div class="levels">
+
+        <div class="level-box">
+
+            <span>
+                Current mapped level
+            </span>
+
+            <strong>
+                ${mapped}
+            </strong>
+
+        </div>
+
+
+        <div class="level-box recommended">
+
+            <span>
+                Your recommendation
+            </span>
+
+            <strong
+                id="detailRecommendation-${code}"
+            >
+                ${recommendation}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="tabs">
+
+        <button
+            class="tab active"
+            onclick="
+                competencyTab(
+                    this,
+                    '${code}',
+                    'definition'
+                )
+            "
+        >
+            Definition
+        </button>
+
+
+        <button
+            class="tab"
+            onclick="
+                competencyTab(
+                    this,
+                    '${code}',
+                    'ksa'
+                )
+            "
+        >
+            Knowledge • Skill • Attitude
+        </button>
+
+
+        <button
+            class="tab"
+            onclick="
+                competencyTab(
+                    this,
+                    '${code}',
+                    'activities'
+                )
+            "
+        >
+            Activities
+        </button>
+
+
+        <button
+            class="tab"
+            onclick="
+                competencyTab(
+                    this,
+                    '${code}',
+                    'ladder'
+                )
+            "
+        >
+            Proficiency Ladder
+        </button>
+
+    </div>
+
+
+    <div
+        id="tab-${code}"
+        class="tab-content"
+    ></div>
+
+    `;
+
+
+    detail.classList.add("open");
+
+
+    const firstTab =
+    detail.querySelector(".tab");
+
+    competencyTab(
+        firstTab,
+        code,
+        "definition"
+    );
 
 }
 
+
+/* =====================================================
+   COMPETENCY TABS
+===================================================== */
+
+function competencyTab(
+    button,
+    code,
+    type
+){
+
+    const detail =
+    document.getElementById(
+        "detail-"+code
+    );
+
+
+    detail
+    .querySelectorAll(".tab")
+    .forEach(function(tab){
+
+        tab.classList.remove("active");
+
+    });
+
+
+    button.classList.add("active");
+
+
+    const competency =
+    DATA.competencies[code];
+
+
+    const content =
+    document.getElementById(
+        "tab-"+code
+    );
+
+
+    if(type==="definition"){
+
+        content.innerHTML = `
+
+        <b>
+            Definition
+        </b>
+
+        <p>
+            ${esc(
+                competency.scope ||
+                competency.definition ||
+                "No definition available."
+            )}
+        </p>
+
+        `;
+
+    }
+
+
+    if(type==="ksa"){
+
+        content.innerHTML = `
+
+        <div
+            style="
+                display:grid;
+                gap:7px
+            "
+        >
+
+            <div
+                style="
+                    background:white;
+                    border:1px solid #e5e7eb;
+                    padding:10px;
+                    border-radius:8px
+                "
+            >
+
+                <b>
+                    KNOWLEDGE
+                </b>
+
+                <p>
+                    ${esc(
+                        competency.Knowledge || "—"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div
+                style="
+                    background:white;
+                    border:1px solid #e5e7eb;
+                    padding:10px;
+                    border-radius:8px
+                "
+            >
+
+                <b>
+                    SKILL
+                </b>
+
+                <p>
+                    ${esc(
+                        competency.Skill || "—"
+                    )}
+                </p>
+
+            </div>
+
+
+            <div
+                style="
+                    background:white;
+                    border:1px solid #e5e7eb;
+                    padding:10px;
+                    border-radius:8px
+                "
+            >
+
+                <b>
+                    ATTITUDE
+                </b>
+
+                <p>
+                    ${esc(
+                        competency.Attitude || "—"
+                    )}
+                </p>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+
+    if(type==="activities"){
+
+        const activities =
+        String(
+            competency["On-the-Job Activities"] ||
+            ""
+        )
+        .split("\n")
+        .filter(Boolean);
+
+
+        content.innerHTML = `
+
+        <b>
+            On-the-job activities
+        </b>
+
+        <ul>
+
+            ${
+                activities.map(
+                    function(item){
+
+                        return `
+                        <li>
+                            ${esc(
+                                item.replace(
+                                    /^•\s*/,
+                                    ""
+                                )
+                            )}
+                        </li>
+                        `;
+
+                    }
+                ).join("")
+            }
+
+        </ul>
+
+        `;
+
+    }
+
+
+    if(type==="ladder"){
+
+        content.innerHTML = `
+
+        <div
+            style="
+                margin-bottom:8px
+            "
+        >
+
+            <b>
+                Proficiency Ladder
+            </b>
+
+            <div class="description">
+                Use these levels to validate the recommended mapping.
+            </div>
+
+        </div>
+
+
+        <div class="ladder">
+
+            ${
+                [1,2,3,4].map(
+                    function(level){
+
+                        const info =
+                        LEVEL_INFO[level];
+
+
+                        const raw =
+                        competency["PL"+level] || "";
+
+
+                        const items =
+                        String(raw)
+                        .split("\n")
+                        .map(function(item){
+
+                            return item
+                            .replace(/^•\s*/,"")
+                            .trim();
+
+                        })
+                        .filter(Boolean);
+
+
+                        return `
+
+                        <div class="pl">
+
+                            <div class="pl-number">
+                                ${level}
+                            </div>
+
+                            <div class="pl-label">
+                                ${info.label}
+                            </div>
+
+                            <div class="pl-definition">
+                                ${info.definition}
+                            </div>
+
+                            ${
+                                items.length
+                                ?
+                                `
+                                <div
+                                    style="
+                                        font-size:8px;
+                                        color:#667085
+                                    "
+                                >
+
+                                    <b>
+                                        At this level:
+                                    </b>
+
+                                    <ul>
+
+                                        ${
+                                            items.map(
+                                                function(item){
+
+                                                    return `
+                                                    <li>
+                                                        ${esc(item)}
+                                                    </li>
+                                                    `;
+
+                                                }
+                                            ).join("")
+                                        }
+
+                                    </ul>
+
+                                </div>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+            }
+
+        </div>
+
+        `;
+
+    }
+
 }
 
+
+/* =====================================================
+   RECOMMENDATION
+===================================================== */
+
+function recommendationChanged(code){
+
+    reviewed[code] = true;
+
+    markReviewedUI(code);
+
+
+    const select =
+    document.getElementById(
+        "recommend-"+code
+    );
+
+
+    const detail =
+    document.getElementById(
+        "detailRecommendation-"+code
+    );
+
+
+    if(detail){
+
+        detail.textContent =
+        select.value;
+
+    }
+
+
+    updateProgress();
+
+}
+
+
+/* =====================================================
+   REVIEWED
+===================================================== */
 
 function markReviewed(code){
 
-reviewed[code]=
-!reviewed[code];
+    reviewed[code] =
+    !reviewed[code];
 
-setReviewedUI(code);
+    markReviewedUI(code);
 
-updateProgress();
+    updateProgress();
+
+}
+
+
+function markReviewedUI(code){
+
+    const button =
+    document.getElementById(
+        "review-"+code
+    );
+
+    const status =
+    document.getElementById(
+        "status-"+code
+    );
+
+
+    if(!button || !status){
+        return;
+    }
+
+
+    if(reviewed[code]){
+
+        button.textContent =
+        "✓ Reviewed";
+
+        button.classList.add("done");
+
+        status.textContent =
+        "Reviewed";
+
+        status.style.color =
+        "#047857";
+
+        status.style.fontWeight =
+        "bold";
+
+    }else{
+
+        button.textContent =
+        "Mark reviewed";
+
+        button.classList.remove("done");
+
+        status.textContent =
+        "Not reviewed";
+
+        status.style.color =
+        "";
+
+        status.style.fontWeight =
+        "";
+
+    }
 
 }
 
 
-function setReviewedUI(code){
-
-let btn=
-$("reviewed-"+code);
-
-let status=
-$("status-"+code);
-
-
-if(reviewed[code]){
-
-btn.textContent=
-"✓ Reviewed";
-
-btn.classList.add(
-"done"
-);
-
-status.textContent=
-"Reviewed";
-
-status.style.color=
-"#047857";
-
-status.style.fontWeight=
-"800";
-
-}else{
-
-btn.textContent=
-"Mark reviewed";
-
-btn.classList.remove(
-"done"
-);
-
-status.textContent=
-"Not reviewed";
-
-status.style.color="";
-
-status.style.fontWeight="";
-
-}
-
-}
-
+/* =====================================================
+   PROGRESS
+===================================================== */
 
 function updateProgress(){
 
-if(
-current.sec===null ||
-current.role===null
-)
-return;
+    if(
+        currentSection === null ||
+        currentRole === null
+    ){
+
+        return;
+
+    }
 
 
-let s=
-DATA.sections[current.sec];
-
-let r=
-s.roles[current.role];
+    const role =
+    DATA.sections[currentSection]
+    .roles[currentRole];
 
 
-let total=
-Object.entries(
-r.scores
-)
-.filter(
-([c,v])=>
-v!=="NA" &&
-v!==null &&
-v!==undefined &&
-v!==""
-)
-.length;
+    const total =
+    Object.entries(role.scores)
+    .filter(function(item){
+
+        const value = item[1];
+
+        return (
+            value !== "NA" &&
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+        );
+
+    }).length;
 
 
-let done=
-Object.values(
-reviewed
-)
-.filter(Boolean)
-.length;
+    const completed =
+    Object.values(reviewed)
+    .filter(Boolean)
+    .length;
 
 
-let pct=
-total?
-Math.round(
-done/total*100
-):
-0;
+    const percentage =
+    total
+    ?
+    Math.round(
+        completed / total * 100
+    )
+    :
+    0;
 
 
-if($("progressText"))
-$("progressText")
-.textContent=
-`${done} of ${total} competencies reviewed`;
+    const text =
+    document.getElementById(
+        "progressText"
+    );
+
+    const percent =
+    document.getElementById(
+        "progressPercent"
+    );
+
+    const fill =
+    document.getElementById(
+        "progressFill"
+    );
 
 
-if($("progressPct"))
-$("progressPct")
-.textContent=
-`${pct}%`;
+    if(text){
+
+        text.textContent =
+        `${completed} of ${total} competencies reviewed`;
+
+    }
 
 
-if($("progressBar"))
-$("progressBar")
-.style.width=
-pct+"%";
+    if(percent){
 
-}
+        percent.textContent =
+        `${percentage}%`;
 
-
-/* =================================
-   COMPETENCY EXPANSION
-================================= */
-
-function openComp(code){
-
-current.code=code;
+    }
 
 
-document
-.querySelectorAll(".card")
-.forEach(
-x=>
-x.classList.remove("selected")
-);
+    if(fill){
 
+        fill.style.width =
+        percentage + "%";
 
-$("card-"+code)
-.classList.add("selected");
-
-
-let detail=
-$("detail-"+code);
-
-let wasOpen=
-detail.classList.contains("open");
-
-
-document
-.querySelectorAll(".detail")
-.forEach(
-d=>{
-
-d.classList.remove("open");
-
-d.innerHTML="";
-
-}
-);
-
-
-if(wasOpen){
-
-$("card-"+code)
-.classList.remove("selected");
-
-return;
+    }
 
 }
 
 
-let c=
-DATA.competencies[code];
+/* =====================================================
+   SIDE NAVIGATION
+===================================================== */
 
-let r=
-DATA.sections[current.sec]
-.roles[current.role];
+function toggleSideOrg(index){
 
-let mapped=
-r.scores[code];
-
-let suggested=
-$("level-"+code)?.value||
-mapped;
+    const all =
+    document.querySelectorAll(
+        ".side-org"
+    );
 
 
-detail.innerHTML=`
+    all.forEach(function(item,i){
 
-<div class="detail-inner">
+        if(i !== index){
 
-<div class="detail-head">
+            item.classList.remove(
+                "open"
+            );
 
-<div>
+        }
 
-<div class="code">
-${code}
-</div>
-
-<h3>
-${esc(c.name)}
-</h3>
-
-</div>
-
-<button
-onclick="
-event.stopPropagation();
-openComp('${code}')
-"
->
-Close
-</button>
-
-</div>
+    });
 
 
-<div class="level-compare">
-
-<div class="level-box">
-
-<div class="small">
-Current mapped level
-</div>
-
-<strong>
-${mapped}
-</strong>
-
-</div>
-
-
-<div class="level-box suggested">
-
-<div class="small">
-Your recommendation
-</div>
-
-<strong
-id="detailSuggested-${code}"
->
-${suggested}
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="tabs">
-
-<button
-class="tab active"
-onclick="
-event.stopPropagation();
-tab(this,'${code}','definition')
-"
->
-Definition
-</button>
-
-
-<button
-class="tab"
-onclick="
-event.stopPropagation();
-tab(this,'${code}','ksa')
-"
->
-Knowledge • Skill • Attitude
-</button>
-
-
-<button
-class="tab"
-onclick="
-event.stopPropagation();
-tab(this,'${code}','activities')
-"
->
-Activities
-</button>
-
-
-<button
-class="tab"
-onclick="
-event.stopPropagation();
-tab(this,'${code}','ladder')
-"
->
-Proficiency Ladder
-</button>
-
-</div>
-
-
-<div
-id="tabbody-${code}"
-class="tabbody"
->
-</div>
-
-</div>
-
-`;
-
-
-detail.classList.add(
-"open"
-);
-
-
-tab(
-detail.querySelector(".tab"),
-code,
-"definition"
-);
+    all[index]
+    .classList.toggle("open");
 
 }
 
 
-/* =================================
-   TABS
-================================= */
+function searchRoles(){
 
-function tab(
-btn,
-code,
-type
-){
-
-let detail=
-$("detail-"+code);
+    const input =
+    document.getElementById(
+        "roleSearch"
+    );
 
 
-detail
-.querySelectorAll(".tab")
-.forEach(
-x=>
-x.classList.remove("active")
-);
+    const query =
+    input.value.toLowerCase();
 
 
-btn.classList.add("active");
+    document
+    .querySelectorAll(".side-role")
+    .forEach(function(role){
+
+        const text =
+        role.dataset.role || "";
 
 
-let c=
-DATA.competencies[code];
+        role.style.display =
+        text.includes(query)
+        ?
+        "block"
+        :
+        "none";
 
-let b=
-$("tabbody-"+code);
-
-
-if(type==="definition"){
-
-b.innerHTML=`
-
-<b>
-Definition
-</b>
-
-<p>
-${esc(c.scope||"")}
-</p>
-
-`;
+    });
 
 }
 
 
-if(type==="ksa"){
-
-b.innerHTML=`
-
-<div
-style="
-display:grid;
-gap:7px
-"
->
-
-<div
-class="card"
-style="cursor:default"
->
-
-<b>
-KNOWLEDGE
-</b>
-
-<p>
-${esc(c.Knowledge||"—")}
-</p>
-
-</div>
-
-
-<div
-class="card"
-style="cursor:default"
->
-
-<b>
-SKILL
-</b>
-
-<p>
-${esc(c.Skill||"—")}
-</p>
-
-</div>
-
-
-<div
-class="card"
-style="cursor:default"
->
-
-<b>
-ATTITUDE
-</b>
-
-<p>
-${esc(c.Attitude||"—")}
-</p>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-if(type==="activities"){
-
-let items=
-String(
-c["On-the-Job Activities"]||
-""
-)
-.split("\n")
-.filter(Boolean);
-
-
-b.innerHTML=`
-
-<b>
-On-the-job activities
-</b>
-
-<ul>
-
-${items.map(
-x=>
-`<li>${esc(
-x.replace(
-/^•\s*/,
-""
-)
-)}</li>`
-).join("")}
-
-</ul>
-
-`;
-
-}
-
-
-if(type==="ladder"){
-
-b.innerHTML=`
-
-<div
-style="margin-bottom:8px"
->
-
-<b>
-Proficiency Ladder
-</b>
-
-<div class="muted">
-Use these definitions to validate the recommended level.
-</div>
-
-</div>
-
-
-<div class="ladder">
-
-${["PL1","PL2","PL3","PL4"]
-.map(
-x=>{
-
-let items=
-String(
-c[x]||
-""
-)
-.split("\n")
-.map(
-v=>
-v.replace(
-/^•\s*/,
-""
-)
-.trim()
-)
-.filter(Boolean);
-
-
-let info=
-LEVEL_INFO[x];
-
-
-return `
-
-<div class="pl">
-
-<div class="plnum">
-${x.replace("PL","")}
-</div>
-
-<div class="pllabel">
-${info.label}
-</div>
-
-<div class="definition">
-${info.definition}
-</div>
-
-<div class="expect">
-
-<b>
-At this level:
-</b>
-
-<ul>
-
-${items.map(
-v=>
-`<li>${esc(v)}</li>`
-).join("")}
-
-</ul>
-
-</div>
-
-</div>
-
-`;
-
-}
-).join("")}
-
-</div>
-
-`;
-
-}
-
-}
-
-
-/* =================================
+/* =====================================================
    SUBMIT
-================================= */
+===================================================== */
 
-function submitFeedback(){
+async function submitReview(){
 
-let reviewer=
-sessionStorage.getItem(
-"reviewer"
-);
+    const section =
+    DATA.sections[currentSection];
 
-
-if(!reviewer){
-
-return alert(
-"Please enter your name first."
-);
-
-}
+    const role =
+    section.roles[currentRole];
 
 
-let s=
-DATA.sections[current.sec];
+    const mapped =
+    Object.entries(role.scores)
+    .filter(function(item){
 
-let r=
-s.roles[current.role];
+        const value = item[1];
 
+        return (
+            value !== "NA" &&
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+        );
 
-let mapped=
-Object.entries(
-r.scores
-)
-.filter(
-([c,v])=>
-v!=="NA" &&
-v!==null &&
-v!==undefined &&
-v!==""
-);
+    });
 
 
-let notReviewed=
-mapped.filter(
-([code])=>
-!reviewed[code]
-);
+    const suggestedLevels = {};
 
 
-if(notReviewed.length){
+    mapped.forEach(function(item){
 
-if(
-!confirm(
-`You have not marked ${notReviewed.length} competency(ies) as reviewed. Submit anyway?`
-)
-)
-return;
+        const code = item[0];
 
-}
+        const select =
+        document.getElementById(
+            "recommend-"+code
+        );
 
 
-let suggestedLevels={};
+        if(select){
+
+            suggestedLevels[code] =
+            Number(select.value);
+
+        }
+
+    });
 
 
-mapped.forEach(
-([code])=>{
-
-let el=
-$("level-"+code);
-
-if(el){
-
-suggestedLevels[code]=
-Number(el.value);
-
-}
-
-}
-);
+    const comments =
+    document.getElementById(
+        "comments"
+    ).value;
 
 
-fetch(
-"/api/feedback",
-{
-method:"POST",
+    const payload = {
 
-headers:{
-"Content-Type":
-"application/json"
-},
+        reviewer:reviewer(),
 
-body:
-JSON.stringify({
+        vertical:section.name,
 
-reviewer,
+        role:role.name,
 
-vertical:s.name,
+        suggestedLevels:
 
-role:r.name,
+            suggestedLevels,
 
-suggestedLevels,
+        reviewed:
 
-reviewed:
-Object.keys(reviewed)
-.filter(
-k=>reviewed[k]
-),
+            Object.keys(reviewed)
+            .filter(function(code){
 
-comments:
-$("comments")
-.value
+                return reviewed[code];
 
-})
-}
-)
-.then(
-async res=>{
+            }),
 
-if(!res.ok)
-throw new Error();
+        comments:comments
+
+    };
 
 
-$("saved")
-.style.display=
-"inline";
+    try{
 
-$("saved")
-.textContent=
-"✓ Review submitted successfully";
+        const response =
+        await fetch(
+            "/api/feedback",
+            {
+                method:"POST",
 
-}
-)
-.catch(
-()=>{
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
 
-alert(
-"Unable to save. Please try again."
-);
+                body:
+                JSON.stringify(payload)
 
-}
-);
+            }
+        );
+
+
+        if(!response.ok){
+
+            throw new Error();
+
+        }
+
+
+        const message =
+        document.getElementById(
+            "savedMessage"
+        );
+
+
+        message.style.display =
+        "inline";
+
+
+        message.textContent =
+        "✓ Review submitted successfully";
+
+
+    }catch(error){
+
+        alert(
+            "Unable to save the review. Please try again."
+        );
+
+    }
 
 }
 
 
-/* =================================
-   OPTIONAL SEARCH FOR REVIEW SCREEN
-================================= */
+/* =====================================================
+   START APPLICATION
+===================================================== */
 
-function filterRoles(){
-
-let q=
-$("search")
-.value
-.toLowerCase();
-
-
-document
-.querySelectorAll(
-".org"
-)
-.forEach(
-o=>{
-
-let any=false;
-
-
-o.querySelectorAll(
-".role"
-)
-.forEach(
-r=>{
-
-let show=
-!q ||
-r.dataset.q.includes(q);
-
-
-r.style.display=
-show?
-"block":
-"none";
-
-
-if(show)
-any=true;
-
-}
-);
-
-
-o.style.display=
-any?
-"block":
-"none";
-
-
-if(q&&any)
-o.classList.add(
-"open"
-);
-
-}
-);
-
-
-/* =================================
-   RUN
-================================= */
-
-boot();
+loadData();
 
 </script>
 
