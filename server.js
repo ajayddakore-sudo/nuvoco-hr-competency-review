@@ -2,26 +2,23 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const { Pool } = require("pg");
 
 const app = express();
 
-const PORT =
-  process.env.PORT || 10000;
+const PORT = process.env.PORT || 10000;
 
 const ADMIN_PASSWORD =
   process.env.ADMIN_PASSWORD ||
   "change-this-password";
 
-
 app.use(
   express.json({
-    limit:"1mb"
+    limit: "1mb"
   })
 );
 
-
-const ROOT =
-  __dirname;
+const ROOT = __dirname;
 
 const ARCHITECTURE =
   path.join(
@@ -29,49 +26,115 @@ const ARCHITECTURE =
     "architecture.json"
   );
 
-const FEEDBACK =
-  path.join(
-    ROOT,
-    "feedback.json"
+/*
+  PERSISTENT DATABASE
+  -------------------
+  Responses are now stored in PostgreSQL
+  instead of feedback.json.
+
+  Add DATABASE_URL in Render Environment Variables.
+*/
+
+if (!process.env.DATABASE_URL) {
+  console.error(
+    "DATABASE_URL is not configured. Please add PostgreSQL DATABASE_URL in Render."
   );
+
+  process.exit(1);
+}
+
+const pool = new Pool({
+  connectionString:
+    process.env.DATABASE_URL,
+
+  ssl:
+    process.env.DATABASE_SSL === "false"
+      ? false
+      : {
+          rejectUnauthorized: false
+        }
+});
 
 
 /* -----------------------------
-   FILE HELPERS
+   DATABASE INITIALIZATION
 ------------------------------ */
 
-function readFeedback(){
+async function initDatabase() {
 
-  try{
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS competency_feedback (
+      id BIGSERIAL PRIMARY KEY,
 
-    return JSON.parse(
-      fs.readFileSync(
-        FEEDBACK,
-        "utf8"
+      reviewer TEXT NOT NULL,
+
+      vertical TEXT NOT NULL,
+
+      role TEXT NOT NULL,
+
+      suggested_levels
+        JSONB NOT NULL
+        DEFAULT '{}'::jsonb,
+
+      reviewed
+        JSONB NOT NULL
+        DEFAULT '[]'::jsonb,
+
+      comments
+        TEXT NOT NULL
+        DEFAULT '',
+
+      submitted_at
+        TIMESTAMPTZ NOT NULL
+        DEFAULT NOW(),
+
+      updated_at
+        TIMESTAMPTZ NOT NULL
+        DEFAULT NOW(),
+
+      UNIQUE (
+        reviewer,
+        vertical,
+        role
       )
-    );
-
-  }catch(e){
-
-    return [];
-
-  }
+    )
+  `);
 
 }
 
 
-function writeFeedback(rows){
+/* -----------------------------
+   READ ALL FEEDBACK
+------------------------------ */
 
-  fs.writeFileSync(
-    FEEDBACK,
-    JSON.stringify(
-      rows,
-      null,
-      2
-    ),
-    "utf8"
-  );
+async function readFeedback() {
 
+  const result =
+    await pool.query(`
+      SELECT
+
+        reviewer,
+
+        vertical,
+
+        role,
+
+        suggested_levels
+          AS "suggestedLevels",
+
+        reviewed,
+
+        comments,
+
+        submitted_at
+          AS timestamp
+
+      FROM competency_feedback
+
+      ORDER BY submitted_at DESC
+    `);
+
+  return result.rows;
 }
 
 
@@ -81,7 +144,7 @@ function writeFeedback(rows){
 
 app.get(
   "/api/architecture",
-  (req,res)=>{
+  (req, res) => {
 
     res.sendFile(
       ARCHITECTURE
@@ -97,121 +160,185 @@ app.get(
 
 app.get(
   "/api/feedback",
-  (req,res)=>{
+  async (req, res) => {
 
-    res.json(
-      readFeedback()
-    );
+    try {
+
+      const rows =
+        await readFeedback();
+
+      res.json(rows);
+
+    } catch (error) {
+
+      console.error(
+        error
+      );
+
+      res.status(500).json({
+        error:
+          "Unable to read feedback."
+      });
+
+    }
 
   }
 );
 
 
+/* -----------------------------
+   SUBMIT FEEDBACK
+------------------------------ */
+
 app.post(
   "/api/feedback",
-  (req,res)=>{
+  async (req, res) => {
 
     const b =
       req.body || {};
 
-
-    if(
+    if (
       !b.reviewer ||
       !b.vertical ||
       !b.role ||
       !b.suggestedLevels
-    ){
+    ) {
 
       return res
         .status(400)
         .json({
 
           error:
-          "Reviewer, vertical, role and suggested levels are required."
+            "Reviewer, vertical, role and suggested levels are required."
 
         });
 
     }
 
+    try {
 
-    const rows =
-      readFeedback();
+      const result =
+        await pool.query(
 
+          `
+          INSERT INTO
+            competency_feedback
+          (
+            reviewer,
+            vertical,
+            role,
+            suggested_levels,
+            reviewed,
+            comments,
+            submitted_at,
+            updated_at
+          )
 
-    const record={
+          VALUES
+          (
+            $1,
+            $2,
+            $3,
+            $4::jsonb,
+            $5::jsonb,
+            $6,
+            $7::timestamptz,
+            NOW()
+          )
 
-      reviewer:
-        b.reviewer,
+          ON CONFLICT
+            (
+              reviewer,
+              vertical,
+              role
+            )
 
-      vertical:
-        b.vertical,
+          DO UPDATE SET
 
-      role:
-        b.role,
+            suggested_levels =
+              EXCLUDED.suggested_levels,
 
-      suggestedLevels:
-        b.suggestedLevels,
+            reviewed =
+              EXCLUDED.reviewed,
 
-      reviewed:
-        b.reviewed || [],
+            comments =
+              EXCLUDED.comments,
 
-      comments:
-        b.comments || "",
+            submitted_at =
+              EXCLUDED.submitted_at,
 
-      timestamp:
-        new Date()
-        .toISOString()
+            updated_at =
+              NOW()
 
-    };
+          RETURNING
 
+            reviewer,
 
-    /*
-      If the same reviewer submits
-      the same role again, update the
-      previous submission instead of
-      creating duplicates.
-    */
+            vertical,
 
-    const index =
-      rows.findIndex(
-        x=>
-          x.vertical===
-            b.vertical &&
+            role,
 
-          x.role===
-            b.role &&
+            suggested_levels
+              AS "suggestedLevels",
 
-          x.reviewer===
-            b.reviewer
+            reviewed,
+
+            comments,
+
+            submitted_at
+              AS timestamp
+          `,
+
+          [
+
+            b.reviewer,
+
+            b.vertical,
+
+            b.role,
+
+            JSON.stringify(
+              b.suggestedLevels
+            ),
+
+            JSON.stringify(
+              b.reviewed || []
+            ),
+
+            b.comments || "",
+
+            new Date().toISOString()
+
+          ]
+
+        );
+
+      res.json({
+
+        ok: true,
+
+        record:
+          result.rows[0]
+
+      });
+
+    } catch (error) {
+
+      console.error(
+        "Feedback save failed:",
+        error
       );
 
+      res
+        .status(500)
+        .json({
 
-    if(index>=0){
+          error:
+            "Unable to save feedback."
 
-      rows[index]=
-        record;
-
-    }else{
-
-      rows.push(
-        record
-      );
+        });
 
     }
-
-
-    writeFeedback(
-      rows
-    );
-
-
-    res.json({
-
-      ok:true,
-
-      record
-
-    });
 
   }
 );
@@ -227,7 +354,7 @@ const adminTokens =
 
 app.post(
   "/api/admin/login",
-  (req,res)=>{
+  (req, res) => {
 
     const password =
       String(
@@ -236,17 +363,17 @@ app.post(
       );
 
 
-    if(
+    if (
       password !==
       ADMIN_PASSWORD
-    ){
+    ) {
 
       return res
         .status(401)
         .json({
 
           error:
-          "Invalid password"
+            "Invalid password"
 
         });
 
@@ -254,9 +381,8 @@ app.post(
 
 
     const token =
-      crypto
-      .randomBytes(24)
-      .toString("hex");
+      crypto.randomBytes(24)
+        .toString("hex");
 
 
     adminTokens.add(
@@ -266,7 +392,7 @@ app.post(
 
     res.json({
 
-      ok:true,
+      ok: true,
 
       token
 
@@ -276,11 +402,15 @@ app.post(
 );
 
 
+/* -----------------------------
+   ADMIN AUTH MIDDLEWARE
+------------------------------ */
+
 function requireAdmin(
   req,
   res,
   next
-){
+) {
 
   const token =
     req.headers[
@@ -288,19 +418,19 @@ function requireAdmin(
     ];
 
 
-  if(
+  if (
     !token ||
     !adminTokens.has(
       token
     )
-  ){
+  ) {
 
     return res
       .status(401)
       .json({
 
         error:
-        "Admin authentication required"
+          "Admin authentication required"
 
       });
 
@@ -313,401 +443,479 @@ function requireAdmin(
 
 
 /* -----------------------------
-   ADMIN: VIEW FEEDBACK
+   ADMIN VIEW FEEDBACK
 ------------------------------ */
 
 app.get(
   "/api/admin/feedback",
   requireAdmin,
-  (req,res)=>{
+  async (req, res) => {
 
-    res.json(
-      readFeedback()
-    );
+    try {
 
-  }
-);
+      const rows =
+        await readFeedback();
 
+      res.json(rows);
 
-/* -----------------------------
-   ADMIN: CLEAR RESPONSES
------------------------------- */
+    } catch (error) {
 
-app.delete(
-  "/api/admin/feedback",
-  requireAdmin,
-  (req,res)=>{
+      console.error(
+        error
+      );
 
-    const body =
-      req.body || {};
-
-
-    let rows =
-      readFeedback();
-
-
-    /*
-      CLEAR EVERYTHING
-    */
-
-    if(body.all===true){
-
-      const deleted =
-        rows.length;
-
-
-      writeFeedback([]);
-
-
-      return res.json({
-
-        ok:true,
-
-        deleted,
-
-        message:
-        "All responses cleared."
-
-      });
-
-    }
-
-
-    /*
-      CLEAR SELECTED RESPONSES
-    */
-
-    const reviewer =
-      String(
-        body.reviewer ||
-        ""
-      ).trim();
-
-
-    const vertical =
-      String(
-        body.vertical ||
-        ""
-      ).trim();
-
-
-    const role =
-      String(
-        body.role ||
-        ""
-      ).trim();
-
-
-    if(
-      !reviewer &&
-      !vertical &&
-      !role
-    ){
-
-      return res
-        .status(400)
+      res
+        .status(500)
         .json({
 
           error:
-          "At least one filter is required."
+            "Unable to read feedback."
 
         });
 
     }
 
-
-    const originalCount =
-      rows.length;
-
-
-    rows=
-      rows.filter(
-        item=>{
-
-          /*
-            A response matches the
-            selected filters only when
-            every supplied filter matches.
-          */
-
-          if(
-            reviewer &&
-            item.reviewer!==reviewer
-          ){
-            return true;
-          }
+  }
+);
 
 
-          if(
-            vertical &&
-            item.vertical!==vertical
-          ){
-            return true;
-          }
+/* -----------------------------
+   ADMIN CLEAR RESPONSES
+------------------------------ */
+
+app.delete(
+  "/api/admin/feedback",
+  requireAdmin,
+  async (req, res) => {
+
+    const body =
+      req.body || {};
 
 
-          if(
-            role &&
-            item.role!==role
-          ){
-            return true;
-          }
+    try {
+
+      /*
+        CLEAR EVERYTHING
+      */
+
+      if (
+        body.all === true
+      ) {
+
+        const result =
+          await pool.query(
+            `
+            DELETE FROM
+              competency_feedback
+            `
+          );
 
 
-          /*
-            All supplied filters matched,
-            therefore DELETE this record.
-          */
+        return res.json({
 
-          return false;
+          ok: true,
 
-        }
+          deleted:
+            result.rowCount,
+
+          message:
+            "All responses cleared."
+
+        });
+
+      }
+
+
+      /*
+        CLEAR SELECTED
+      */
+
+      const reviewer =
+        String(
+          body.reviewer ||
+          ""
+        ).trim();
+
+
+      const vertical =
+        String(
+          body.vertical ||
+          ""
+        ).trim();
+
+
+      const role =
+        String(
+          body.role ||
+          ""
+        ).trim();
+
+
+      if (
+        !reviewer &&
+        !vertical &&
+        !role
+      ) {
+
+        return res
+          .status(400)
+          .json({
+
+            error:
+              "At least one filter is required."
+
+          });
+
+      }
+
+
+      const conditions = [];
+
+      const values = [];
+
+
+      if (reviewer) {
+
+        values.push(
+          reviewer
+        );
+
+        conditions.push(
+          `reviewer = $${values.length}`
+        );
+
+      }
+
+
+      if (vertical) {
+
+        values.push(
+          vertical
+        );
+
+        conditions.push(
+          `vertical = $${values.length}`
+        );
+
+      }
+
+
+      if (role) {
+
+        values.push(
+          role
+        );
+
+        conditions.push(
+          `role = $${values.length}`
+        );
+
+      }
+
+
+      const result =
+        await pool.query(
+
+          `
+          DELETE FROM
+            competency_feedback
+
+          WHERE
+            ${conditions.join(
+              " AND "
+            )}
+          `,
+
+          values
+
+        );
+
+
+      const remaining =
+        await pool.query(
+          `
+          SELECT
+            COUNT(*)::int
+            AS count
+
+          FROM
+            competency_feedback
+          `
+        );
+
+
+      res.json({
+
+        ok: true,
+
+        deleted:
+          result.rowCount,
+
+        remaining:
+          remaining.rows[0].count,
+
+        message:
+          "Selected responses cleared."
+
+      });
+
+    } catch (error) {
+
+      console.error(
+        "Delete failed:",
+        error
       );
 
+      res
+        .status(500)
+        .json({
 
-    const deleted =
-      originalCount -
-      rows.length;
+          error:
+            "Unable to clear responses."
 
+        });
 
-    writeFeedback(
-      rows
-    );
-
-
-    res.json({
-
-      ok:true,
-
-      deleted,
-
-      remaining:
-      rows.length,
-
-      message:
-      "Selected responses cleared."
-
-    });
+    }
 
   }
 );
 
 
 /* -----------------------------
-   ADMIN: CSV EXPORT
+   CSV EXPORT
 ------------------------------ */
 
 app.get(
   "/api/admin/export.csv",
   requireAdmin,
-  (req,res)=>{
+  async (req, res) => {
 
-    const rows =
-      readFeedback();
+    try {
 
-
-    const arch=
-      JSON.parse(
-        fs.readFileSync(
-          ARCHITECTURE,
-          "utf8"
-        )
-      );
+      const rows =
+        await readFeedback();
 
 
-    function mapped(
-      vertical,
-      role,
-      code
-    ){
-
-      const s=
-        arch.sections
-        ?.find(
-          x=>
-            x.name===
-            vertical
+      const arch =
+        JSON.parse(
+          fs.readFileSync(
+            ARCHITECTURE,
+            "utf8"
+          )
         );
 
 
-      const r=
-        s?.roles
-        ?.find(
-          x=>
-            x.name===
-            role
-        );
-
-
-      return(
-        r?.scores?.[code]
-        ??
-        ""
-      );
-
-    }
-
-
-    function name(code){
-
-      return(
-        arch
-        .competencies
-        ?.[code]
-        ?.name
-        ||
+      function mapped(
+        vertical,
+        role,
         code
-      );
+      ) {
 
-    }
-
-
-    function esc(v){
-
-      return `"${String(
-        v??""
-      ).replaceAll(
-        '"',
-        '""'
-      )}"`;
-
-    }
+        const section =
+          arch.sections?.find(
+            x =>
+              x.name ===
+              vertical
+          );
 
 
-    const headers=[
-
-      "Reviewer",
-
-      "Organisation Vertical",
-
-      "Role",
-
-      "Competency",
-
-      "Mapped Level",
-
-      "Recommended Level",
-
-      "Change",
-
-      "Reviewed",
-
-      "Comments",
-
-      "Timestamp"
-
-    ];
+        const r =
+          section?.roles?.find(
+            x =>
+              x.name ===
+              role
+          );
 
 
-    const output=[
-      headers.join(",")
-    ];
-
-
-    rows.forEach(
-      row=>{
-
-        Object
-        .entries(
-          row.suggestedLevels||{}
-        )
-        .forEach(
-          ([code,suggested])=>{
-
-            const m=
-              mapped(
-                row.vertical,
-                row.role,
-                code
-              );
-
-
-            let change=
-              "No change";
-
-
-            if(
-              m!=="" &&
-              Number(suggested)>
-              Number(m)
-            ){
-
-              change=
-                `Up: ${m} to ${suggested}`;
-
-            }
-
-            else if(
-              m!=="" &&
-              Number(suggested)<
-              Number(m)
-            ){
-
-              change=
-                `Down: ${m} to ${suggested}`;
-
-            }
-
-
-            output.push(
-
-              [
-
-                row.reviewer,
-
-                row.vertical,
-
-                row.role,
-
-                `${code} - ${name(code)}`,
-
-                m,
-
-                suggested,
-
-                change,
-
-                (row.reviewed||[])
-                  .includes(code)
-                  ?
-                  "Yes"
-                  :
-                  "No",
-
-                row.comments,
-
-                row.timestamp
-
-              ]
-              .map(
-                esc
-              )
-              .join(",")
-
-            );
-
-          }
+        return (
+          r?.scores?.[code]
+          ?? ""
         );
 
       }
-    );
 
 
-    res.setHeader(
-      "Content-Type",
-      "text/csv; charset=utf-8"
-    );
+      function name(
+        code
+      ) {
+
+        return (
+          arch
+            .competencies
+            ?.[code]
+            ?.name
+          ||
+          code
+        );
+
+      }
 
 
-    res.setHeader(
-      "Content-Disposition",
-      'attachment; filename="Nuvoco_HR_Competency_Feedback_Detailed.csv"'
-    );
+      function esc(v) {
+
+        return `"${String(
+          v ?? ""
+        ).replaceAll(
+          '"',
+          '""'
+        )}"`;
+
+      }
 
 
-    res.send(
-      output.join("\n")
-    );
+      const headers = [
+
+        "Reviewer",
+
+        "Organisation Vertical",
+
+        "Role",
+
+        "Competency",
+
+        "Mapped Level",
+
+        "Recommended Level",
+
+        "Change",
+
+        "Reviewed",
+
+        "Comments",
+
+        "Timestamp"
+
+      ];
+
+
+      const output = [
+
+        headers.join(",")
+
+      ];
+
+
+      rows.forEach(
+        row => {
+
+          Object.entries(
+            row.suggestedLevels ||
+            {}
+          ).forEach(
+            ([code, suggested]) => {
+
+              const m =
+                mapped(
+                  row.vertical,
+                  row.role,
+                  code
+                );
+
+
+              let change =
+                "No change";
+
+
+              if (
+                m !== "" &&
+                Number(suggested) >
+                Number(m)
+              ) {
+
+                change =
+                  `Up: ${m} to ${suggested}`;
+
+              }
+
+              else if (
+                m !== "" &&
+                Number(suggested) <
+                Number(m)
+              ) {
+
+                change =
+                  `Down: ${m} to ${suggested}`;
+
+              }
+
+
+              output.push(
+
+                [
+
+                  row.reviewer,
+
+                  row.vertical,
+
+                  row.role,
+
+                  `${code} - ${name(code)}`,
+
+                  m,
+
+                  suggested,
+
+                  change,
+
+                  (
+                    row.reviewed ||
+                    []
+                  ).includes(code)
+                    ? "Yes"
+                    : "No",
+
+                  row.comments,
+
+                  row.timestamp
+
+                ]
+                .map(
+                  esc
+                )
+                .join(",")
+
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+      res.setHeader(
+        "Content-Type",
+        "text/csv; charset=utf-8"
+      );
+
+
+      res.setHeader(
+        "Content-Disposition",
+        'attachment; filename="Nuvoco_HR_Competency_Feedback_Detailed.csv"'
+      );
+
+
+      res.send(
+        output.join("\n")
+      );
+
+    } catch (error) {
+
+      console.error(
+        "CSV export failed:",
+        error
+      );
+
+      res
+        .status(500)
+        .json({
+
+          error:
+            "Unable to export."
+
+        });
+
+    }
 
   }
 );
@@ -719,7 +927,7 @@ app.get(
 
 app.get(
   "/admin",
-  (req,res)=>{
+  (req, res) => {
 
     res.sendFile(
       path.join(
@@ -749,7 +957,7 @@ app.use(
 
 app.get(
   "*",
-  (req,res)=>{
+  (req, res) => {
 
     res.sendFile(
       path.join(
@@ -766,13 +974,34 @@ app.get(
    START SERVER
 ------------------------------ */
 
-app.listen(
-  PORT,
-  ()=>{
+initDatabase()
 
-    console.log(
-      `Nuvoco HR Competency Review running on port ${PORT}`
-    );
+  .then(
+    () => {
 
-  }
-);
+      app.listen(
+        PORT,
+        () => {
+
+          console.log(
+            `Nuvoco HR Competency Review running on port ${PORT}`
+          );
+
+        }
+      );
+
+    }
+  )
+
+  .catch(
+    error => {
+
+      console.error(
+        "Database initialization failed:",
+        error
+      );
+
+      process.exit(1);
+
+    }
+  );
