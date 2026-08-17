@@ -24,9 +24,14 @@ const ARCHITECTURE = path.join(
   "architecture.json"
 );
 
+const LEGACY_FEEDBACK = path.join(
+  ROOT,
+  "feedback.json"
+);
+
 
 /* =========================================================
-   DATABASE
+   DATABASE CONNECTION
    ========================================================= */
 
 if (!process.env.DATABASE_URL) {
@@ -38,7 +43,8 @@ if (!process.env.DATABASE_URL) {
 }
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString:
+    process.env.DATABASE_URL,
 
   ssl:
     process.env.DATABASE_SSL === "false"
@@ -50,7 +56,7 @@ const pool = new Pool({
 
 
 /* =========================================================
-   CREATE DATABASE TABLE
+   INITIALIZE DATABASE
    ========================================================= */
 
 async function initDatabase() {
@@ -91,8 +97,176 @@ async function initDatabase() {
   `);
 
   console.log(
-    "PostgreSQL database initialized successfully."
+    "PostgreSQL database initialized."
   );
+
+
+  /*
+    ---------------------------------------------------------
+    ONE-TIME MIGRATION FROM feedback.json
+    ---------------------------------------------------------
+
+    If the old feedback.json exists and the database
+    currently has no responses, import the old responses.
+  */
+
+  const countResult =
+    await pool.query(
+      `
+      SELECT
+        COUNT(*)::int AS count
+      FROM competency_feedback
+      `
+    );
+
+
+  const existingCount =
+    countResult.rows[0].count;
+
+
+  if (
+    existingCount === 0 &&
+    fs.existsSync(LEGACY_FEEDBACK)
+  ) {
+
+    try {
+
+      const raw =
+        fs.readFileSync(
+          LEGACY_FEEDBACK,
+          "utf8"
+        );
+
+
+      const oldRows =
+        JSON.parse(raw);
+
+
+      if (
+        Array.isArray(oldRows) &&
+        oldRows.length > 0
+      ) {
+
+        let imported = 0;
+
+
+        for (
+          const row of oldRows
+        ) {
+
+          if (
+            !row ||
+            !row.reviewer ||
+            !row.vertical ||
+            !row.role ||
+            !row.suggestedLevels
+          ) {
+
+            continue;
+
+          }
+
+
+          await pool.query(
+
+            `
+            INSERT INTO competency_feedback (
+
+              reviewer,
+
+              vertical,
+
+              role,
+
+              suggested_levels,
+
+              reviewed,
+
+              comments,
+
+              submitted_at,
+
+              updated_at
+
+            )
+
+            VALUES (
+
+              $1,
+
+              $2,
+
+              $3,
+
+              $4::jsonb,
+
+              $5::jsonb,
+
+              $6,
+
+              $7::timestamptz,
+
+              NOW()
+
+            )
+
+            ON CONFLICT (
+              reviewer,
+              vertical,
+              role
+            )
+
+            DO NOTHING
+            `,
+
+            [
+
+              row.reviewer,
+
+              row.vertical,
+
+              row.role,
+
+              JSON.stringify(
+                row.suggestedLevels || {}
+              ),
+
+              JSON.stringify(
+                row.reviewed || []
+              ),
+
+              row.comments || "",
+
+              row.timestamp ||
+                new Date().toISOString()
+
+            ]
+
+          );
+
+
+          imported++;
+
+        }
+
+
+        console.log(
+          `Imported ${imported} response(s) from feedback.json.`
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Unable to migrate feedback.json:",
+        error
+      );
+
+    }
+
+  }
+
 }
 
 
@@ -102,31 +276,33 @@ async function initDatabase() {
 
 async function readFeedback() {
 
-  const result = await pool.query(`
-    SELECT
+  const result =
+    await pool.query(`
+      SELECT
 
-      reviewer,
+        reviewer,
 
-      vertical,
+        vertical,
 
-      role,
+        role,
 
-      suggested_levels
-        AS "suggestedLevels",
+        suggested_levels
+          AS "suggestedLevels",
 
-      reviewed,
+        reviewed,
 
-      comments,
+        comments,
 
-      submitted_at
-        AS timestamp
+        submitted_at
+          AS timestamp
 
-    FROM competency_feedback
+      FROM competency_feedback
 
-    ORDER BY submitted_at DESC
-  `);
+      ORDER BY submitted_at DESC
+    `);
 
   return result.rows;
+
 }
 
 
@@ -168,10 +344,14 @@ app.get(
         error
       );
 
-      res.status(500).json({
-        error:
-          "Unable to read feedback."
-      });
+      res
+        .status(500)
+        .json({
+
+          error:
+            "Unable to read feedback."
+
+        });
 
     }
 
@@ -190,10 +370,6 @@ app.post(
     const b =
       req.body || {};
 
-
-    /* -------------------------
-       VALIDATION
-    ------------------------- */
 
     if (
       !b.reviewer ||
@@ -219,12 +395,6 @@ app.post(
       const timestamp =
         new Date().toISOString();
 
-
-      /*
-        If the same reviewer submits
-        the same role again, update
-        the existing response.
-      */
 
       const result =
         await pool.query(
@@ -384,7 +554,8 @@ app.post(
 
     const password =
       String(
-        req.body?.password || ""
+        req.body?.password ||
+        ""
       );
 
 
@@ -521,9 +692,7 @@ app.delete(
 
     try {
 
-      /* -------------------------
-         CLEAR EVERYTHING
-      ------------------------- */
+      /* CLEAR ALL */
 
       if (
         body.all === true
@@ -553,25 +722,26 @@ app.delete(
       }
 
 
-      /* -------------------------
-         CLEAR SELECTED
-      ------------------------- */
+      /* CLEAR SELECTED */
 
       const reviewer =
         String(
-          body.reviewer || ""
+          body.reviewer ||
+          ""
         ).trim();
 
 
       const vertical =
         String(
-          body.vertical || ""
+          body.vertical ||
+          ""
         ).trim();
 
 
       const role =
         String(
-          body.role || ""
+          body.role ||
+          ""
         ).trim();
 
 
@@ -848,7 +1018,6 @@ app.get(
                   `Up: ${mappedLevel} to ${suggested}`;
 
               }
-
 
               else if (
                 mappedLevel !== "" &&
