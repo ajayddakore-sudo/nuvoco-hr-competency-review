@@ -9,8 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 const ADMIN_PASSWORD =
-  process.env.ADMIN_PASSWORD ||
-  "change-this-password";
+  process.env.ADMIN_PASSWORD || "change-this-password";
 
 app.use(
   express.json({
@@ -20,32 +19,26 @@ app.use(
 
 const ROOT = __dirname;
 
-const ARCHITECTURE =
-  path.join(
-    ROOT,
-    "architecture.json"
-  );
+const ARCHITECTURE = path.join(
+  ROOT,
+  "architecture.json"
+);
 
-/*
-  PERSISTENT DATABASE
-  -------------------
-  Responses are now stored in PostgreSQL
-  instead of feedback.json.
 
-  Add DATABASE_URL in Render Environment Variables.
-*/
+/* =========================================================
+   DATABASE
+   ========================================================= */
 
 if (!process.env.DATABASE_URL) {
   console.error(
-    "DATABASE_URL is not configured. Please add PostgreSQL DATABASE_URL in Render."
+    "ERROR: DATABASE_URL is not configured."
   );
 
   process.exit(1);
 }
 
 const pool = new Pool({
-  connectionString:
-    process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
 
   ssl:
     process.env.DATABASE_SSL === "false"
@@ -56,14 +49,15 @@ const pool = new Pool({
 });
 
 
-/* -----------------------------
-   DATABASE INITIALIZATION
------------------------------- */
+/* =========================================================
+   CREATE DATABASE TABLE
+   ========================================================= */
 
 async function initDatabase() {
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS competency_feedback (
+
       id BIGSERIAL PRIMARY KEY,
 
       reviewer TEXT NOT NULL,
@@ -72,24 +66,19 @@ async function initDatabase() {
 
       role TEXT NOT NULL,
 
-      suggested_levels
-        JSONB NOT NULL
+      suggested_levels JSONB NOT NULL
         DEFAULT '{}'::jsonb,
 
-      reviewed
-        JSONB NOT NULL
+      reviewed JSONB NOT NULL
         DEFAULT '[]'::jsonb,
 
-      comments
-        TEXT NOT NULL
+      comments TEXT NOT NULL
         DEFAULT '',
 
-      submitted_at
-        TIMESTAMPTZ NOT NULL
+      submitted_at TIMESTAMPTZ NOT NULL
         DEFAULT NOW(),
 
-      updated_at
-        TIMESTAMPTZ NOT NULL
+      updated_at TIMESTAMPTZ NOT NULL
         DEFAULT NOW(),
 
       UNIQUE (
@@ -97,50 +86,53 @@ async function initDatabase() {
         vertical,
         role
       )
+
     )
   `);
 
+  console.log(
+    "PostgreSQL database initialized successfully."
+  );
 }
 
 
-/* -----------------------------
-   READ ALL FEEDBACK
------------------------------- */
+/* =========================================================
+   READ FEEDBACK
+   ========================================================= */
 
 async function readFeedback() {
 
-  const result =
-    await pool.query(`
-      SELECT
+  const result = await pool.query(`
+    SELECT
 
-        reviewer,
+      reviewer,
 
-        vertical,
+      vertical,
 
-        role,
+      role,
 
-        suggested_levels
-          AS "suggestedLevels",
+      suggested_levels
+        AS "suggestedLevels",
 
-        reviewed,
+      reviewed,
 
-        comments,
+      comments,
 
-        submitted_at
-          AS timestamp
+      submitted_at
+        AS timestamp
 
-      FROM competency_feedback
+    FROM competency_feedback
 
-      ORDER BY submitted_at DESC
-    `);
+    ORDER BY submitted_at DESC
+  `);
 
   return result.rows;
 }
 
 
-/* -----------------------------
+/* =========================================================
    ARCHITECTURE
------------------------------- */
+   ========================================================= */
 
 app.get(
   "/api/architecture",
@@ -154,9 +146,9 @@ app.get(
 );
 
 
-/* -----------------------------
-   PUBLIC FEEDBACK
------------------------------- */
+/* =========================================================
+   PUBLIC: GET FEEDBACK
+   ========================================================= */
 
 app.get(
   "/api/feedback",
@@ -172,6 +164,7 @@ app.get(
     } catch (error) {
 
       console.error(
+        "Read feedback error:",
         error
       );
 
@@ -186,9 +179,9 @@ app.get(
 );
 
 
-/* -----------------------------
-   SUBMIT FEEDBACK
------------------------------- */
+/* =========================================================
+   PUBLIC: SUBMIT FEEDBACK
+   ========================================================= */
 
 app.post(
   "/api/feedback",
@@ -196,6 +189,11 @@ app.post(
 
     const b =
       req.body || {};
+
+
+    /* -------------------------
+       VALIDATION
+    ------------------------- */
 
     if (
       !b.reviewer ||
@@ -215,43 +213,68 @@ app.post(
 
     }
 
+
     try {
+
+      const timestamp =
+        new Date().toISOString();
+
+
+      /*
+        If the same reviewer submits
+        the same role again, update
+        the existing response.
+      */
 
       const result =
         await pool.query(
 
           `
-          INSERT INTO
-            competency_feedback
-          (
+          INSERT INTO competency_feedback (
+
+            reviewer,
+
+            vertical,
+
+            role,
+
+            suggested_levels,
+
+            reviewed,
+
+            comments,
+
+            submitted_at,
+
+            updated_at
+
+          )
+
+          VALUES (
+
+            $1,
+
+            $2,
+
+            $3,
+
+            $4::jsonb,
+
+            $5::jsonb,
+
+            $6,
+
+            $7::timestamptz,
+
+            NOW()
+
+          )
+
+          ON CONFLICT (
             reviewer,
             vertical,
-            role,
-            suggested_levels,
-            reviewed,
-            comments,
-            submitted_at,
-            updated_at
+            role
           )
-
-          VALUES
-          (
-            $1,
-            $2,
-            $3,
-            $4::jsonb,
-            $5::jsonb,
-            $6,
-            $7::timestamptz,
-            NOW()
-          )
-
-          ON CONFLICT
-            (
-              reviewer,
-              vertical,
-              role
-            )
 
           DO UPDATE SET
 
@@ -307,11 +330,12 @@ app.post(
 
             b.comments || "",
 
-            new Date().toISOString()
+            timestamp
 
           ]
 
         );
+
 
       res.json({
 
@@ -322,12 +346,14 @@ app.post(
 
       });
 
+
     } catch (error) {
 
       console.error(
         "Feedback save failed:",
         error
       );
+
 
       res
         .status(500)
@@ -344,9 +370,9 @@ app.post(
 );
 
 
-/* -----------------------------
+/* =========================================================
    ADMIN AUTHENTICATION
------------------------------- */
+   ========================================================= */
 
 const adminTokens =
   new Set();
@@ -358,8 +384,7 @@ app.post(
 
     const password =
       String(
-        req.body?.password ||
-        ""
+        req.body?.password || ""
       );
 
 
@@ -381,7 +406,8 @@ app.post(
 
 
     const token =
-      crypto.randomBytes(24)
+      crypto
+        .randomBytes(24)
         .toString("hex");
 
 
@@ -402,9 +428,9 @@ app.post(
 );
 
 
-/* -----------------------------
+/* =========================================================
    ADMIN AUTH MIDDLEWARE
------------------------------- */
+   ========================================================= */
 
 function requireAdmin(
   req,
@@ -442,9 +468,9 @@ function requireAdmin(
 }
 
 
-/* -----------------------------
-   ADMIN VIEW FEEDBACK
------------------------------- */
+/* =========================================================
+   ADMIN: VIEW FEEDBACK
+   ========================================================= */
 
 app.get(
   "/api/admin/feedback",
@@ -461,6 +487,7 @@ app.get(
     } catch (error) {
 
       console.error(
+        "Admin feedback error:",
         error
       );
 
@@ -479,9 +506,9 @@ app.get(
 );
 
 
-/* -----------------------------
-   ADMIN CLEAR RESPONSES
------------------------------- */
+/* =========================================================
+   ADMIN: CLEAR RESPONSES
+   ========================================================= */
 
 app.delete(
   "/api/admin/feedback",
@@ -494,9 +521,9 @@ app.delete(
 
     try {
 
-      /*
-        CLEAR EVERYTHING
-      */
+      /* -------------------------
+         CLEAR EVERYTHING
+      ------------------------- */
 
       if (
         body.all === true
@@ -526,28 +553,25 @@ app.delete(
       }
 
 
-      /*
-        CLEAR SELECTED
-      */
+      /* -------------------------
+         CLEAR SELECTED
+      ------------------------- */
 
       const reviewer =
         String(
-          body.reviewer ||
-          ""
+          body.reviewer || ""
         ).trim();
 
 
       const vertical =
         String(
-          body.vertical ||
-          ""
+          body.vertical || ""
         ).trim();
 
 
       const role =
         String(
-          body.role ||
-          ""
+          body.role || ""
         ).trim();
 
 
@@ -635,8 +659,7 @@ app.delete(
         await pool.query(
           `
           SELECT
-            COUNT(*)::int
-            AS count
+            COUNT(*)::int AS count
 
           FROM
             competency_feedback
@@ -659,12 +682,14 @@ app.delete(
 
       });
 
+
     } catch (error) {
 
       console.error(
-        "Delete failed:",
+        "Delete feedback error:",
         error
       );
+
 
       res
         .status(500)
@@ -681,9 +706,9 @@ app.delete(
 );
 
 
-/* -----------------------------
-   CSV EXPORT
------------------------------- */
+/* =========================================================
+   ADMIN: CSV EXPORT
+   ========================================================= */
 
 app.get(
   "/api/admin/export.csv",
@@ -735,9 +760,7 @@ app.get(
       }
 
 
-      function name(
-        code
-      ) {
+      function name(code) {
 
         return (
           arch
@@ -751,10 +774,10 @@ app.get(
       }
 
 
-      function esc(v) {
+      function esc(value) {
 
         return `"${String(
-          v ?? ""
+          value ?? ""
         ).replaceAll(
           '"',
           '""'
@@ -799,12 +822,11 @@ app.get(
         row => {
 
           Object.entries(
-            row.suggestedLevels ||
-            {}
+            row.suggestedLevels || {}
           ).forEach(
             ([code, suggested]) => {
 
-              const m =
+              const mappedLevel =
                 mapped(
                   row.vertical,
                   row.role,
@@ -817,24 +839,25 @@ app.get(
 
 
               if (
-                m !== "" &&
+                mappedLevel !== "" &&
                 Number(suggested) >
-                Number(m)
+                Number(mappedLevel)
               ) {
 
                 change =
-                  `Up: ${m} to ${suggested}`;
+                  `Up: ${mappedLevel} to ${suggested}`;
 
               }
 
+
               else if (
-                m !== "" &&
+                mappedLevel !== "" &&
                 Number(suggested) <
-                Number(m)
+                Number(mappedLevel)
               ) {
 
                 change =
-                  `Down: ${m} to ${suggested}`;
+                  `Down: ${mappedLevel} to ${suggested}`;
 
               }
 
@@ -851,7 +874,7 @@ app.get(
 
                   `${code} - ${name(code)}`,
 
-                  m,
+                  mappedLevel,
 
                   suggested,
 
@@ -869,17 +892,21 @@ app.get(
                   row.timestamp
 
                 ]
+
                 .map(
                   esc
                 )
+
                 .join(",")
 
               );
 
             }
+
           );
 
         }
+
       );
 
 
@@ -899,12 +926,14 @@ app.get(
         output.join("\n")
       );
 
+
     } catch (error) {
 
       console.error(
-        "CSV export failed:",
+        "CSV export error:",
         error
       );
+
 
       res
         .status(500)
@@ -921,9 +950,9 @@ app.get(
 );
 
 
-/* -----------------------------
+/* =========================================================
    ADMIN PAGE
------------------------------- */
+   ========================================================= */
 
 app.get(
   "/admin",
@@ -940,9 +969,9 @@ app.get(
 );
 
 
-/* -----------------------------
+/* =========================================================
    STATIC FILES
------------------------------- */
+   ========================================================= */
 
 app.use(
   express.static(
@@ -951,9 +980,9 @@ app.use(
 );
 
 
-/* -----------------------------
+/* =========================================================
    SPA FALLBACK
------------------------------- */
+   ========================================================= */
 
 app.get(
   "*",
@@ -970,9 +999,9 @@ app.get(
 );
 
 
-/* -----------------------------
+/* =========================================================
    START SERVER
------------------------------- */
+   ========================================================= */
 
 initDatabase()
 
